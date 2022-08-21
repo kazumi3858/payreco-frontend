@@ -22,7 +22,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - name: Eslint
-        uses: actions/checkout@v3
         run: yarn lint
       - name: Cypress run
         uses: cypress-io/github-action@v4
