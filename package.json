@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test dev http://localhost:3001 cypress",
