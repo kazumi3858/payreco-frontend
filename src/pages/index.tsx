@@ -1,4 +1,4 @@
-import Main from "components/templates/Maix";
+import Main from "components/templates/Main";
 
 export default function Home() {
   return (

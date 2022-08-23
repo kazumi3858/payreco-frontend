@@ -1,8 +1,12 @@
+import Button from "components/atoms/Button";
+
 function Menu() {
   return (
-    <>
-      <p>勤務管理　給料計算　勤務先管理</p>
-    </>
+    <div className="sticky bottom-0 h-14 bg-zinc-100">
+      <Button />
+      <Button />
+      <Button />
+    </div>
   );
 }
 

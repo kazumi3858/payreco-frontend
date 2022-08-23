@@ -7,9 +7,13 @@ import Menu from "components/organisms/Menu";
 function Main() {
   return (
     <>
-      <Header />
-      <Calendar />
-      <DetailedSchedule />
+      <div className="min-h-screen">
+        <Header />
+        <div className="lg:flex">
+          <Calendar />
+          <DetailedSchedule />
+        </div>
+      </div>
       <Menu />
       <Footer />
     </>
