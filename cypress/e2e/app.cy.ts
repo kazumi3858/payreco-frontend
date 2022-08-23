@@ -15,7 +15,7 @@ describe("Navigation", () => {
     // cy.url().should("include", "/about");
 
     // The new page should contain an h1 with "About page"
-    cy.get("h1").contains("利用規約");
+    cy.get("footer").contains("利用規約");
   });
 });
 
