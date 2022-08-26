@@ -15,7 +15,7 @@ import {
 } from "date-fns";
 import ja from "date-fns/locale/ja";
 import { useState } from "react";
-import DetailedSchedule from "./DetailedSchedule";
+import ScheduleList from "./ScheduleList";
 
 const colStartClasses = [
   "",
@@ -82,8 +82,8 @@ function Calendar() {
               </button>
             </div>
             <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
-              {dayOfWeek.map((day) => (
-                <div>{day}</div>
+              {dayOfWeek.map((day, dayIdx) => (
+                <div key={dayIdx}>{day}</div>
               ))}
             </div>
             <div className="grid grid-cols-7 mt-2 text-sm">
@@ -126,21 +126,10 @@ function Calendar() {
             </div>
           </div>
           <section className="mt-12 md:mt-0 md:pl-14">
-            <h2 className="font-semibold text-gray-900">
-              <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
-                {format(selectedDay, "MMM dd日", { locale: ja })}
-              </time>
-              の予定
-            </h2>
-            <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
-              {selectedDayWorks && selectedDayWorks.length > 0 ? (
-                selectedDayWorks.map((work) => (
-                  <DetailedSchedule work={work} key={work.id} />
-                ))
-              ) : (
-                <p>予定はありません。</p>
-              )}
-            </ol>
+            <ScheduleList
+              selectedDay={selectedDay}
+              selectedDayWorks={selectedDayWorks}
+            />
           </section>
         </div>
       </div>
