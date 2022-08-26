@@ -1,6 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 
-function FormModal({ setFormModal }: {setFormModal: Dispatch<SetStateAction<boolean>>}) {
+function FormModal({
+  setFormModal,
+}: {
+  setFormModal: Dispatch<SetStateAction<boolean>>;
+}) {
   return (
     <div className="fixed inset-0">
       <div className="flex h-screen justify-center items-center">

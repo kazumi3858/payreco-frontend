@@ -8,7 +8,7 @@ function DetailedSchedule({ work }: { work: Work }) {
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);
   const [formModal, setFormModal] = useState<boolean>(false);
-  const [deleteModal, setDeleteModal] = useState<boolean>(false)
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
