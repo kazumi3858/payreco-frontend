@@ -13,8 +13,8 @@ export interface Company {
   readonly id: string;
   name: string;
   hourly_wage_system: boolean;
-  wage?: number;
-  currency: string;
+  wage_amount?: number;
+  currency_type: string;
   user_id: string;
   readonly created_at?: Date;
   readonly updated_at?: Date;
