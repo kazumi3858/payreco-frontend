@@ -125,12 +125,10 @@ function Calendar() {
               ))}
             </div>
           </div>
-          <section className="mt-12 md:mt-0 md:pl-14">
-            <ScheduleList
-              selectedDay={selectedDay}
-              selectedDayWorks={selectedDayWorks}
-            />
-          </section>
+          <ScheduleList
+            selectedDay={selectedDay}
+            selectedDayWorks={selectedDayWorks}
+          />
         </div>
       </div>
     </div>

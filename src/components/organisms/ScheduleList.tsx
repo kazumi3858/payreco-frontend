@@ -10,7 +10,7 @@ type Props = {
 
 function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
   return (
-    <>
+    <section className="mt-12 md:mt-0 md:pl-14">
       <span className="font-semibold text-gray-900">
         <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
           {format(selectedDay, "MMM dd日", { locale: ja })}
@@ -27,7 +27,7 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
           <p>予定はありません。</p>
         )}
       </ol>
-    </>
+    </section>
   );
 }
 
