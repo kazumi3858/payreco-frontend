@@ -12,6 +12,10 @@ export const getGetUsersUserIdMock = () => ({
   id: faker.random.word(),
   uid: faker.random.word(),
   name: faker.random.word(),
+  target_amount: faker.helpers.arrayElement([
+    faker.datatype.number({ min: undefined, max: undefined }),
+    undefined,
+  ]),
   created_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
   updated_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
 });

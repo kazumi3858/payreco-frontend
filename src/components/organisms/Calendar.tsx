@@ -54,7 +54,7 @@ function Calendar() {
   }
 
   const selectedDayWorks = data?.filter((work) =>
-    isSameDay(parseISO(`${work.starting_time}`), selectedDay)
+    isSameDay(parseISO(`${work.date}`), selectedDay)
   );
 
   return (
@@ -118,7 +118,7 @@ function Calendar() {
                   </time>
                   <div className="mx-auto mt-1 h-10">
                     {data?.some((work) =>
-                      isSameDay(parseISO(`${work.starting_time}`), day)
+                      isSameDay(parseISO(`${work.date}`), day)
                     ) && <p>testtest</p>}
                   </div>
                 </div>
