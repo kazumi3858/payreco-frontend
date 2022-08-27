@@ -1,3 +1,4 @@
+import { useGetCompanies } from "api/companies/companies";
 import { Work } from "api/model";
 import { Dispatch, SetStateAction, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -9,6 +10,7 @@ type Props = {
 };
 
 function FormModal({ selectedDay, setFormModal, work }: Props) {
+  const { data } = useGetCompanies();
   const { register, handleSubmit } = useForm<Work>();
   const selectedYear = selectedDay.getFullYear();
   const selectedMonth = ("0" + (selectedDay.getMonth() + 1)).slice(-2);
@@ -18,11 +20,11 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
   const maxTime = `${selectedYear}-${selectedMonth}-${selectedDate}T23:59`;
   const maxTimeNextDay = `${selectedYear}-${selectedMonth}-${nextSelectedDate}T23:59`;
   const [inputShift, setInputShift] = useState<string>("shift");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputShift(e.target.value);
-  console.log(inputShift);
-  const onSubmit: SubmitHandler<Work> = (data: Work) => {
-    console.log({ ...data, ...{ date: selectedDay } });
+  };
+  const onSubmit: SubmitHandler<Work> = (inputData: Work) => {
+    console.log({ ...inputData, ...{ date: selectedDay } });
   };
   return (
     <div className="fixed inset-0 z-50">
@@ -39,7 +41,25 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label>勤務先: </label>
-              <input className="m-1" {...register("company_id")} />
+              {data?.map((company) => {
+                return (
+                  <div key={company.id}>
+                    <input
+                      className="sr-only peer"
+                      type="radio"
+                      value={company.id}
+                      id={company.id}
+                      {...register("company_id")}
+                    />
+                    <label
+                      className="flex cursor-pointer peer-checked:bg-green-200"
+                      htmlFor={company.id}
+                    >
+                      {company.name}
+                    </label>
+                  </div>
+                );
+              })}
             </div>
             <input
               className="cursor-pointer"
