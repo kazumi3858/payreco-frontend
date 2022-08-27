@@ -6,7 +6,7 @@ function DeleteModal({
   setDeleteModal: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
-    <div className="fixed inset-0">
+    <div className="fixed inset-0 z-50">
       <div className="flex h-screen justify-center items-center">
         <div className="bg-stone-100 p-12 rounded-xl ">
           <p>本当に削除しますか？</p>

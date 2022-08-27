@@ -4,7 +4,12 @@ import { useState } from "react";
 import FormModal from "components/molecules/FormModal";
 import DeleteModal from "components/molecules/DeleteModel";
 
-function DetailedSchedule({ work }: { work: Work }) {
+type Props = {
+  work: Work;
+  selectedDay: Date;
+};
+
+function DetailedSchedule({ work, selectedDay }: Props) {
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);
   const [formModal, setFormModal] = useState<boolean>(false);
@@ -33,7 +38,9 @@ function DetailedSchedule({ work }: { work: Work }) {
       <div className="flex">
         <button
           className="bg-stone-100 p-2 m-1 rounded-md"
-          onClick={() => setFormModal(true)}
+          onClick={() => {
+            setFormModal(true);
+          }}
         >
           編集
         </button>
@@ -43,7 +50,13 @@ function DetailedSchedule({ work }: { work: Work }) {
         >
           削除
         </button>
-        {formModal && <FormModal setFormModal={setFormModal} />}
+        {formModal && (
+          <FormModal
+            selectedDay={selectedDay}
+            setFormModal={setFormModal}
+            work={work}
+          />
+        )}
         {deleteModal && <DeleteModal setDeleteModal={setDeleteModal} />}
       </div>
     </li>
