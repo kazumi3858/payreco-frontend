@@ -19,13 +19,21 @@ function FormModal({
   const selectedMonth = ("0" + (selectedDay.getMonth() + 1)).slice(-2);
   const selectedDate = ("0" + selectedDay.getDate()).slice(-2);
   const nextSelectedDate = ("0" + (selectedDay.getDate() + 1)).slice(-2);
-  const minTime = `${selectedYear}-${selectedMonth}-${selectedDate}T00:00`;
-  const maxTime = `${selectedYear}-${selectedMonth}-${selectedDate}T23:59`;
-  const maxTimeNextDay = `${selectedYear}-${selectedMonth}-${nextSelectedDate}T23:59`;
+  const formatTime = (date: string, time: string) =>
+    `${selectedYear}-${selectedMonth}-${date}T${time}`;
+  const minTime = formatTime(selectedDate, "00:00");
+  const maxTime = formatTime(selectedDate, "23:59");
+  console.log(String(work?.starting_time).substring(11, 16), work?.ending_time);
+  const maxTimeNextDay = formatTime(nextSelectedDate, "23:59");
+  const defaultTime = (time: Date) =>
+    formatTime(selectedDate, String(time).substring(11, 16));
   const [durationHour, setDurationHour] = useState<string>("0");
   const [durationMinutes, setDurationMinutes] = useState<string>("0");
+  const [payAmount, setPayAmount] = useState<string>(
+    work?.pay_amount ? String(work.pay_amount) : "0"
+  );
   const { register, handleSubmit, watch } = useForm<Work>();
-  const [inputShift, setInputShift] = useState<string>("shift");
+  const [inputShift, setInputShift] = useState<string>("yes");
   const [startingTime, endingTime, breakTime] = watch([
     "starting_time",
     "ending_time",
@@ -37,12 +45,12 @@ function FormModal({
       (1000 * 60) -
     (breakTime === undefined ? 0 : breakTime);
   const workingHours =
-    inputShift === "shift"
-      ? Math.round((workingDuration / 60) * 100) / 100
-      : Math.round(
-          (Number(durationHour) + Number(durationMinutes) / 60) * 100
-        ) / 100;
-  console.log(workingHours);
+    Math.round(
+      inputShift === "yes"
+        ? (workingDuration / 60) * 100
+        : (Number(durationHour) + Number(durationMinutes) / 60) * 100
+    ) / 100;
+  console.log(work?.company);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputShift(e.target.value);
   };
@@ -53,6 +61,9 @@ function FormModal({
         date: selectedDay,
         working_hours: workingHours,
         company_id: selectedCompany.id,
+        pay_amount: selectedCompany.wage_amount
+          ? selectedCompany.wage_amount * workingHours
+          : Number(payAmount),
       },
     });
   };
@@ -76,20 +87,20 @@ function FormModal({
             <input
               className="cursor-pointer"
               type="radio"
-              value="shift"
+              value="yes"
               onChange={handleChange}
-              checked={inputShift === "shift"}
+              checked={inputShift === "yes"}
             />
             <label>シフト時刻を入力</label>
             <input
               className="cursor-pointer"
               type="radio"
-              value="noShift"
+              value="no"
               onChange={handleChange}
-              checked={inputShift === "noShift"}
+              checked={inputShift === "no"}
             />
             <label>合計勤務時間のみ入力</label>
-            {inputShift === "shift" ? (
+            {inputShift === "yes" ? (
               <>
                 <div>
                   <label>開始時刻: </label>
@@ -98,7 +109,11 @@ function FormModal({
                     className="block"
                     min={minTime}
                     max={maxTime}
-                    defaultValue={minTime}
+                    defaultValue={
+                      work?.starting_time
+                        ? defaultTime(work.starting_time)
+                        : minTime
+                    }
                     {...register("starting_time")}
                   />
                 </div>
@@ -109,13 +124,20 @@ function FormModal({
                     className="block"
                     min={minTime}
                     max={maxTimeNextDay}
-                    defaultValue={minTime}
+                    defaultValue={
+                      work?.ending_time
+                        ? defaultTime(work.ending_time)
+                        : minTime
+                    }
                     {...register("ending_time")}
                   />
                 </div>
                 <div>
                   <label>休憩: </label>
-                  <select {...register("break_time")}>
+                  <select
+                    defaultValue={work?.break_time ? work.break_time : "0"}
+                    {...register("break_time")}
+                  >
                     <option value="0">0</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -139,20 +161,38 @@ function FormModal({
               <div>
                 <label>合計時間: </label>
                 <select
-                  value={durationHour}
+                  defaultValue={
+                    work?.working_hours ? Math.floor(work.working_hours) : 0
+                  }
                   onChange={(e) => setDurationHour(e.target.value)}
                 >
                   {Object.keys([...Array(24)]).map((num) => {
-                    return <option value={num}>{num}</option>;
+                    return (
+                      <option key={num} value={num}>
+                        {num}
+                      </option>
+                    );
                   })}
                 </select>
                 時間
                 <select
-                  value={durationMinutes}
+                  defaultValue={
+                    work?.working_hours
+                      ? Math.round(
+                          (Number(work.working_hours.toFixed(2)) -
+                            Math.floor(work.working_hours)) *
+                            60
+                        )
+                      : 0
+                  }
                   onChange={(e) => setDurationMinutes(e.target.value)}
                 >
                   {Object.keys([...Array(60)]).map((num) => {
-                    return <option value={num}>{num}</option>;
+                    return (
+                      <option key={num} value={num}>
+                        {num}
+                      </option>
+                    );
                   })}
                 </select>
                 分
@@ -160,16 +200,15 @@ function FormModal({
             )}
             <div>
               <label>給料: </label>
-              {work?.company?.wage_amount ? (
-                work?.company?.wage_amount * workingHours
+              {selectedCompany.wage_amount ? (
+                <span>{selectedCompany.wage_amount * workingHours}</span>
               ) : (
                 <input
                   className="m-1 w-16"
-                  {...register("pay_amount")}
-                  placeholder="11000"
+                  value={payAmount}
+                  onChange={(e) => setPayAmount(e.target.value)}
                 />
               )}
-              {work?.company?.currency_type}
             </div>
             <div>
               <label>メモ: </label>
