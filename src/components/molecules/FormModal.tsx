@@ -11,7 +11,6 @@ type Props = {
 
 function FormModal({ selectedDay, setFormModal, work }: Props) {
   const { data } = useGetCompanies();
-  const { register, handleSubmit } = useForm<Work>();
   const selectedYear = selectedDay.getFullYear();
   const selectedMonth = ("0" + (selectedDay.getMonth() + 1)).slice(-2);
   const selectedDate = ("0" + selectedDay.getDate()).slice(-2);
@@ -19,12 +18,38 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
   const minTime = `${selectedYear}-${selectedMonth}-${selectedDate}T00:00`;
   const maxTime = `${selectedYear}-${selectedMonth}-${selectedDate}T23:59`;
   const maxTimeNextDay = `${selectedYear}-${selectedMonth}-${nextSelectedDate}T23:59`;
+  const [durationHour, setDurationHour] = useState<string>("0");
+  const [durationMinutes, setDurationMinutes] = useState<string>("0");
+  const { register, handleSubmit, watch } = useForm<Work>();
   const [inputShift, setInputShift] = useState<string>("shift");
+  const [startingTime, endingTime, breakTime] = watch([
+    "starting_time",
+    "ending_time",
+    "break_time",
+  ]);
+  const workingDuration =
+    (Date.parse(String(endingTime === undefined ? minTime : endingTime)) -
+      Date.parse(String(startingTime === undefined ? minTime : startingTime))) /
+      (1000 * 60) -
+    (breakTime === undefined ? 0 : breakTime);
+  console.log(endingTime);
+  const workingHours =
+    inputShift === "shift"
+      ? Math.round((workingDuration / 60) * 100) / 100
+      : Math.round(
+          (Number(durationHour) + Number(durationMinutes) / 60) * 100
+        ) / 100;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputShift(e.target.value);
   };
   const onSubmit: SubmitHandler<Work> = (inputData: Work) => {
-    console.log({ ...inputData, ...{ date: selectedDay } });
+    console.log({
+      ...inputData,
+      ...{
+        date: selectedDay,
+        working_hours: workingHours,
+      },
+    });
   };
   return (
     <div className="fixed inset-0 z-50">
@@ -111,18 +136,39 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
                     <option value="40">40</option>
                     <option value="50">50</option>
                     <option value="60">60</option>
-                    <option value="60">90</option>
-                    <option value="60">120</option>
+                    <option value="90">90</option>
+                    <option value="120">120</option>
                   </select>
                   分
                 </div>
+                <p>
+                  合計時間:{" "}
+                  {`${Math.floor(workingDuration / 60)}時間${
+                    workingDuration % 60
+                  }分`}
+                </p>
               </>
             ) : (
               <div>
                 <label>合計時間: </label>
-                <input className="m-1 w-10" {...register("working_hours")} />
+                <select
+                  value={durationHour}
+                  onChange={(e) => setDurationHour(e.target.value)}
+                >
+                  {Object.keys([...Array(24)]).map((num) => {
+                    return <option value={num}>{num}</option>;
+                  })}
+                </select>
                 時間
-                <input className="m-1 w-10" {...register("working_hours")} />分
+                <select
+                  value={durationMinutes}
+                  onChange={(e) => setDurationMinutes(e.target.value)}
+                >
+                  {Object.keys([...Array(60)]).map((num) => {
+                    return <option value={num}>{num}</option>;
+                  })}
+                </select>
+                分
               </div>
             )}
             {!work?.company?.hourly_wage_system && (
