@@ -1,16 +1,20 @@
-import { useGetCompanies } from "api/companies/companies";
-import { Work } from "api/model";
+import { Company, Work } from "api/model";
 import { Dispatch, SetStateAction, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
   selectedDay: Date;
-  setFormModal: Dispatch<SetStateAction<boolean>>;
+  selectedCompany: Company;
+  setSelectedCompany: Dispatch<SetStateAction<Company | null>>;
   work?: Work;
 };
 
-function FormModal({ selectedDay, setFormModal, work }: Props) {
-  const { data } = useGetCompanies();
+function FormModal({
+  selectedDay,
+  selectedCompany,
+  setSelectedCompany,
+  work,
+}: Props) {
   const selectedYear = selectedDay.getFullYear();
   const selectedMonth = ("0" + (selectedDay.getMonth() + 1)).slice(-2);
   const selectedDate = ("0" + selectedDay.getDate()).slice(-2);
@@ -32,13 +36,13 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
       Date.parse(String(startingTime === undefined ? minTime : startingTime))) /
       (1000 * 60) -
     (breakTime === undefined ? 0 : breakTime);
-  console.log(endingTime);
   const workingHours =
     inputShift === "shift"
       ? Math.round((workingDuration / 60) * 100) / 100
       : Math.round(
           (Number(durationHour) + Number(durationMinutes) / 60) * 100
         ) / 100;
+  console.log(workingHours);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputShift(e.target.value);
   };
@@ -48,6 +52,7 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
       ...{
         date: selectedDay,
         working_hours: workingHours,
+        company_id: selectedCompany.id,
       },
     });
   };
@@ -57,7 +62,7 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
         <div className="bg-stone-100 p-12 rounded-xl ">
           <button
             onClick={() => {
-              setFormModal(false);
+              setSelectedCompany(null);
             }}
             className="p-2"
           >
@@ -66,25 +71,7 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label>勤務先: </label>
-              {data?.map((company) => {
-                return (
-                  <div key={company.id}>
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value={company.id}
-                      id={company.id}
-                      {...register("company_id")}
-                    />
-                    <label
-                      className="flex cursor-pointer peer-checked:bg-green-200"
-                      htmlFor={company.id}
-                    >
-                      {company.name}
-                    </label>
-                  </div>
-                );
-              })}
+              {selectedCompany.name}
             </div>
             <input
               className="cursor-pointer"
@@ -171,16 +158,19 @@ function FormModal({ selectedDay, setFormModal, work }: Props) {
                 分
               </div>
             )}
-            {!work?.company?.hourly_wage_system && (
-              <div>
-                <label>給料: </label>
+            <div>
+              <label>給料: </label>
+              {work?.company?.wage_amount ? (
+                work?.company?.wage_amount * workingHours
+              ) : (
                 <input
-                  className="m-1"
+                  className="m-1 w-16"
                   {...register("pay_amount")}
                   placeholder="11000"
                 />
-              </div>
-            )}
+              )}
+              {work?.company?.currency_type}
+            </div>
             <div>
               <label>メモ: </label>
               <input className="m-1" {...register("memo")} placeholder="メモ" />

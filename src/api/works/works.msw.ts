@@ -26,26 +26,21 @@ export const getGetWorksMock = () =>
     memo: faker.helpers.arrayElement([faker.random.word(), undefined]),
     user_id: faker.random.word(),
     company_id: faker.helpers.arrayElement([faker.random.word(), undefined]),
-    company: faker.helpers.arrayElement([
-      {
-        name: faker.helpers.arrayElement([faker.random.word(), undefined]),
-        hourly_wage_system: faker.helpers.arrayElement([
-          faker.datatype.boolean(),
-          undefined,
-        ]),
-        wage_amount: faker.helpers.arrayElement([
-          faker.datatype.number({ min: undefined, max: undefined }),
-          undefined,
-        ]),
-        currency_type: faker.helpers.arrayElement([
-          faker.random.word(),
-          undefined,
-        ]),
-      },
-      undefined,
-    ]),
     created_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
     updated_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
+    company: {
+      id: faker.random.word(),
+      name: faker.random.word(),
+      hourly_wage_system: faker.datatype.boolean(),
+      wage_amount: faker.helpers.arrayElement([
+        faker.datatype.number({ min: undefined, max: undefined }),
+        undefined,
+      ]),
+      currency_type: faker.random.word(),
+      user_id: faker.random.word(),
+      created_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
+      updated_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
+    },
   }));
 
 export const getWorksMSW = () => [

@@ -1,5 +1,5 @@
 import { format, parseISO } from "date-fns";
-import { Work } from "api/model";
+import { Company, Work } from "api/model";
 import { useState } from "react";
 import FormModal from "components/molecules/FormModal";
 import DeleteModal from "components/molecules/DeleteModel";
@@ -12,7 +12,7 @@ type Props = {
 function DetailedSchedule({ work, selectedDay }: Props) {
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);
-  const [formModal, setFormModal] = useState<boolean>(false);
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
   return (
@@ -39,7 +39,7 @@ function DetailedSchedule({ work, selectedDay }: Props) {
         <button
           className="bg-stone-100 p-2 m-1 rounded-md"
           onClick={() => {
-            setFormModal(true);
+            setSelectedCompany(work.company);
           }}
         >
           編集
@@ -50,10 +50,11 @@ function DetailedSchedule({ work, selectedDay }: Props) {
         >
           削除
         </button>
-        {formModal && (
+        {selectedCompany && (
           <FormModal
             selectedDay={selectedDay}
-            setFormModal={setFormModal}
+            selectedCompany={selectedCompany}
+            setSelectedCompany={setSelectedCompany}
             work={work}
           />
         )}

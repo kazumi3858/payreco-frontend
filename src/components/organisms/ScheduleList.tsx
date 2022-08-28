@@ -1,4 +1,5 @@
-import { Work } from "api/model";
+import { useGetCompanies } from "api/companies/companies";
+import { Company, Work } from "api/model";
 import FormModal from "components/molecules/FormModal";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
@@ -11,7 +12,8 @@ type Props = {
 };
 
 function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
-  const [formModal, setFormModal] = useState<boolean>(false);
+  const { data } = useGetCompanies();
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
       <span className="font-semibold text-gray-900">
@@ -20,14 +22,6 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
         </time>
         の予定
       </span>
-      <button
-        className="m-1 bg-stone-200"
-        onClick={() => {
-          setFormModal(true);
-        }}
-      >
-        勤務を登録
-      </button>
       <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
         {selectedDayWorks && selectedDayWorks.length > 0 ? (
           selectedDayWorks.map((work) => (
@@ -41,8 +35,26 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
           <p>予定はありません。</p>
         )}
       </ol>
-      {formModal && (
-        <FormModal selectedDay={selectedDay} setFormModal={setFormModal} />
+      <p>勤務先を選んで予定を追加</p>
+      {data?.map((company) => {
+        return (
+          <button
+            className="m-1 bg-stone-200"
+            key={company.id}
+            onClick={() => {
+              setSelectedCompany(company);
+            }}
+          >
+            {company.name}
+          </button>
+        );
+      })}
+      {selectedCompany && (
+        <FormModal
+          selectedDay={selectedDay}
+          selectedCompany={selectedCompany}
+          setSelectedCompany={setSelectedCompany}
+        />
       )}
     </section>
   );

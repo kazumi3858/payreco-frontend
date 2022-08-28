@@ -5,13 +5,13 @@
  * API for payreco app
  * OpenAPI spec version: 1.0
  */
-import type { WorkCompany } from "./workCompany";
+import type { Company } from "./company";
 
 /**
  * Work model
  */
 export interface Work {
-  readonly id?: string;
+  readonly id: string;
   date: Date;
   starting_time?: Date;
   ending_time?: Date;
@@ -19,9 +19,9 @@ export interface Work {
   working_hours: number;
   pay_amount: number;
   memo?: string;
-  user_id?: string;
+  user_id: string;
   company_id?: string;
-  company?: WorkCompany;
   readonly created_at?: Date;
   readonly updated_at?: Date;
+  company: Company;
 }
