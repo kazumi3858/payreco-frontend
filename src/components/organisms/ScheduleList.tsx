@@ -13,7 +13,7 @@ type Props = {
 
 function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
   const { data } = useGetCompanies();
-  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
+  const [selectedCompany, setSelectedCompany] = useState<Company | undefined>(undefined);
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
       <span className="font-semibold text-gray-900">

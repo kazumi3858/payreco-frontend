@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 type Props = {
   selectedDay: Date;
   selectedCompany: Company;
-  setSelectedCompany: Dispatch<SetStateAction<Company | null>>;
+  setSelectedCompany: Dispatch<SetStateAction<Company | undefined>>;
   work?: Work;
 };
 
@@ -73,7 +73,7 @@ function FormModal({
         <div className="bg-stone-100 p-12 rounded-xl ">
           <button
             onClick={() => {
-              setSelectedCompany(null);
+              setSelectedCompany(undefined);
             }}
             className="p-2"
           >
