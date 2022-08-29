@@ -208,7 +208,7 @@ function FormModal({
                   value={payAmount}
                   onChange={(e) => setPayAmount(e.target.value)}
                 />
-              )}
+              )}{selectedCompany.currency_type}
             </div>
             <div>
               <label>メモ: </label>
