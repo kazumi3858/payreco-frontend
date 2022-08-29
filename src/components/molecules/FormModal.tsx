@@ -1,6 +1,5 @@
 import { Company, Work } from "api/model";
 import { Dispatch, SetStateAction, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
   selectedDay: Date;
@@ -27,44 +26,79 @@ function FormModal({
   const maxTimeNextDay = formatTime(nextSelectedDate, "23:59");
   const defaultTime = (time: Date) =>
     formatTime(selectedDate, String(time).substring(11, 16));
-  const [durationHour, setDurationHour] = useState<string>("0");
-  const [durationMinutes, setDurationMinutes] = useState<string>("0");
-  const [payAmount, setPayAmount] = useState<string>(
-    work?.pay_amount ? String(work.pay_amount) : "0"
+  const pickDurationHours = work?.working_hours
+    ? String(Math.floor(work.working_hours))
+    : "0";
+  const pickDurationMinutes = work?.working_hours
+    ? String(
+        Math.round(
+          (Number(work.working_hours.toFixed(2)) -
+            Math.floor(work.working_hours)) *
+            60
+        )
+      )
+    : "0";
+  const [durationHour, setDurationHour] = useState<string>(pickDurationHours);
+  const [durationMinutes, setDurationMinutes] =
+    useState<string>(pickDurationMinutes);
+  const [payAmount, setPayAmount] = useState<number>(
+    work?.pay_amount ? work.pay_amount : 0
   );
-  const { register, handleSubmit, watch } = useForm<Work>();
-  const [inputShift, setInputShift] = useState<string>("yes");
-  const [startingTime, endingTime, breakTime] = watch([
-    "starting_time",
-    "ending_time",
-    "break_time",
-  ]);
-  const workingDuration =
+
+  const [startingTime, setStartingTime] = useState<Date>(
+    work?.starting_time ? work.starting_time : selectedDay
+  );
+  const [endingTime, setEndingTime] = useState<Date>(
+    work?.ending_time ? work.ending_time : selectedDay
+  );
+  const [breakTime, setBreakTime] = useState<number>(
+    work?.break_time ? work.break_time : 0
+  );
+  const [memo, setMemo] = useState<string>(work?.memo ? work.memo : "");
+
+  const startAndEndTimeDifference =
     (Date.parse(String(endingTime === undefined ? minTime : endingTime)) -
       Date.parse(String(startingTime === undefined ? minTime : startingTime))) /
       (1000 * 60) -
     (breakTime === undefined ? 0 : breakTime);
+
+  const [shiftMode, setShiftMode] = useState<boolean>(true);
+  const changeShiftMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShiftMode(Boolean(e.target.value));
+  };
   const workingHours =
     Math.round(
-      inputShift === "yes"
-        ? (workingDuration / 60) * 100
+      shiftMode
+        ? (startAndEndTimeDifference / 60) * 100
         : (Number(durationHour) + Number(durationMinutes) / 60) * 100
     ) / 100;
-  console.log(work?.company);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputShift(e.target.value);
+
+  const formData = {
+    date: selectedDay,
+    company_id: selectedCompany.id,
+    starting_time: shiftMode ? startingTime : null,
+    ending_time: shiftMode? endingTime : null,
+    break_time: shiftMode? breakTime : null,
+    working_hours: workingHours,
+    pay_amount: selectedCompany.wage_amount
+      ? Math.round(selectedCompany.wage_amount * workingHours * 100) / 100
+      : payAmount,
+    memo: memo,
   };
-  const onSubmit: SubmitHandler<Work> = (inputData: Work) => {
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log({
-      ...inputData,
-      ...{
-        date: selectedDay,
-        working_hours: workingHours,
-        company_id: selectedCompany.id,
-        pay_amount: selectedCompany.wage_amount
-          ? selectedCompany.wage_amount * workingHours
-          : Number(payAmount),
-      },
+      date: selectedDay,
+      company_id: selectedCompany.id,
+      working_hours: workingHours,
+      pay_amount: selectedCompany.wage_amount
+        ? Math.round(selectedCompany.wage_amount * workingHours * 100) / 100
+        : payAmount,
+      starting_time: shiftMode ? startingTime : null,
+      ending_time: shiftMode? endingTime : null,
+      break_time: shiftMode? breakTime : null,
+      memo: memo,
     });
   };
   return (
@@ -79,7 +113,7 @@ function FormModal({
           >
             閉じる
           </button>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit}>
             <div>
               <label>勤務先: </label>
               {selectedCompany.name}
@@ -87,20 +121,20 @@ function FormModal({
             <input
               className="cursor-pointer"
               type="radio"
-              value="yes"
-              onChange={handleChange}
-              checked={inputShift === "yes"}
+              value="true"
+              onChange={changeShiftMode}
+              checked={shiftMode === true}
             />
             <label>シフト時刻を入力</label>
             <input
               className="cursor-pointer"
               type="radio"
-              value="no"
-              onChange={handleChange}
-              checked={inputShift === "no"}
+              value=""
+              onChange={changeShiftMode}
+              checked={shiftMode === false}
             />
             <label>合計勤務時間のみ入力</label>
-            {inputShift === "yes" ? (
+            {shiftMode ? (
               <>
                 <div>
                   <label>開始時刻: </label>
@@ -114,7 +148,7 @@ function FormModal({
                         ? defaultTime(work.starting_time)
                         : minTime
                     }
-                    {...register("starting_time")}
+                    onChange={(e) => setStartingTime(new Date(e.target.value))}
                   />
                 </div>
                 <div>
@@ -129,14 +163,14 @@ function FormModal({
                         ? defaultTime(work.ending_time)
                         : minTime
                     }
-                    {...register("ending_time")}
+                    onChange={(e) => setEndingTime(new Date(e.target.value))}
                   />
                 </div>
                 <div>
                   <label>休憩: </label>
                   <select
                     defaultValue={work?.break_time ? work.break_time : "0"}
-                    {...register("break_time")}
+                    onChange={(e) => setBreakTime(Number(e.target.value))}
                   >
                     <option value="0">0</option>
                     <option value="10">10</option>
@@ -152,8 +186,8 @@ function FormModal({
                 </div>
                 <p>
                   合計時間:{" "}
-                  {`${Math.floor(workingDuration / 60)}時間${
-                    workingDuration % 60
+                  {`${Math.floor(startAndEndTimeDifference / 60)}時間${
+                    startAndEndTimeDifference % 60
                   }分`}
                 </p>
               </>
@@ -201,18 +235,29 @@ function FormModal({
             <div>
               <label>給料: </label>
               {selectedCompany.wage_amount ? (
-                <span>{selectedCompany.wage_amount * workingHours}</span>
+                <span>
+                  {Math.round(
+                    selectedCompany.wage_amount * workingHours * 100
+                  ) / 100}
+                </span>
               ) : (
                 <input
                   className="m-1 w-16"
+                  type="number"
                   value={payAmount}
-                  onChange={(e) => setPayAmount(e.target.value)}
+                  onChange={(e) => setPayAmount(Number(e.target.value))}
                 />
-              )}{selectedCompany.currency_type}
+              )}
+              {selectedCompany.currency_type}
             </div>
             <div>
               <label>メモ: </label>
-              <input className="m-1" {...register("memo")} placeholder="メモ" />
+              <input
+                className="m-1"
+                defaultValue={memo}
+                onChange={(e) => setMemo(e.target.value)}
+                placeholder="メモ"
+              />
             </div>
             <input className="block m-1 cursor-pointer" type="submit" />
           </form>

@@ -12,7 +12,9 @@ type Props = {
 function DetailedSchedule({ work, selectedDay }: Props) {
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);
-  const [selectedCompany, setSelectedCompany] = useState<Company | undefined>(undefined);
+  const [selectedCompany, setSelectedCompany] = useState<Company | undefined>(
+    undefined
+  );
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
   return (
