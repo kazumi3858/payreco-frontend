@@ -60,7 +60,9 @@ function DetailedSchedule({ work, selectedDay }: Props) {
             work={work}
           />
         )}
-        {deleteModal && <DeleteModal setDeleteModal={setDeleteModal} />}
+        {deleteModal && (
+          <DeleteModal setDeleteModal={setDeleteModal} workId={work.id} />
+        )}
       </div>
     </li>
   );
