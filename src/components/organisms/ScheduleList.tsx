@@ -1,5 +1,5 @@
 import { useGetCompanies } from "api/companies/companies";
-import { Work } from "api/model";
+import { Company, Work } from "api/model";
 import FormModal from "components/molecules/FormModal";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
@@ -14,6 +14,7 @@ type Props = {
 function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
   const { data } = useGetCompanies();
   const [modal, setModal] = useState<boolean>(false);
+  const [selectedCompany, setSelectedCompany] = useState<Company>();
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
       <span className="font-semibold text-gray-900">
@@ -39,25 +40,25 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
       <p>勤務先を選んで予定を追加</p>
       {data?.map((company) => {
         return (
-          <div key={company.id}>
-            <button
-              className="m-1 bg-stone-200"
-              onClick={() => {
-                setModal(true);
-              }}
-            >
-              {company.name}
-            </button>
-            {modal && (
-              <FormModal
-                selectedDay={selectedDay}
-                company={company}
-                setModal={setModal}
-              />
-            )}
-          </div>
+          <button
+            key={company.id}
+            className="m-1 bg-stone-200"
+            onClick={() => {
+              setModal(true);
+              setSelectedCompany(company);
+            }}
+          >
+            {company.name}
+          </button>
         );
       })}
+      {modal && (
+        <FormModal
+          selectedDay={selectedDay}
+          company={selectedCompany}
+          setModal={setModal}
+        />
+      )}
     </section>
   );
 }

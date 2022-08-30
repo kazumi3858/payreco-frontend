@@ -18,7 +18,6 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
     `${selectedYear}-${selectedMonth}-${date}T${time}`;
   const minTime = formatTime(selectedDate, "00:00");
   const maxTime = formatTime(selectedDate, "23:59");
-  console.log(String(work?.starting_time).substring(11, 16), work?.ending_time);
   const maxTimeNextDay = formatTime(nextSelectedDate, "23:59");
   const defaultTime = (time: Date) =>
     formatTime(selectedDate, String(time).substring(11, 16));
@@ -92,6 +91,10 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (workingHours <= 0)
+      return alert("合計時間は正の数でなければなりません。");
+    if (payAmount > 999999 || payAmount < 0)
+      return alert("金額がマイナス・または大きすぎます。");
     work?.id
       ? patchMutation.mutate({ workId: work.id, data: formData })
       : postMutation.mutate({ data: formData });
@@ -248,7 +251,8 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
               )}
               {company?.currency_type}
               <p className="text-rose-600">
-                {payAmount > 999999 && `数値が大きすぎます。`}
+                {(payAmount > 999999 || payAmount < 0) &&
+                  `金額がマイナス・または大きすぎます。`}
               </p>
             </div>
             <div>
