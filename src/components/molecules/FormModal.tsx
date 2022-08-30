@@ -1,4 +1,4 @@
-import { usePostWorks } from "api/default/default";
+import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -81,21 +81,25 @@ function FormModal({
       Number(selectedDate) + 1
     ),
     company_id: selectedCompany.id,
-    starting_time: shiftMode ? startingTime : undefined,
-    ending_time: shiftMode ? endingTime : undefined,
-    break_time: shiftMode ? breakTime : undefined,
+    starting_time: shiftMode ? startingTime : null,
+    ending_time: shiftMode ? endingTime : null,
+    break_time: shiftMode ? breakTime : null,
     working_hours: workingHours,
     pay_amount: selectedCompany.wage_amount
       ? Math.round(selectedCompany.wage_amount * workingHours * 100) / 100
       : payAmount,
     memo: memo,
-    user_id: "509aa386-2946-4a85-be45-68a7496902b5",
+    user_id: "166d5e6b-0f61-4b91-bafa-ee2085f264b6",
   };
 
-  const mutation = usePostWorks();
+  const postMutation = usePostWorks();
+  const patchMutation = usePatchWorksWorkId();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutation.mutate({ data: formData });
+    work?.id
+      ? patchMutation.mutate({ workId: work.id, data: formData })
+      : postMutation.mutate({ data: formData });
   };
 
   return (

@@ -13,9 +13,9 @@ import type { Company } from "./company";
 export interface Work {
   readonly id?: string;
   date: Date;
-  starting_time?: Date;
-  ending_time?: Date;
-  break_time?: number;
+  starting_time: Date | null;
+  ending_time: Date | null;
+  break_time: number | null;
   working_hours: number;
   pay_amount: number;
   memo?: string;
