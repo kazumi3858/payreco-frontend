@@ -12,8 +12,8 @@
 export interface User {
   /** Unique identifier for the given user. */
   readonly id: string;
-  uid: string;
-  name: string;
+  readonly uid: string;
+  readonly name: string;
   target_amount?: number;
   readonly created_at?: Date;
   /** The date that the user was created. */

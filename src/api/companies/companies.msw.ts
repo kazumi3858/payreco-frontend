@@ -13,7 +13,7 @@ export const getGetCompaniesMock = () =>
     { length: faker.datatype.number({ min: 1, max: 10 }) },
     (_, i) => i + 1
   ).map(() => ({
-    id: faker.random.word(),
+    id: faker.helpers.arrayElement([faker.random.word(), undefined]),
     name: faker.random.word(),
     hourly_wage_system: faker.datatype.boolean(),
     wage_amount: faker.helpers.arrayElement([

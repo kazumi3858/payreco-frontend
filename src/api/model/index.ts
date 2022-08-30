@@ -1,5 +1,5 @@
 export * from "./user";
-export * from "./company";
+export * from "./work";
 export * from "./exchangeRate";
 export * from "./exchangeRateExchangeRateList";
-export * from "./work";
+export * from "./company";

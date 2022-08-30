@@ -2,7 +2,7 @@ import { useDeleteWorksWorkId } from "api/default/default";
 
 type Props = {
   setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
-  workId: string | undefined;
+  workId?: string;
 };
 
 function DeleteModal({ setDeleteModal, workId }: Props) {
