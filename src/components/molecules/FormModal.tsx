@@ -1,3 +1,4 @@
+import { usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -43,7 +44,7 @@ function FormModal({
     useState<string>(pickDurationMinutes);
   const [payAmount, setPayAmount] = useState<number>(
     work?.pay_amount ? work.pay_amount : 0
-  );
+    );
 
   const [startingTime, setStartingTime] = useState<Date>(
     work?.starting_time ? work.starting_time : selectedDay
@@ -74,33 +75,25 @@ function FormModal({
     ) / 100;
 
   const formData = {
-    date: selectedDay,
+    date: new Date(selectedYear, Number(selectedMonth) -1, Number(selectedDate) + 1),
     company_id: selectedCompany.id,
-    starting_time: shiftMode ? startingTime : null,
-    ending_time: shiftMode? endingTime : null,
-    break_time: shiftMode? breakTime : null,
+    starting_time: shiftMode ? startingTime : undefined,
+    ending_time: shiftMode? endingTime : undefined,
+    break_time: shiftMode? breakTime : undefined,
     working_hours: workingHours,
     pay_amount: selectedCompany.wage_amount
       ? Math.round(selectedCompany.wage_amount * workingHours * 100) / 100
       : payAmount,
     memo: memo,
+    user_id: "509aa386-2946-4a85-be45-68a7496902b5"
   };
 
+  const mutation = usePostWorks()
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({
-      date: selectedDay,
-      company_id: selectedCompany.id,
-      working_hours: workingHours,
-      pay_amount: selectedCompany.wage_amount
-        ? Math.round(selectedCompany.wage_amount * workingHours * 100) / 100
-        : payAmount,
-      starting_time: shiftMode ? startingTime : null,
-      ending_time: shiftMode? endingTime : null,
-      break_time: shiftMode? breakTime : null,
-      memo: memo,
-    });
+    mutation.mutate({data: formData})
   };
+
   return (
     <div className="fixed inset-0 z-50">
       <div className="flex h-screen justify-center items-center">
@@ -190,6 +183,9 @@ function FormModal({
                     startAndEndTimeDifference % 60
                   }分`}
                 </p>
+                <p className="text-rose-600">
+                {Math.sign(startAndEndTimeDifference) === -1 && `合計時間が正しくありません。`}
+                </p>
               </>
             ) : (
               <div>
@@ -244,11 +240,12 @@ function FormModal({
                 <input
                   className="m-1 w-16"
                   type="number"
-                  value={payAmount}
+                  defaultValue={payAmount}
                   onChange={(e) => setPayAmount(Number(e.target.value))}
                 />
               )}
               {selectedCompany.currency_type}
+              <p className="text-rose-600">{payAmount > 999999 && `数値が大きすぎます。` }</p>
             </div>
             <div>
               <label>メモ: </label>
@@ -256,7 +253,7 @@ function FormModal({
                 className="m-1"
                 defaultValue={memo}
                 onChange={(e) => setMemo(e.target.value)}
-                placeholder="メモ"
+                placeholder="任意入力"
               />
             </div>
             <input className="block m-1 cursor-pointer" type="submit" />

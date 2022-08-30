@@ -11,7 +11,7 @@ import type { Company } from "./company";
  * Work model
  */
 export interface Work {
-  readonly id: string;
+  readonly id?: string;
   date: Date;
   starting_time?: Date;
   ending_time?: Date;
@@ -23,5 +23,5 @@ export interface Work {
   company_id?: string;
   readonly created_at?: Date;
   readonly updated_at?: Date;
-  company: Company;
+  company?: Company;
 }
