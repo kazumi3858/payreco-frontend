@@ -44,7 +44,7 @@ function FormModal({
     useState<string>(pickDurationMinutes);
   const [payAmount, setPayAmount] = useState<number>(
     work?.pay_amount ? work.pay_amount : 0
-    );
+  );
 
   const [startingTime, setStartingTime] = useState<Date>(
     work?.starting_time ? work.starting_time : selectedDay
@@ -75,23 +75,27 @@ function FormModal({
     ) / 100;
 
   const formData = {
-    date: new Date(selectedYear, Number(selectedMonth) -1, Number(selectedDate) + 1),
+    date: new Date(
+      selectedYear,
+      Number(selectedMonth) - 1,
+      Number(selectedDate) + 1
+    ),
     company_id: selectedCompany.id,
     starting_time: shiftMode ? startingTime : undefined,
-    ending_time: shiftMode? endingTime : undefined,
-    break_time: shiftMode? breakTime : undefined,
+    ending_time: shiftMode ? endingTime : undefined,
+    break_time: shiftMode ? breakTime : undefined,
     working_hours: workingHours,
     pay_amount: selectedCompany.wage_amount
       ? Math.round(selectedCompany.wage_amount * workingHours * 100) / 100
       : payAmount,
     memo: memo,
-    user_id: "509aa386-2946-4a85-be45-68a7496902b5"
+    user_id: "509aa386-2946-4a85-be45-68a7496902b5",
   };
 
-  const mutation = usePostWorks()
+  const mutation = usePostWorks();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutation.mutate({data: formData})
+    mutation.mutate({ data: formData });
   };
 
   return (
@@ -184,7 +188,8 @@ function FormModal({
                   }分`}
                 </p>
                 <p className="text-rose-600">
-                {Math.sign(startAndEndTimeDifference) === -1 && `合計時間が正しくありません。`}
+                  {Math.sign(startAndEndTimeDifference) === -1 &&
+                    `合計時間が正しくありません。`}
                 </p>
               </>
             ) : (
@@ -245,7 +250,9 @@ function FormModal({
                 />
               )}
               {selectedCompany.currency_type}
-              <p className="text-rose-600">{payAmount > 999999 && `数値が大きすぎます。` }</p>
+              <p className="text-rose-600">
+                {payAmount > 999999 && `数値が大きすぎます。`}
+              </p>
             </div>
             <div>
               <label>メモ: </label>
