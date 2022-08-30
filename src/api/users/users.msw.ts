@@ -16,8 +16,8 @@ export const getGetUsersUserIdMock = () => ({
     faker.datatype.number({ min: undefined, max: undefined }),
     undefined,
   ]),
-  created_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
-  updated_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
+  created_at: faker.random.word(),
+  updated_at: faker.random.word(),
 });
 
 export const getUsersMSW = () => [

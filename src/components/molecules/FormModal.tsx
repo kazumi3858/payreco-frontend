@@ -4,17 +4,12 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
   selectedDay: Date;
-  selectedCompany: Company;
-  setSelectedCompany: Dispatch<SetStateAction<Company | undefined>>;
+  company?: Company;
+  setModal: Dispatch<SetStateAction<boolean>>;
   work?: Work;
 };
 
-function FormModal({
-  selectedDay,
-  selectedCompany,
-  setSelectedCompany,
-  work,
-}: Props) {
+function FormModal({ selectedDay, company, setModal, work }: Props) {
   const selectedYear = selectedDay.getFullYear();
   const selectedMonth = ("0" + (selectedDay.getMonth() + 1)).slice(-2);
   const selectedDate = ("0" + selectedDay.getDate()).slice(-2);
@@ -80,13 +75,13 @@ function FormModal({
       Number(selectedMonth) - 1,
       Number(selectedDate) + 1
     ),
-    company_id: selectedCompany.id,
+    company_id: company?.id,
     starting_time: shiftMode ? startingTime : null,
     ending_time: shiftMode ? endingTime : null,
     break_time: shiftMode ? breakTime : null,
     working_hours: workingHours,
-    pay_amount: selectedCompany.wage_amount
-      ? Math.round(selectedCompany.wage_amount * workingHours * 100) / 100
+    pay_amount: company?.wage_amount
+      ? Math.round(company.wage_amount * workingHours * 100) / 100
       : payAmount,
     memo: memo,
     user_id: "166d5e6b-0f61-4b91-bafa-ee2085f264b6",
@@ -108,7 +103,7 @@ function FormModal({
         <div className="bg-stone-100 p-12 rounded-xl ">
           <button
             onClick={() => {
-              setSelectedCompany(undefined);
+              setModal(false);
             }}
             className="p-2"
           >
@@ -117,7 +112,7 @@ function FormModal({
           <form onSubmit={handleSubmit}>
             <div>
               <label>勤務先: </label>
-              {selectedCompany.name}
+              {company?.name}
             </div>
             <input
               className="cursor-pointer"
@@ -239,11 +234,9 @@ function FormModal({
             )}
             <div>
               <label>給料: </label>
-              {selectedCompany.wage_amount ? (
+              {company?.wage_amount ? (
                 <span>
-                  {Math.round(
-                    selectedCompany.wage_amount * workingHours * 100
-                  ) / 100}
+                  {Math.round(company.wage_amount * workingHours * 100) / 100}
                 </span>
               ) : (
                 <input
@@ -253,7 +246,7 @@ function FormModal({
                   onChange={(e) => setPayAmount(Number(e.target.value))}
                 />
               )}
-              {selectedCompany.currency_type}
+              {company?.currency_type}
               <p className="text-rose-600">
                 {payAmount > 999999 && `数値が大きすぎます。`}
               </p>

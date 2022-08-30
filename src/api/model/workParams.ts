@@ -6,11 +6,7 @@
  * OpenAPI spec version: 1.0
  */
 
-/**
- * Work model
- */
-export interface Work {
-  readonly id: string;
+export interface WorkParams {
   date: Date;
   starting_time?: Date | null;
   ending_time?: Date | null;
@@ -18,8 +14,6 @@ export interface Work {
   working_hours: number;
   pay_amount: number;
   memo?: string;
-  readonly user_id: string;
-  readonly company_id: string;
-  readonly created_at: Date;
-  readonly updated_at: Date;
+  user_id?: string;
+  company_id?: string;
 }

@@ -10,7 +10,7 @@ import type {
   UseMutationOptions,
   MutationFunction,
 } from "@tanstack/react-query";
-import type { User, Work, Company } from ".././model";
+import type { User, WorkParams, CompanyParams } from ".././model";
 import { customInstance } from ".././custom-instance";
 import type { ErrorType, BodyType } from ".././custom-instance";
 
@@ -184,7 +184,7 @@ export const useDeleteWorksWorkId = <
  */
 export const patchWorksWorkId = (
   workId: string,
-  work: BodyType<Work>,
+  workParams: BodyType<WorkParams>,
   options?: SecondParameter<typeof customInstance>
 ) => {
   return customInstance<void>(
@@ -192,7 +192,7 @@ export const patchWorksWorkId = (
       url: `/works/${workId}`,
       method: "patch",
       headers: { "Content-Type": "application/json" },
-      data: work,
+      data: workParams,
     },
     options
   );
@@ -201,7 +201,7 @@ export const patchWorksWorkId = (
 export type PatchWorksWorkIdMutationResult = NonNullable<
   Awaited<ReturnType<typeof patchWorksWorkId>>
 >;
-export type PatchWorksWorkIdMutationBody = BodyType<Work>;
+export type PatchWorksWorkIdMutationBody = BodyType<WorkParams>;
 export type PatchWorksWorkIdMutationError = ErrorType<unknown>;
 
 export const usePatchWorksWorkId = <
@@ -211,7 +211,7 @@ export const usePatchWorksWorkId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchWorksWorkId>>,
     TError,
-    { workId: string; data: BodyType<Work> },
+    { workId: string; data: BodyType<WorkParams> },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -220,7 +220,7 @@ export const usePatchWorksWorkId = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchWorksWorkId>>,
-    { workId: string; data: BodyType<Work> }
+    { workId: string; data: BodyType<WorkParams> }
   > = (props) => {
     const { workId, data } = props ?? {};
 
@@ -230,7 +230,7 @@ export const usePatchWorksWorkId = <
   return useMutation<
     Awaited<ReturnType<typeof patchWorksWorkId>>,
     TError,
-    { workId: string; data: BodyType<Work> },
+    { workId: string; data: BodyType<WorkParams> },
     TContext
   >(mutationFn, mutationOptions);
 };
@@ -239,7 +239,7 @@ export const usePatchWorksWorkId = <
  * @summary Create a work
  */
 export const postWorks = (
-  work: BodyType<Work>,
+  workParams: BodyType<WorkParams>,
   options?: SecondParameter<typeof customInstance>
 ) => {
   return customInstance<void>(
@@ -247,7 +247,7 @@ export const postWorks = (
       url: `/works`,
       method: "post",
       headers: { "Content-Type": "application/json" },
-      data: work,
+      data: workParams,
     },
     options
   );
@@ -256,7 +256,7 @@ export const postWorks = (
 export type PostWorksMutationResult = NonNullable<
   Awaited<ReturnType<typeof postWorks>>
 >;
-export type PostWorksMutationBody = BodyType<Work>;
+export type PostWorksMutationBody = BodyType<WorkParams>;
 export type PostWorksMutationError = ErrorType<unknown>;
 
 export const usePostWorks = <
@@ -266,7 +266,7 @@ export const usePostWorks = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postWorks>>,
     TError,
-    { data: BodyType<Work> },
+    { data: BodyType<WorkParams> },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -275,7 +275,7 @@ export const usePostWorks = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postWorks>>,
-    { data: BodyType<Work> }
+    { data: BodyType<WorkParams> }
   > = (props) => {
     const { data } = props ?? {};
 
@@ -285,7 +285,7 @@ export const usePostWorks = <
   return useMutation<
     Awaited<ReturnType<typeof postWorks>>,
     TError,
-    { data: BodyType<Work> },
+    { data: BodyType<WorkParams> },
     TContext
   >(mutationFn, mutationOptions);
 };
@@ -294,7 +294,7 @@ export const usePostWorks = <
  * @summary Create a company
  */
 export const postCompanies = (
-  company: BodyType<Company>,
+  companyParams: BodyType<CompanyParams>,
   options?: SecondParameter<typeof customInstance>
 ) => {
   return customInstance<void>(
@@ -302,7 +302,7 @@ export const postCompanies = (
       url: `/companies`,
       method: "post",
       headers: { "Content-Type": "application/json" },
-      data: company,
+      data: companyParams,
     },
     options
   );
@@ -311,7 +311,7 @@ export const postCompanies = (
 export type PostCompaniesMutationResult = NonNullable<
   Awaited<ReturnType<typeof postCompanies>>
 >;
-export type PostCompaniesMutationBody = BodyType<Company>;
+export type PostCompaniesMutationBody = BodyType<CompanyParams>;
 export type PostCompaniesMutationError = ErrorType<unknown>;
 
 export const usePostCompanies = <
@@ -321,7 +321,7 @@ export const usePostCompanies = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postCompanies>>,
     TError,
-    { data: BodyType<Company> },
+    { data: BodyType<CompanyParams> },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -330,7 +330,7 @@ export const usePostCompanies = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postCompanies>>,
-    { data: BodyType<Company> }
+    { data: BodyType<CompanyParams> }
   > = (props) => {
     const { data } = props ?? {};
 
@@ -340,7 +340,7 @@ export const usePostCompanies = <
   return useMutation<
     Awaited<ReturnType<typeof postCompanies>>,
     TError,
-    { data: BodyType<Company> },
+    { data: BodyType<CompanyParams> },
     TContext
   >(mutationFn, mutationOptions);
 };
@@ -350,7 +350,7 @@ export const usePostCompanies = <
  */
 export const patchCompaniesCompanyId = (
   companyId: string,
-  company: BodyType<Company>,
+  companyParams: BodyType<CompanyParams>,
   options?: SecondParameter<typeof customInstance>
 ) => {
   return customInstance<void>(
@@ -358,7 +358,7 @@ export const patchCompaniesCompanyId = (
       url: `/companies/${companyId}`,
       method: "patch",
       headers: { "Content-Type": "application/json" },
-      data: company,
+      data: companyParams,
     },
     options
   );
@@ -367,7 +367,7 @@ export const patchCompaniesCompanyId = (
 export type PatchCompaniesCompanyIdMutationResult = NonNullable<
   Awaited<ReturnType<typeof patchCompaniesCompanyId>>
 >;
-export type PatchCompaniesCompanyIdMutationBody = BodyType<Company>;
+export type PatchCompaniesCompanyIdMutationBody = BodyType<CompanyParams>;
 export type PatchCompaniesCompanyIdMutationError = ErrorType<unknown>;
 
 export const usePatchCompaniesCompanyId = <
@@ -377,7 +377,7 @@ export const usePatchCompaniesCompanyId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchCompaniesCompanyId>>,
     TError,
-    { companyId: string; data: BodyType<Company> },
+    { companyId: string; data: BodyType<CompanyParams> },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -386,7 +386,7 @@ export const usePatchCompaniesCompanyId = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchCompaniesCompanyId>>,
-    { companyId: string; data: BodyType<Company> }
+    { companyId: string; data: BodyType<CompanyParams> }
   > = (props) => {
     const { companyId, data } = props ?? {};
 
@@ -396,7 +396,7 @@ export const usePatchCompaniesCompanyId = <
   return useMutation<
     Awaited<ReturnType<typeof patchCompaniesCompanyId>>,
     TError,
-    { companyId: string; data: BodyType<Company> },
+    { companyId: string; data: BodyType<CompanyParams> },
     TContext
   >(mutationFn, mutationOptions);
 };

@@ -7,14 +7,13 @@ import DeleteModal from "components/molecules/DeleteModel";
 type Props = {
   work: Work;
   selectedDay: Date;
+  company?: Company;
 };
 
-function DetailedSchedule({ work, selectedDay }: Props) {
+function DetailedSchedule({ work, selectedDay, company }: Props) {
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);
-  const [selectedCompany, setSelectedCompany] = useState<Company | undefined>(
-    undefined
-  );
+  const [modal, setModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
   return (
@@ -25,14 +24,14 @@ function DetailedSchedule({ work, selectedDay }: Props) {
             {format(startingTime, "h:mm a")} - {format(endingTime, "h:mm a")}
           </p>
         )}
-        <p className="text-gray-900">{work.company?.name}</p>
+        <p className="text-gray-900">{company?.name}</p>
         <p>
           {`合計勤務: ${work.working_hours}時間 `}
           {work.break_time && `(休憩${work.break_time}分)`}
         </p>
         <p>
           {`給料: ${work.pay_amount}`}
-          {work.company?.currency_type}
+          {company?.currency_type}
         </p>
         <p>{work.memo && `メモ: ${work.memo}`}</p>
       </div>
@@ -41,7 +40,7 @@ function DetailedSchedule({ work, selectedDay }: Props) {
         <button
           className="bg-stone-100 p-2 m-1 rounded-md"
           onClick={() => {
-            setSelectedCompany(work.company);
+            setModal(true);
           }}
         >
           編集
@@ -52,11 +51,11 @@ function DetailedSchedule({ work, selectedDay }: Props) {
         >
           削除
         </button>
-        {selectedCompany && (
+        {modal && (
           <FormModal
             selectedDay={selectedDay}
-            selectedCompany={selectedCompany}
-            setSelectedCompany={setSelectedCompany}
+            company={company}
+            setModal={setModal}
             work={work}
           />
         )}

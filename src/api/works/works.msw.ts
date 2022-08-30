@@ -13,7 +13,7 @@ export const getGetWorksMock = () =>
     { length: faker.datatype.number({ min: 1, max: 10 }) },
     (_, i) => i + 1
   ).map(() => ({
-    id: faker.helpers.arrayElement([faker.random.word(), undefined]),
+    id: faker.random.word(),
     date: faker.date.recent(),
     starting_time: faker.helpers.arrayElement([{}, undefined]),
     ending_time: faker.helpers.arrayElement([{}, undefined]),
@@ -23,21 +23,8 @@ export const getGetWorksMock = () =>
     memo: faker.helpers.arrayElement([faker.random.word(), undefined]),
     user_id: faker.random.word(),
     company_id: faker.random.word(),
-    created_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
-    updated_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
-    company: {
-      id: faker.helpers.arrayElement([faker.random.word(), undefined]),
-      name: faker.random.word(),
-      hourly_wage_system: faker.datatype.boolean(),
-      wage_amount: faker.helpers.arrayElement([
-        faker.datatype.number({ min: undefined, max: undefined }),
-        undefined,
-      ]),
-      currency_type: faker.random.word(),
-      user_id: faker.random.word(),
-      created_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
-      updated_at: faker.helpers.arrayElement([faker.random.word(), undefined]),
-    },
+    created_at: faker.random.word(),
+    updated_at: faker.random.word(),
   }));
 
 export const getWorksMSW = () => [

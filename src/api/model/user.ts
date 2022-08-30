@@ -10,12 +10,10 @@
  * User model
  */
 export interface User {
-  /** Unique identifier for the given user. */
   readonly id: string;
   readonly uid: string;
   readonly name: string;
   target_amount?: number;
-  readonly created_at?: Date;
-  /** The date that the user was created. */
-  readonly updated_at?: Date;
+  readonly created_at: Date;
+  readonly updated_at: Date;
 }

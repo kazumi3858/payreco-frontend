@@ -6,16 +6,10 @@
  * OpenAPI spec version: 1.0
  */
 
-/**
- * Company model
- */
-export interface Company {
-  readonly id: string;
+export interface CompanyParams {
   name: string;
   hourly_wage_system: boolean;
   wage_amount?: number;
   currency_type: string;
-  readonly user_id: string;
-  readonly created_at: Date;
-  readonly updated_at: Date;
+  user_id?: string;
 }
