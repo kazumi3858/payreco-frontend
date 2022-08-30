@@ -1,3 +1,5 @@
+import { useQueryClient } from "@tanstack/react-query";
+import { customMutationResult } from "api/custom-mutation-result";
 import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -88,16 +90,18 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
 
   const postMutation = usePostWorks();
   const patchMutation = usePatchWorksWorkId();
+  const queryClient = useQueryClient()
+  const mutationResult = customMutationResult(queryClient, `/works`)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (workingHours <= 0)
-      return alert("合計時間は正の数でなければなりません。");
+    return alert("合計時間は正の数でなければなりません。");
     if (payAmount > 999999 || payAmount < 0)
-      return alert("金額がマイナス・または大きすぎます。");
+    return alert("金額がマイナス・または大きすぎます。");
     work?.id
-      ? patchMutation.mutate({ workId: work.id, data: formData })
-      : postMutation.mutate({ data: formData });
+    ? patchMutation.mutate({ workId: work.id, data: formData }, mutationResult)
+    : postMutation.mutate({ data: formData }, mutationResult);
   };
 
   return (

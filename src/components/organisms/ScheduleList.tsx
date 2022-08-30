@@ -42,7 +42,7 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
         return (
           <button
             key={company.id}
-            className="m-1 bg-stone-200"
+            className="m-2 p-2 bg-stone-100 rounded-md"
             onClick={() => {
               setModal(true);
               setSelectedCompany(company);
