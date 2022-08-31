@@ -42,9 +42,14 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
   const [endingTime, setEndingTime] = useState<Date>(
     work?.ending_time ? work.ending_time : selectedDay
   );
-  const [breakTime, setBreakTime] = useState<number>(
-    work?.break_time ? work.break_time : 0
-  );
+
+  const defaultBreakHours = work?.break_time
+    ? Math.floor(work.break_time / 60)
+    : 0;
+  const defaultBreakMinutes = work?.break_time ? work.break_time % 60 : 0;
+  const [breakHours, setBreakHours] = useState<number>(defaultBreakHours);
+  const [breakMinutes, setBreakMinutes] = useState<number>(defaultBreakMinutes);
+  const breakTime = breakHours * 60 + breakMinutes;
   const [memo, setMemo] = useState<string>(work?.memo ? work.memo : "");
   const startAndEndTimeDifference =
     (Date.parse(String(endingTime ? endingTime : minTime)) -
@@ -166,20 +171,17 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                 </div>
                 <div>
                   <label>休憩: </label>
-                  <select
-                    defaultValue={work?.break_time ? work.break_time : "0"}
-                    onChange={(e) => setBreakTime(Number(e.target.value))}
-                  >
-                    <option value="0">0</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                    <option value="60">60</option>
-                    <option value="90">90</option>
-                    <option value="120">120</option>
-                  </select>
+                  <SelectBox
+                    defaultValue={defaultBreakHours}
+                    changeEvent={(e) => setBreakHours(Number(e.target.value))}
+                    array={["0", "1", "2", "3", "4", "5"]}
+                  />
+                  時間
+                  <SelectBox
+                    defaultValue={defaultBreakMinutes}
+                    changeEvent={(e) => setBreakMinutes(Number(e.target.value))}
+                    array={Object.keys([...Array(60)])}
+                  />
                   分
                 </div>
                 <div>

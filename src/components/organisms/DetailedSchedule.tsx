@@ -26,7 +26,9 @@ function DetailedSchedule({ work, selectedDay, company }: Props) {
               "h:mm a"
             )}`}
           {work.break_time && work.break_time > 0
-            ? ` (休憩: ${work.break_time}分)`
+            ? ` (休憩: ${Math.floor(work.break_time / 60)}時間${
+                work.break_time % 60
+              }分)`
             : ``}
         </p>
         <p className="text-gray-900">{company?.name}</p>
