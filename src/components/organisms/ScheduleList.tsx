@@ -1,5 +1,6 @@
 import { useGetCompanies } from "api/companies/companies";
 import { Company, Work } from "api/model";
+import CompanyForm from "components/molecules/CompanyForm";
 import WorkForm from "components/molecules/WorkForm";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
@@ -14,6 +15,7 @@ type Props = {
 function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
   const { data } = useGetCompanies();
   const [workForm, setWorkForm] = useState<boolean>(false);
+  const [companyForm, setCompanyForm] = useState<boolean>(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
@@ -57,7 +59,7 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
             勤務先の登録がありません。勤務先を登録をすると予定を追加できるようになります。
           </p>
         )}
-        <button>＋勤務先を登録</button>
+        <button onClick={() => setCompanyForm(true)}>＋勤務先を登録</button>
       </div>
       {workForm && (
         <WorkForm
@@ -66,6 +68,7 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
           setWorkForm={setWorkForm}
         />
       )}
+      {companyForm && <CompanyForm setCompanyForm={setCompanyForm} />}
     </section>
   );
 }

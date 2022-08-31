@@ -128,22 +128,24 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
               <label>勤務先: </label>
               {company?.name}
             </div>
-            <input
-              className="cursor-pointer"
-              type="radio"
-              value="true"
-              onChange={changeShiftMode}
-              checked={shiftMode === true}
-            />
-            <label>シフト時刻を入力</label>
-            <input
-              className="cursor-pointer"
-              type="radio"
-              value=""
-              onChange={changeShiftMode}
-              checked={shiftMode === false}
-            />
-            <label>合計勤務時間のみ入力</label>
+            <div>
+              <input
+                className="cursor-pointer"
+                type="radio"
+                value="true"
+                onChange={changeShiftMode}
+                checked={shiftMode === true}
+              />
+              <label>シフト時刻を入力</label>
+              <input
+                className="cursor-pointer"
+                type="radio"
+                value=""
+                onChange={changeShiftMode}
+                checked={shiftMode === false}
+              />
+              <label>合計勤務時間のみ入力</label>
+            </div>
             {shiftMode ? (
               <>
                 <div>
@@ -194,16 +196,18 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                   </select>
                   分
                 </div>
-                <p>
-                  合計時間:{" "}
-                  {`${Math.floor(startAndEndTimeDifference / 60)}時間${
-                    startAndEndTimeDifference % 60
-                  }分`}
-                </p>
-                <p className="text-rose-600">
-                  {Math.sign(startAndEndTimeDifference) === -1 &&
-                    `合計時間が正しくありません。`}
-                </p>
+                <div>
+                  <p>
+                    合計時間:{" "}
+                    {`${Math.floor(startAndEndTimeDifference / 60)}時間${
+                      startAndEndTimeDifference % 60
+                    }分`}
+                  </p>
+                  <p className="text-rose-600">
+                    {Math.sign(startAndEndTimeDifference) === -1 &&
+                      `合計時間が正しくありません。`}
+                  </p>
+                </div>
               </>
             ) : (
               <div>
