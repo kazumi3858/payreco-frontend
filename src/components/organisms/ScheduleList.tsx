@@ -17,7 +17,7 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
   const [selectedCompany, setSelectedCompany] = useState<Company>();
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
-      <span className="font-semibold text-gray-900">
+      <span className="font-semibold text-lg text-gray-900">
         <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
           {format(selectedDay, "MMM dd日", { locale: ja })}
         </time>
@@ -37,21 +37,23 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
           <p>予定はありません。</p>
         )}
       </ol>
-      <p>勤務先を選んで予定を追加</p>
-      {data?.map((company) => {
-        return (
-          <button
-            key={company.id}
-            className="m-2 p-2 bg-stone-100 rounded-md"
-            onClick={() => {
-              setModal(true);
-              setSelectedCompany(company);
-            }}
-          >
-            {company.name}
-          </button>
-        );
-      })}
+      <p className="pt-10 pb-3 text-lg">勤務先を選んで予定を追加</p>
+      <div className="mb-10">
+        {data?.map((company) => {
+          return (
+            <button
+              key={company.id}
+              className="m-2 p-2 bg-stone-100 rounded-md"
+              onClick={() => {
+                setModal(true);
+                setSelectedCompany(company);
+              }}
+            >
+              {company.name}
+            </button>
+          );
+        })}
+      </div>
       {modal && (
         <FormModal
           selectedDay={selectedDay}
