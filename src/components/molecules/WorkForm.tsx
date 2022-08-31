@@ -13,16 +13,15 @@ type Props = {
 };
 
 function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
-  const minTime = format(selectedDay, "yyyy-MM-dd 00:00").replace(" ", "T");
-  const maxTime = format(selectedDay, "yyyy-MM-dd 23:59").replace(" ", "T");
-  const nextDayMaxTime = format(
-    addDays(selectedDay, 1),
-    "yyyy-MM-dd 23:59"
-  ).replace(" ", "T");
-  const pickDurationHours = work?.working_hours
+  const formatTime = (day: Date, time: string) =>
+    format(day, `yyyy-MM-dd ${time}`).replace(" ", "T");
+  const minTime = formatTime(selectedDay, "00:00");
+  const maxTime = formatTime(selectedDay, "23:59");
+  const nextDayMaxTime = formatTime(addDays(selectedDay, 1), "23:59");
+  const defaultHours = work?.working_hours
     ? String(Math.floor(work.working_hours))
     : "0";
-  const pickDurationMinutes = work?.working_hours
+  const defaultMinutes = work?.working_hours
     ? String(
         Math.round(
           (Number(work.working_hours.toFixed(2)) -
@@ -31,9 +30,9 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
         )
       )
     : "0";
-  const [durationHour, setDurationHour] = useState<string>(pickDurationHours);
-  const [durationMinutes, setDurationMinutes] =
-    useState<string>(pickDurationMinutes);
+  const [hours, setHours] = useState<string>(defaultHours);
+  const [minutes, setMinutes] = useState<string>(defaultMinutes);
+
   const [payAmount, setPayAmount] = useState<number>(
     work?.pay_amount ? work.pay_amount : 0
   );
@@ -50,10 +49,10 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
   const [memo, setMemo] = useState<string>(work?.memo ? work.memo : "");
 
   const startAndEndTimeDifference =
-    (Date.parse(String(endingTime === undefined ? minTime : endingTime)) -
-      Date.parse(String(startingTime === undefined ? minTime : startingTime))) /
+    (Date.parse(String(endingTime ? endingTime : minTime)) -
+      Date.parse(String(startingTime ? startingTime : minTime))) /
       (1000 * 60) -
-    (breakTime === undefined ? 0 : breakTime);
+    (breakTime ? breakTime : 0);
 
   const [shiftMode, setShiftMode] = useState<boolean>(true);
   const changeShiftMode = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +62,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     Math.round(
       shiftMode
         ? (startAndEndTimeDifference / 60) * 100
-        : (Number(durationHour) + Number(durationMinutes) / 60) * 100
+        : (Number(hours) + Number(minutes) / 60) * 100
     ) / 100;
 
   const formData = {
@@ -80,9 +79,9 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     user_id: "166d5e6b-0f61-4b91-bafa-ee2085f264b6",
   };
 
+  const queryClient = useQueryClient();
   const postMutation = usePostWorks();
   const patchMutation = usePatchWorksWorkId();
-  const queryClient = useQueryClient();
   const mutationResult = customMutationResult(
     queryClient,
     `/works`,
@@ -208,7 +207,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                   defaultValue={
                     work?.working_hours ? Math.floor(work.working_hours) : 0
                   }
-                  onChange={(e) => setDurationHour(e.target.value)}
+                  onChange={(e) => setHours(e.target.value)}
                 >
                   {Object.keys([...Array(24)]).map((num) => {
                     return (
@@ -229,7 +228,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                         )
                       : 0
                   }
-                  onChange={(e) => setDurationMinutes(e.target.value)}
+                  onChange={(e) => setMinutes(e.target.value)}
                 >
                   {Object.keys([...Array(60)]).map((num) => {
                     return (
