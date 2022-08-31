@@ -1,4 +1,5 @@
 import { Company } from "api/model";
+import SelectBox from "components/atoms/SelectBox";
 import { SetStateAction, useState } from "react";
 
 type Props = {
@@ -99,19 +100,11 @@ function CompanyForm({ setCompanyForm, company }: Props) {
               </div>
             )}
             <label>通貨: </label>
-            <select
+            <SelectBox
               defaultValue={defaultCurrency}
-              onChange={(e) => setCurrencyType(e.target.value)}
-            >
-              {currencyList.map((currency) => {
-                return (
-                  <option key={currency} value={currency}>
-                    {currency}
-                  </option>
-                );
-              })}
-            </select>
-
+              changeEvent={(e) => setCurrencyType(e.target.value)}
+              array={currencyList}
+            />
             <input className="block m-1 cursor-pointer" type="submit" />
           </form>
         </div>

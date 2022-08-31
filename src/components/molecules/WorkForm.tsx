@@ -2,6 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { customMutationResult } from "api/custom-mutation-result";
 import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
+import SelectBox from "components/atoms/SelectBox";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -32,11 +33,9 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     : "0";
   const [hours, setHours] = useState<string>(defaultHours);
   const [minutes, setMinutes] = useState<string>(defaultMinutes);
-
   const [payAmount, setPayAmount] = useState<number>(
     work?.pay_amount ? work.pay_amount : 0
   );
-
   const [startingTime, setStartingTime] = useState<Date>(
     work?.starting_time ? work.starting_time : selectedDay
   );
@@ -47,13 +46,11 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     work?.break_time ? work.break_time : 0
   );
   const [memo, setMemo] = useState<string>(work?.memo ? work.memo : "");
-
   const startAndEndTimeDifference =
     (Date.parse(String(endingTime ? endingTime : minTime)) -
       Date.parse(String(startingTime ? startingTime : minTime))) /
       (1000 * 60) -
     (breakTime ? breakTime : 0);
-
   const [shiftMode, setShiftMode] = useState<boolean>(true);
   const changeShiftMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShiftMode(Boolean(e.target.value));
@@ -64,7 +61,6 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
         ? (startAndEndTimeDifference / 60) * 100
         : (Number(hours) + Number(minutes) / 60) * 100
     ) / 100;
-
   const formData = {
     date: addDays(selectedDay, 1),
     company_id: company?.id,
@@ -78,7 +74,6 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     memo: memo,
     user_id: "166d5e6b-0f61-4b91-bafa-ee2085f264b6",
   };
-
   const queryClient = useQueryClient();
   const postMutation = usePostWorks();
   const patchMutation = usePatchWorksWorkId();
@@ -203,22 +198,15 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
             ) : (
               <div>
                 <label>合計時間: </label>
-                <select
+                <SelectBox
                   defaultValue={
                     work?.working_hours ? Math.floor(work.working_hours) : 0
                   }
-                  onChange={(e) => setHours(e.target.value)}
-                >
-                  {Object.keys([...Array(24)]).map((num) => {
-                    return (
-                      <option key={num} value={num}>
-                        {num}
-                      </option>
-                    );
-                  })}
-                </select>
+                  changeEvent={(e) => setHours(e.target.value)}
+                  array={Object.keys([...Array(24)])}
+                />
                 時間
-                <select
+                <SelectBox
                   defaultValue={
                     work?.working_hours
                       ? Math.round(
@@ -228,16 +216,9 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                         )
                       : 0
                   }
-                  onChange={(e) => setMinutes(e.target.value)}
-                >
-                  {Object.keys([...Array(60)]).map((num) => {
-                    return (
-                      <option key={num} value={num}>
-                        {num}
-                      </option>
-                    );
-                  })}
-                </select>
+                  changeEvent={(e) => setMinutes(e.target.value)}
+                  array={Object.keys([...Array(60)])}
+                />
                 分
               </div>
             )}
