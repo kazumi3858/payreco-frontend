@@ -2,6 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { customMutationResult } from "api/custom-mutation-result";
 import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
+import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
@@ -12,17 +13,12 @@ type Props = {
 };
 
 function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
-  const selectedYear = selectedDay.getFullYear();
-  const selectedMonth = ("0" + (selectedDay.getMonth() + 1)).slice(-2);
-  const selectedDate = ("0" + selectedDay.getDate()).slice(-2);
-  const nextSelectedDate = ("0" + (selectedDay.getDate() + 1)).slice(-2);
-  const formatTime = (date: string, time: string) =>
-    `${selectedYear}-${selectedMonth}-${date}T${time}`;
-  const minTime = formatTime(selectedDate, "00:00");
-  const maxTime = formatTime(selectedDate, "23:59");
-  const maxTimeNextDay = formatTime(nextSelectedDate, "23:59");
-  const defaultTime = (time: Date) =>
-    formatTime(selectedDate, String(time).substring(11, 16));
+  const minTime = format(selectedDay, "yyyy-MM-dd 00:00").replace(" ", "T");
+  const maxTime = format(selectedDay, "yyyy-MM-dd 23:59").replace(" ", "T");
+  const nextDayMaxTime = format(
+    addDays(selectedDay, 1),
+    "yyyy-MM-dd 23:59"
+  ).replace(" ", "T");
   const pickDurationHours = work?.working_hours
     ? String(Math.floor(work.working_hours))
     : "0";
@@ -71,11 +67,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     ) / 100;
 
   const formData = {
-    date: new Date(
-      selectedYear,
-      Number(selectedMonth) - 1,
-      Number(selectedDate) + 1
-    ),
+    date: addDays(selectedDay, 1),
     company_id: company?.id,
     starting_time: shiftMode ? startingTime : null,
     ending_time: shiftMode ? endingTime : null,
@@ -157,7 +149,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                     max={maxTime}
                     defaultValue={
                       work?.starting_time
-                        ? defaultTime(work.starting_time)
+                        ? String(work.starting_time).substring(0, 16)
                         : minTime
                     }
                     onChange={(e) => setStartingTime(new Date(e.target.value))}
@@ -169,10 +161,10 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                     type="datetime-local"
                     className="block"
                     min={minTime}
-                    max={maxTimeNextDay}
+                    max={nextDayMaxTime}
                     defaultValue={
                       work?.ending_time
-                        ? defaultTime(work.ending_time)
+                        ? String(work.ending_time).substring(0, 16)
                         : minTime
                     }
                     onChange={(e) => setEndingTime(new Date(e.target.value))}
