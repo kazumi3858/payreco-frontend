@@ -1,4 +1,6 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteWorksWorkId } from "api/default/default";
+import { customMutationDeleteResult } from "api/custom-mutation-result";
 
 type Props = {
   setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -6,10 +8,14 @@ type Props = {
 };
 
 function DeleteModal({ setDeleteModal, workId }: Props) {
+  const queryClient = useQueryClient();
   const mutation = useDeleteWorksWorkId();
   const handleDelete = () => {
-    workId && mutation.mutate({ workId: workId });
-    setDeleteModal(false);
+    workId &&
+      mutation.mutate(
+        { workId: workId },
+        customMutationDeleteResult(queryClient, `/works`, setDeleteModal)
+      );
   };
   return (
     <div className="fixed inset-0 z-50">

@@ -90,18 +90,21 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
 
   const postMutation = usePostWorks();
   const patchMutation = usePatchWorksWorkId();
-  const queryClient = useQueryClient()
-  const mutationResult = customMutationResult(queryClient, `/works`)
+  const queryClient = useQueryClient();
+  const mutationResult = customMutationResult(queryClient, `/works`, setModal);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (workingHours <= 0)
-    return alert("合計時間は正の数でなければなりません。");
+      return alert("合計時間は正の数でなければなりません。");
     if (payAmount > 999999 || payAmount < 0)
-    return alert("金額がマイナス・または大きすぎます。");
+      return alert("金額がマイナス・または大きすぎます。");
     work?.id
-    ? patchMutation.mutate({ workId: work.id, data: formData }, mutationResult)
-    : postMutation.mutate({ data: formData }, mutationResult);
+      ? patchMutation.mutate(
+          { workId: work.id, data: formData },
+          mutationResult
+        )
+      : postMutation.mutate({ data: formData }, mutationResult);
   };
 
   return (
@@ -249,7 +252,6 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
                 <input
                   className="m-1 w-16"
                   type="number"
-                  defaultValue={payAmount}
                   onChange={(e) => setPayAmount(Number(e.target.value))}
                 />
               )}
