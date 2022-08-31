@@ -7,11 +7,11 @@ import { Dispatch, SetStateAction, useState } from "react";
 type Props = {
   selectedDay: Date;
   company?: Company;
-  setModal: Dispatch<SetStateAction<boolean>>;
+  setWorkForm: Dispatch<SetStateAction<boolean>>;
   work?: Work;
 };
 
-function FormModal({ selectedDay, company, setModal, work }: Props) {
+function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
   const selectedYear = selectedDay.getFullYear();
   const selectedMonth = ("0" + (selectedDay.getMonth() + 1)).slice(-2);
   const selectedDate = ("0" + selectedDay.getDate()).slice(-2);
@@ -91,7 +91,11 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
   const postMutation = usePostWorks();
   const patchMutation = usePatchWorksWorkId();
   const queryClient = useQueryClient();
-  const mutationResult = customMutationResult(queryClient, `/works`, setModal);
+  const mutationResult = customMutationResult(
+    queryClient,
+    `/works`,
+    setWorkForm
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,7 +117,7 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
         <div className="bg-stone-100 p-12 rounded-xl ">
           <button
             onClick={() => {
-              setModal(false);
+              setWorkForm(false);
             }}
             className="p-2"
           >
@@ -278,4 +282,4 @@ function FormModal({ selectedDay, company, setModal, work }: Props) {
   );
 }
 
-export default FormModal;
+export default WorkForm;

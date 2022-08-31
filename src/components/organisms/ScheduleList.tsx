@@ -1,6 +1,6 @@
 import { useGetCompanies } from "api/companies/companies";
 import { Company, Work } from "api/model";
-import FormModal from "components/molecules/FormModal";
+import WorkForm from "components/molecules/WorkForm";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useState } from "react";
@@ -13,7 +13,7 @@ type Props = {
 
 function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
   const { data } = useGetCompanies();
-  const [modal, setModal] = useState<boolean>(false);
+  const [workForm, setWorkForm] = useState<boolean>(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
@@ -39,26 +39,31 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
       </ol>
       <p className="pt-10 pb-3 text-lg">勤務先を選んで予定を追加</p>
       <div className="mb-10">
-        {data?.map((company) => {
-          return (
+        {data && data.length > 0 ? (
+          data.map((company) => (
             <button
               key={company.id}
               className="m-2 p-2 bg-stone-100 rounded-md"
               onClick={() => {
-                setModal(true);
+                setWorkForm(true);
                 setSelectedCompany(company);
               }}
             >
               {company.name}
             </button>
-          );
-        })}
+          ))
+        ) : (
+          <p>
+            勤務先の登録がありません。勤務先を登録をすると予定を追加できるようになります。
+          </p>
+        )}
+        <button>＋勤務先を登録</button>
       </div>
-      {modal && (
-        <FormModal
+      {workForm && (
+        <WorkForm
           selectedDay={selectedDay}
           company={selectedCompany}
-          setModal={setModal}
+          setWorkForm={setWorkForm}
         />
       )}
     </section>
