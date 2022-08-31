@@ -1,7 +1,9 @@
+import { Company } from "api/model";
 import { SetStateAction, useState } from "react";
 
 type Props = {
   setCompanyForm: React.Dispatch<SetStateAction<boolean>>;
+  company?: Company;
 };
 
 const currencyList = [
@@ -19,11 +21,16 @@ const currencyList = [
   "スイスフラン",
 ];
 
-function CompanyForm({ setCompanyForm }: Props) {
-  const [wageSystem, setWageSystem] = useState<boolean>(true);
-  const [name, setName] = useState<string>("");
-  const [wageAmount, setWageAmount] = useState<number>(0);
-  const [currencyType, setCurrencyType] = useState<string>("円");
+function CompanyForm({ setCompanyForm, company }: Props) {
+  const defaultName = company ? company.name : "";
+  const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
+  const defaultCurrency = company ? company.currency_type : "円";
+  const [wageSystem, setWageSystem] = useState<boolean>(
+    company ? company.hourly_wage_system : true
+  );
+  const [name, setName] = useState<string>(defaultName);
+  const [wageAmount, setWageAmount] = useState<number>(defaultWageAmount);
+  const [currencyType, setCurrencyType] = useState<string>(defaultCurrency);
   const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWageSystem(Boolean(e.target.value));
   };
@@ -54,7 +61,10 @@ function CompanyForm({ setCompanyForm }: Props) {
           <form onSubmit={handleSubmit}>
             <div>
               <label>名前: </label>
-              <input onChange={(e) => setName(e.target.value)} />
+              <input
+                defaultValue={defaultName}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
             <div>
               <input
@@ -78,18 +88,19 @@ function CompanyForm({ setCompanyForm }: Props) {
               <div>
                 <label>時給額: </label>
                 <input
-                type="number"
+                  type="number"
+                  defaultValue={defaultWageAmount}
                   onChange={(e) => setWageAmount(Number(e.target.value))}
                 />
-                              <p className="text-rose-600">
-                {(wageAmount > 99999 || wageAmount < 0) &&
-                  `金額がマイナス・または大きすぎます。`}
-              </p>
+                <p className="text-rose-600">
+                  {(wageAmount > 99999 || wageAmount < 0) &&
+                    `金額がマイナス・または大きすぎます。`}
+                </p>
               </div>
             )}
             <label>通貨: </label>
             <select
-              defaultValue="円"
+              defaultValue={defaultCurrency}
               onChange={(e) => setCurrencyType(e.target.value)}
             >
               {currencyList.map((currency) => {
