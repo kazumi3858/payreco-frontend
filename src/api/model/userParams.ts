@@ -7,5 +7,5 @@
  */
 
 export interface UserParams {
-  target_amount?: number;
+  target_amount: number | null;
 }

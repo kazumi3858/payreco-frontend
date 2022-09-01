@@ -10,7 +10,7 @@ import type {
   UseMutationOptions,
   MutationFunction,
 } from "@tanstack/react-query";
-import type { User, WorkParams, CompanyParams } from ".././model";
+import type { UserParams, WorkParams, CompanyParams } from ".././model";
 import { customInstance } from ".././custom-instance";
 import type { ErrorType, BodyType } from ".././custom-instance";
 
@@ -28,7 +28,7 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
  */
 export const patchUsersUserId = (
   userId: string,
-  user: BodyType<User>,
+  userParams: BodyType<UserParams>,
   options?: SecondParameter<typeof customInstance>
 ) => {
   return customInstance<void>(
@@ -36,7 +36,7 @@ export const patchUsersUserId = (
       url: `/users/${userId}`,
       method: "patch",
       headers: { "Content-Type": "application/json" },
-      data: user,
+      data: userParams,
     },
     options
   );
@@ -45,7 +45,7 @@ export const patchUsersUserId = (
 export type PatchUsersUserIdMutationResult = NonNullable<
   Awaited<ReturnType<typeof patchUsersUserId>>
 >;
-export type PatchUsersUserIdMutationBody = BodyType<User>;
+export type PatchUsersUserIdMutationBody = BodyType<UserParams>;
 export type PatchUsersUserIdMutationError = ErrorType<unknown>;
 
 export const usePatchUsersUserId = <
@@ -55,7 +55,7 @@ export const usePatchUsersUserId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchUsersUserId>>,
     TError,
-    { userId: string; data: BodyType<User> },
+    { userId: string; data: BodyType<UserParams> },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -64,7 +64,7 @@ export const usePatchUsersUserId = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchUsersUserId>>,
-    { userId: string; data: BodyType<User> }
+    { userId: string; data: BodyType<UserParams> }
   > = (props) => {
     const { userId, data } = props ?? {};
 
@@ -74,7 +74,7 @@ export const usePatchUsersUserId = <
   return useMutation<
     Awaited<ReturnType<typeof patchUsersUserId>>,
     TError,
-    { userId: string; data: BodyType<User> },
+    { userId: string; data: BodyType<UserParams> },
     TContext
   >(mutationFn, mutationOptions);
 };

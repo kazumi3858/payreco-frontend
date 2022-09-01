@@ -50,7 +50,9 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
   const [breakHours, setBreakHours] = useState<number>(defaultBreakHours);
   const [breakMinutes, setBreakMinutes] = useState<number>(defaultBreakMinutes);
   const breakTime = breakHours * 60 + breakMinutes;
-  const [memo, setMemo] = useState<string>(work?.memo ? work.memo : "");
+  const [memo, setMemo] = useState<string | null>(
+    work?.memo ? work.memo : null
+  );
   const startAndEndTimeDifference =
     (Date.parse(String(endingTime ? endingTime : minTime)) -
       Date.parse(String(startingTime ? startingTime : minTime))) /
@@ -76,8 +78,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     pay_amount: company?.wage_amount
       ? Math.round(company.wage_amount * workingHours * 100) / 100
       : payAmount,
-    memo: memo,
-    user_id: "166d5e6b-0f61-4b91-bafa-ee2085f264b6",
+    memo: memo !== "" ? memo : null,
   };
   const queryClient = useQueryClient();
   const postMutation = usePostWorks();
@@ -247,7 +248,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
               <label>メモ: </label>
               <input
                 className="m-1"
-                defaultValue={memo}
+                defaultValue={memo ? memo : ""}
                 onChange={(e) => setMemo(e.target.value)}
                 placeholder="任意入力"
               />

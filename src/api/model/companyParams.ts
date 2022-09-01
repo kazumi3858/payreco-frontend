@@ -9,7 +9,6 @@
 export interface CompanyParams {
   name: string;
   hourly_wage_system: boolean;
-  wage_amount?: number;
+  wage_amount: number | null;
   currency_type: string;
-  user_id?: string;
 }

@@ -12,12 +12,12 @@
 export interface Work {
   readonly id: string;
   date: Date;
-  starting_time?: Date | null;
-  ending_time?: Date | null;
-  break_time?: number | null;
+  starting_time: Date | null;
+  ending_time: Date | null;
+  break_time: number | null;
   working_hours: number;
   pay_amount: number;
-  memo?: string;
+  memo: string | null;
   readonly user_id: string;
   readonly company_id: string;
   readonly created_at: Date;

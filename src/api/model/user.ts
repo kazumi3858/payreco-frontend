@@ -13,7 +13,7 @@ export interface User {
   readonly id: string;
   readonly uid: string;
   readonly name: string;
-  target_amount?: number;
+  target_amount: number | null;
   readonly created_at: Date;
   readonly updated_at: Date;
 }

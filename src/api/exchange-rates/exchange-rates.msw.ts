@@ -16,6 +16,8 @@ export const getGetExchangeRatesMock = () =>
     id: faker.datatype.number({ min: undefined, max: undefined }),
     year_and_month: faker.datatype.number({ min: undefined, max: undefined }),
     exchange_rate_list: {},
+    created_at: faker.random.word(),
+    updated_at: faker.random.word(),
   }));
 
 export const getExchangeRatesMSW = () => [

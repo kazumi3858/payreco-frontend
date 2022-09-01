@@ -1,3 +1,9 @@
+import { useQueryClient } from "@tanstack/react-query";
+import { customMutationResult } from "api/custom-mutation-result";
+import {
+  usePatchCompaniesCompanyId,
+  usePostCompanies,
+} from "api/default/default";
 import { Company } from "api/model";
 import SelectBox from "components/atoms/SelectBox";
 import { SetStateAction, useState } from "react";
@@ -24,27 +30,46 @@ const currencyList = [
 
 function CompanyForm({ setCompanyForm, company }: Props) {
   const defaultName = company ? company.name : "";
-  const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
-  const defaultCurrency = company ? company.currency_type : "円";
-  const [wageSystem, setWageSystem] = useState<boolean>(
-    company ? company.hourly_wage_system : true
-  );
+  const defaultWageAmount = company?.wage_amount ? company.wage_amount : null;
+  const defaultCurrencyType = company ? company.currency_type : "円";
+  const defaultWageSystem = company ? company.hourly_wage_system : true;
+  const [wageSystem, setWageSystem] = useState<boolean>(defaultWageSystem);
   const [name, setName] = useState<string>(defaultName);
-  const [wageAmount, setWageAmount] = useState<number>(defaultWageAmount);
-  const [currencyType, setCurrencyType] = useState<string>(defaultCurrency);
+  const [wageAmount, setWageAmount] = useState<number | null>(
+    defaultWageAmount
+  );
+  const [currencyType, setCurrencyType] = useState<string>(defaultCurrencyType);
   const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWageSystem(Boolean(e.target.value));
   };
   const formData = {
     name: name,
-    hourly_wage_sytem: wageSystem,
+    hourly_wage_system: wageSystem,
     wage_amount: wageSystem ? wageAmount : null,
     currency_type: currencyType,
-    use_id: "166d5e6b-0f61-4b91-bafa-ee2085f264b6",
   };
+
+  const queryClient = useQueryClient();
+  const postMutation = usePostCompanies();
+  const patchMutation = usePatchCompaniesCompanyId();
+  const mutationResult = customMutationResult(
+    queryClient,
+    `/companies`,
+    setCompanyForm
+  );
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
+    if (name.length > 30) return alert("名前を30文字以内に収めてください。");
+    if (wageAmount !== null && (wageAmount > 99999 || wageAmount < 0))
+      return alert("金額がマイナス・または大きすぎます。");
+    company?.id
+      ? patchMutation.mutate(
+          { companyId: company.id, data: formData },
+          mutationResult
+        )
+      : postMutation.mutate({ data: formData }, mutationResult);
   };
 
   return (
@@ -66,6 +91,9 @@ function CompanyForm({ setCompanyForm, company }: Props) {
                 defaultValue={defaultName}
                 onChange={(e) => setName(e.target.value)}
               />
+              <p className="text-rose-600">
+                {name.length > 30 && `文字数が制限を超えています。`}
+              </p>
             </div>
             <div>
               <input
@@ -81,7 +109,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
                 type="radio"
                 onChange={changeWageSystem}
                 checked={wageSystem === false}
-                defaultValue=""
+                value=""
               />
               <label>日給制</label>
             </div>
@@ -90,18 +118,18 @@ function CompanyForm({ setCompanyForm, company }: Props) {
                 <label>時給額: </label>
                 <input
                   type="number"
-                  defaultValue={defaultWageAmount}
                   onChange={(e) => setWageAmount(Number(e.target.value))}
                 />
                 <p className="text-rose-600">
-                  {(wageAmount > 99999 || wageAmount < 0) &&
+                  {wageAmount != null &&
+                    (wageAmount > 99999 || wageAmount < 0) &&
                     `金額がマイナス・または大きすぎます。`}
                 </p>
               </div>
             )}
             <label>通貨: </label>
             <SelectBox
-              defaultValue={defaultCurrency}
+              defaultValue={defaultCurrencyType}
               changeEvent={(e) => setCurrencyType(e.target.value)}
               array={currencyList}
             />

@@ -8,12 +8,11 @@
 
 export interface WorkParams {
   date: Date;
-  starting_time?: Date | null;
-  ending_time?: Date | null;
-  break_time?: number | null;
+  starting_time: Date | null;
+  ending_time: Date | null;
+  break_time: number | null;
   working_hours: number;
   pay_amount: number;
-  memo?: string;
-  user_id?: string;
+  memo: string | null;
   company_id?: string;
 }

@@ -11,4 +11,6 @@ export interface ExchangeRate {
   readonly id: number;
   year_and_month: number;
   exchange_rate_list: ExchangeRateExchangeRateList;
+  created_at: Date;
+  updated_at: Date;
 }
