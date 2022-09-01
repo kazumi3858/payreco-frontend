@@ -5,14 +5,14 @@ import WorkForm from "components/molecules/WorkForm";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useState } from "react";
-import Schedule from "./Schedule";
+import WorkDetails from "./WorkDetails";
 
 type Props = {
   selectedDay: Date;
   selectedDayWorks?: Work[];
 };
 
-function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
+function WorkList({ selectedDay, selectedDayWorks }: Props) {
   const { data } = useGetCompanies();
   const [workForm, setWorkForm] = useState<boolean>(false);
   const [companyForm, setCompanyForm] = useState<boolean>(false);
@@ -28,7 +28,7 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
       <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
         {selectedDayWorks && selectedDayWorks.length > 0 ? (
           selectedDayWorks.map((work) => (
-            <Schedule
+            <WorkDetails
               selectedDay={selectedDay}
               work={work}
               key={work.id}
@@ -73,4 +73,4 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
   );
 }
 
-export default ScheduleList;
+export default WorkList;

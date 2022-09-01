@@ -15,7 +15,7 @@ import {
 } from "date-fns";
 import ja from "date-fns/locale/ja";
 import { useState } from "react";
-import ScheduleList from "./ScheduleList";
+import WorkList from "./WorkList";
 
 const colStartClasses = [
   "",
@@ -125,7 +125,7 @@ function Calendar() {
               ))}
             </div>
           </div>
-          <ScheduleList
+          <WorkList
             selectedDay={selectedDay}
             selectedDayWorks={selectedDayWorks}
           />

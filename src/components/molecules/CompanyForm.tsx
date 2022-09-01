@@ -35,9 +35,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   const defaultWageSystem = company ? company.hourly_wage_system : true;
   const [wageSystem, setWageSystem] = useState<boolean>(defaultWageSystem);
   const [name, setName] = useState<string>(defaultName);
-  const [wageAmount, setWageAmount] = useState<number>(
-    defaultWageAmount
-  );
+  const [wageAmount, setWageAmount] = useState<number>(defaultWageAmount);
   const [currencyType, setCurrencyType] = useState<string>(defaultCurrencyType);
   const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWageSystem(Boolean(e.target.value));
@@ -61,7 +59,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
-    if (name.length < 1 || name.length > 30) return alert("名前は1～30文字にしてください。");
+    if (name.length < 1 || name.length > 30)
+      return alert("名前は1～30文字にしてください。");
     if (wageSystem && (wageAmount > 99999 || wageAmount <= 0))
       return alert("時給額が不正な値・または大きすぎます。");
     company?.id

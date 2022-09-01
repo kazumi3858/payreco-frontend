@@ -1,8 +1,8 @@
 import { useGetCompanies } from "api/companies/companies";
 import { useState } from "react";
 import CompanyForm from "components/molecules/CompanyForm";
+import CompanyDetails from "./CompanyDetails";
 import DeleteModal from "components/molecules/DeleteModel";
-import Company from "./Company";
 
 function CompapyList() {
   const { data } = useGetCompanies();
@@ -26,7 +26,7 @@ function CompapyList() {
             {data?.map((company) => {
               return (
                 <li key={company.id}>
-                  <Company company={company} />
+                  <CompanyDetails company={company} />
                 </li>
               );
             })}

@@ -10,7 +10,7 @@ type Props = {
   company?: Company;
 };
 
-function Schedule({ work, selectedDay, company }: Props) {
+function WorkDetails({ work, selectedDay, company }: Props) {
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);
   const [workForm, setWorkForm] = useState<boolean>(false);
@@ -75,4 +75,4 @@ function Schedule({ work, selectedDay, company }: Props) {
   );
 }
 
-export default Schedule;
+export default WorkDetails;

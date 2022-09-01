@@ -7,7 +7,7 @@ type Props = {
   company: Company;
 };
 
-function Company({ company }: Props) {
+function CompanyDetails({ company }: Props) {
   const [companyForm, setCompanyForm] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   return (
@@ -41,4 +41,4 @@ function Company({ company }: Props) {
   );
 }
 
-export default Company;
+export default CompanyDetails;

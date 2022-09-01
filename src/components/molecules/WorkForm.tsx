@@ -80,8 +80,8 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     memo: memo !== "" ? memo : null,
   };
   const queryClient = useQueryClient();
-  const postMutation = usePostWorks();
-  const patchMutation = usePatchWorksWorkId();
+  const postWork = usePostWorks();
+  const patchWork = usePatchWorksWorkId();
   const mutationResult = customMutationResult(
     queryClient,
     `/works`,
@@ -97,11 +97,8 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     if (memo && memo.length > 50)
       return alert(`メモを50文字以内に収めてください。`);
     work?.id
-      ? patchMutation.mutate(
-          { workId: work.id, data: formData },
-          mutationResult
-        )
-      : postMutation.mutate({ data: formData }, mutationResult);
+      ? patchWork.mutate({ workId: work.id, data: formData }, mutationResult)
+      : postWork.mutate({ data: formData }, mutationResult);
   };
 
   return (
