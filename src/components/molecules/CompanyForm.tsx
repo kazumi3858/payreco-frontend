@@ -30,12 +30,12 @@ const currencyList = [
 
 function CompanyForm({ setCompanyForm, company }: Props) {
   const defaultName = company ? company.name : "";
-  const defaultWageAmount = company?.wage_amount ? company.wage_amount : null;
+  const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
   const defaultCurrencyType = company ? company.currency_type : "円";
   const defaultWageSystem = company ? company.hourly_wage_system : true;
   const [wageSystem, setWageSystem] = useState<boolean>(defaultWageSystem);
   const [name, setName] = useState<string>(defaultName);
-  const [wageAmount, setWageAmount] = useState<number | null>(
+  const [wageAmount, setWageAmount] = useState<number>(
     defaultWageAmount
   );
   const [currencyType, setCurrencyType] = useState<string>(defaultCurrencyType);
@@ -62,8 +62,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
     e.preventDefault();
     console.log(formData);
     if (name.length > 30) return alert("名前を30文字以内に収めてください。");
-    if (wageAmount !== null && (wageAmount > 99999 || wageAmount < 0))
-      return alert("金額がマイナス・または大きすぎます。");
+    if (wageSystem && (wageAmount > 99999 || wageAmount <= 0))
+      return alert("時給額が不正な値・または大きすぎます。");
     company?.id
       ? patchMutation.mutate(
           { companyId: company.id, data: formData },
@@ -92,7 +92,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
                 onChange={(e) => setName(e.target.value)}
               />
               <p className="text-rose-600">
-                {name.length > 30 && `文字数が制限を超えています。`}
+                {name.length > 30 && `名前を30文字以内に収めてください。`}
               </p>
             </div>
             <div>
@@ -118,12 +118,14 @@ function CompanyForm({ setCompanyForm, company }: Props) {
                 <label>時給額: </label>
                 <input
                   type="number"
+                  step="0.01"
+                  defaultValue={defaultWageAmount ? defaultWageAmount : ""}
                   onChange={(e) => setWageAmount(Number(e.target.value))}
                 />
                 <p className="text-rose-600">
                   {wageAmount != null &&
                     (wageAmount > 99999 || wageAmount < 0) &&
-                    `金額がマイナス・または大きすぎます。`}
+                    `時給額が不正な値・または大きすぎます。`}
                 </p>
               </div>
             )}

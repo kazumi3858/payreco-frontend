@@ -1,11 +1,11 @@
 import { useGetCompanies } from "api/companies/companies";
-import { Company } from "api/model";
 import { useState } from "react";
 import CompanyForm from "components/molecules/CompanyForm";
+import DeleteModal from "components/molecules/DeleteModel";
+import Company from "./Company";
 
 function CompapyList() {
   const { data } = useGetCompanies();
-  const [selectedCompany, setSelectedCompany] = useState<Company>();
   const [companyForm, setCompanyForm] = useState<boolean>(false);
   return (
     <div className="flex justify-center">
@@ -16,7 +16,6 @@ function CompapyList() {
             className="bg-stone-200 rounded-md"
             onClick={() => {
               setCompanyForm(true);
-              setSelectedCompany(undefined);
             }}
           >
             新規登録
@@ -27,30 +26,13 @@ function CompapyList() {
             {data?.map((company) => {
               return (
                 <li key={company.id}>
-                  {company.name}
-                  <button
-                    className="bg-stone-100 p-2 m-1 rounded-md"
-                    onClick={() => {
-                      setCompanyForm(true);
-                      setSelectedCompany(company);
-                    }}
-                  >
-                    編集
-                  </button>
-                  <button className="bg-stone-100 p-2 m-1 rounded-md">
-                    削除
-                  </button>
+                  <Company company={company} />
                 </li>
               );
             })}
           </ul>
         </div>
-        {companyForm && (
-          <CompanyForm
-            setCompanyForm={setCompanyForm}
-            company={selectedCompany}
-          />
-        )}
+        {companyForm && <CompanyForm setCompanyForm={setCompanyForm} />}
       </div>
     </div>
   );

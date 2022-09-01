@@ -34,7 +34,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
   const [hours, setHours] = useState<string>(defaultHours);
   const [minutes, setMinutes] = useState<string>(defaultMinutes);
   const [payAmount, setPayAmount] = useState<number>(
-    work?.pay_amount ? work.pay_amount : 0
+    work ? work.pay_amount : 0
   );
   const [startingTime, setStartingTime] = useState<Date>(
     work?.starting_time ? work.starting_time : selectedDay
@@ -42,7 +42,6 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
   const [endingTime, setEndingTime] = useState<Date>(
     work?.ending_time ? work.ending_time : selectedDay
   );
-
   const defaultBreakHours = work?.break_time
     ? Math.floor(work.break_time / 60)
     : 0;
@@ -95,6 +94,8 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
       return alert("合計時間は正の数でなければなりません。");
     if (payAmount > 999999 || payAmount < 0)
       return alert("金額がマイナス・または大きすぎます。");
+    if (memo && memo.length > 50)
+      return alert(`メモを50文字以内に収めてください。`);
     work?.id
       ? patchMutation.mutate(
           { workId: work.id, data: formData },
@@ -235,6 +236,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                 <input
                   className="m-1 w-16"
                   type="number"
+                  defaultValue={work?.pay_amount ? work?.pay_amount : ""}
                   onChange={(e) => setPayAmount(Number(e.target.value))}
                 />
               )}
@@ -252,6 +254,11 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                 onChange={(e) => setMemo(e.target.value)}
                 placeholder="任意入力"
               />
+              <p className="text-rose-600">
+                {memo &&
+                  memo.length > 50 &&
+                  `メモを50文字以内に収めてください。`}
+              </p>
             </div>
             <input className="block m-1 cursor-pointer" type="submit" />
           </form>

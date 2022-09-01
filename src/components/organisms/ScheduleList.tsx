@@ -5,7 +5,7 @@ import WorkForm from "components/molecules/WorkForm";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useState } from "react";
-import DetailedSchedule from "./DetailedSchedule";
+import Schedule from "./Schedule";
 
 type Props = {
   selectedDay: Date;
@@ -28,7 +28,7 @@ function ScheduleList({ selectedDay, selectedDayWorks }: Props) {
       <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
         {selectedDayWorks && selectedDayWorks.length > 0 ? (
           selectedDayWorks.map((work) => (
-            <DetailedSchedule
+            <Schedule
               selectedDay={selectedDay}
               work={work}
               key={work.id}

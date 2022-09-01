@@ -10,7 +10,7 @@ type Props = {
   company?: Company;
 };
 
-function DetailedSchedule({ work, selectedDay, company }: Props) {
+function Schedule({ work, selectedDay, company }: Props) {
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);
   const [workForm, setWorkForm] = useState<boolean>(false);
@@ -64,11 +64,15 @@ function DetailedSchedule({ work, selectedDay, company }: Props) {
           />
         )}
         {deleteModal && (
-          <DeleteModal setDeleteModal={setDeleteModal} workId={work.id} />
+          <DeleteModal
+            setDeleteModal={setDeleteModal}
+            id={work.id}
+            queryKey={`/works`}
+          />
         )}
       </div>
     </li>
   );
 }
 
-export default DetailedSchedule;
+export default Schedule;
