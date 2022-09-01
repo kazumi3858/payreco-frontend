@@ -1,31 +1,33 @@
+import Button from "components/atoms/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import { customMutationResult } from "api/custom-mutation-result";
 import {
   useDeleteCompaniesCompanyId,
   useDeleteWorksWorkId,
 } from "api/default/default";
-import Button from "components/atoms/Button";
 
 type Props = {
-  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
   queryKey: string;
+  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function DeleteModal({ setDeleteModal, id, queryKey }: Props) {
+function DeleteModal({ id, queryKey, setDeleteModal }: Props) {
   const queryClient = useQueryClient();
-  const deleteWorkMutation = useDeleteWorksWorkId();
-  const deleteCompanyMutation = useDeleteCompaniesCompanyId();
+  const deleteWork = useDeleteWorksWorkId();
+  const deleteCompany = useDeleteCompaniesCompanyId();
   const mutationResult = customMutationResult(
     queryClient,
     queryKey,
     setDeleteModal
   );
+
   const handleDelete = () => {
     queryKey === `/works`
-      ? deleteWorkMutation.mutate({ workId: id }, mutationResult)
-      : deleteCompanyMutation.mutate({ companyId: id }, mutationResult);
+      ? deleteWork.mutate({ workId: id }, mutationResult)
+      : deleteCompany.mutate({ companyId: id }, mutationResult);
   };
+
   return (
     <div className="fixed inset-0 z-50">
       <div className="flex h-screen justify-center items-center">

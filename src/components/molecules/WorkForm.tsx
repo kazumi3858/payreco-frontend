@@ -1,29 +1,30 @@
+import Button from "components/atoms/Button";
+import SelectBox from "components/atoms/SelectBox";
 import { useQueryClient } from "@tanstack/react-query";
 import { customMutationResult } from "api/custom-mutation-result";
 import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
-import Button from "components/atoms/Button";
-import SelectBox from "components/atoms/SelectBox";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
   selectedDay: Date;
   company?: Company;
-  setWorkForm: Dispatch<SetStateAction<boolean>>;
   work?: Work;
+  setWorkForm: Dispatch<SetStateAction<boolean>>;
 };
 
-function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
+function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const formatTime = (day: Date, time: string) =>
     format(day, `yyyy-MM-dd ${time}`).replace(" ", "T");
   const minTime = formatTime(selectedDay, "00:00");
   const maxTime = formatTime(selectedDay, "23:59");
   const nextDayMaxTime = formatTime(addDays(selectedDay, 1), "23:59");
-  const defaultHours = work?.working_hours
+
+  const defaultWorkedHours = work?.working_hours
     ? String(Math.floor(work.working_hours))
     : "0";
-  const defaultMinutes = work?.working_hours
+  const defaultWorkedMinutes = work?.working_hours
     ? String(
         Math.round(
           (Number(work.working_hours.toFixed(2)) -
@@ -32,33 +33,34 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
         )
       )
     : "0";
-  const [hours, setHours] = useState<string>(defaultHours);
-  const [minutes, setMinutes] = useState<string>(defaultMinutes);
-  const [payAmount, setPayAmount] = useState<number>(
-    work ? work.pay_amount : 0
-  );
-  const [startingTime, setStartingTime] = useState<Date>(
-    work?.starting_time ? work.starting_time : selectedDay
-  );
-  const [endingTime, setEndingTime] = useState<Date>(
-    work?.ending_time ? work.ending_time : selectedDay
-  );
   const defaultBreakHours = work?.break_time
     ? Math.floor(work.break_time / 60)
     : 0;
+  const defaultPayAmount = work ? work.pay_amount : 0;
+  const defaultStartingTime = work?.starting_time
+    ? work.starting_time
+    : selectedDay;
+  const defaultEndingTime = work?.ending_time ? work.ending_time : selectedDay;
   const defaultBreakMinutes = work?.break_time ? work.break_time % 60 : 0;
+  const defaultMemo = work?.memo ? work.memo : null;
+
+  const [workedHours, setWorkedHours] = useState<string>(defaultWorkedHours);
+  const [workedMinutes, setWorkedMinutes] =
+    useState<string>(defaultWorkedMinutes);
+  const [payAmount, setPayAmount] = useState<number>(defaultPayAmount);
+  const [startingTime, setStartingTime] = useState<Date>(defaultStartingTime);
+  const [endingTime, setEndingTime] = useState<Date>(defaultEndingTime);
   const [breakHours, setBreakHours] = useState<number>(defaultBreakHours);
   const [breakMinutes, setBreakMinutes] = useState<number>(defaultBreakMinutes);
+  const [memo, setMemo] = useState<string | null>(defaultMemo);
+  const [shiftMode, setShiftMode] = useState<boolean>(true);
+
   const breakTime = breakHours * 60 + breakMinutes;
-  const [memo, setMemo] = useState<string | null>(
-    work?.memo ? work.memo : null
-  );
   const startAndEndTimeDifference =
     (Date.parse(String(endingTime ? endingTime : minTime)) -
       Date.parse(String(startingTime ? startingTime : minTime))) /
       (1000 * 60) -
     (breakTime ? breakTime : 0);
-  const [shiftMode, setShiftMode] = useState<boolean>(true);
   const changeShiftMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShiftMode(Boolean(e.target.value));
   };
@@ -66,8 +68,9 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     Math.round(
       shiftMode
         ? (startAndEndTimeDifference / 60) * 100
-        : (Number(hours) + Number(minutes) / 60) * 100
+        : (Number(workedHours) + Number(workedMinutes) / 60) * 100
     ) / 100;
+
   const formData = {
     date: addDays(selectedDay, 1),
     company_id: company?.id,
@@ -80,6 +83,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
       : payAmount,
     memo: memo !== "" ? memo : null,
   };
+
   const queryClient = useQueryClient();
   const postWork = usePostWorks();
   const patchWork = usePatchWorksWorkId();
@@ -91,12 +95,16 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const validation = [];
     if (workingHours <= 0)
-      return alert("合計時間は正の数でなければなりません。");
+      validation.push("合計時間は正の数でなければなりません。");
     if (payAmount > 999999 || payAmount < 0)
-      return alert("金額がマイナス・または大きすぎます。");
+      validation.push("金額がマイナス・または大きすぎます。");
     if (memo && memo.length > 50)
-      return alert(`メモを50文字以内に収めてください。`);
+      validation.push(`メモを50文字以内に収めてください。`);
+    if (validation.length > 0) return alert(validation);
+
     work?.id
       ? patchWork.mutate({ workId: work.id, data: formData }, mutationResult)
       : postWork.mutate({ data: formData }, mutationResult);
@@ -197,7 +205,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                   defaultValue={
                     work?.working_hours ? Math.floor(work.working_hours) : 0
                   }
-                  changeEvent={(e) => setHours(e.target.value)}
+                  changeEvent={(e) => setWorkedHours(e.target.value)}
                   array={Object.keys([...Array(24)])}
                 />
                 時間
@@ -211,7 +219,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
                         )
                       : 0
                   }
-                  changeEvent={(e) => setMinutes(e.target.value)}
+                  changeEvent={(e) => setWorkedMinutes(e.target.value)}
                   array={Object.keys([...Array(60)])}
                 />
                 分

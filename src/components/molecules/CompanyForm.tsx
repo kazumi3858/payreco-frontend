@@ -34,13 +34,16 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
   const defaultCurrencyType = company ? company.currency_type : "円";
   const defaultWageSystem = company ? company.hourly_wage_system : true;
+
   const [wageSystem, setWageSystem] = useState<boolean>(defaultWageSystem);
   const [name, setName] = useState<string>(defaultName);
   const [wageAmount, setWageAmount] = useState<number>(defaultWageAmount);
   const [currencyType, setCurrencyType] = useState<string>(defaultCurrencyType);
+
   const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWageSystem(Boolean(e.target.value));
   };
+
   const formData = {
     name: name,
     hourly_wage_system: wageSystem,
@@ -49,8 +52,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   };
 
   const queryClient = useQueryClient();
-  const postMutation = usePostCompanies();
-  const patchMutation = usePatchCompaniesCompanyId();
+  const postCompany = usePostCompanies();
+  const patchCompany = usePatchCompaniesCompanyId();
   const mutationResult = customMutationResult(
     queryClient,
     `/companies`,
@@ -59,17 +62,20 @@ function CompanyForm({ setCompanyForm, company }: Props) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+
+    const validation = [];
     if (name.length < 1 || name.length > 30)
-      return alert("名前は1～30文字にしてください。");
+      validation.push("名前は1～30文字にしてください。");
     if (wageSystem && (wageAmount > 99999 || wageAmount <= 0))
-      return alert("時給額が不正な値・または大きすぎます。");
+      validation.push("時給額が不正な値・または大きすぎます。");
+    if (validation.length > 0) return alert(validation);
+
     company?.id
-      ? patchMutation.mutate(
+      ? patchCompany.mutate(
           { companyId: company.id, data: formData },
           mutationResult
         )
-      : postMutation.mutate({ data: formData }, mutationResult);
+      : postCompany.mutate({ data: formData }, mutationResult);
   };
 
   return (
@@ -77,7 +83,6 @@ function CompanyForm({ setCompanyForm, company }: Props) {
       <div className="flex h-screen justify-center items-center">
         <div className="bg-stone-100 p-12 rounded-xl ">
           <Button text="閉じる" onClick={() => setCompanyForm(false)} />
-
           <form onSubmit={handleSubmit}>
             <div>
               <label>名前: </label>

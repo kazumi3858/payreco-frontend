@@ -18,6 +18,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
   const [workForm, setWorkForm] = useState<boolean>(false);
   const [companyForm, setCompanyForm] = useState<boolean>(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
+
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
       <span className="font-semibold text-lg text-gray-900">

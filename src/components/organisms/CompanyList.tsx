@@ -2,12 +2,12 @@ import { useGetCompanies } from "api/companies/companies";
 import { useState } from "react";
 import CompanyForm from "components/molecules/CompanyForm";
 import CompanyDetails from "./CompanyDetails";
-import DeleteModal from "components/molecules/DeleteModel";
 import Button from "components/atoms/Button";
 
 function CompapyList() {
   const { data } = useGetCompanies();
   const [companyForm, setCompanyForm] = useState<boolean>(false);
+
   return (
     <div className="flex justify-center">
       <div>
@@ -18,11 +18,7 @@ function CompapyList() {
         <div>
           <ul>
             {data?.map((company) => {
-              return (
-                <li key={company.id}>
-                  <CompanyDetails company={company} />
-                </li>
-              );
+              return <CompanyDetails key={company.id} company={company} />;
             })}
           </ul>
         </div>
