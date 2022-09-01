@@ -61,7 +61,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
-    if (name.length > 30) return alert("名前を30文字以内に収めてください。");
+    if (name.length < 1 || name.length > 30) return alert("名前は1～30文字にしてください。");
     if (wageSystem && (wageAmount > 99999 || wageAmount <= 0))
       return alert("時給額が不正な値・または大きすぎます。");
     company?.id
@@ -92,7 +92,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
                 onChange={(e) => setName(e.target.value)}
               />
               <p className="text-rose-600">
-                {name.length > 30 && `名前を30文字以内に収めてください。`}
+                {name.length > 30 && `名前は1～30文字にしてください。`}
               </p>
             </div>
             <div>
