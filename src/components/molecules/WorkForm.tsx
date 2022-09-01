@@ -2,6 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { customMutationResult } from "api/custom-mutation-result";
 import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
+import Button from "components/atoms/Button";
 import SelectBox from "components/atoms/SelectBox";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -105,14 +106,7 @@ function WorkForm({ selectedDay, company, setWorkForm, work }: Props) {
     <div className="fixed inset-0 z-50">
       <div className="flex h-screen justify-center items-center">
         <div className="bg-stone-100 p-12 rounded-xl ">
-          <button
-            onClick={() => {
-              setWorkForm(false);
-            }}
-            className="p-2"
-          >
-            閉じる
-          </button>
+          <Button text="閉じる" onClick={() => setWorkForm(false)} />
           <form onSubmit={handleSubmit}>
             <div>
               <label>勤務先: </label>

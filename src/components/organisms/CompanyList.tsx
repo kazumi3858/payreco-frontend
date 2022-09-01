@@ -3,6 +3,7 @@ import { useState } from "react";
 import CompanyForm from "components/molecules/CompanyForm";
 import CompanyDetails from "./CompanyDetails";
 import DeleteModal from "components/molecules/DeleteModel";
+import Button from "components/atoms/Button";
 
 function CompapyList() {
   const { data } = useGetCompanies();
@@ -12,14 +13,7 @@ function CompapyList() {
       <div>
         <div className="my-6">
           <h2 className="text-xl inline">勤務先一覧</h2>
-          <button
-            className="bg-stone-200 rounded-md"
-            onClick={() => {
-              setCompanyForm(true);
-            }}
-          >
-            新規登録
-          </button>
+          <Button text="新規登録" onClick={() => setCompanyForm(true)} />
         </div>
         <div>
           <ul>

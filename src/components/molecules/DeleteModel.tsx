@@ -4,6 +4,7 @@ import {
   useDeleteCompaniesCompanyId,
   useDeleteWorksWorkId,
 } from "api/default/default";
+import Button from "components/atoms/Button";
 
 type Props = {
   setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,17 +31,8 @@ function DeleteModal({ setDeleteModal, id, queryKey }: Props) {
       <div className="flex h-screen justify-center items-center">
         <div className="bg-stone-100 p-12 rounded-xl ">
           <p>本当に削除しますか？</p>
-          <button onClick={handleDelete} className="p-2">
-            はい
-          </button>
-          <button
-            onClick={() => {
-              setDeleteModal(false);
-            }}
-            className="p-2"
-          >
-            いいえ
-          </button>
+          <Button text="はい" onClick={handleDelete} />
+          <Button text="いいえ" onClick={() => setDeleteModal(false)} />
         </div>
       </div>
     </div>

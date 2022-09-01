@@ -1,5 +1,6 @@
 import { useGetCompanies } from "api/companies/companies";
 import { Company, Work } from "api/model";
+import Button from "components/atoms/Button";
 import CompanyForm from "components/molecules/CompanyForm";
 import WorkForm from "components/molecules/WorkForm";
 import { format } from "date-fns";
@@ -43,23 +44,24 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
       <div className="mb-10">
         {data && data.length > 0 ? (
           data.map((company) => (
-            <button
+            <Button
               key={company.id}
-              className="m-2 p-2 bg-stone-100 rounded-md"
+              text={company.name}
               onClick={() => {
                 setWorkForm(true);
                 setSelectedCompany(company);
               }}
-            >
-              {company.name}
-            </button>
+            />
           ))
         ) : (
           <p>
             勤務先の登録がありません。勤務先を登録をすると予定を追加できるようになります。
           </p>
         )}
-        <button onClick={() => setCompanyForm(true)}>＋勤務先を登録</button>
+        <Button
+          text="＋勤務先を追加する"
+          onClick={() => setCompanyForm(true)}
+        />
       </div>
       {workForm && (
         <WorkForm

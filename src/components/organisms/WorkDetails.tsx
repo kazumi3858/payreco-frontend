@@ -3,6 +3,7 @@ import { Company, Work } from "api/model";
 import { useState } from "react";
 import WorkForm from "components/molecules/WorkForm";
 import DeleteModal from "components/molecules/DeleteModel";
+import Button from "components/atoms/Button";
 
 type Props = {
   work: Work;
@@ -41,20 +42,8 @@ function WorkDetails({ work, selectedDay, company }: Props) {
       </div>
 
       <div className="flex">
-        <button
-          className="bg-stone-100 p-2 m-1 rounded-md"
-          onClick={() => {
-            setWorkForm(true);
-          }}
-        >
-          編集
-        </button>
-        <button
-          className="bg-stone-100 p-2 m-1 rounded-md"
-          onClick={() => setDeleteModal(true)}
-        >
-          削除
-        </button>
+        <Button text="編集" onClick={() => setWorkForm(true)} />
+        <Button text="削除" onClick={() => setDeleteModal(true)} />
         {workForm && (
           <WorkForm
             selectedDay={selectedDay}

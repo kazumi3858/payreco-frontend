@@ -5,6 +5,7 @@ import {
   usePostCompanies,
 } from "api/default/default";
 import { Company } from "api/model";
+import Button from "components/atoms/Button";
 import SelectBox from "components/atoms/SelectBox";
 import { SetStateAction, useState } from "react";
 
@@ -75,14 +76,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
     <div className="fixed inset-0 z-50">
       <div className="flex h-screen justify-center items-center">
         <div className="bg-stone-100 p-12 rounded-xl ">
-          <button
-            onClick={() => {
-              setCompanyForm(false);
-            }}
-            className="p-2"
-          >
-            閉じる
-          </button>
+          <Button text="閉じる" onClick={() => setCompanyForm(false)} />
+
           <form onSubmit={handleSubmit}>
             <div>
               <label>名前: </label>

@@ -1,4 +1,5 @@
 import { Company } from "api/model";
+import Button from "components/atoms/Button";
 import CompanyForm from "components/molecules/CompanyForm";
 import DeleteModal from "components/molecules/DeleteModel";
 import { useState } from "react";
@@ -13,20 +14,8 @@ function CompanyDetails({ company }: Props) {
   return (
     <>
       {company.name}
-      <button
-        className="bg-stone-100 p-2 m-1 rounded-md"
-        onClick={() => {
-          setCompanyForm(true);
-        }}
-      >
-        編集
-      </button>
-      <button
-        className="bg-stone-100 p-2 m-1 rounded-md"
-        onClick={() => setDeleteModal(true)}
-      >
-        削除
-      </button>
+      <Button text="編集" onClick={() => setCompanyForm(true)} />
+      <Button text="削除" onClick={() => setDeleteModal(true)} />
       {companyForm && (
         <CompanyForm company={company} setCompanyForm={setCompanyForm} />
       )}
