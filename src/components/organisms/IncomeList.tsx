@@ -36,8 +36,7 @@ function IncomeList() {
   }, {} as { [key: string]: [[Date, number]] });
 
   const payAmountThisMonth =
-    payAmountGroupByMonth && payAmountGroupByMonth[202208];
-  console.log(payAmountThisMonth);
+    payAmountGroupByMonth && payAmountGroupByMonth[202209];
 
   return (
     <div className="pt-5">
