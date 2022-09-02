@@ -6,9 +6,6 @@
  * OpenAPI spec version: 1.0
  */
 
-export type WorkCompany = {
-  name?: string;
-  hourly_wage_system?: boolean;
-  wage_amount?: number;
-  currency_type?: string;
-};
+export interface UserParams {
+  target_amount: number | null;
+}

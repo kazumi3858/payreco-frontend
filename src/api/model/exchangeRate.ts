@@ -8,7 +8,9 @@
 import type { ExchangeRateExchangeRateList } from "./exchangeRateExchangeRateList";
 
 export interface ExchangeRate {
-  id?: number;
-  year_and_month?: number;
-  exchange_rate_list?: ExchangeRateExchangeRateList;
+  readonly id: number;
+  year_and_month: number;
+  exchange_rate_list: ExchangeRateExchangeRateList;
+  created_at: Date;
+  updated_at: Date;
 }

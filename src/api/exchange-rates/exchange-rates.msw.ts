@@ -13,15 +13,11 @@ export const getGetExchangeRatesMock = () =>
     { length: faker.datatype.number({ min: 1, max: 10 }) },
     (_, i) => i + 1
   ).map(() => ({
-    id: faker.helpers.arrayElement([
-      faker.datatype.number({ min: undefined, max: undefined }),
-      undefined,
-    ]),
-    year_and_month: faker.helpers.arrayElement([
-      faker.datatype.number({ min: undefined, max: undefined }),
-      undefined,
-    ]),
-    exchange_rate_list: faker.helpers.arrayElement([{}, undefined]),
+    id: faker.datatype.number({ min: undefined, max: undefined }),
+    year_and_month: faker.datatype.number({ min: undefined, max: undefined }),
+    exchange_rate_list: {},
+    created_at: faker.random.word(),
+    updated_at: faker.random.word(),
   }));
 
 export const getExchangeRatesMSW = () => [

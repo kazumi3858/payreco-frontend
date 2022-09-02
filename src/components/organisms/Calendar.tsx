@@ -15,7 +15,7 @@ import {
 } from "date-fns";
 import ja from "date-fns/locale/ja";
 import { useState } from "react";
-import ScheduleList from "./ScheduleList";
+import WorkList from "./WorkList";
 
 const colStartClasses = [
   "",
@@ -110,22 +110,22 @@ function Calendar() {
                     !isEqual(day, selectedDay) && "hover:bg-gray-200",
                     (isEqual(day, selectedDay) || isToday(day)) &&
                       "font-semibold",
-                    "lg:h-20 rounded-md m-1 p-1"
+                    "lg:h-20 rounded-md m-1 p-1 text-center"
                   )}
                 >
                   <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
                   </time>
-                  <div className="mx-auto mt-1 h-10">
+                  <div className="mx-auto mt-3 h-10">
                     {data?.some((work) =>
                       isSameDay(parseISO(`${work.date}`), day)
-                    ) && <p>testtest</p>}
+                    ) && <p>●</p>}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <ScheduleList
+          <WorkList
             selectedDay={selectedDay}
             selectedDayWorks={selectedDayWorks}
           />

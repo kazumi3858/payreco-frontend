@@ -1,9 +1,9 @@
 import Main from "components/templates/Main";
 
-export default function Home() {
+export default function Companies() {
   return (
     <>
-      <Main content={"calendar"} />
+      <Main content={"company"} />
     </>
   );
 }
