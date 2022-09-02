@@ -6,6 +6,7 @@ import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
+import RadioButton from "components/atoms/RadioButton";
 
 type Props = {
   selectedDay: Date;
@@ -43,6 +44,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const defaultEndingTime = work?.ending_time ? work.ending_time : selectedDay;
   const defaultBreakMinutes = work?.break_time ? work.break_time % 60 : 0;
   const defaultMemo = work?.memo ? work.memo : null;
+  const defaultShiftMode = work?.starting_time !== null;
 
   const [workedHours, setWorkedHours] = useState<string>(defaultWorkedHours);
   const [workedMinutes, setWorkedMinutes] =
@@ -53,7 +55,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const [breakHours, setBreakHours] = useState<number>(defaultBreakHours);
   const [breakMinutes, setBreakMinutes] = useState<number>(defaultBreakMinutes);
   const [memo, setMemo] = useState<string | null>(defaultMemo);
-  const [shiftMode, setShiftMode] = useState<boolean>(true);
+  const [shiftMode, setShiftMode] = useState<boolean>(defaultShiftMode);
 
   const breakTime = breakHours * 60 + breakMinutes;
   const startAndEndTimeDifference =
@@ -121,22 +123,18 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
               {company?.name}
             </div>
             <div>
-              <input
-                className="cursor-pointer"
-                type="radio"
+              <RadioButton
                 value="true"
+                text="シフト時刻を入力"
                 onChange={changeShiftMode}
-                checked={shiftMode === true}
+                checked={shiftMode}
               />
-              <label>シフト時刻を入力</label>
-              <input
-                className="cursor-pointer"
-                type="radio"
+              <RadioButton
                 value=""
+                text="合計勤務時間のみ入力"
                 onChange={changeShiftMode}
-                checked={shiftMode === false}
+                checked={!shiftMode}
               />
-              <label>合計勤務時間のみ入力</label>
             </div>
             {shiftMode ? (
               <>
