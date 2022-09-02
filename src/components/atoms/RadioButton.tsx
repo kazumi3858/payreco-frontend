@@ -8,15 +8,15 @@ type Props = {
 function RadioButton({ value, text, onChange, checked }: Props) {
   return (
     <>
-      <input
-        className="cursor-pointer"
-        type="radio"
-        id="option"
-        value={value}
-        onChange={onChange}
-        checked={checked}
-      />
-      <label htmlFor="option">{text}</label>
+      <label className="cursor-pointer">
+        <input
+          type="radio"
+          value={value}
+          onChange={onChange}
+          checked={checked}
+        />
+        {text}
+      </label>
     </>
   );
 }
