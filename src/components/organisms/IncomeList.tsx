@@ -11,7 +11,11 @@ type Props = {
 };
 
 function IncomeList({ works, companies, exchangeRates }: Props) {
-  const [incomeData, setIncomeData] = useState<string>("monthly");
+  const [thisMonthMode, setThisMonthMode] = useState<boolean>(true);
+
+  const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setThisMonthMode(Boolean(e.target.value));
+  };
 
   const payAmountGroupByMonth = works?.reduce((map, work) => {
     const year_and_month = String(work.date).substring(0, 7).replace("-", "");
@@ -43,28 +47,30 @@ function IncomeList({ works, companies, exchangeRates }: Props) {
     <div className="pt-5">
       <div className="max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
         <div className="flex justify-center">
-          <div>
+          <div className="md:hidden">
             <RadioButton
-              value="monthly"
+              value="true"
               text="今月の給料"
-              onChange={() => setIncomeData("monthly")}
-              checked={incomeData === "monthly"}
+              onChange={changeMode}
+              checked={thisMonthMode}
             />
             <RadioButton
-              value="annual"
+              value=""
               text="年間の給料"
-              onChange={() => setIncomeData("annual")}
-              checked={incomeData === "annual"}
+              onChange={changeMode}
+              checked={!thisMonthMode}
             />
           </div>
         </div>
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
-            <div className="flex items-center">
+            <div className={!thisMonthMode ? "hidden md:inline-block" : ""}>
               <MonthlyIncome income={payAmountThisMonth} />
             </div>
           </div>
-          <div className="mt-12 md:mt-0 md:pl-14">
+          <div
+            className={thisMonthMode ? "hidden md:inline-block" : "md:pl-14"}
+          >
             <AnnualIncome incomeList={payAmountGroupByMonth} />
           </div>
         </div>
