@@ -1,4 +1,3 @@
-import { useGetWorks } from "api/works/works";
 import {
   add,
   eachDayOfInterval,
@@ -15,6 +14,7 @@ import {
 } from "date-fns";
 import ja from "date-fns/locale/ja";
 import { useState } from "react";
+import { Work } from "api/model";
 import WorkList from "./WorkList";
 
 const colStartClasses = [
@@ -27,7 +27,7 @@ const colStartClasses = [
   "col-start-7",
 ];
 
-function Calendar() {
+function Calendar({ works }: { works?: Work[] }) {
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -36,7 +36,6 @@ function Calendar() {
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
   });
-  const { data } = useGetWorks();
   const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
 
   function classNames(...classes: (string | boolean)[]) {
@@ -53,7 +52,7 @@ function Calendar() {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
-  const selectedDayWorks = data?.filter((work) =>
+  const selectedDayWorks = works?.filter((work) =>
     isSameDay(parseISO(`${work.date}`), selectedDay)
   );
 
@@ -117,7 +116,7 @@ function Calendar() {
                     {format(day, "d")}
                   </time>
                   <div className="mx-auto mt-3 h-10">
-                    {data?.some((work) =>
+                    {works?.some((work) =>
                       isSameDay(parseISO(`${work.date}`), day)
                     ) && <p>●</p>}
                   </div>

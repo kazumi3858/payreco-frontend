@@ -1,9 +1,9 @@
 import { format, parseISO } from "date-fns";
 import { Company, Work } from "api/model";
 import { useState } from "react";
-import WorkForm from "components/molecules/WorkForm";
-import DeleteModal from "components/molecules/DeleteModel";
+import WorkForm from "components/organisms/WorkForm";
 import Button from "components/atoms/Button";
+import DeleteModal from "./DeleteModel";
 
 type Props = {
   work: Work;

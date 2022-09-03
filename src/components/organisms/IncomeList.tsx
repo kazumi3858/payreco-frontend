@@ -1,16 +1,17 @@
 import RadioButton from "components/atoms/RadioButton";
 import MonthlyIncome from "components/molecules/MonthlyIncome";
 import AnnualIncome from "components/molecules/Annualncome";
-import { useGetCompanies } from "api/companies/companies";
-import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
-import { useGetWorks } from "api/works/works";
 import { useState } from "react";
+import { Company, ExchangeRate, Work } from "api/model";
 
-function IncomeList() {
+type Props = {
+  works?: Work[];
+  companies?: Company[];
+  exchangeRates?: ExchangeRate[];
+};
+
+function IncomeList({ works, companies, exchangeRates }: Props) {
   const [incomeData, setIncomeData] = useState<string>("monthly");
-  const { data: works } = useGetWorks();
-  const { data: companies } = useGetCompanies();
-  const { data: exchangeRates } = useGetExchangeRates();
 
   const payAmountGroupByMonth = works?.reduce((map, work) => {
     const year_and_month = String(work.date).substring(0, 7).replace("-", "");

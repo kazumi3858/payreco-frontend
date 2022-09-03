@@ -1,11 +1,10 @@
-import { useGetCompanies } from "api/companies/companies";
 import { useState } from "react";
-import CompanyForm from "components/molecules/CompanyForm";
+import CompanyForm from "components/organisms/CompanyForm";
 import CompanyDetails from "./CompanyDetails";
 import Button from "components/atoms/Button";
+import { Company } from "api/model";
 
-function CompapyList() {
-  const { data } = useGetCompanies();
+function CompapyList({ companies }: { companies?: Company[] }) {
   const [companyForm, setCompanyForm] = useState<boolean>(false);
 
   return (
@@ -17,7 +16,7 @@ function CompapyList() {
         </div>
         <div>
           <ul>
-            {data?.map((company) => (
+            {companies?.map((company) => (
               <CompanyDetails key={company.id} company={company} />
             ))}
           </ul>

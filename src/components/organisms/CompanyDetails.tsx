@@ -1,8 +1,8 @@
 import { Company } from "api/model";
 import Button from "components/atoms/Button";
-import CompanyForm from "components/molecules/CompanyForm";
-import DeleteModal from "components/molecules/DeleteModel";
+import CompanyForm from "components/organisms/CompanyForm";
 import { useState } from "react";
+import DeleteModal from "./DeleteModel";
 
 type Props = {
   company: Company;
