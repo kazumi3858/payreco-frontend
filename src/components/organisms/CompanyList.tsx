@@ -17,9 +17,9 @@ function CompapyList() {
         </div>
         <div>
           <ul>
-            {data?.map((company) => {
-              return <CompanyDetails key={company.id} company={company} />;
-            })}
+            {data?.map((company) => (
+              <CompanyDetails key={company.id} company={company} />
+            ))}
           </ul>
         </div>
         {companyForm && <CompanyForm setCompanyForm={setCompanyForm} />}
