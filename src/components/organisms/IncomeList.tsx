@@ -41,8 +41,12 @@ function IncomeList({ works, companies, exchangeRates }: Props) {
     return map;
   }, {} as { [key: string]: [[Date, number]] });
 
+  const thisMonth = Number(
+    new Date().getFullYear() + ("0" + (new Date().getMonth() + 1)).slice(-2)
+  );
+  console.log(thisMonth);
   const payAmountThisMonth =
-    payAmountGroupByMonth && payAmountGroupByMonth[202209];
+    payAmountGroupByMonth && payAmountGroupByMonth[thisMonth];
 
   return (
     <div className="pt-5">
