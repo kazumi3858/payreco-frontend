@@ -1,13 +1,11 @@
-import Link from "next/link";
+import Dropdown from "components/atoms/DropDown";
 import { useRouter } from "next/router";
 
 function Header() {
   const router = useRouter();
   return (
     <header className="h-14 bg-stone-200">
-      <Link href="/account">
-        <a>マイページ</a>
-      </Link>
+      <Dropdown />
     </header>
   );
 }

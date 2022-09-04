@@ -11,7 +11,7 @@ function Main({ children }: Props) {
     <>
       <div className="min-h-screen">
         <Header />
-        {children}
+        <div className="z-0">{children}</div>
       </div>
       <Menu />
       <Footer />
