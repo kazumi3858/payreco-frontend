@@ -1,13 +1,12 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
-//import { auth } from './services/firebase';
+import { auth } from "auth/firebase";
 
 export const AXIOS_INSTANCE = Axios.create({
-  baseURL: "http://localhost:3000/api/v1",
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
 AXIOS_INSTANCE.interceptors.request.use(async function (config) {
-  //const token = await auth.currentUser?.getIdToken(true)
-  const token = "dummy token";
+  const token = await auth.currentUser?.getIdToken(true);
   config.headers!.Authorization = token ? `Bearer ${token}` : "";
   return config;
 });
