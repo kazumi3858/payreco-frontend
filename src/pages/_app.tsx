@@ -8,7 +8,14 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new QueryClient();
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+
+  if (loading)
+    return (
+      <div className="h-screen w-screen flex justify-center items-center">
+        <p className="text-4xl">Loading</p>
+      </div>
+    );
 
   return (
     <>

@@ -65,9 +65,10 @@ export const useGetUsersUserId = <
     Awaited<ReturnType<typeof getUsersUserId>>,
     TError,
     TData
-  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
+  >(queryKey, queryFn, {
+    staleTime: Infinity,
+    ...queryOptions,
+  }) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 
