@@ -1,24 +1,17 @@
 import Header from "components/organisms/Header";
 import Footer from "components/organisms/Footor";
 import Menu from "components/organisms/Menu";
-import Calendar from "components/organisms/Calendar";
-import CompanyList from "components/organisms/CompanyList";
-import IncomeList from "components/organisms/IncomeList";
-import MyPage from "components/organisms/MyPage";
 
 type Props = {
-  content: string;
+  children: JSX.Element;
 };
 
-function Main({ content }: Props) {
+function Main({ children }: Props) {
   return (
     <>
       <div className="min-h-screen">
         <Header />
-        {content === "account" && <MyPage />}
-        {content === "calendar" && <Calendar />}
-        {content === "company" && <CompanyList />}
-        {content === "income" && <IncomeList />}
+        {children}
       </div>
       <Menu />
       <Footer />
