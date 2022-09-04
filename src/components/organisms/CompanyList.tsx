@@ -1,11 +1,10 @@
-import { useGetCompanies } from "api/companies/companies";
 import { useState } from "react";
-import CompanyForm from "components/molecules/CompanyForm";
+import CompanyForm from "components/organisms/CompanyForm";
 import CompanyDetails from "./CompanyDetails";
 import Button from "components/atoms/Button";
+import { Company } from "api/model";
 
-function CompapyList() {
-  const { data } = useGetCompanies();
+function CompapyList({ companies }: { companies?: Company[] }) {
   const [companyForm, setCompanyForm] = useState<boolean>(false);
 
   return (
@@ -15,11 +14,11 @@ function CompapyList() {
           <h2 className="text-xl inline">勤務先一覧</h2>
           <Button text="新規登録" onClick={() => setCompanyForm(true)} />
         </div>
-        <div>
+        <div className="mb-10">
           <ul>
-            {data?.map((company) => {
-              return <CompanyDetails key={company.id} company={company} />;
-            })}
+            {companies?.map((company) => (
+              <CompanyDetails key={company.id} company={company} />
+            ))}
           </ul>
         </div>
         {companyForm && <CompanyForm setCompanyForm={setCompanyForm} />}

@@ -6,6 +6,7 @@ import {
 } from "api/default/default";
 import { Company } from "api/model";
 import Button from "components/atoms/Button";
+import RadioButton from "components/atoms/RadioButton";
 import SelectBox from "components/atoms/SelectBox";
 import { SetStateAction, useState } from "react";
 
@@ -31,9 +32,9 @@ const currencyList = [
 
 function CompanyForm({ setCompanyForm, company }: Props) {
   const defaultName = company ? company.name : "";
+  const defaultWageSystem = company ? company.hourly_wage_system : true;
   const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
   const defaultCurrencyType = company ? company.currency_type : "円";
-  const defaultWageSystem = company ? company.hourly_wage_system : true;
 
   const [wageSystem, setWageSystem] = useState<boolean>(defaultWageSystem);
   const [name, setName] = useState<string>(defaultName);
@@ -94,23 +95,21 @@ function CompanyForm({ setCompanyForm, company }: Props) {
                 {name.length > 30 && `名前は1～30文字にしてください。`}
               </p>
             </div>
-            <div>
-              <input
-                className="cursor-pointer"
-                type="radio"
+            <div className="space-x-1">
+              <RadioButton
+                type="small"
                 value="true"
+                text="時給制"
                 onChange={changeWageSystem}
-                checked={wageSystem === true}
+                checked={wageSystem}
               />
-              <label>時給制</label>
-              <input
-                className="cursor-pointer"
-                type="radio"
-                onChange={changeWageSystem}
-                checked={wageSystem === false}
+              <RadioButton
+                type="small"
                 value=""
+                text="日給制"
+                onChange={changeWageSystem}
+                checked={!wageSystem}
               />
-              <label>日給制</label>
             </div>
             {wageSystem && (
               <div>

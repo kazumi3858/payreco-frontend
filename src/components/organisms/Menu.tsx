@@ -9,7 +9,7 @@ function Menu() {
       <Link href="/companies">
         <a>勤務先管理</a>
       </Link>
-      <Link href="/companies">
+      <Link href="/income">
         <a>給料計算</a>
       </Link>
     </div>

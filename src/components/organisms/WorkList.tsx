@@ -1,8 +1,8 @@
 import { useGetCompanies } from "api/companies/companies";
 import { Company, Work } from "api/model";
 import Button from "components/atoms/Button";
-import CompanyForm from "components/molecules/CompanyForm";
-import WorkForm from "components/molecules/WorkForm";
+import CompanyForm from "components/organisms/CompanyForm";
+import WorkForm from "components/organisms/WorkForm";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useState } from "react";

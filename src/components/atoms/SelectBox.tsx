@@ -7,13 +7,11 @@ type Props = {
 function SelectBox({ defaultValue, changeEvent, array }: Props) {
   return (
     <select defaultValue={defaultValue} onChange={changeEvent}>
-      {array.map((element) => {
-        return (
-          <option key={element} value={element}>
-            {element}
-          </option>
-        );
-      })}
+      {array.map((element) => (
+        <option key={element} value={element}>
+          {element}
+        </option>
+      ))}
     </select>
   );
 }

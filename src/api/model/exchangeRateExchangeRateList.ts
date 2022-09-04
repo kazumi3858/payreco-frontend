@@ -6,4 +6,4 @@
  * OpenAPI spec version: 1.0
  */
 
-export type ExchangeRateExchangeRateList = { [key: string]: any };
+export type ExchangeRateExchangeRateList = { [key: string]: number };
