@@ -7,6 +7,7 @@ import IncomeList from "components/organisms/IncomeList";
 import { useGetWorks } from "api/works/works";
 import { useGetCompanies } from "api/companies/companies";
 import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
+import { useGetUsersUserId } from "api/users/users";
 
 type Props = {
   content: string;

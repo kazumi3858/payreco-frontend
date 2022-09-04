@@ -13,16 +13,17 @@ function MonthlyIncome({ income }: Props) {
   const earnedIncome =
     workedDaysData?.reduce((sum, array) => sum + array[1], 0) || 0;
   const expectedIncome = totalIncome - earnedIncome;
-
   return (
-    <div>
+    <>
       <Heading text="今月の給料" />
-      <ul>
-        <li className="mb-2">現在: {earnedIncome.toLocaleString()}円</li>
-        <li className="mb-2">見込み: {expectedIncome.toLocaleString()}円</li>
-        <li className="mb-2">合計: {totalIncome.toLocaleString()}円</li>
-      </ul>
-    </div>
+      <div>
+        <ul>
+          <li className="mb-2">現在: {earnedIncome.toLocaleString()}円</li>
+          <li className="mb-2">見込み: {expectedIncome.toLocaleString()}円</li>
+          <li className="mb-2">合計: {totalIncome.toLocaleString()}円</li>
+        </ul>
+      </div>
+    </>
   );
 }
 

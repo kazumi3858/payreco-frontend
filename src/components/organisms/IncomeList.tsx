@@ -2,7 +2,8 @@ import RadioButton from "components/atoms/RadioButton";
 import MonthlyIncome from "components/molecules/MonthlyIncome";
 import AnnualIncome from "components/molecules/Annualncome";
 import { useState } from "react";
-import { Company, ExchangeRate, Work } from "api/model";
+import { Company, ExchangeRate, User, Work } from "api/model";
+import Button from "components/atoms/Button";
 
 type Props = {
   works?: Work[];
@@ -64,10 +65,15 @@ function IncomeList({ works, companies, exchangeRates }: Props) {
             />
           </div>
         </div>
-        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
+        <div className="mb-10 md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
             <div className={!thisMonthMode ? "hidden md:inline-block" : ""}>
               <MonthlyIncome income={payAmountThisMonth} />
+              <div>
+                目標金額:{" "}
+                <input className="w-16" type="number" defaultValue="0" />円
+                <Button text="更新" onClick={() => ""} />
+              </div>
             </div>
           </div>
           <div

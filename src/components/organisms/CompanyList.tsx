@@ -14,7 +14,7 @@ function CompapyList({ companies }: { companies?: Company[] }) {
           <h2 className="text-xl inline">勤務先一覧</h2>
           <Button text="新規登録" onClick={() => setCompanyForm(true)} />
         </div>
-        <div>
+        <div className="mb-10">
           <ul>
             {companies?.map((company) => (
               <CompanyDetails key={company.id} company={company} />
