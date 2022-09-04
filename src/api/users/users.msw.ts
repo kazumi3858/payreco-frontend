@@ -17,28 +17,12 @@ export const getGetUsersUserIdMock = () => ({
   updated_at: faker.random.word(),
 });
 
-export const getPostUserMock = () => ({
-  id: faker.random.word(),
-  uid: faker.random.word(),
-  name: faker.random.word(),
-  target_amount: {},
-  created_at: faker.random.word(),
-  updated_at: faker.random.word(),
-});
-
 export const getUsersMSW = () => [
-  rest.get("*/users/:userId", (_req, res, ctx) => {
+  rest.get("*/user", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
       ctx.json(getGetUsersUserIdMock())
-    );
-  }),
-  rest.post("*/users", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getPostUserMock())
     );
   }),
 ];

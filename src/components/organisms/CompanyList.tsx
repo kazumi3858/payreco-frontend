@@ -2,10 +2,11 @@ import { useState } from "react";
 import CompanyForm from "components/organisms/CompanyForm";
 import CompanyDetails from "./CompanyDetails";
 import Button from "components/atoms/Button";
-import { Company } from "api/model";
+import { useGetCompanies } from "api/companies/companies";
 
-function CompapyList({ companies }: { companies?: Company[] }) {
+function CompapyList() {
   const [companyForm, setCompanyForm] = useState<boolean>(false);
+  const { data, isLoading } = useGetCompanies();
 
   return (
     <div className="flex justify-center">
@@ -15,11 +16,15 @@ function CompapyList({ companies }: { companies?: Company[] }) {
           <Button text="新規登録" onClick={() => setCompanyForm(true)} />
         </div>
         <div className="mb-10">
-          <ul>
-            {companies?.map((company) => (
-              <CompanyDetails key={company.id} company={company} />
-            ))}
-          </ul>
+          {isLoading ? (
+            <p>Loading</p>
+          ) : (
+            <ul>
+              {data?.map((company) => (
+                <CompanyDetails key={company.id} company={company} />
+              ))}
+            </ul>
+          )}
         </div>
         {companyForm && <CompanyForm setCompanyForm={setCompanyForm} />}
       </div>

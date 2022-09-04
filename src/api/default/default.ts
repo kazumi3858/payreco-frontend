@@ -27,13 +27,12 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
  * @summary Update a use
  */
 export const patchUsersUserId = (
-  userId: string,
   userParams: BodyType<UserParams>,
   options?: SecondParameter<typeof customInstance>
 ) => {
   return customInstance<void>(
     {
-      url: `/users/${userId}`,
+      url: `/user`,
       method: "patch",
       headers: { "Content-Type": "application/json" },
       data: userParams,
@@ -55,7 +54,7 @@ export const usePatchUsersUserId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchUsersUserId>>,
     TError,
-    { userId: string; data: BodyType<UserParams> },
+    { data: BodyType<UserParams> },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -64,17 +63,17 @@ export const usePatchUsersUserId = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchUsersUserId>>,
-    { userId: string; data: BodyType<UserParams> }
+    { data: BodyType<UserParams> }
   > = (props) => {
-    const { userId, data } = props ?? {};
+    const { data } = props ?? {};
 
-    return patchUsersUserId(userId, data, requestOptions);
+    return patchUsersUserId(data, requestOptions);
   };
 
   return useMutation<
     Awaited<ReturnType<typeof patchUsersUserId>>,
     TError,
-    { userId: string; data: BodyType<UserParams> },
+    { data: BodyType<UserParams> },
     TContext
   >(mutationFn, mutationOptions);
 };
@@ -83,13 +82,9 @@ export const usePatchUsersUserId = <
  * @summary Delete a user
  */
 export const deleteUsersUserId = (
-  userId: string,
   options?: SecondParameter<typeof customInstance>
 ) => {
-  return customInstance<string>(
-    { url: `/users/${userId}`, method: "delete" },
-    options
-  );
+  return customInstance<string>({ url: `/user`, method: "delete" }, options);
 };
 
 export type DeleteUsersUserIdMutationResult = NonNullable<
@@ -100,12 +95,13 @@ export type DeleteUsersUserIdMutationError = ErrorType<unknown>;
 
 export const useDeleteUsersUserId = <
   TError = ErrorType<unknown>,
+  TVariables = void,
   TContext = unknown
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteUsersUserId>>,
     TError,
-    { userId: string },
+    TVariables,
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -114,17 +110,15 @@ export const useDeleteUsersUserId = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteUsersUserId>>,
-    { userId: string }
-  > = (props) => {
-    const { userId } = props ?? {};
-
-    return deleteUsersUserId(userId, requestOptions);
+    TVariables
+  > = () => {
+    return deleteUsersUserId(requestOptions);
   };
 
   return useMutation<
     Awaited<ReturnType<typeof deleteUsersUserId>>,
     TError,
-    { userId: string },
+    TVariables,
     TContext
   >(mutationFn, mutationOptions);
 };

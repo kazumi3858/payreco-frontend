@@ -14,8 +14,8 @@ import {
 } from "date-fns";
 import ja from "date-fns/locale/ja";
 import { useState } from "react";
-import { Work } from "api/model";
 import WorkList from "./WorkList";
+import { useGetWorks } from "api/works/works";
 
 const colStartClasses = [
   "",
@@ -27,7 +27,8 @@ const colStartClasses = [
   "col-start-7",
 ];
 
-function Calendar({ works }: { works?: Work[] }) {
+function Calendar() {
+  const { data } = useGetWorks();
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -52,7 +53,7 @@ function Calendar({ works }: { works?: Work[] }) {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
-  const selectedDayWorks = works?.filter((work) =>
+  const selectedDayWorks = data?.filter((work) =>
     isSameDay(parseISO(`${work.date}`), selectedDay)
   );
 
@@ -116,7 +117,7 @@ function Calendar({ works }: { works?: Work[] }) {
                     {format(day, "d")}
                   </time>
                   <div className="mx-auto mt-3 h-10">
-                    {works?.some((work) =>
+                    {data?.some((work) =>
                       isSameDay(parseISO(`${work.date}`), day)
                     ) && <p>●</p>}
                   </div>
