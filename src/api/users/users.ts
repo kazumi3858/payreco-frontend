@@ -91,11 +91,16 @@ export const useGetUsersUserId = <
  * @summary Create a user
  */
 export const postUser = (
-  postUserBody: BodyType<User | User[]> | User[],
+  postUserBody: BodyType<unknown>,
   options?: SecondParameter<typeof customInstance>
 ) => {
-  return customInstance<void>(
-    { url: `/users`, method: "post", data: postUserBody },
+  return customInstance<User>(
+    {
+      url: `/users`,
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      data: postUserBody,
+    },
     options
   );
 };
@@ -103,7 +108,7 @@ export const postUser = (
 export type PostUserMutationResult = NonNullable<
   Awaited<ReturnType<typeof postUser>>
 >;
-export type PostUserMutationBody = BodyType<User | User[]>;
+export type PostUserMutationBody = BodyType<unknown>;
 export type PostUserMutationError = ErrorType<unknown>;
 
 export const usePostUser = <
@@ -113,7 +118,7 @@ export const usePostUser = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postUser>>,
     TError,
-    { data: BodyType<User | User[]> },
+    { data: BodyType<unknown> },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -122,7 +127,7 @@ export const usePostUser = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postUser>>,
-    { data: BodyType<User | User[]> }
+    { data: BodyType<unknown> }
   > = (props) => {
     const { data } = props ?? {};
 
@@ -132,7 +137,7 @@ export const usePostUser = <
   return useMutation<
     Awaited<ReturnType<typeof postUser>>,
     TError,
-    { data: BodyType<User | User[]> },
+    { data: BodyType<unknown> },
     TContext
   >(mutationFn, mutationOptions);
 };
