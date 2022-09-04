@@ -95,14 +95,16 @@ function CompanyForm({ setCompanyForm, company }: Props) {
                 {name.length > 30 && `名前は1～30文字にしてください。`}
               </p>
             </div>
-            <div>
+            <div className="space-x-1">
               <RadioButton
+                type="small"
                 value="true"
                 text="時給制"
                 onChange={changeWageSystem}
                 checked={wageSystem}
               />
               <RadioButton
+                type="small"
                 value=""
                 text="日給制"
                 onChange={changeWageSystem}

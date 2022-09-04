@@ -1,3 +1,4 @@
+import Heading from "components/atoms/Heading";
 import { isPast, parseISO } from "date-fns";
 
 type Props = {
@@ -15,10 +16,12 @@ function MonthlyIncome({ income }: Props) {
 
   return (
     <div>
-      <p>今月の給料</p>
-      <p>現在: {earnedIncome.toLocaleString()}円</p>
-      <p>見込み: {expectedIncome.toLocaleString()}円</p>
-      <p>合計: {totalIncome.toLocaleString()}円</p>
+      <Heading text="今月の給料" />
+      <ul>
+        <li className="mb-2">現在: {earnedIncome.toLocaleString()}円</li>
+        <li className="mb-2">見込み: {expectedIncome.toLocaleString()}円</li>
+        <li className="mb-2">合計: {totalIncome.toLocaleString()}円</li>
+      </ul>
     </div>
   );
 }

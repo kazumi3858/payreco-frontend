@@ -1,3 +1,5 @@
+import Heading from "components/atoms/Heading";
+
 type Props = {
   incomeList?: { [key: string]: [[Date, number]] };
 };
@@ -26,10 +28,10 @@ function AnnualIncome({ incomeList }: Props) {
 
   return (
     <div>
-      <p>年間の給料</p>
+      <Heading text="年間の給料" />
       <ul>
         {incomeListByMonth.map((income, idx) => (
-          <li key={idx}>
+          <li key={idx} className="mb-2">
             {idx + 1}月: {income.toLocaleString()}円
           </li>
         ))}

@@ -47,14 +47,16 @@ function IncomeList({ works, companies, exchangeRates }: Props) {
     <div className="pt-5">
       <div className="max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
         <div className="flex justify-center">
-          <div className="md:hidden">
+          <div className="md:hidden space-x-6 mb-6">
             <RadioButton
+              type="big"
               value="true"
               text="今月の給料"
               onChange={changeMode}
               checked={thisMonthMode}
             />
             <RadioButton
+              type="big"
               value=""
               text="年間の給料"
               onChange={changeMode}
@@ -69,7 +71,9 @@ function IncomeList({ works, companies, exchangeRates }: Props) {
             </div>
           </div>
           <div
-            className={thisMonthMode ? "hidden md:inline-block" : "md:pl-14"}
+            className={
+              thisMonthMode ? "hidden md:inline-block md:pl-14" : "md:pl-14"
+            }
           >
             <AnnualIncome incomeList={payAmountGroupByMonth} />
           </div>
