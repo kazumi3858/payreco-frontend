@@ -22,7 +22,9 @@ function Questions() {
       .then(() => {
         console.log("An account has been deleted.");
         router.push("/");
-        alert('退会処理が完了しました。ご利用いただきましてありがとうございました。')
+        alert(
+          "退会処理が完了しました。ご利用いただきましてありがとうございました。"
+        );
       })
       .catch((error) => {
         if (error.code === "auth/requires-recent-login") {

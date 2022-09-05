@@ -444,3 +444,51 @@ export const useDeleteCompaniesCompanyId = <
     TContext
   >(mutationFn, mutationOptions);
 };
+/**
+ * Delete an authentication
+ * @summary Delete an authentication
+ */
+export const deleteAuthentication = (
+  options?: SecondParameter<typeof customInstance>
+) => {
+  return customInstance<void>(
+    { url: `/authentication`, method: "delete" },
+    options
+  );
+};
+
+export type DeleteAuthenticationMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteAuthentication>>
+>;
+
+export type DeleteAuthenticationMutationError = ErrorType<unknown>;
+
+export const useDeleteAuthentication = <
+  TError = ErrorType<unknown>,
+  TVariables = void,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteAuthentication>>,
+    TError,
+    TVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}) => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteAuthentication>>,
+    TVariables
+  > = () => {
+    return deleteAuthentication(requestOptions);
+  };
+
+  return useMutation<
+    Awaited<ReturnType<typeof deleteAuthentication>>,
+    TError,
+    TVariables,
+    TContext
+  >(mutationFn, mutationOptions);
+};

@@ -38,7 +38,7 @@ export const getExchangeRates = (
   );
 };
 
-export const getGetExchangeRatesQueryKey = () => [`/exchange-rates`];
+export const getGetExchangeRatesQueryKey = () => [`/exchange_rates`];
 
 export type GetExchangeRatesQueryResult = NonNullable<
   Awaited<ReturnType<typeof getExchangeRates>>

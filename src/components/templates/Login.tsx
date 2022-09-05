@@ -5,13 +5,17 @@ import { useState } from "react";
 function Login() {
   const [disable, setDisable] = useState(false);
   const googleSignIn = () => {
-    setDisable(true)
+    setDisable(true);
     signInWithPopup(auth, provider).catch((error) =>
       console.log(error.message)
     );
   };
 
-  return <button disabled={disable} onClick={googleSignIn}>サインイン</button>;
+  return (
+    <button disabled={disable} onClick={googleSignIn}>
+      サインイン
+    </button>
+  );
 }
 
 export default Login;
