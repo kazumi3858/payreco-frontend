@@ -6,7 +6,7 @@ export const AXIOS_INSTANCE = Axios.create({
 });
 
 AXIOS_INSTANCE.interceptors.request.use(async function (config) {
-  const token = await auth.currentUser?.getIdToken(true);
+  const token = await auth.currentUser?.getIdToken();
   config.headers!.Authorization = token ? `Bearer ${token}` : "";
   return config;
 });
