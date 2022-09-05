@@ -13,10 +13,8 @@ function Dropdown({ children }: Props) {
       onBlur={() => setMenu(false)}
       tabIndex={0}
     >
-      <div>メニュー</div>
-      <ul
-        className={menu ? "bg-white inline-block m-2 p-3 z-50 fixed" : "hidden"}
-      >
+      <div>ロゴ</div>
+      <ul className={menu ? "bg-white inline-block z-50 fixed" : "hidden"}>
         {children}
       </ul>
     </div>

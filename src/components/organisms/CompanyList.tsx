@@ -4,6 +4,7 @@ import CompanyDetails from "./CompanyDetails";
 import Button from "components/atoms/Button";
 import { useGetCompanies } from "api/companies/companies";
 import Modal from "./Modal";
+import Heading from "components/atoms/Heading";
 
 function CompapyList() {
   const [companyForm, setCompanyForm] = useState<boolean>(false);
@@ -12,9 +13,8 @@ function CompapyList() {
   return (
     <div className="flex justify-center">
       <div>
-        <div className="my-6">
-          <h2 className="text-xl inline">勤務先一覧</h2>
-          <Button text="新規登録" onClick={() => setCompanyForm(true)} />
+        <div className="mt-6">
+          <Heading text="勤務先一覧" />
         </div>
         <div className="mb-10">
           {isLoading ? (
@@ -26,6 +26,7 @@ function CompapyList() {
               ))}
             </ul>
           )}
+          <Button text="新規登録" onClick={() => setCompanyForm(true)} />
         </div>
 
         <Modal modal={companyForm} setModal={setCompanyForm}>

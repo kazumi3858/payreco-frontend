@@ -12,14 +12,16 @@ function Header() {
   };
   const handleClickQuestion = () => router.push("/questions");
 
+  const style = "cursor-pointer hover:bg-stone-100 p-3";
+
   return (
     <header className="h-14 bg-stone-200">
       <Dropdown>
         <>
-          <li className="cursor-pointer" onClick={handleClickLogout}>
+          <li className={style} onClick={handleClickLogout}>
             ログアウト
           </li>
-          <li className="cursor-pointer" onClick={handleClickQuestion}>
+          <li className={style} onClick={handleClickQuestion}>
             よくある質問
           </li>
         </>

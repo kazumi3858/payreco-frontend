@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   if (loading)
     return (
       <div className="h-screen w-screen flex justify-center items-center">
-        <p className="text-4xl">Loading</p>
+        <div className="animate-spin h-16 w-16 bg-stone-200 rounded-xl"></div>
       </div>
     );
 
