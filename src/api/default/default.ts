@@ -449,10 +449,11 @@ export const useDeleteCompaniesCompanyId = <
  * @summary Delete an authentication
  */
 export const deleteAuthentication = (
+  userId: string,
   options?: SecondParameter<typeof customInstance>
 ) => {
   return customInstance<void>(
-    { url: `/authentication`, method: "delete" },
+    { url: `/authentications/${userId}`, method: "delete" },
     options
   );
 };
@@ -465,13 +466,12 @@ export type DeleteAuthenticationMutationError = ErrorType<unknown>;
 
 export const useDeleteAuthentication = <
   TError = ErrorType<unknown>,
-  TVariables = void,
   TContext = unknown
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteAuthentication>>,
     TError,
-    TVariables,
+    { userId: string },
     TContext
   >;
   request?: SecondParameter<typeof customInstance>;
@@ -480,15 +480,17 @@ export const useDeleteAuthentication = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteAuthentication>>,
-    TVariables
-  > = () => {
-    return deleteAuthentication(requestOptions);
+    { userId: string }
+  > = (props) => {
+    const { userId } = props ?? {};
+
+    return deleteAuthentication(userId, requestOptions);
   };
 
   return useMutation<
     Awaited<ReturnType<typeof deleteAuthentication>>,
     TError,
-    TVariables,
+    { userId: string },
     TContext
   >(mutationFn, mutationOptions);
 };

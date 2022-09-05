@@ -3,8 +3,11 @@ import { deleteUser, reauthenticateWithPopup } from "firebase/auth";
 import Button from "components/atoms/Button";
 import Heading from "components/atoms/Heading";
 import router from "next/router";
+import { useGetUsersUserId } from "api/users/users";
+import { useDeleteAuthentication } from "api/default/default";
 
 function Questions() {
+  const { data } = useGetUsersUserId();
   const user = auth.currentUser;
 
   const reauthenticate = () => {
@@ -16,10 +19,13 @@ function Questions() {
         });
   };
 
+  const deleteServerSideData = useDeleteAuthentication();
+
   const deleteAccount = () =>
     user &&
     deleteUser(user)
       .then(() => {
+        data && deleteServerSideData.mutate({ userId: data.id });
         console.log("An account has been deleted.");
         router.push("/");
         alert(
@@ -29,7 +35,9 @@ function Questions() {
       .catch((error) => {
         if (error.code === "auth/requires-recent-login") {
           reauthenticate();
-          alert("処理に失敗しました。もう一度お試しください。");
+          alert(
+            "アカウント認証に失敗したため処理が実行できませんでした。再度お試しください。"
+          );
         } else {
           console.log(error);
         }

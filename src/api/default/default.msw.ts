@@ -51,7 +51,7 @@ export const getDefaultMSW = () => [
       ctx.json(getDeleteCompaniesCompanyIdMock())
     );
   }),
-  rest.delete("*/authentication", (_req, res, ctx) => {
+  rest.delete("*/authentications/:userId", (_req, res, ctx) => {
     return res(ctx.delay(1000), ctx.status(200, "Mocked status"));
   }),
 ];
