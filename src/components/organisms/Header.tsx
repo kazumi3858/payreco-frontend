@@ -10,7 +10,7 @@ function Header() {
     auth.signOut();
     router.push("/");
   };
-  const handleClickQuestion = () => router.push("/account");
+  const handleClickQuestion = () => router.push("/questions");
 
   return (
     <header className="h-14 bg-stone-200">

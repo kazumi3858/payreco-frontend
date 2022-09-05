@@ -1,10 +1,10 @@
-import MyPage from "components/organisms/MyPage";
+import Questions from "components/organisms/Questions";
 import Main from "components/templates/Main";
 
 export default function Account() {
   return (
     <Main>
-      <MyPage />
+      <Questions />
     </Main>
   );
 }
