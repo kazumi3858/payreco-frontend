@@ -5,7 +5,7 @@ import CompanyForm from "components/organisms/CompanyForm";
 import WorkForm from "components/organisms/WorkForm";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import WorkDetails from "./WorkDetails";
 
 type Props = {
@@ -18,6 +18,11 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
   const [workForm, setWorkForm] = useState<boolean>(false);
   const [companyForm, setCompanyForm] = useState<boolean>(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    workForm && modalRef.current && modalRef.current.focus();
+  }, [workForm]);
 
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
@@ -73,13 +78,19 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         </div>
       )}
       {workForm && (
-        <WorkForm
-          selectedDay={selectedDay}
-          company={selectedCompany}
-          setWorkForm={setWorkForm}
-        />
+        <div onClick={() => setWorkForm(false)}>
+          <WorkForm
+            selectedDay={selectedDay}
+            company={selectedCompany}
+            setWorkForm={setWorkForm}
+          />
+        </div>
       )}
-      {companyForm && <CompanyForm setCompanyForm={setCompanyForm} />}
+      {companyForm && (
+        <div onClick={() => setCompanyForm(false)}>
+          <CompanyForm setCompanyForm={setCompanyForm} />
+        </div>
+      )}
     </section>
   );
 }

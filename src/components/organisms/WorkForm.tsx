@@ -115,7 +115,12 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   return (
     <div className="fixed inset-0 z-50">
       <div className="flex h-screen justify-center items-center">
-        <div className="bg-stone-100 p-12 rounded-xl ">
+        <div
+          className="bg-stone-100 p-12 rounded-xl"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <Button text="閉じる" onClick={() => setWorkForm(false)} />
           <form onSubmit={handleSubmit}>
             <div>

@@ -1,14 +1,14 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { customMutationResult } from "api/custom-mutation-result";
 import {
   usePatchCompaniesCompanyId,
   usePostCompanies,
 } from "api/default/default";
 import { Company } from "api/model";
+import { useQueryClient } from "@tanstack/react-query";
+import { SetStateAction, useState } from "react";
+import { customMutationResult } from "api/custom-mutation-result";
 import Button from "components/atoms/Button";
 import RadioButton from "components/atoms/RadioButton";
 import SelectBox from "components/atoms/SelectBox";
-import { SetStateAction, useState } from "react";
 
 type Props = {
   setCompanyForm: React.Dispatch<SetStateAction<boolean>>;
@@ -82,7 +82,12 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   return (
     <div className="fixed inset-0 z-50">
       <div className="flex h-screen justify-center items-center">
-        <div className="bg-stone-100 p-12 rounded-xl ">
+        <div
+          className="bg-stone-100 p-12 rounded-xl "
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <Button text="閉じる" onClick={() => setCompanyForm(false)} />
           <form onSubmit={handleSubmit}>
             <div>
