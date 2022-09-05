@@ -8,11 +8,6 @@ type Props = {
 };
 
 function Modal({ children, modal, setModal }: Props) {
-  const modalRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    modal && modalRef.current && modalRef.current.focus();
-  }, [modal]);
-
   return (
     <>
       {modal && (

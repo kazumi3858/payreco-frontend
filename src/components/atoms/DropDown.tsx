@@ -1,28 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 type Props = {
   children: JSX.Element;
 };
 
 function Dropdown({ children }: Props) {
-  const [openMenu, setOpenMenu] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    openMenu && menuRef.current && menuRef.current.focus();
-  }, [openMenu]);
+  const [menu, setMenu] = useState(false);
 
   return (
     <div
-      onClick={() => setOpenMenu(!openMenu)}
-      onBlur={() => setOpenMenu(false)}
-      ref={menuRef}
+      onClick={() => setMenu(true)}
+      onBlur={() => setMenu(false)}
       tabIndex={0}
     >
       <div>メニュー</div>
       <ul
-        className={
-          openMenu ? "bg-white inline-block m-2 p-3 z-50 fixed" : "hidden"
-        }
+        className={menu ? "bg-white inline-block m-2 p-3 z-50 fixed" : "hidden"}
       >
         {children}
       </ul>
