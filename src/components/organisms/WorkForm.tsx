@@ -1,4 +1,3 @@
-import Button from "components/atoms/Button";
 import SelectBox from "components/atoms/SelectBox";
 import { useQueryClient } from "@tanstack/react-query";
 import { customMutationResult } from "api/custom-mutation-result";
@@ -113,162 +112,148 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50">
-      <div className="flex h-screen justify-center items-center">
-        <div
-          className="bg-stone-100 p-12 rounded-xl"
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          <Button text="閉じる" onClick={() => setWorkForm(false)} />
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>勤務先: </label>
-              {company?.name}
-            </div>
-            <div className="space-x-1">
-              <RadioButton
-                type="small"
-                value="true"
-                text="シフト時刻を入力"
-                onChange={changeShiftMode}
-                checked={shiftMode}
-              />
-              <RadioButton
-                type="small"
-                value=""
-                text="合計勤務時間のみ入力"
-                onChange={changeShiftMode}
-                checked={!shiftMode}
-              />
-            </div>
-            {shiftMode ? (
-              <>
-                <div>
-                  <label>開始時刻: </label>
-                  <input
-                    type="datetime-local"
-                    className="block"
-                    min={minTime}
-                    max={maxTime}
-                    defaultValue={
-                      work?.starting_time
-                        ? String(work.starting_time).substring(0, 16)
-                        : minTime
-                    }
-                    onChange={(e) => setStartingTime(new Date(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <label>終了時刻: </label>
-                  <input
-                    type="datetime-local"
-                    className="block"
-                    min={minTime}
-                    max={nextDayMaxTime}
-                    defaultValue={
-                      work?.ending_time
-                        ? String(work.ending_time).substring(0, 16)
-                        : minTime
-                    }
-                    onChange={(e) => setEndingTime(new Date(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <label>休憩: </label>
-                  <SelectBox
-                    defaultValue={defaultBreakHours}
-                    changeEvent={(e) => setBreakHours(Number(e.target.value))}
-                    array={["0", "1", "2", "3", "4", "5"]}
-                  />
-                  時間
-                  <SelectBox
-                    defaultValue={defaultBreakMinutes}
-                    changeEvent={(e) => setBreakMinutes(Number(e.target.value))}
-                    array={Object.keys([...Array(60)])}
-                  />
-                  分
-                </div>
-                <div>
-                  <p>
-                    合計時間:{" "}
-                    {`${Math.floor(startAndEndTimeDifference / 60)}時間${
-                      startAndEndTimeDifference % 60
-                    }分`}
-                  </p>
-                  <p className="text-rose-600">
-                    {Math.sign(startAndEndTimeDifference) === -1 &&
-                      `合計時間が正しくありません。`}
-                  </p>
-                </div>
-              </>
-            ) : (
-              <div>
-                <label>合計時間: </label>
-                <SelectBox
-                  defaultValue={
-                    work?.working_hours ? Math.floor(work.working_hours) : 0
-                  }
-                  changeEvent={(e) => setWorkedHours(e.target.value)}
-                  array={Object.keys([...Array(24)])}
-                />
-                時間
-                <SelectBox
-                  defaultValue={
-                    work?.working_hours
-                      ? Math.round(
-                          (Number(work.working_hours.toFixed(2)) -
-                            Math.floor(work.working_hours)) *
-                            60
-                        )
-                      : 0
-                  }
-                  changeEvent={(e) => setWorkedMinutes(e.target.value)}
-                  array={Object.keys([...Array(60)])}
-                />
-                分
-              </div>
-            )}
-            <div>
-              <label>給料: </label>
-              {company?.wage_amount ? (
-                <span>
-                  {Math.round(company.wage_amount * workingHours * 100) / 100}
-                </span>
-              ) : (
-                <input
-                  className="m-1 w-16"
-                  type="number"
-                  defaultValue={work?.pay_amount ? work?.pay_amount : ""}
-                  onChange={(e) => setPayAmount(Number(e.target.value))}
-                />
-              )}
-              {company?.currency_type}
-              <p className="text-rose-600">
-                {(payAmount > 999999 || payAmount < 0) &&
-                  `金額がマイナス・または大きすぎます。`}
-              </p>
-            </div>
-            <div>
-              <label>メモ: </label>
-              <input
-                className="m-1"
-                defaultValue={memo ? memo : ""}
-                onChange={(e) => setMemo(e.target.value)}
-                placeholder="任意入力"
-              />
-              <p className="text-rose-600">
-                {memo &&
-                  memo.length > 50 &&
-                  `メモを50文字以内に収めてください。`}
-              </p>
-            </div>
-            <input className="block m-1 cursor-pointer" type="submit" />
-          </form>
-        </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>勤務先: </label>
+        {company?.name}
       </div>
-    </div>
+      <div className="space-x-1">
+        <RadioButton
+          type="small"
+          value="true"
+          text="シフト時刻を入力"
+          onChange={changeShiftMode}
+          checked={shiftMode}
+        />
+        <RadioButton
+          type="small"
+          value=""
+          text="合計勤務時間のみ入力"
+          onChange={changeShiftMode}
+          checked={!shiftMode}
+        />
+      </div>
+      {shiftMode ? (
+        <>
+          <div>
+            <label>開始時刻: </label>
+            <input
+              type="datetime-local"
+              className="block"
+              min={minTime}
+              max={maxTime}
+              defaultValue={
+                work?.starting_time
+                  ? String(work.starting_time).substring(0, 16)
+                  : minTime
+              }
+              onChange={(e) => setStartingTime(new Date(e.target.value))}
+            />
+          </div>
+          <div>
+            <label>終了時刻: </label>
+            <input
+              type="datetime-local"
+              className="block"
+              min={minTime}
+              max={nextDayMaxTime}
+              defaultValue={
+                work?.ending_time
+                  ? String(work.ending_time).substring(0, 16)
+                  : minTime
+              }
+              onChange={(e) => setEndingTime(new Date(e.target.value))}
+            />
+          </div>
+          <div>
+            <label>休憩: </label>
+            <SelectBox
+              defaultValue={defaultBreakHours}
+              changeEvent={(e) => setBreakHours(Number(e.target.value))}
+              array={["0", "1", "2", "3", "4", "5"]}
+            />
+            時間
+            <SelectBox
+              defaultValue={defaultBreakMinutes}
+              changeEvent={(e) => setBreakMinutes(Number(e.target.value))}
+              array={Object.keys([...Array(60)])}
+            />
+            分
+          </div>
+          <div>
+            <p>
+              合計時間:{" "}
+              {`${Math.floor(startAndEndTimeDifference / 60)}時間${
+                startAndEndTimeDifference % 60
+              }分`}
+            </p>
+            <p className="text-rose-600">
+              {Math.sign(startAndEndTimeDifference) === -1 &&
+                `合計時間が正しくありません。`}
+            </p>
+          </div>
+        </>
+      ) : (
+        <div>
+          <label>合計時間: </label>
+          <SelectBox
+            defaultValue={
+              work?.working_hours ? Math.floor(work.working_hours) : 0
+            }
+            changeEvent={(e) => setWorkedHours(e.target.value)}
+            array={Object.keys([...Array(24)])}
+          />
+          時間
+          <SelectBox
+            defaultValue={
+              work?.working_hours
+                ? Math.round(
+                    (Number(work.working_hours.toFixed(2)) -
+                      Math.floor(work.working_hours)) *
+                      60
+                  )
+                : 0
+            }
+            changeEvent={(e) => setWorkedMinutes(e.target.value)}
+            array={Object.keys([...Array(60)])}
+          />
+          分
+        </div>
+      )}
+      <div>
+        <label>給料: </label>
+        {company?.wage_amount ? (
+          <span>
+            {Math.round(company.wage_amount * workingHours * 100) / 100}
+          </span>
+        ) : (
+          <input
+            className="m-1 w-16"
+            type="number"
+            defaultValue={work?.pay_amount ? work?.pay_amount : ""}
+            onChange={(e) => setPayAmount(Number(e.target.value))}
+          />
+        )}
+        {company?.currency_type}
+        <p className="text-rose-600">
+          {(payAmount > 999999 || payAmount < 0) &&
+            `金額がマイナス・または大きすぎます。`}
+        </p>
+      </div>
+      <div>
+        <label>メモ: </label>
+        <input
+          className="m-1"
+          defaultValue={memo ? memo : ""}
+          onChange={(e) => setMemo(e.target.value)}
+          placeholder="任意入力"
+        />
+        <p className="text-rose-600">
+          {memo && memo.length > 50 && `メモを50文字以内に収めてください。`}
+        </p>
+      </div>
+      <input className="block m-1 cursor-pointer" type="submit" />
+    </form>
   );
 }
 

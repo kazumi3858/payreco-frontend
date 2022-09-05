@@ -3,6 +3,7 @@ import CompanyForm from "components/organisms/CompanyForm";
 import CompanyDetails from "./CompanyDetails";
 import Button from "components/atoms/Button";
 import { useGetCompanies } from "api/companies/companies";
+import Modal from "./Modal";
 
 function CompapyList() {
   const [companyForm, setCompanyForm] = useState<boolean>(false);
@@ -26,7 +27,10 @@ function CompapyList() {
             </ul>
           )}
         </div>
-        {companyForm && <CompanyForm setCompanyForm={setCompanyForm} />}
+
+        <Modal modal={companyForm} setModal={setCompanyForm}>
+          <CompanyForm setCompanyForm={setCompanyForm} />
+        </Modal>
       </div>
     </div>
   );
