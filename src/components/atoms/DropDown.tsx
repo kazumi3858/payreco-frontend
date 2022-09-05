@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 type Props = {
   children: JSX.Element;
 };
+
 function Dropdown({ children }: Props) {
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -15,6 +16,7 @@ function Dropdown({ children }: Props) {
       onClick={() => setOpenMenu(!openMenu)}
       onBlur={() => setOpenMenu(false)}
       ref={menuRef}
+      tabIndex={0}
     >
       <div>メニュー</div>
       <ul
