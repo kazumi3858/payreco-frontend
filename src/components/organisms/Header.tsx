@@ -1,17 +1,25 @@
+import { useDeleteUsersUserId } from "api/default/default";
+import { auth } from "auth/firebase";
 import Dropdown from "components/atoms/DropDown";
 import router from "next/router";
 
 function Header() {
-  const handleClick = () => router.push("/account");
+  const logout = useDeleteUsersUserId();
+  const handleClickLogout = () => {
+    logout.mutate();
+    auth.signOut();
+    router.push("/");
+  };
+  const handleClickQuestion = () => router.push("/account");
 
   return (
     <header className="h-14 bg-stone-200">
       <Dropdown>
         <>
-          <li className="cursor-pointer" onClick={handleClick}>
-            アカウント
+          <li className="cursor-pointer" onClick={handleClickLogout}>
+            ログアウト
           </li>
-          <li className="cursor-pointer" onClick={handleClick}>
+          <li className="cursor-pointer" onClick={handleClickQuestion}>
             よくある質問
           </li>
         </>
