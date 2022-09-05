@@ -86,6 +86,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
         <input
           defaultValue={defaultName}
           onChange={(e) => setName(e.target.value)}
+          onFocus={(e) => e.target.select()}
         />
         <p className="text-rose-600">
           {name.length > 30 && `名前は1～30文字にしてください。`}

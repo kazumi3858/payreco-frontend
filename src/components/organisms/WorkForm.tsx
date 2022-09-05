@@ -247,6 +247,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
           placeholder="任意入力"
+          onFocus={(e) => e.target.select()}
         />
         <p className="text-rose-600">
           {memo && memo.length > 50 && `メモを50文字以内に収めてください。`}
