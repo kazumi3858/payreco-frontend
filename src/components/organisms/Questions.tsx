@@ -27,7 +27,7 @@ function Questions() {
       .then(() => {
         data && deleteServerSideData.mutate({ userId: data.id });
         console.log("An account has been deleted.");
-        router.push("/");
+        router.push("/login");
         alert(
           "退会処理が完了しました。ご利用いただきましてありがとうございました。"
         );

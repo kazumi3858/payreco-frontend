@@ -1,20 +1,30 @@
+import { useGetUsersUserId } from "api/users/users";
 import { auth, provider } from "auth/firebase";
 import { signInWithPopup } from "firebase/auth";
+import router from "next/router";
 import { useState } from "react";
 
 function Login() {
-  const [disable, setDisable] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { data } = useGetUsersUserId();
   const googleSignIn = () => {
-    setDisable(true);
-    signInWithPopup(auth, provider).catch((error) =>
-      console.log(error.message)
-    );
+    setLoading(true);
+    signInWithPopup(auth, provider)
+      .then(() => {
+        data
+        router.push("/");
+      })
+      .catch((error) => console.log(error.message));
   };
 
   return (
-    <button disabled={disable} onClick={googleSignIn}>
-      サインイン
-    </button>
+    <>
+      {loading ? (
+        <div>ログイン中</div>
+      ) : (
+        <button onClick={googleSignIn}>Gooleアカウントでログインして開始</button>
+      )}
+    </>
   );
 }
 
