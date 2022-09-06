@@ -107,7 +107,8 @@ function Calendar() {
                       "text-gray-400",
                     isEqual(day, selectedDay) && isToday(day) && "bg-red-500",
                     isEqual(day, selectedDay) && !isToday(day) && "bg-gray-900",
-                    !isEqual(day, selectedDay) && "hover:bg-gray-200",
+                    !isEqual(day, selectedDay) &&
+                      "hover:bg-gray-200 cursor-pointer",
                     (isEqual(day, selectedDay) || isToday(day)) &&
                       "font-semibold",
                     "lg:h-20 rounded-md m-1 p-1 text-center"

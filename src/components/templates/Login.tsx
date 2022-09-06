@@ -23,13 +23,23 @@ function Login() {
 
   return (
     <>
-      {loading ? (
-        <div>ログイン中</div>
-      ) : (
-        <button onClick={googleSignIn}>
-          Gooleアカウントでログインして始める
-        </button>
-      )}
+      <div className="bg-gradient-to-r from-stone-100 via-stone-100 to-stone-100 h-96">
+        <p>ペイレコ</p>
+        <p>外貨は日本円で計算</p>
+        <p>シフト管理・給料計算ツール</p>
+      </div>
+      <div className="flex justify-center">
+        {loading ? (
+          <div>ログイン中</div>
+        ) : (
+          <button
+            className="h-20 px-10 my-10 bg-stone-200 rounded-full"
+            onClick={googleSignIn}
+          >
+            Googleアカウントでログインして始める
+          </button>
+        )}
+      </div>
     </>
   );
 }
