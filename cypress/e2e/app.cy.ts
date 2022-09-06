@@ -3,21 +3,17 @@
 // If you're using ESLint on your project, we recommend installing the ESLint Cypress plugin instead:
 // https://github.com/cypress-io/eslint-plugin-cypress
 
-describe("Navigation", () => {
+describe("Home", () => {
+  beforeEach(() => {
+    cy.login();
+  });
+
   it("should navigate to the about page", () => {
-    // Start from the index page
-    cy.visit("http://localhost:3001/");
+    cy.visit("/");
+    cy.contains("日の予定");
+  });
 
-    // Find a link with an href attribute containing "about" and click it
-    // cy.get('a[href*="about"]').click();
-
-    // The new url should include "/about"
-    // cy.url().should("include", "/about");
-
-    // The new page should contain an h1 with "About page"
-    cy.get("footer").contains("利用規約");
+  afterEach(() => {
+    cy.logout();
   });
 });
-
-// Prevent TypeScript from reading file as legacy script
-export {};
