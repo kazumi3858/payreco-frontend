@@ -1,7 +1,7 @@
-import { auth, provider } from "auth/firebase";
-import axios from "axios";
-import { signInWithPopup } from "firebase/auth";
 import router from "next/router";
+import axios from "axios";
+import { auth, provider } from "auth/firebase";
+import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 
 function Login() {
@@ -11,11 +11,10 @@ function Login() {
     setLoading(true);
     await signInWithPopup(auth, provider)
       .then((result) => {
-        result.user.getIdToken(true).then((idToken) => {
-          axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/user`, null, {
+        result.user.getIdToken(true).then(async (idToken) => {
+          await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/user`, {
             headers: { Authorization: `Bearer ${idToken}` },
           });
-          console.log(idToken);
           router.push("/");
         });
       })
@@ -28,7 +27,7 @@ function Login() {
         <div>ログイン中</div>
       ) : (
         <button onClick={googleSignIn}>
-          Gooleアカウントでログインして開始
+          Gooleアカウントでログインして始める
         </button>
       )}
     </>
