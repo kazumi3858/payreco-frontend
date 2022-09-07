@@ -6,7 +6,6 @@ import { Company } from "api/model";
 import { useQueryClient } from "@tanstack/react-query";
 import { SetStateAction, useState } from "react";
 import { customMutationResult } from "api/custom-mutation-result";
-import Button from "components/atoms/Button";
 import RadioButton from "components/atoms/RadioButton";
 import SelectBox from "components/atoms/SelectBox";
 
@@ -88,9 +87,9 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           onChange={(e) => setName(e.target.value)}
           onFocus={(e) => e.target.select()}
         />
-        <p className="text-rose-600">
-          {name.length > 30 && `名前は1～30文字にしてください。`}
-        </p>
+        {name.length > 30 && (
+          <p className="text-rose-600">名前は1～30文字にしてください。</p>
+        )}
       </div>
       <div className="space-x-1">
         <RadioButton
@@ -117,11 +116,11 @@ function CompanyForm({ setCompanyForm, company }: Props) {
             defaultValue={defaultWageAmount ? defaultWageAmount : ""}
             onChange={(e) => setWageAmount(Number(e.target.value))}
           />
-          <p className="text-rose-600">
-            {wageAmount != null &&
-              (wageAmount > 99999 || wageAmount < 0) &&
-              `時給額が不正な値・または大きすぎます。`}
-          </p>
+          {wageAmount != null && (wageAmount > 99999 || wageAmount < 0) && (
+            <p className="text-rose-600">
+              時給額が不正な値・または大きすぎます。
+            </p>
+          )}
         </div>
       )}
       <label>通貨: </label>

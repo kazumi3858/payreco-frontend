@@ -4,16 +4,14 @@
 // https://github.com/cypress-io/eslint-plugin-cypress
 
 describe("Home", () => {
-  // beforeEach(() => {
-  //   cy.login();
-  // });
-
-  // it("should navigate to the about page", () => {
-  //   cy.visit("/");
-  //   cy.contains("日の予定");
-  // });
-
-  // afterEach(() => {
-  //   cy.logout();
-  // });
+  beforeEach(() => {
+    cy.login();
+  });
+  it("should navigate to the about page", () => {
+    cy.visit("/");
+    cy.contains("日の予定");
+  });
+  afterEach(() => {
+    cy.logout();
+  });
 });

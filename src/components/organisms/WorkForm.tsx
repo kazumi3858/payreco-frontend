@@ -170,7 +170,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <SelectBox
               defaultValue={defaultBreakHours}
               changeEvent={(e) => setBreakHours(Number(e.target.value))}
-              array={["0", "1", "2", "3", "4", "5"]}
+              array={["0", "1", "2", "3", "4", "5", "6", "7", "8"]}
             />
             時間
             <SelectBox
@@ -187,10 +187,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
                 startAndEndTimeDifference % 60
               }分`}
             </p>
-            <p className="text-rose-600">
-              {Math.sign(startAndEndTimeDifference) === -1 &&
-                `合計時間が正しくありません。`}
-            </p>
+            {Math.sign(startAndEndTimeDifference) === -1 && (
+              <p className="text-rose-600">合計時間が正しくありません。</p>
+            )}
           </div>
         </>
       ) : (
@@ -235,10 +234,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           />
         )}
         {company?.currency_type}
-        <p className="text-rose-600">
-          {(payAmount > 999999 || payAmount < 0) &&
-            `金額がマイナス・または大きすぎます。`}
-        </p>
+        {(payAmount > 999999 || payAmount < 0) && (
+          <p className="text-rose-600">金額がマイナス・または大きすぎます。</p>
+        )}
       </div>
       <div>
         <label>メモ: </label>
@@ -249,9 +247,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           placeholder="任意入力"
           onFocus={(e) => e.target.select()}
         />
-        <p className="text-rose-600">
-          {memo && memo.length > 50 && `メモを50文字以内に収めてください。`}
-        </p>
+        {memo && memo.length > 50 && (
+          <p className="text-rose-600">メモを50文字以内に収めてください。</p>
+        )}
       </div>
       <input className="block m-1 cursor-pointer" type="submit" />
     </form>
