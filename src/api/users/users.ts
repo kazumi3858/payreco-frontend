@@ -5,18 +5,16 @@
  * API for payreco app
  * OpenAPI spec version: 1.0
  */
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import type {
   UseQueryOptions,
-  UseMutationOptions,
   QueryFunction,
-  MutationFunction,
   UseQueryResult,
   QueryKey,
 } from "@tanstack/react-query";
 import type { User } from ".././model";
 import { customInstance } from ".././custom-instance";
-import type { ErrorType, BodyType } from ".././custom-instance";
+import type { ErrorType } from ".././custom-instance";
 
 // eslint-disable-next-line
 type SecondParameter<T extends (...args: any) => any> = T extends (
@@ -31,19 +29,13 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
  * @summary Get a user
  */
 export const getUsersUserId = (
-  userId: string,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<User>(
-    { url: `/users/${userId}`, method: "get", signal },
-    options
-  );
+  return customInstance<User>({ url: `/user`, method: "get", signal }, options);
 };
 
-export const getGetUsersUserIdQueryKey = (userId: string) => [
-  `/users/${userId}`,
-];
+export const getGetUsersUserIdQueryKey = () => [`/user`];
 
 export type GetUsersUserIdQueryResult = NonNullable<
   Awaited<ReturnType<typeof getUsersUserId>>
@@ -53,86 +45,32 @@ export type GetUsersUserIdQueryError = ErrorType<unknown>;
 export const useGetUsersUserId = <
   TData = Awaited<ReturnType<typeof getUsersUserId>>,
   TError = ErrorType<unknown>
->(
-  userId: string,
-  options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getUsersUserId>>,
-      TError,
-      TData
-    >;
-    request?: SecondParameter<typeof customInstance>;
-  }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getUsersUserId>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customInstance>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetUsersUserIdQueryKey(userId);
+  const queryKey = queryOptions?.queryKey ?? getGetUsersUserIdQueryKey();
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getUsersUserId>>> = ({
     signal,
-  }) => getUsersUserId(userId, requestOptions, signal);
+  }) => getUsersUserId(requestOptions, signal);
 
   const query = useQuery<
     Awaited<ReturnType<typeof getUsersUserId>>,
     TError,
     TData
   >(queryKey, queryFn, {
-    enabled: !!userId,
+    staleTime: Infinity,
     ...queryOptions,
   }) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 
   return query;
-};
-
-/**
- * Create a user
- * @summary Create a user
- */
-export const postUser = (
-  postUserBody: BodyType<User | User[]> | User[],
-  options?: SecondParameter<typeof customInstance>
-) => {
-  return customInstance<void>(
-    { url: `/users`, method: "post", data: postUserBody },
-    options
-  );
-};
-
-export type PostUserMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postUser>>
->;
-export type PostUserMutationBody = BodyType<User | User[]>;
-export type PostUserMutationError = ErrorType<unknown>;
-
-export const usePostUser = <
-  TError = ErrorType<unknown>,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postUser>>,
-    TError,
-    { data: BodyType<User | User[]> },
-    TContext
-  >;
-  request?: SecondParameter<typeof customInstance>;
-}) => {
-  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof postUser>>,
-    { data: BodyType<User | User[]> }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return postUser(data, requestOptions);
-  };
-
-  return useMutation<
-    Awaited<ReturnType<typeof postUser>>,
-    TError,
-    { data: BodyType<User | User[]> },
-    TContext
-  >(mutationFn, mutationOptions);
 };

@@ -6,6 +6,7 @@ import WorkForm from "components/organisms/WorkForm";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useState } from "react";
+import Modal from "./Modal";
 import WorkDetails from "./WorkDetails";
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
 };
 
 function WorkList({ selectedDay, selectedDayWorks }: Props) {
-  const { data } = useGetCompanies();
+  const { data, isLoading } = useGetCompanies();
   const [workForm, setWorkForm] = useState<boolean>(false);
   const [companyForm, setCompanyForm] = useState<boolean>(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
@@ -27,51 +28,63 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         </time>
         の予定
       </span>
-      <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
-        {selectedDayWorks && selectedDayWorks.length > 0 ? (
-          selectedDayWorks.map((work) => (
-            <WorkDetails
-              selectedDay={selectedDay}
-              work={work}
-              key={work.id}
-              company={data?.find((v) => v.id === work.company_id)}
-            />
-          ))
-        ) : (
-          <p>予定はありません。</p>
-        )}
-      </ol>
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
+          {selectedDayWorks && selectedDayWorks.length > 0 ? (
+            selectedDayWorks.map((work) => (
+              <WorkDetails
+                selectedDay={selectedDay}
+                work={work}
+                key={work.id}
+                company={data?.find((v) => v.id === work.company_id)}
+              />
+            ))
+          ) : (
+            <p>予定はありません。</p>
+          )}
+        </ol>
+      )}
       <p className="pt-10 pb-3 text-lg">勤務先を選んで予定を追加</p>
-      <div className="mb-10">
-        {data && data.length > 0 ? (
-          data.map((company) => (
-            <Button
-              key={company.id}
-              text={company.name}
-              onClick={() => {
-                setWorkForm(true);
-                setSelectedCompany(company);
-              }}
-            />
-          ))
-        ) : (
-          <p>
-            勤務先の登録がありません。勤務先を登録をすると予定を追加できるようになります。
-          </p>
-        )}
-        <Button
-          text="＋勤務先を追加する"
-          onClick={() => setCompanyForm(true)}
-        />
-      </div>
-      {workForm && (
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <div className="mb-10">
+          {data && data.length > 0 ? (
+            data.map((company) => (
+              <Button
+                key={company.id}
+                text={company.name}
+                onClick={() => {
+                  setWorkForm(true);
+                  setSelectedCompany(company);
+                }}
+              />
+            ))
+          ) : (
+            <p>
+              勤務先の登録がありません。勤務先を登録をすると予定を追加できるようになります。
+            </p>
+          )}
+          <Button
+            text="＋勤務先を追加する"
+            onClick={() => setCompanyForm(true)}
+          />
+        </div>
+      )}
+
+      <Modal modal={workForm} setModal={setWorkForm}>
         <WorkForm
           selectedDay={selectedDay}
           company={selectedCompany}
           setWorkForm={setWorkForm}
         />
-      )}
-      {companyForm && <CompanyForm setCompanyForm={setCompanyForm} />}
+      </Modal>
+
+      <Modal modal={companyForm} setModal={setCompanyForm}>
+        <CompanyForm setCompanyForm={setCompanyForm} />
+      </Modal>
     </section>
   );
 }

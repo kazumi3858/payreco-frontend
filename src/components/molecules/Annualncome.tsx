@@ -2,9 +2,10 @@ import Heading from "components/atoms/Heading";
 
 type Props = {
   incomeList?: { [key: string]: [[Date, number]] };
+  loading: boolean;
 };
 
-function AnnualIncome({ incomeList }: Props) {
+function AnnualIncome({ incomeList, loading }: Props) {
   const year = new Date().getFullYear();
   const months = Array(12)
     .fill(0)
@@ -29,14 +30,20 @@ function AnnualIncome({ incomeList }: Props) {
   return (
     <div>
       <Heading text="年間の給料" />
-      <ul>
-        {incomeListByMonth.map((income, idx) => (
-          <li key={idx} className="mb-2">
-            {idx + 1}月: {income.toLocaleString()}円
-          </li>
-        ))}
-      </ul>
-      <p className="mt-10">合計: {annualTotalIncome.toLocaleString()}円</p>
+      {loading ? (
+        <p>Laoding</p>
+      ) : (
+        <>
+          <ul>
+            {incomeListByMonth.map((income, idx) => (
+              <li key={idx} className="mb-2">
+                {idx + 1}月: {income.toLocaleString()}円
+              </li>
+            ))}
+          </ul>
+          <p className="mt-10">合計: {annualTotalIncome.toLocaleString()}円</p>
+        </>
+      )}
     </div>
   );
 }

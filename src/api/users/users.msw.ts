@@ -18,14 +18,11 @@ export const getGetUsersUserIdMock = () => ({
 });
 
 export const getUsersMSW = () => [
-  rest.get("*/users/:userId", (_req, res, ctx) => {
+  rest.get("*/user", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
       ctx.json(getGetUsersUserIdMock())
     );
-  }),
-  rest.post("*/users", (_req, res, ctx) => {
-    return res(ctx.delay(1000), ctx.status(200, "Mocked status"));
   }),
 ];

@@ -38,7 +38,7 @@ export const getExchangeRates = (
   );
 };
 
-export const getGetExchangeRatesQueryKey = () => [`/exchange-rates`];
+export const getGetExchangeRatesQueryKey = () => [`/exchange_rates`];
 
 export type GetExchangeRatesQueryResult = NonNullable<
   Awaited<ReturnType<typeof getExchangeRates>>
@@ -68,9 +68,10 @@ export const useGetExchangeRates = <
     Awaited<ReturnType<typeof getExchangeRates>>,
     TError,
     TData
-  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
+  >(queryKey, queryFn, {
+    staleTime: 3600000,
+    ...queryOptions,
+  }) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 

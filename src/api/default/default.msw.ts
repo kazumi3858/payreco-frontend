@@ -15,10 +15,10 @@ export const getDeleteWorksWorkIdMock = () => faker.random.word();
 export const getDeleteCompaniesCompanyIdMock = () => faker.random.word();
 
 export const getDefaultMSW = () => [
-  rest.patch("*/users/:userId", (_req, res, ctx) => {
+  rest.patch("*/user", (_req, res, ctx) => {
     return res(ctx.delay(1000), ctx.status(200, "Mocked status"));
   }),
-  rest.delete("*/users/:userId", (_req, res, ctx) => {
+  rest.delete("*/user", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
@@ -50,5 +50,8 @@ export const getDefaultMSW = () => [
       ctx.status(200, "Mocked status"),
       ctx.json(getDeleteCompaniesCompanyIdMock())
     );
+  }),
+  rest.delete("*/authentications/:userId", (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, "Mocked status"));
   }),
 ];

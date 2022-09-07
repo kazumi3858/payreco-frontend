@@ -1,38 +1,42 @@
 import Header from "components/organisms/Header";
 import Footer from "components/organisms/Footor";
 import Menu from "components/organisms/Menu";
-import Calendar from "components/organisms/Calendar";
-import CompanyList from "components/organisms/CompanyList";
-import IncomeList from "components/organisms/IncomeList";
-import { useGetWorks } from "api/works/works";
-import { useGetCompanies } from "api/companies/companies";
-import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
-import { useGetUsersUserId } from "api/users/users";
+import { auth } from "auth/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import router from "next/router";
 
 type Props = {
-  content: string;
+  children: JSX.Element;
 };
 
-function Main({ content }: Props) {
-  const { data: works } = useGetWorks();
-  const { data: companies } = useGetCompanies();
-  const { data: exchangeRates } = useGetExchangeRates();
+function Main({ children }: Props) {
+  const [user, loading] = useAuthState(auth);
+
+  const redirect = () => {
+    router.push("/login");
+  };
+
+  if (loading)
+    return (
+      <div className="h-screen w-screen flex justify-center items-center">
+        <div className="animate-spin h-16 w-16 bg-stone-200 rounded-xl"></div>
+      </div>
+    );
+
   return (
     <>
-      <div className="min-h-screen">
-        <Header />
-        {content === "calendar" && <Calendar works={works} />}
-        {content === "company" && <CompanyList companies={companies} />}
-        {content === "income" && (
-          <IncomeList
-            works={works}
-            companies={companies}
-            exchangeRates={exchangeRates}
-          />
-        )}
-      </div>
-      <Menu />
-      <Footer />
+      {user ? (
+        <>
+          <div className="min-h-screen">
+            <Header />
+            <div className="z-0">{children}</div>
+          </div>
+          <Menu />
+          <Footer />
+        </>
+      ) : (
+        redirect()
+      )}
     </>
   );
 }

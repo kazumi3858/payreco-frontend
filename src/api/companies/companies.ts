@@ -68,9 +68,10 @@ export const useGetCompanies = <
     Awaited<ReturnType<typeof getCompanies>>,
     TError,
     TData
-  >(queryKey, queryFn, queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
+  >(queryKey, queryFn, {
+    staleTime: Infinity,
+    ...queryOptions,
+  }) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 

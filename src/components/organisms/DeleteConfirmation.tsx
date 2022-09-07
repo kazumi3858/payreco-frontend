@@ -9,17 +9,17 @@ import {
 type Props = {
   id: string;
   queryKey: string;
-  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setDeleteConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function DeleteModal({ id, queryKey, setDeleteModal }: Props) {
+function DeleteConfirmation({ id, queryKey, setDeleteConfirmation }: Props) {
   const queryClient = useQueryClient();
   const deleteWork = useDeleteWorksWorkId();
   const deleteCompany = useDeleteCompaniesCompanyId();
   const mutationResult = customMutationResult(
     queryClient,
     queryKey,
-    setDeleteModal
+    setDeleteConfirmation
   );
 
   const handleDelete = () => {
@@ -29,16 +29,12 @@ function DeleteModal({ id, queryKey, setDeleteModal }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50">
-      <div className="flex h-screen justify-center items-center">
-        <div className="bg-stone-100 p-12 rounded-xl ">
-          <p>本当に削除しますか？</p>
-          <Button text="はい" onClick={handleDelete} />
-          <Button text="いいえ" onClick={() => setDeleteModal(false)} />
-        </div>
-      </div>
+    <div>
+      <p>本当に削除しますか？</p>
+      <Button text="はい" onClick={handleDelete} />
+      <Button text="いいえ" onClick={() => setDeleteConfirmation(false)} />
     </div>
   );
 }
 
-export default DeleteModal;
+export default DeleteConfirmation;

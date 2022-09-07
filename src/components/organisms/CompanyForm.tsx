@@ -1,14 +1,13 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { customMutationResult } from "api/custom-mutation-result";
 import {
   usePatchCompaniesCompanyId,
   usePostCompanies,
 } from "api/default/default";
 import { Company } from "api/model";
-import Button from "components/atoms/Button";
+import { useQueryClient } from "@tanstack/react-query";
+import { SetStateAction, useState } from "react";
+import { customMutationResult } from "api/custom-mutation-result";
 import RadioButton from "components/atoms/RadioButton";
 import SelectBox from "components/atoms/SelectBox";
-import { SetStateAction, useState } from "react";
 
 type Props = {
   setCompanyForm: React.Dispatch<SetStateAction<boolean>>;
@@ -80,64 +79,58 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50">
-      <div className="flex h-screen justify-center items-center">
-        <div className="bg-stone-100 p-12 rounded-xl ">
-          <Button text="閉じる" onClick={() => setCompanyForm(false)} />
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>名前: </label>
-              <input
-                defaultValue={defaultName}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <p className="text-rose-600">
-                {name.length > 30 && `名前は1～30文字にしてください。`}
-              </p>
-            </div>
-            <div className="space-x-1">
-              <RadioButton
-                type="small"
-                value="true"
-                text="時給制"
-                onChange={changeWageSystem}
-                checked={wageSystem}
-              />
-              <RadioButton
-                type="small"
-                value=""
-                text="日給制"
-                onChange={changeWageSystem}
-                checked={!wageSystem}
-              />
-            </div>
-            {wageSystem && (
-              <div>
-                <label>時給額: </label>
-                <input
-                  type="number"
-                  step="0.01"
-                  defaultValue={defaultWageAmount ? defaultWageAmount : ""}
-                  onChange={(e) => setWageAmount(Number(e.target.value))}
-                />
-                <p className="text-rose-600">
-                  {wageAmount != null &&
-                    (wageAmount > 99999 || wageAmount < 0) &&
-                    `時給額が不正な値・または大きすぎます。`}
-                </p>
-              </div>
-            )}
-            <label>通貨: </label>
-            <SelectBox
-              defaultValue={defaultCurrencyType}
-              changeEvent={(e) => setCurrencyType(e.target.value)}
-              array={currencyList}
-            />
-            <input className="block m-1 cursor-pointer" type="submit" />
-          </form>
-        </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>名前: </label>
+        <input
+          defaultValue={defaultName}
+          onChange={(e) => setName(e.target.value)}
+          onFocus={(e) => e.target.select()}
+        />
+        {name.length > 30 && (
+          <p className="text-rose-600">名前は1～30文字にしてください。</p>
+        )}
       </div>
-    </div>
+      <div className="space-x-1">
+        <RadioButton
+          type="small"
+          value="true"
+          text="時給制"
+          onChange={changeWageSystem}
+          checked={wageSystem}
+        />
+        <RadioButton
+          type="small"
+          value=""
+          text="日給制"
+          onChange={changeWageSystem}
+          checked={!wageSystem}
+        />
+      </div>
+      {wageSystem && (
+        <div>
+          <label>時給額: </label>
+          <input
+            type="number"
+            step="0.01"
+            defaultValue={defaultWageAmount ? defaultWageAmount : ""}
+            onChange={(e) => setWageAmount(Number(e.target.value))}
+          />
+          {wageAmount != null && (wageAmount > 99999 || wageAmount < 0) && (
+            <p className="text-rose-600">
+              時給額が不正な値・または大きすぎます。
+            </p>
+          )}
+        </div>
+      )}
+      <label>通貨: </label>
+      <SelectBox
+        defaultValue={defaultCurrencyType}
+        changeEvent={(e) => setCurrencyType(e.target.value)}
+        array={currencyList}
+      />
+      <input className="block m-1 cursor-pointer" type="submit" />
+    </form>
   );
 }
 

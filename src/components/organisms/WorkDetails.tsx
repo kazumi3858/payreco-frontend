@@ -3,7 +3,8 @@ import { Company, Work } from "api/model";
 import { useState } from "react";
 import WorkForm from "components/organisms/WorkForm";
 import Button from "components/atoms/Button";
-import DeleteModal from "./DeleteModel";
+import DeleteConfirmation from "./DeleteConfirmation";
+import Modal from "./Modal";
 
 type Props = {
   work: Work;
@@ -15,7 +16,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);
   const [workForm, setWorkForm] = useState<boolean>(false);
-  const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState<boolean>(false);
 
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
@@ -43,22 +44,24 @@ function WorkDetails({ work, selectedDay, company }: Props) {
 
       <div className="flex">
         <Button text="編集" onClick={() => setWorkForm(true)} />
-        <Button text="削除" onClick={() => setDeleteModal(true)} />
-        {workForm && (
+        <Button text="削除" onClick={() => setDeleteConfirmation(true)} />
+
+        <Modal modal={workForm} setModal={setWorkForm}>
           <WorkForm
             selectedDay={selectedDay}
             company={company}
             setWorkForm={setWorkForm}
             work={work}
           />
-        )}
-        {deleteModal && (
-          <DeleteModal
-            setDeleteModal={setDeleteModal}
+        </Modal>
+
+        <Modal modal={deleteConfirmation} setModal={setDeleteConfirmation}>
+          <DeleteConfirmation
+            setDeleteConfirmation={setDeleteConfirmation}
             id={work.id}
             queryKey={`/works`}
           />
-        )}
+        </Modal>
       </div>
     </li>
   );

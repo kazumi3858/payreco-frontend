@@ -63,7 +63,7 @@ export const useGetWorks = <
   const query = useQuery<Awaited<ReturnType<typeof getWorks>>, TError, TData>(
     queryKey,
     queryFn,
-    queryOptions
+    { staleTime: Infinity, ...queryOptions }
   ) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;

@@ -12,6 +12,11 @@ module.exports = {
           path: "./src/api/custom-instance.ts",
           name: "customInstance",
         },
+        query: {
+          options: {
+            staleTime: Infinity,
+          },
+        },
       },
     },
     input: {
