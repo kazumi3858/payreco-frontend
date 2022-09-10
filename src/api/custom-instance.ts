@@ -3,6 +3,10 @@ import { auth } from "auth/firebase";
 
 export const AXIOS_INSTANCE = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+    "X-Requested-With": "XMLHttpRequest",
+  },
 });
 
 AXIOS_INSTANCE.interceptors.request.use(async function (config) {
