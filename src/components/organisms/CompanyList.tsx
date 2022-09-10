@@ -21,9 +21,12 @@ function CompapyList() {
             <p>Loading</p>
           ) : (
             <ul>
-              {data?.map((company) => (
-                <CompanyDetails key={company.id} company={company} />
-              ))}
+              {data?.map(
+                (company) =>
+                  company.deleted_at === null && (
+                    <CompanyDetails key={company.id} company={company} />
+                  )
+              )}
             </ul>
           )}
           <Button text="新規登録" onClick={() => setCompanyForm(true)} />

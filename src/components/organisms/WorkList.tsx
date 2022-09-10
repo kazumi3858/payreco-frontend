@@ -52,16 +52,19 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
       ) : (
         <div className="mb-10">
           {data && data.length > 0 ? (
-            data.map((company) => (
-              <Button
-                key={company.id}
-                text={company.name}
-                onClick={() => {
-                  setWorkForm(true);
-                  setSelectedCompany(company);
-                }}
-              />
-            ))
+            data.map(
+              (company) =>
+                company.deleted_at === null && (
+                  <Button
+                    key={company.id}
+                    text={company.name}
+                    onClick={() => {
+                      setWorkForm(true);
+                      setSelectedCompany(company);
+                    }}
+                  />
+                )
+            )
           ) : (
             <p>
               勤務先の登録がありません。勤務先を登録をすると予定を追加できるようになります。
