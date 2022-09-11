@@ -2,6 +2,7 @@ import RadioButton from "components/atoms/RadioButton";
 import MonthlyIncome from "components/molecules/MonthlyIncome";
 import AnnualIncome from "components/molecules/Annualncome";
 import TargetAmountForm from "./TagertAmountForm";
+import Chart from "components/atoms/Chart";
 import { useState } from "react";
 import { useGetWorks } from "api/works/works";
 import { useGetCompanies } from "api/companies/companies";
@@ -74,6 +75,7 @@ function IncomeList() {
           <div className="md:pr-14">
             <div className={!thisMonthMode ? "hidden md:inline-block" : ""}>
               <MonthlyIncome income={thisMonthIncome} loading={isLoading} />
+              <Chart />
               {user && <TargetAmountForm user={user} />}
             </div>
           </div>

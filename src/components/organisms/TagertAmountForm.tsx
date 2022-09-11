@@ -38,7 +38,7 @@ function TargetAmountForm({ user }: Props) {
   };
 
   return (
-    <div>
+    <div className="pb-4">
       <form onSubmit={handleSubmit}>
         <label>
           毎月の目標金額:{" "}
