@@ -22,13 +22,15 @@ function TargetAmountForm({ user }: Props) {
     setUpdating
   );
 
+  const alertMessage = "目標金額が不正な値・または大きすぎます。";
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setUpdating(true);
 
     if (targetAmount > 9999999 || targetAmount <= 0) {
       setUpdating(false);
-      return alert("目標金額が不正な値・または大きすぎます。");
+      return alert(alertMessage);
     }
 
     mutation.mutate(
@@ -59,9 +61,7 @@ function TargetAmountForm({ user }: Props) {
       )}
 
       {targetAmount != null && (targetAmount > 9999999 || targetAmount < 0) && (
-        <p className="text-rose-600">
-          目標金額が不正な値・または大きすぎます。
-        </p>
+        <p className="text-rose-600">{alertMessage}</p>
       )}
     </div>
   );

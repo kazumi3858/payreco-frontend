@@ -1,44 +1,43 @@
 import RadioButton from "components/atoms/RadioButton";
 import MonthlyIncome from "components/molecules/MonthlyIncome";
 import AnnualIncome from "components/molecules/Annualncome";
-import TargetAmountForm from "./TagertAmountForm";
-import Chart from "components/atoms/Chart";
 import { useState } from "react";
 import { useGetWorks } from "api/works/works";
 import { useGetCompanies } from "api/companies/companies";
 import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
-import { useGetUsersUserId } from "api/users/users";
 
 function IncomeList() {
-  const { data: user } = useGetUsersUserId();
   const { data: works, isLoading } = useGetWorks();
   const { data: companies } = useGetCompanies();
   const { data: exchangeRates } = useGetExchangeRates();
 
-  const [thisMonthMode, setThisMonthMode] = useState<boolean>(true);
+  const [monthlyMode, setMonthlyMode] = useState<boolean>(true);
 
   const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setThisMonthMode(Boolean(e.target.value));
+    setMonthlyMode(Boolean(e.target.value));
   };
 
   const incomeListByMonth = works?.reduce((map, work) => {
-    const year_and_month = String(work.date).substring(0, 7).replace("-", "");
     const company = companies?.find(
       (company) => company.id === work.company_id
     );
 
-    const rateData = exchangeRates?.find(
-      (data) => String(data.year_and_month) === year_and_month
+    const yearAndMonthOfWork = String(work.date)
+      .substring(0, 7)
+      .replace("-", "");
+    const selectedMonthRateData = exchangeRates?.find(
+      (data) => String(data.year_and_month) === yearAndMonthOfWork
     );
-    const rateList = rateData
-      ? rateData.exchange_rate_list
+    const rate = selectedMonthRateData
+      ? selectedMonthRateData.exchange_rate_list
       : exchangeRates?.slice(-1)[0].exchange_rate_list;
-    const rate =
-      rateList &&
+    const companyCurrencyRate =
+      rate &&
       company?.currency_type &&
-      Reflect.get(rateList, company.currency_type);
-    const convertedPayToJPY = Math.floor(work.pay_amount / rate);
-    (map[year_and_month] = map[year_and_month] || []).push([
+      Reflect.get(rate, company.currency_type);
+
+    const convertedPayToJPY = Math.floor(work.pay_amount / companyCurrencyRate);
+    (map[yearAndMonthOfWork] = map[yearAndMonthOfWork] || []).push([
       work.date,
       convertedPayToJPY,
     ]);
@@ -60,28 +59,26 @@ function IncomeList() {
               value="true"
               text="今月の給料"
               onChange={changeMode}
-              checked={thisMonthMode}
+              checked={monthlyMode}
             />
             <RadioButton
               type="big"
               value=""
               text="年間の給料"
               onChange={changeMode}
-              checked={!thisMonthMode}
+              checked={!monthlyMode}
             />
           </div>
         </div>
-        <div className="mb-10 md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
+        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
-            <div className={!thisMonthMode ? "hidden md:inline-block" : ""}>
+            <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
               <MonthlyIncome income={thisMonthIncome} loading={isLoading} />
-              <Chart />
-              {user && <TargetAmountForm user={user} />}
             </div>
           </div>
           <div
             className={
-              thisMonthMode ? "hidden md:inline-block md:pl-14" : "md:pl-14"
+              monthlyMode ? "hidden md:inline-block md:pl-14" : "mb-8 md:pl-14"
             }
           >
             <AnnualIncome incomeList={incomeListByMonth} loading={isLoading} />
