@@ -8,6 +8,7 @@ import { SetStateAction, useState } from "react";
 import { customMutationResult } from "api/custom-mutation-result";
 import RadioButton from "components/atoms/RadioButton";
 import SelectBox from "components/atoms/SelectBox";
+import SubmitButton from "components/atoms/SubmitButton";
 
 type Props = {
   setCompanyForm: React.Dispatch<SetStateAction<boolean>>;
@@ -39,6 +40,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   const [name, setName] = useState<string>(defaultName);
   const [wageAmount, setWageAmount] = useState<number>(defaultWageAmount);
   const [currencyType, setCurrencyType] = useState<string>(defaultCurrencyType);
+  const [updating, setUpdating] = useState<boolean>(false);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
 
   const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWageSystem(Boolean(e.target.value));
@@ -69,6 +72,9 @@ function CompanyForm({ setCompanyForm, company }: Props) {
     if (wageSystem && (wageAmount > 99999 || wageAmount <= 0))
       validation.push("時給額が不正な値・または大きすぎます。");
     if (validation.length > 0) return alert(validation);
+
+    setDisableButton(true);
+    setUpdating(true);
 
     company?.id
       ? patchCompany.mutate(
@@ -115,6 +121,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
             step="0.01"
             defaultValue={defaultWageAmount ? defaultWageAmount : ""}
             onChange={(e) => setWageAmount(Number(e.target.value))}
+            onFocus={(e) => e.target.select()}
           />
           {wageAmount != null && (wageAmount > 99999 || wageAmount < 0) && (
             <p className="text-rose-600">
@@ -129,7 +136,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
         changeEvent={(e) => setCurrencyType(e.target.value)}
         array={currencyList}
       />
-      <input className="block m-1 cursor-pointer" type="submit" />
+      <SubmitButton updating={updating} disabled={disableButton} />
     </form>
   );
 }

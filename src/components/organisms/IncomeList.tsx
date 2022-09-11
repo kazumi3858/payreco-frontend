@@ -20,7 +20,7 @@ function IncomeList() {
     setThisMonthMode(Boolean(e.target.value));
   };
 
-  const payAmountGroupByMonth = works?.reduce((map, work) => {
+  const incomeListByMonth = works?.reduce((map, work) => {
     const year_and_month = String(work.date).substring(0, 7).replace("-", "");
     const company = companies?.find(
       (company) => company.id === work.company_id
@@ -36,10 +36,10 @@ function IncomeList() {
       rateList &&
       company?.currency_type &&
       Reflect.get(rateList, company.currency_type);
-    const payAmountWithJPY = Math.floor(work.pay_amount / rate);
+    const convertedPayToJPY = Math.floor(work.pay_amount / rate);
     (map[year_and_month] = map[year_and_month] || []).push([
       work.date,
-      payAmountWithJPY,
+      convertedPayToJPY,
     ]);
     return map;
   }, {} as { [key: string]: [[Date, number]] });
@@ -47,8 +47,7 @@ function IncomeList() {
   const thisMonth = Number(
     new Date().getFullYear() + ("0" + (new Date().getMonth() + 1)).slice(-2)
   );
-  const payAmountThisMonth =
-    payAmountGroupByMonth && payAmountGroupByMonth[thisMonth];
+  const thisMonthIncome = incomeListByMonth && incomeListByMonth[thisMonth];
 
   return (
     <div className="pt-5">
@@ -74,7 +73,7 @@ function IncomeList() {
         <div className="mb-10 md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
             <div className={!thisMonthMode ? "hidden md:inline-block" : ""}>
-              <MonthlyIncome income={payAmountThisMonth} loading={isLoading} />
+              <MonthlyIncome income={thisMonthIncome} loading={isLoading} />
               {user && <TargetAmountForm user={user} />}
             </div>
           </div>
@@ -83,10 +82,7 @@ function IncomeList() {
               thisMonthMode ? "hidden md:inline-block md:pl-14" : "md:pl-14"
             }
           >
-            <AnnualIncome
-              incomeList={payAmountGroupByMonth}
-              loading={isLoading}
-            />
+            <AnnualIncome incomeList={incomeListByMonth} loading={isLoading} />
           </div>
         </div>
       </div>
