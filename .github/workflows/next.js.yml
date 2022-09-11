@@ -25,7 +25,9 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           build: yarn build
+          start: yarn start
           wait-on: 'http://localhost:3001'
+          browser: chrome
         env:
           TEST_UID: ${{ secrets.TEST_UID }}
           CYPRESS_FIREBASE_API_KEY: ${{ secrets.CYPRESS_FIREBASE_API_KEY }}
