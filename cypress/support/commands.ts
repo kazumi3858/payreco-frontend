@@ -4,7 +4,7 @@ import "firebase/compat/database";
 import "firebase/compat/firestore";
 import { attachCustomCommands } from "cypress-firebase";
 
-const fbConfig = {
+export const fbConfig = {
   apiKey: Cypress.env("CYPRESS_FIREBASE_API_KEY"),
   authDomain: Cypress.env("CYPRESS_FIREBASE_AUTH_DOMAIN"),
   projectId: Cypress.env("CYPRESS_FIREBASE_PROJECT_ID"),
