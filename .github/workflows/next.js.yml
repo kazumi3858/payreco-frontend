@@ -22,7 +22,9 @@ jobs:
         with:
           group: 'E2E Tests'
           build: yarn build
-          start: yarn start
+          start: |
+            yarn start
+            echo "Test ${{env.CYPRESS_FIREBASE_API_KEY}}"
           wait-on: 'http://localhost:3001'
           record: true
     env:
