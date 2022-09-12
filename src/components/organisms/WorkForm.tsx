@@ -1,3 +1,5 @@
+import RadioButton from "components/atoms/RadioButton";
+import SubmitButton from "components/atoms/SubmitButton";
 import SelectBox from "components/atoms/SelectBox";
 import { useQueryClient } from "@tanstack/react-query";
 import { customMutationResult } from "api/custom-mutation-result";
@@ -5,7 +7,6 @@ import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
-import RadioButton from "components/atoms/RadioButton";
 
 type Props = {
   selectedDay: Date;
@@ -56,6 +57,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const [memo, setMemo] = useState<string | null>(defaultMemo);
   const [shiftMode, setShiftMode] = useState<boolean>(defaultShiftMode);
 
+  const [updating, setUpdating] = useState<boolean>(false);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
+
   const breakTime = breakHours * 60 + breakMinutes;
   const startAndEndTimeDifference =
     (Date.parse(String(endingTime ? endingTime : minTime)) -
@@ -105,6 +109,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
     if (memo && memo.length > 50)
       validation.push(`メモを50文字以内に収めてください。`);
     if (validation.length > 0) return alert(validation);
+
+    setDisableButton(true);
+    setUpdating(true);
 
     work?.id
       ? patchWork.mutate({ workId: work.id, data: formData }, mutationResult)
@@ -251,7 +258,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <p className="text-rose-600">メモを50文字以内に収めてください。</p>
         )}
       </div>
-      <input className="block m-1 cursor-pointer" type="submit" />
+      <SubmitButton updating={updating} disabled={disableButton} />
     </form>
   );
 }

@@ -1,4 +1,7 @@
+import { useGetUsersUserId } from "api/users/users";
+import Chart from "components/atoms/Chart";
 import Heading from "components/atoms/Heading";
+import TargetAmountForm from "components/organisms/TagertAmountForm";
 import { isPast, parseISO } from "date-fns";
 
 type Props = {
@@ -8,12 +11,15 @@ type Props = {
 
 function MonthlyIncome({ income, loading }: Props) {
   const totalIncome = income?.reduce((sum, array) => sum + array[1], 0) || 0;
-  const workedDaysData = income?.filter((data) =>
+  const pastWorksPay = income?.filter((data) =>
     isPast(parseISO(String(data[0])))
   );
   const earnedIncome =
-    workedDaysData?.reduce((sum, array) => sum + array[1], 0) || 0;
+    pastWorksPay?.reduce((sum, array) => sum + array[1], 0) || 0;
   const expectedIncome = totalIncome - earnedIncome;
+
+  const { data } = useGetUsersUserId();
+
   return (
     <>
       <Heading text="今月の給料" />
@@ -28,6 +34,14 @@ function MonthlyIncome({ income, loading }: Props) {
             </li>
             <li className="mb-2">合計: {totalIncome.toLocaleString()}円</li>
           </ul>
+          {data?.target_amount && (
+            <Chart
+              target={data.target_amount}
+              earnedIncome={earnedIncome}
+              expectedIncome={expectedIncome}
+            />
+          )}
+          {data && <TargetAmountForm user={data} />}
         </div>
       )}
     </>

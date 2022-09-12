@@ -8,7 +8,6 @@ function Header() {
   const handleClickLogout = () => {
     logout.mutate();
     auth.signOut();
-    router.push("/login");
   };
   const handleClickQuestion = () => router.push("/questions");
 
