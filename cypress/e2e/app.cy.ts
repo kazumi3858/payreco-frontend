@@ -15,7 +15,7 @@ describe("Home", () => {
 
   it("should navigate to the logout button", () => {
     cy.visit("/");
-    cy.contains('Menu').click()
+    cy.contains("Menu").click();
     cy.contains("ログアウト");
   });
 
