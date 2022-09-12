@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useGetWorks } from "api/works/works";
 import { useGetCompanies } from "api/companies/companies";
 import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
+import { findCurrencyRate } from "utils/find-currency-rate";
 
 function IncomeList() {
   const { data: works, isLoading } = useGetWorks();
@@ -18,26 +19,14 @@ function IncomeList() {
   };
 
   const incomeListByMonth = works?.reduce((map, work) => {
+    const monthOfWorks = String(work.date).substring(0, 7).replace("-", "");
     const company = companies?.find(
-      (company) => company.id === work.company_id
-    );
+      (company): boolean => company.id === work.company_id
+    )!;
+    const rate = findCurrencyRate(work, company, exchangeRates!);
 
-    const yearAndMonthOfWork = String(work.date)
-      .substring(0, 7)
-      .replace("-", "");
-    const selectedMonthRateData = exchangeRates?.find(
-      (data) => String(data.year_and_month) === yearAndMonthOfWork
-    );
-    const rate = selectedMonthRateData
-      ? selectedMonthRateData.exchange_rate_list
-      : exchangeRates?.slice(-1)[0].exchange_rate_list;
-    const companyCurrencyRate =
-      rate &&
-      company?.currency_type &&
-      Reflect.get(rate, company.currency_type);
-
-    const convertedPayToJPY = Math.floor(work.pay_amount / companyCurrencyRate);
-    (map[yearAndMonthOfWork] = map[yearAndMonthOfWork] || []).push([
+    const convertedPayToJPY = Math.floor(work.pay_amount / rate);
+    (map[monthOfWorks] = map[monthOfWorks] || []).push([
       work.date,
       convertedPayToJPY,
     ]);
