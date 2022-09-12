@@ -33,8 +33,9 @@ jobs:
           wait-on: 'http://localhost:3001'
         env:
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-          CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
           CYPRESS_FIREBASE_API_KEY: ${{ secrets.CYPRESS_FIREBASE_API_KEY }}
+          CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
           GITHUB_REF: ${{ github.ref }}
 
