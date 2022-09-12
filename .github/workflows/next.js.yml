@@ -24,7 +24,8 @@ jobs:
           build: yarn build
           start: |
             yarn start
-            echo "Test ${{env.CYPRESS_FIREBASE_API_KEY}}"
+            echo "Test ${{env.FIREBASE_API_KEY}}"
+            echo "Test ${{env.FIREBASE_PROJECT_ID}}"
           wait-on: 'http://localhost:3001'
           record: true
     env:
@@ -38,6 +39,7 @@ jobs:
       CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       FIREBASE_API_KEY: ${{ secrets.CYPRESS_FIREBASE_API_KEY }}
+      FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
       GITHUB_HEAD_REF: ${{ github.head_ref }}
       GITHUB_REF: ${{ github.ref }}
 
