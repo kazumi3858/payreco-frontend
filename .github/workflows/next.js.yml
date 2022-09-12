@@ -57,6 +57,7 @@ jobs:
           wait-on: http://localhost:3001
         env:
           # pass the Dashboard record key as an environment variable
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
           # UID of User to login as during tests
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
