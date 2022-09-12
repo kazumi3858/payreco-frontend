@@ -1,13 +1,13 @@
-import { useGetCompanies } from "api/companies/companies";
-import { Company, Work } from "api/model";
 import Button from "components/atoms/Button";
 import CompanyForm from "components/organisms/CompanyForm";
 import WorkForm from "components/organisms/WorkForm";
-import { format } from "date-fns";
-import { ja } from "date-fns/locale";
-import { useState } from "react";
 import Modal from "./Modal";
 import WorkDetails from "./WorkDetails";
+import { useState } from "react";
+import { format } from "date-fns";
+import { ja } from "date-fns/locale";
+import { useGetCompanies } from "api/companies/companies";
+import { Company, Work } from "api/model";
 
 type Props = {
   selectedDay: Date;
@@ -66,7 +66,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                 )
             )
           ) : (
-            <p>
+            <p className="mb-5">
               勤務先の登録がありません。勤務先を登録をすると予定を追加できるようになります。
             </p>
           )}
