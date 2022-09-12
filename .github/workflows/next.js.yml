@@ -44,6 +44,9 @@ name: Next.js CI
 #           NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
 #           GITHUB_HEAD_REF: ${{ github.head_ref }}
 #           GITHUB_REF: ${{ github.ref }}
+
+on: [pull_request]
+
 jobs:
   ui-tests:
     name: UI Tests
