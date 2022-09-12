@@ -24,8 +24,7 @@ jobs:
           build: yarn build
           start: |
             yarn start
-            echo "Project id ${{env.SERVICE_ACCOUNT.type}}"
-            echo "Project id ${{env.SERVICE_ACCOUNT.project_id}}"
+            echo "Project id ${{env.SERVICE_ACCOUNT}}"
           wait-on: 'http://localhost:3001'
           record: true
     env:
