@@ -33,7 +33,6 @@ jobs:
           NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID }}
           NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-          TEST_TEST: "test!!"
           CYPRESS_FIREBASE_API_KEY: ${{ secrets.CYPRESS_FIREBASE_API_KEY }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
