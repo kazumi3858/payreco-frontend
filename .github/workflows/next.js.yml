@@ -9,8 +9,6 @@ env:
   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
   NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID }}
   NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
-  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-  CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
 
 jobs:
   cypress-run:
@@ -33,10 +31,9 @@ jobs:
           build: yarn build
           start: yarn start
           wait-on: 'http://localhost:3001'
+          env: configFile=ci
         env:
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-          CYPRESS_FIREBASE_API_KEY: ${{ secrets.CYPRESS_FIREBASE_API_KEY }}
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
           GITHUB_REF: ${{ github.ref }}
