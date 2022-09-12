@@ -35,6 +35,7 @@ jobs:
       CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
       CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+      FIREBASE_API_KEY: ${{ secrets.CYPRESS_FIREBASE_API_KEY }}
       GITHUB_HEAD_REF: ${{ github.head_ref }}
       GITHUB_REF: ${{ github.ref }}
 
