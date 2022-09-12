@@ -6,6 +6,7 @@
 describe("Home", () => {
   beforeEach(() => {
     cy.log(Cypress.env("CYPRESS_FIREBASE_API_KEY"))
+    cy.log("test!!")
     cy.login();
   });
   it("should navigate to the about page", () => {
