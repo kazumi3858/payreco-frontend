@@ -5,7 +5,6 @@
 
 describe("Home", () => {
   beforeEach(() => {
-    cy.log(Cypress.env("CYPRESS_TEST_UID"))
     cy.login();
   });
   it("should navigate to the about page", () => {
