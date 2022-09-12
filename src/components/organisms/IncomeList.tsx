@@ -25,10 +25,10 @@ function IncomeList() {
     )!;
     const rate = findCurrencyRate(work, company, exchangeRates!);
 
-    const convertedPayToJPY = Math.floor(work.pay_amount / rate);
+    const payAmountWithJPY = Math.floor(work.pay_amount / rate);
     (map[monthOfWorks] = map[monthOfWorks] || []).push([
       work.date,
-      convertedPayToJPY,
+      payAmountWithJPY,
     ]);
     return map;
   }, {} as { [key: string]: [[Date, number]] });

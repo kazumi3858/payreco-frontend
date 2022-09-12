@@ -16,7 +16,7 @@ export const findCurrencyRate = (
     : exchangeRates.slice(-1)[0].exchange_rate_list;
 
   const companyCurrencyRate: number =
-    rate && company.currency_type && Reflect.get(rate, company.currency_type);
+    company.currency_type && Reflect.get(rate, company.currency_type);
 
   return companyCurrencyRate;
 };
