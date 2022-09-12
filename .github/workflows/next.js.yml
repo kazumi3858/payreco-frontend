@@ -22,10 +22,7 @@ jobs:
         with:
           group: 'E2E Tests'
           build: yarn build
-          start: |
-            yarn start
-            echo "Project id ${{env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}}"
-            echo "テスト"
+          start: yarn start
           wait-on: 'http://localhost:3001'
           record: true
     env:
