@@ -49,7 +49,7 @@ jobs:
 
       # Cypress action manages installing/caching npm dependencies and Cypress binary
       - name: Cypress Run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           group: 'E2E Tests'
           build: yarn build
