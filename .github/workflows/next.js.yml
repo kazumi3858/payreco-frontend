@@ -1,47 +1,79 @@
 name: Next.js CI
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
 
+# jobs:
+#   cypress-run:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Use Github Action cache
+#         uses: actions/cache@v3
+#         with:
+#           path: |
+#             ~/.npm
+#             ${{ github.workspace }}/.next/cache
+#           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+#           restore-keys: |
+#             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+#       - name: Cypress run
+#         uses: cypress-io/github-action@v4
+#         with:
+#           build: yarn build
+#           start: yarn start
+#           wait-on: 'http://localhost:3001'
+#         env:
+#           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+#           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
+#           CYPRESS_FIREBASE_API_KEY: ${{ secrets.CYPRESS_FIREBASE_API_KEY }}
+#           # CYPRESS_FIREBASE_AUTH_DOMAIN: ${{ secrets.CYPRESS_FIREBASE_AUTH_DOMAIN }}
+#           # CYPRESS_FIREBASE_PROJECT_ID: ${{ secrets.CYPRESS_FIREBASE_PROJECT_ID }}
+#           # CYPRESS_FIREBASE_STORAGE_BUCKET: ${{ secrets.CYPRESS_FIREBASE_STORAGE_BUCKET }}
+#           # CYPRESS_FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.CYPRESS_FIREBASE_MESSAGE_SENDER_ID }}
+#           # CYPRESS_FIREBASE_APP_ID: ${{ secrets.CYPRESS_FIREBASE_APP_ID }}
+#           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+#           NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+#           NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+#           NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
+#           NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID }}
+#           NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
+#           GITHUB_HEAD_REF: ${{ github.head_ref }}
+#           GITHUB_REF: ${{ github.ref }}
 jobs:
-  cypress-run:
+  ui-tests:
+    name: UI Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Github Action cache
-        uses: actions/cache@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      # Cypress action manages installing/caching npm dependencies and Cypress binary.
+      - name: Cypress Run
+        uses: cypress-io/github-action@v2
         with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
-        with:
+          group: 'E2E Tests'
           build: yarn build
           start: yarn start
-          wait-on: 'http://localhost:3001'
+          wait-on: http://localhost:3001
         env:
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
+          # UID of User to login as during tests
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
-          CYPRESS_FIREBASE_API_KEY: ${{ secrets.CYPRESS_FIREBASE_API_KEY }}
-          # CYPRESS_FIREBASE_AUTH_DOMAIN: ${{ secrets.CYPRESS_FIREBASE_AUTH_DOMAIN }}
-          # CYPRESS_FIREBASE_PROJECT_ID: ${{ secrets.CYPRESS_FIREBASE_PROJECT_ID }}
-          # CYPRESS_FIREBASE_STORAGE_BUCKET: ${{ secrets.CYPRESS_FIREBASE_STORAGE_BUCKET }}
-          # CYPRESS_FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.CYPRESS_FIREBASE_MESSAGE_SENDER_ID }}
-          # CYPRESS_FIREBASE_APP_ID: ${{ secrets.CYPRESS_FIREBASE_APP_ID }}
+          # Service Account (used for creating custom auth tokens)
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
           NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
           NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
           NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
           NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID }}
           NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
+          # Branch settings
           GITHUB_HEAD_REF: ${{ github.head_ref }}
           GITHUB_REF: ${{ github.ref }}
   lint:
