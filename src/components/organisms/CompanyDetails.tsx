@@ -10,8 +10,8 @@ type Props = {
 };
 
 function CompanyDetails({ company }: Props) {
-  const [companyForm, setCompanyForm] = useState<boolean>(false);
-  const [deleteConfirmation, setDeleteConfirmation] = useState<boolean>(false);
+  const [companyForm, setCompanyForm] = useState(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">

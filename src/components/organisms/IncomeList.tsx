@@ -12,7 +12,7 @@ function IncomeList() {
   const { data: companies } = useGetCompanies();
   const { data: exchangeRates } = useGetExchangeRates();
 
-  const [monthlyMode, setMonthlyMode] = useState<boolean>(true);
+  const [monthlyMode, setMonthlyMode] = useState(true);
 
   const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMonthlyMode(Boolean(e.target.value));

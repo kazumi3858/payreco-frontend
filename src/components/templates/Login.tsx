@@ -5,7 +5,7 @@ import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 
 function Login() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const googleSignIn = async () => {
     setIsLoading(true);

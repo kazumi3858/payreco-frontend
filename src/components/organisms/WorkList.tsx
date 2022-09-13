@@ -16,8 +16,8 @@ type Props = {
 
 function WorkList({ selectedDay, selectedDayWorks }: Props) {
   const { data, isLoading } = useGetCompanies();
-  const [workForm, setWorkForm] = useState<boolean>(false);
-  const [companyForm, setCompanyForm] = useState<boolean>(false);
+  const [workForm, setWorkForm] = useState(false);
+  const [companyForm, setCompanyForm] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
   const company = (work: Work) =>
     data?.find((company): boolean => company.id === work.company_id)!;

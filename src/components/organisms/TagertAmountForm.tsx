@@ -11,8 +11,8 @@ type Props = {
 
 function TargetAmountForm({ user }: Props) {
   const defaultTargetAmount = user.target_amount ? user.target_amount : 0;
-  const [targetAmount, setTargetAmount] = useState<number>(defaultTargetAmount);
-  const [updating, setUpdating] = useState<boolean>(false);
+  const [targetAmount, setTargetAmount] = useState(defaultTargetAmount);
+  const [updating, setUpdating] = useState(false);
 
   const queryClient = useQueryClient();
   const mutation = usePatchUsersUserId();

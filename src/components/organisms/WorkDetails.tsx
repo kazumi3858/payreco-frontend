@@ -15,8 +15,8 @@ type Props = {
 };
 
 function WorkDetails({ work, selectedDay, company }: Props) {
-  const [workForm, setWorkForm] = useState<boolean>(false);
-  const [deleteConfirmation, setDeleteConfirmation] = useState<boolean>(false);
+  const [workForm, setWorkForm] = useState(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const { data } = useGetExchangeRates();
   const startingTime = parseISO(`${work.starting_time}`);
   const endingTime = parseISO(`${work.ending_time}`);

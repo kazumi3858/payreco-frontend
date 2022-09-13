@@ -7,7 +7,7 @@ import Modal from "./Modal";
 import Heading from "components/atoms/Heading";
 
 function CompapyList() {
-  const [companyForm, setCompanyForm] = useState<boolean>(false);
+  const [companyForm, setCompanyForm] = useState(false);
   const { data, isLoading } = useGetCompanies();
 
   return (
