@@ -10,13 +10,13 @@ type Props = {
 };
 
 function Main({ children }: Props) {
-  const [user, loading] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
   const redirect = () => {
     router.push("/login");
   };
 
-  if (loading)
+  if (isLoading)
     return (
       <div className="h-screen w-screen flex justify-center items-center">
         <div className="animate-spin h-16 w-16 bg-stone-200 rounded-xl"></div>

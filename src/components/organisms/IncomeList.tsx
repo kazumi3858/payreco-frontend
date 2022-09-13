@@ -63,7 +63,7 @@ function IncomeList() {
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
             <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
-              <MonthlyIncome income={incomeOfThisMonth} loading={isLoading} />
+              <MonthlyIncome income={incomeOfThisMonth} isLoading={isLoading} />
             </div>
           </div>
           <div

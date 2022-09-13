@@ -6,10 +6,10 @@ import { isPast, parseISO } from "date-fns";
 
 type Props = {
   income?: [[Date, number]];
-  loading: boolean;
+  isLoading: boolean;
 };
 
-function MonthlyIncome({ income, loading }: Props) {
+function MonthlyIncome({ income, isLoading }: Props) {
   const { data } = useGetUsersUserId();
 
   const totalIncome = income?.reduce((sum, array) => sum + array[1], 0) || 0;
@@ -23,7 +23,7 @@ function MonthlyIncome({ income, loading }: Props) {
   return (
     <>
       <Heading text="今月の給料" />
-      {!loading && isFinite(totalIncome) ? (
+      {!isLoading && isFinite(totalIncome) ? (
         <div>
           <ul>
             <li className="mb-2">現在: {earnedIncome.toLocaleString()}円</li>

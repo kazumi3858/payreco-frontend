@@ -5,10 +5,10 @@ import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 
 function Login() {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const googleSignIn = async () => {
-    setLoading(true);
+    setIsLoading(true);
     await signInWithPopup(auth, provider)
       .then((result) => {
         result.user.getIdToken(true).then(async (idToken) => {
@@ -29,7 +29,7 @@ function Login() {
         <p>シフト管理・給料計算ツール</p>
       </div>
       <div className="flex justify-center">
-        {loading ? (
+        {isLoading ? (
           <div>ログイン中</div>
         ) : (
           <button
