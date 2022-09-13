@@ -23,17 +23,15 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const nextDayMaxTime = formatTime(addDays(selectedDay, 1), "23:59");
 
   const defaultWorkedHours = work?.working_hours
-    ? String(Math.floor(work.working_hours))
-    : "0";
+    ? Math.floor(work.working_hours)
+    : 0;
   const defaultWorkedMinutes = work?.working_hours
-    ? String(
-        Math.round(
-          (Number(work.working_hours.toFixed(2)) -
-            Math.floor(work.working_hours)) *
-            60
-        )
+    ? Math.round(
+        (Number(work.working_hours.toFixed(2)) -
+          Math.floor(work.working_hours)) *
+          60
       )
-    : "0";
+    : 0;
   const defaultBreakHours = work?.break_time
     ? Math.floor(work.break_time / 60)
     : 0;
@@ -46,19 +44,17 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const defaultMemo = work?.memo ? work.memo : null;
   const defaultShiftMode = work?.starting_time !== null;
 
-  const [workedHours, setWorkedHours] = useState<string>(defaultWorkedHours);
-  const [workedMinutes, setWorkedMinutes] =
-    useState<string>(defaultWorkedMinutes);
-  const [payAmount, setPayAmount] = useState<number>(defaultPayAmount);
-  const [startingTime, setStartingTime] = useState<Date>(defaultStartingTime);
-  const [endingTime, setEndingTime] = useState<Date>(defaultEndingTime);
-  const [breakHours, setBreakHours] = useState<number>(defaultBreakHours);
-  const [breakMinutes, setBreakMinutes] = useState<number>(defaultBreakMinutes);
+  const [workedHours, setWorkedHours] = useState(defaultWorkedHours);
+  const [workedMinutes, setWorkedMinutes] = useState(defaultWorkedMinutes);
+  const [payAmount, setPayAmount] = useState(defaultPayAmount);
+  const [startingTime, setStartingTime] = useState(defaultStartingTime);
+  const [endingTime, setEndingTime] = useState(defaultEndingTime);
+  const [breakHours, setBreakHours] = useState(defaultBreakHours);
+  const [breakMinutes, setBreakMinutes] = useState(defaultBreakMinutes);
   const [memo, setMemo] = useState<string | null>(defaultMemo);
-  const [shiftMode, setShiftMode] = useState<boolean>(defaultShiftMode);
-
-  const [updating, setUpdating] = useState<boolean>(false);
-  const [disableButton, setDisableButton] = useState<boolean>(false);
+  const [shiftMode, setShiftMode] = useState(defaultShiftMode);
+  const [updating, setUpdating] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   const breakTime = breakHours * 60 + breakMinutes;
   const startAndEndTimeDifference =
@@ -73,7 +69,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
     Math.round(
       shiftMode
         ? (startAndEndTimeDifference / 60) * 100
-        : (Number(workedHours) + Number(workedMinutes) / 60) * 100
+        : (workedHours + workedMinutes / 60) * 100
     ) / 100;
 
   const formData = {
@@ -206,7 +202,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             defaultValue={
               work?.working_hours ? Math.floor(work.working_hours) : 0
             }
-            changeEvent={(e) => setWorkedHours(e.target.value)}
+            changeEvent={(e) => setWorkedHours(Number(e.target.value))}
             array={Object.keys([...Array(24)])}
           />
           時間
@@ -220,7 +216,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
                   )
                 : 0
             }
-            changeEvent={(e) => setWorkedMinutes(e.target.value)}
+            changeEvent={(e) => setWorkedMinutes(Number(e.target.value))}
             array={Object.keys([...Array(60)])}
           />
           分

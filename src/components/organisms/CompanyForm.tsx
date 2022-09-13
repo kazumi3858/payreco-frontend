@@ -36,12 +36,12 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
   const defaultCurrencyType = company ? company.currency_type : "円";
 
-  const [wageSystem, setWageSystem] = useState<boolean>(defaultWageSystem);
-  const [name, setName] = useState<string>(defaultName);
-  const [wageAmount, setWageAmount] = useState<number>(defaultWageAmount);
-  const [currencyType, setCurrencyType] = useState<string>(defaultCurrencyType);
-  const [updating, setUpdating] = useState<boolean>(false);
-  const [disableButton, setDisableButton] = useState<boolean>(false);
+  const [wageSystem, setWageSystem] = useState(defaultWageSystem);
+  const [name, setName] = useState(defaultName);
+  const [wageAmount, setWageAmount] = useState(defaultWageAmount);
+  const [currencyType, setCurrencyType] = useState(defaultCurrencyType);
+  const [updating, setUpdating] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWageSystem(Boolean(e.target.value));
