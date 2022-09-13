@@ -23,7 +23,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   const hasBreak = work.break_time !== null && work.break_time > 0;
   const hourOfBreak = work.break_time ? Math.floor(work.break_time / 60) : 0;
   const minuteOfBreak = work.break_time ? work.break_time % 60 : 0;
-  const rate = findCurrencyRate(work, company, data!);
+  const rate = data ? findCurrencyRate(work, company, data) : 0;
 
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
@@ -42,7 +42,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <p>
           {`合計勤務: ${work.working_hours}時間 `}
           {`給料: ${work.pay_amount}${company.currency_type}`}
-          {rate && ` (${Math.floor(work.pay_amount / rate)}円)`}
+          {rate > 0 && ` (${Math.floor(work.pay_amount / rate)}円)`}
         </p>
         <p>{work.memo && `メモ: ${work.memo}`}</p>
       </div>

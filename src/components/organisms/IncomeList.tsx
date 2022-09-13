@@ -8,7 +8,7 @@ import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
 import { findCurrencyRate } from "utils/find-currency-rate";
 
 function IncomeList() {
-  const { data: works, isLoading } = useGetWorks();
+  const { data: works } = useGetWorks();
   const { data: companies } = useGetCompanies();
   const { data: exchangeRates } = useGetExchangeRates();
 
@@ -23,8 +23,9 @@ function IncomeList() {
     const company = companies?.find(
       (company): boolean => company.id === work.company_id
     )!;
-    const rate = findCurrencyRate(work, company, exchangeRates!);
-
+    const rate = exchangeRates
+      ? findCurrencyRate(work, company, exchangeRates)
+      : 0;
     const payAmountWithJPY = Math.floor(work.pay_amount / rate);
     (map[monthOfWorks] = map[monthOfWorks] || []).push([
       work.date,
@@ -62,7 +63,7 @@ function IncomeList() {
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
             <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
-              <MonthlyIncome income={thisMonthIncome} loading={isLoading} />
+              <MonthlyIncome income={thisMonthIncome} />
             </div>
           </div>
           <div
@@ -70,7 +71,7 @@ function IncomeList() {
               monthlyMode ? "hidden md:inline-block md:pl-14" : "mb-8 md:pl-14"
             }
           >
-            <AnnualIncome incomeList={incomeListByMonth} loading={isLoading} />
+            <AnnualIncome incomeList={incomeListByMonth} />
           </div>
         </div>
       </div>

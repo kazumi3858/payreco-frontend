@@ -2,19 +2,18 @@ import Heading from "components/atoms/Heading";
 
 type Props = {
   incomeList?: { [key: string]: [[Date, number]] };
-  loading: boolean;
 };
 
-function AnnualIncome({ incomeList, loading }: Props) {
-  const year = new Date().getFullYear();
-  const months = Array(12)
+function AnnualIncome({ incomeList }: Props) {
+  const thisYear = new Date().getFullYear();
+  const numArray = Array(12)
     .fill(0)
     .map((_, i) => i + 1);
-  const yearAndMonths = months.map((month) =>
-    Number(year + ("0" + month).slice(-2))
+  const thisYearMonths = numArray.map((month) =>
+    Number(thisYear + ("0" + month).slice(-2))
   );
 
-  const incomeListByMonth = yearAndMonths.map(
+  const incomeListByMonth = thisYearMonths.map(
     (month) =>
       (incomeList &&
         incomeList[month] &&
@@ -30,9 +29,7 @@ function AnnualIncome({ incomeList, loading }: Props) {
   return (
     <div>
       <Heading text="年間の給料" />
-      {loading ? (
-        <p>Laoding</p>
-      ) : (
+      {incomeList && isFinite(annualTotalIncome) ? (
         <>
           <ul>
             {incomeListByMonth.map((income, idx) => (
@@ -43,6 +40,8 @@ function AnnualIncome({ incomeList, loading }: Props) {
           </ul>
           <p className="mt-10">合計: {annualTotalIncome.toLocaleString()}円</p>
         </>
+      ) : (
+        <p>Laoding</p>
       )}
     </div>
   );
