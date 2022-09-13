@@ -78,15 +78,15 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
           />
         </div>
       )}
-
-      <Modal modal={workForm} setModal={setWorkForm}>
-        <WorkForm
-          selectedDay={selectedDay}
-          company={selectedCompany}
-          setWorkForm={setWorkForm}
-        />
-      </Modal>
-
+      {selectedCompany && (
+        <Modal modal={workForm} setModal={setWorkForm}>
+          <WorkForm
+            selectedDay={selectedDay}
+            company={selectedCompany}
+            setWorkForm={setWorkForm}
+          />
+        </Modal>
+      )}
       <Modal modal={companyForm} setModal={setCompanyForm}>
         <CompanyForm setCompanyForm={setCompanyForm} />
       </Modal>

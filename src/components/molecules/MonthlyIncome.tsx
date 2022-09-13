@@ -4,9 +4,7 @@ import TargetAmountForm from "components/organisms/TagertAmountForm";
 import { useGetUsersUserId } from "api/users/users";
 import { isPast, parseISO } from "date-fns";
 
-type Props = {
-  income?: [[Date, number]];
-};
+type Props = { income?: [[Date, number]] };
 
 function MonthlyIncome({ income }: Props) {
   const { data } = useGetUsersUserId();
@@ -22,9 +20,7 @@ function MonthlyIncome({ income }: Props) {
   return (
     <>
       <Heading text="今月の給料" />
-      {!expectedIncome ? (
-        <p>Loading</p>
-      ) : (
+      {expectedIncome ? (
         <div>
           <ul>
             <li className="mb-2">現在: {earnedIncome.toLocaleString()}円</li>
@@ -42,6 +38,8 @@ function MonthlyIncome({ income }: Props) {
           )}
           {data && <TargetAmountForm user={data} />}
         </div>
+      ) : (
+        <p>Loading</p>
       )}
     </>
   );

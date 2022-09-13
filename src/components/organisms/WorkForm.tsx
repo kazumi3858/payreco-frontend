@@ -10,7 +10,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
   selectedDay: Date;
-  company?: Company;
+  company: Company;
   work?: Work;
   setWorkForm: Dispatch<SetStateAction<boolean>>;
 };
@@ -78,12 +78,12 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
 
   const formData = {
     date: addDays(selectedDay, 1),
-    company_id: company?.id,
+    company_id: company.id,
     starting_time: shiftMode ? startingTime : null,
     ending_time: shiftMode ? endingTime : null,
     break_time: shiftMode ? breakTime : null,
     working_hours: workingHours,
-    pay_amount: company?.wage_amount
+    pay_amount: company.wage_amount
       ? Math.round(company.wage_amount * workingHours * 100) / 100
       : payAmount,
     memo: memo !== "" ? memo : null,
@@ -122,7 +122,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
     <form onSubmit={handleSubmit}>
       <div>
         <label>勤務先: </label>
-        {company?.name}
+        {company.name}
       </div>
       <div className="space-x-1">
         <RadioButton
@@ -228,7 +228,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
       )}
       <div>
         <label>給料: </label>
-        {company?.wage_amount ? (
+        {company.wage_amount ? (
           <span>
             {Math.round(company.wage_amount * workingHours * 100) / 100}
           </span>
@@ -240,7 +240,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             onChange={(e) => setPayAmount(Number(e.target.value))}
           />
         )}
-        {company?.currency_type}
+        {company.currency_type}
         {(payAmount > 999999 || payAmount < 0) && (
           <p className="text-rose-600">金額がマイナス・または大きすぎます。</p>
         )}
