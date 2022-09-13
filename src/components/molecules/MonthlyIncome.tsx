@@ -13,11 +13,11 @@ function MonthlyIncome({ income, loading }: Props) {
   const { data } = useGetUsersUserId();
 
   const totalIncome = income?.reduce((sum, array) => sum + array[1], 0) || 0;
-  const pastWorksPay = income?.filter((data) =>
+  const payOfPastWorks = income?.filter((data) =>
     isPast(parseISO(String(data[0])))
   );
   const earnedIncome =
-    pastWorksPay?.reduce((sum, array) => sum + array[1], 0) || 0;
+    payOfPastWorks?.reduce((sum, array) => sum + array[1], 0) || 0;
   const expectedIncome = totalIncome - earnedIncome;
 
   return (

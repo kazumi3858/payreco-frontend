@@ -37,7 +37,7 @@ function IncomeList() {
   const thisMonth = Number(
     new Date().getFullYear() + ("0" + (new Date().getMonth() + 1)).slice(-2)
   );
-  const thisMonthIncome = incomeListByMonth && incomeListByMonth[thisMonth];
+  const incomeOfThisMonth = incomeListByMonth && incomeListByMonth[thisMonth];
 
   return (
     <div className="pt-5">
@@ -63,7 +63,7 @@ function IncomeList() {
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
             <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
-              <MonthlyIncome income={thisMonthIncome} loading={isLoading} />
+              <MonthlyIncome income={incomeOfThisMonth} loading={isLoading} />
             </div>
           </div>
           <div

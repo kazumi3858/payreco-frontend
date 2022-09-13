@@ -5,11 +5,11 @@ type Props = { incomeList?: { [key: string]: [[Date, number]] } };
 function AnnualIncome({ incomeList }: Props) {
   const thisYear = new Date().getFullYear();
   const numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const thisYearMonths = numArray.map((month) =>
+  const monthsOfThisYear = numArray.map((month) =>
     Number(thisYear + ("0" + month).slice(-2))
   );
 
-  const incomeListByMonth = thisYearMonths.map(
+  const incomeListByMonth = monthsOfThisYear.map(
     (month) =>
       (incomeList &&
         incomeList[month] &&
