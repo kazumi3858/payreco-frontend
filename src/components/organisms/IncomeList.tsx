@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useGetWorks } from "api/works/works";
 import { useGetCompanies } from "api/companies/companies";
 import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
+import { findCurrencyRate } from "utils/find-currency-rate";
 
 function IncomeList() {
   const { data: works, isLoading } = useGetWorks();
@@ -18,28 +19,17 @@ function IncomeList() {
   };
 
   const incomeListByMonth = works?.reduce((map, work) => {
+    const monthOfWorks = String(work.date).substring(0, 7).replace("-", "");
     const company = companies?.find(
-      (company) => company.id === work.company_id
-    );
-
-    const yearAndMonthOfWork = String(work.date)
-      .substring(0, 7)
-      .replace("-", "");
-    const selectedMonthRateData = exchangeRates?.find(
-      (data) => String(data.year_and_month) === yearAndMonthOfWork
-    );
-    const rate = selectedMonthRateData
-      ? selectedMonthRateData.exchange_rate_list
-      : exchangeRates?.slice(-1)[0].exchange_rate_list;
-    const companyCurrencyRate =
-      rate &&
-      company?.currency_type &&
-      Reflect.get(rate, company.currency_type);
-
-    const convertedPayToJPY = Math.floor(work.pay_amount / companyCurrencyRate);
-    (map[yearAndMonthOfWork] = map[yearAndMonthOfWork] || []).push([
+      (company): boolean => company.id === work.company_id
+    )!;
+    const rate = exchangeRates
+      ? findCurrencyRate(work, company, exchangeRates)
+      : 0;
+    const payAmountWithJPY = Math.floor(work.pay_amount / rate);
+    (map[monthOfWorks] = map[monthOfWorks] || []).push([
       work.date,
-      convertedPayToJPY,
+      payAmountWithJPY,
     ]);
     return map;
   }, {} as { [key: string]: [[Date, number]] });
@@ -47,7 +37,7 @@ function IncomeList() {
   const thisMonth = Number(
     new Date().getFullYear() + ("0" + (new Date().getMonth() + 1)).slice(-2)
   );
-  const thisMonthIncome = incomeListByMonth && incomeListByMonth[thisMonth];
+  const incomeOfThisMonth = incomeListByMonth && incomeListByMonth[thisMonth];
 
   return (
     <div className="pt-5">
@@ -73,7 +63,7 @@ function IncomeList() {
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
             <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
-              <MonthlyIncome income={thisMonthIncome} loading={isLoading} />
+              <MonthlyIncome income={incomeOfThisMonth} loading={isLoading} />
             </div>
           </div>
           <div
@@ -81,7 +71,7 @@ function IncomeList() {
               monthlyMode ? "hidden md:inline-block md:pl-14" : "mb-8 md:pl-14"
             }
           >
-            <AnnualIncome incomeList={incomeListByMonth} loading={isLoading} />
+            <AnnualIncome incomeList={incomeListByMonth} />
           </div>
         </div>
       </div>

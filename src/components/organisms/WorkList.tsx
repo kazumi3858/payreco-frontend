@@ -19,6 +19,8 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
   const [workForm, setWorkForm] = useState<boolean>(false);
   const [companyForm, setCompanyForm] = useState<boolean>(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
+  const company = (work: Work) =>
+    data?.find((company): boolean => company.id === work.company_id)!;
 
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
@@ -38,7 +40,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                 selectedDay={selectedDay}
                 work={work}
                 key={work.id}
-                company={data?.find((v) => v.id === work.company_id)}
+                company={company(work)}
               />
             ))
           ) : (
@@ -76,15 +78,15 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
           />
         </div>
       )}
-
-      <Modal modal={workForm} setModal={setWorkForm}>
-        <WorkForm
-          selectedDay={selectedDay}
-          company={selectedCompany}
-          setWorkForm={setWorkForm}
-        />
-      </Modal>
-
+      {selectedCompany && (
+        <Modal modal={workForm} setModal={setWorkForm}>
+          <WorkForm
+            selectedDay={selectedDay}
+            company={selectedCompany}
+            setWorkForm={setWorkForm}
+          />
+        </Modal>
+      )}
       <Modal modal={companyForm} setModal={setCompanyForm}>
         <CompanyForm setCompanyForm={setCompanyForm} />
       </Modal>

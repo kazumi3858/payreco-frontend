@@ -21,10 +21,12 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
         <div
           className="absolute h-6 text-center bg-stone-500 rounded-full"
           style={{ width: `${showRate(achievementRate)}%` }}
-        >
-          {showRate(achievementRate)}%
-        </div>
+        ></div>
       </div>
+      <p className="text-xs">
+        現時点: {showRate(achievementRate)}% 見込み含め:{" "}
+        {showRate(expectedAchievementRate)}%
+      </p>
     </div>
   );
 }
