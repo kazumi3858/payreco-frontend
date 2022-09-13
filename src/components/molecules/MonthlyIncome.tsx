@@ -4,9 +4,12 @@ import TargetAmountForm from "components/organisms/TagertAmountForm";
 import { useGetUsersUserId } from "api/users/users";
 import { isPast, parseISO } from "date-fns";
 
-type Props = { income?: [[Date, number]] };
+type Props = {
+  income?: [[Date, number]];
+  loading: boolean;
+};
 
-function MonthlyIncome({ income }: Props) {
+function MonthlyIncome({ income, loading }: Props) {
   const { data } = useGetUsersUserId();
 
   const totalIncome = income?.reduce((sum, array) => sum + array[1], 0) || 0;
@@ -20,7 +23,7 @@ function MonthlyIncome({ income }: Props) {
   return (
     <>
       <Heading text="今月の給料" />
-      {expectedIncome ? (
+      {!loading && isFinite(totalIncome) ? (
         <div>
           <ul>
             <li className="mb-2">現在: {earnedIncome.toLocaleString()}円</li>

@@ -8,7 +8,7 @@ import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
 import { findCurrencyRate } from "utils/find-currency-rate";
 
 function IncomeList() {
-  const { data: works } = useGetWorks();
+  const { data: works, isLoading } = useGetWorks();
   const { data: companies } = useGetCompanies();
   const { data: exchangeRates } = useGetExchangeRates();
 
@@ -63,7 +63,7 @@ function IncomeList() {
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
             <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
-              <MonthlyIncome income={thisMonthIncome} />
+              <MonthlyIncome income={thisMonthIncome} loading={isLoading} />
             </div>
           </div>
           <div
