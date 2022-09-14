@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import Button from "components/atoms/Button";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-describe("render button properly", () => {
+describe("Button", () => {
   it("can call onClick event", () => {
     const onClick = jest.fn();
     render(<Button text="button text" onClick={onClick} />);
