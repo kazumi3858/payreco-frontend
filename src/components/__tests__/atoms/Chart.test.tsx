@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import Chart from "components/atoms/Chart";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 describe("Chart", () => {
   it("can render achievement rate properly", async () => {

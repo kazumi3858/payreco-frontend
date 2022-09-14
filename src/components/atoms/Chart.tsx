@@ -8,7 +8,7 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
   const calcRate = (income: number) => Math.floor((income / target) * 100);
   const achievementRate = calcRate(earnedIncome);
   const expectedAchievementRate = calcRate(expectedIncome) + achievementRate;
-  const result = (rate: number) => rate >= 100 ? 100 : rate;
+  const result = (rate: number) => (rate >= 100 ? 100 : rate);
 
   return (
     <div className="py-6">
