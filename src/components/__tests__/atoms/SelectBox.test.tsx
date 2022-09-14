@@ -17,7 +17,7 @@ describe("SelectBox", () => {
     expect(screen.getAllByRole("option").length).toBe(2);
   });
 
-  it("can change value when user chooses new one", () => {
+  it("can change value", () => {
     render(selectBox);
     const selectedOption = screen.getByRole("combobox") as HTMLSelectElement;
     expect(selectedOption.value).toBe("first option");

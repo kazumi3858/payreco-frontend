@@ -4,7 +4,6 @@ import { render } from "@testing-library/react";
 
 describe("RadioButton", () => {
   it("can render radio buttons properly", () => {
-    const checked = true;
     const radioButton = (value: string, text: string, checked: boolean) => (
       <RadioButton
         type="small"
@@ -14,8 +13,8 @@ describe("RadioButton", () => {
         checked={checked}
       />
     );
-    const firstButton = radioButton("one", "radio1", checked);
-    const secondButton = radioButton("two", "radio2", !checked);
+    const firstButton = radioButton("one", "radio1", true);
+    const secondButton = radioButton("two", "radio2", false);
     const { getByLabelText } = render(
       <>
         {firstButton}
