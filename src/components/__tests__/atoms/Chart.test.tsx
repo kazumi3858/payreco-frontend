@@ -3,7 +3,7 @@ import Chart from "components/atoms/Chart";
 import { render, screen } from "@testing-library/react";
 
 describe("Chart", () => {
-  it("can render achievement rate properly", async () => {
+  it("can render achievement rates properly", async () => {
     render(
       <Chart target={100000} earnedIncome={50000} expectedIncome={20000} />
     );
@@ -11,7 +11,7 @@ describe("Chart", () => {
     expect(screen.getByText(/見込み含め: 70%/)).toBeInTheDocument();
   });
 
-  it("can render 100% when earned income is higher than target", async () => {
+  it("can render text '100%' when earned income is higher than target", async () => {
     render(
       <Chart target={100000} earnedIncome={100001} expectedIncome={120000} />
     );
