@@ -37,12 +37,13 @@ jobs:
   jest:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - uses: ArtiomTr/jest-coverage-report-action@v2
+      - uses: actions/checkout@v3
+      - name: Test using Node.js
+        uses: actions/setup-node@v3
         with:
-          package-manager: yarn
-          test-script: yarn test
+          node-version: '14'
+      - run: yarn install
+      - run: yarn test:ci
 
   lint:
     runs-on: ubuntu-latest
