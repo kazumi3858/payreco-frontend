@@ -1,6 +1,6 @@
 import RadioButton from "components/atoms/RadioButton";
-import MonthlyIncome from "components/molecules/MonthlyIncome";
-import AnnualIncome from "components/molecules/Annualncome";
+import MonthlyIncome from "components/organisms/MonthlyIncome";
+import AnnualIncome from "components/organisms/Annualncome";
 import { useState } from "react";
 import { useGetWorks } from "api/works/works";
 import { useGetCompanies } from "api/companies/companies";
