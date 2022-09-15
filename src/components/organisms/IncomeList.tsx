@@ -6,6 +6,7 @@ import { useGetWorks } from "api/works/works";
 import { useGetCompanies } from "api/companies/companies";
 import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
 import { findCurrencyRate } from "utils/find-currency-rate";
+import { format } from "date-fns";
 
 function IncomeList() {
   const { data: works, isLoading } = useGetWorks();
@@ -34,9 +35,8 @@ function IncomeList() {
     return map;
   }, {} as { [key: string]: [[Date, number]] });
 
-  const thisMonth = Number(
-    new Date().getFullYear() + ("0" + (new Date().getMonth() + 1)).slice(-2)
-  );
+  const thisMonth = format(new Date(), "yyyyMM");
+
   const incomeOfThisMonth = incomeListByMonth && incomeListByMonth[thisMonth];
 
   return (

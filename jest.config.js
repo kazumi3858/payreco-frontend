@@ -9,6 +9,7 @@ const customJestConfig = {
   testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: {
     "#(.*)": "<rootDir>/src/$1",
+    "firebase/*": "<rootDir>src/utils/firebase-mock.js",
   },
 };
 
