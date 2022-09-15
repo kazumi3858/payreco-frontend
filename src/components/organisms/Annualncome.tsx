@@ -28,9 +28,9 @@ function AnnualIncome({ incomeList }: Props) {
       {incomeList && isFinite(annualTotalIncome) ? (
         <>
           <ul>
-            {incomeListByMonth.map((income, idx) => (
-              <li key={idx} className="mb-2">
-                {idx + 1}月: {income.toLocaleString()}円
+            {incomeListByMonth.map((income, index) => (
+              <li key={index} className="mb-2">
+                {index + 1}月: {income.toLocaleString()}円
               </li>
             ))}
           </ul>
