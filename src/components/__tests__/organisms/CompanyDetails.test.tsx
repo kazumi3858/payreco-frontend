@@ -9,6 +9,5 @@ describe("CompanyDetails", () => {
     render(<CompanyDetails company={company} />);
     expect(screen.getByText(/株式会社/)).toBeInTheDocument();
     expect(screen.getByText(/[時日]給/)).toBeInTheDocument();
-    expect(screen.getByText(/(米ドル|ユーロ|英ポンド)/)).toBeInTheDocument();
   });
 });
