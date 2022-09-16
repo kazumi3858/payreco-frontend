@@ -14,14 +14,14 @@ export const getGetCompaniesMock = () =>
     (_, i) => i + 1
   ).map(() => ({
     id: faker.random.word(),
-    name: faker.random.word(),
+    name: "株式会社" + faker.random.word(),
     hourly_wage_system: faker.datatype.boolean(),
-    wage_amount: {},
-    currency_type: faker.random.word(),
+    wage_amount: faker.datatype.number(30),
+    currency_type: faker.helpers.arrayElement(["米ドル", "ユーロ", "英ポンド"]),
     user_id: faker.random.word(),
-    deleted_at: {},
-    created_at: faker.random.word(),
-    updated_at: faker.random.word(),
+    deleted_at: null,
+    created_at: faker.date.recent(),
+    updated_at: faker.date.recent(),
   }));
 
 export const getCompaniesMSW = () => [
