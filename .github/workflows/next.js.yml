@@ -60,5 +60,4 @@ jobs:
       - name: Install Package
         run: yarn install
       - name: Run Test
-        run: jest
-
+        run: yarn test
