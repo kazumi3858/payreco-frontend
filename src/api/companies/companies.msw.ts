@@ -10,13 +10,13 @@ import { faker } from "@faker-js/faker";
 
 export const getGetCompaniesMock = () =>
   Array.from(
-    { length: faker.datatype.number({ min: 1, max: 10 }) },
+    { length: faker.datatype.number({ min: 2, max: 10 }) },
     (_, i) => i + 1
-  ).map(() => ({
+  ).map((_, i) => ({
     id: faker.random.word(),
     name: "株式会社" + faker.random.word(),
-    hourly_wage_system: faker.datatype.boolean(),
-    wage_amount: faker.datatype.number(30),
+    hourly_wage_system: i % 2 === 0 ? true : false,
+    wage_amount: i % 2 === 0 ? faker.datatype.number(30) : null,
     currency_type: faker.helpers.arrayElement(["米ドル", "ユーロ", "英ポンド"]),
     user_id: faker.random.word(),
     deleted_at: null,

@@ -5,6 +5,7 @@ import { useState as useStateMock } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getGetCompaniesMock } from "api/companies/companies.msw";
 import { Company } from "api/model";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("react", () => ({
   ...jest.requireActual("react"),
@@ -14,41 +15,66 @@ jest.mock("react", () => ({
 jest.mock("api/default/default");
 
 describe("CompanyForm", () => {
-  beforeEach(() =>
+  beforeEach(() => {
     (useStateMock as jest.Mock).mockImplementation((init) => [
       init,
       setMockState,
-    ])
-  );
+    ]);
+    window.alert = jest.fn();
+  });
 
   const setMockState = jest.fn();
   const queryClient = new QueryClient();
-  const company = getGetCompaniesMock()[0];
+  const wageSystemCompany = getGetCompaniesMock()[0];
+  const nonWageSystemCompany = getGetCompaniesMock()[1];
   const companyForm = (company?: Company) => (
     <QueryClientProvider client={queryClient}>
       <CompanyForm setCompanyForm={setMockState(true)} company={company} />
     </QueryClientProvider>
   );
 
-  it("can render labels for form", () => {
-    render(companyForm(company));
-    expect(screen.getByText(/名前/)).toBeInTheDocument();
-    expect(screen.getByText(/時給制/)).toBeInTheDocument();
-    expect(screen.getByText(/通貨/)).toBeInTheDocument();
+  it("can render posting form with empty inputs and default selected values", () => {
+    const { getByLabelText } = render(companyForm());
+    const selectedCurrency = screen.getByRole("combobox") as HTMLSelectElement;
+    expect(getByLabelText(/名前/)).toHaveValue("");
+    expect(getByLabelText(/時給制/)).toBeChecked();
+    expect(getByLabelText(/時給額/)).toHaveValue(null);
+    expect(selectedCurrency.value).toBe("円");
   });
 
-  it("can render empty inputs for posting", () => {
+  it("can render editing form with current saved values", () => {
+    const { getByLabelText } = render(companyForm(wageSystemCompany));
+    const selectedCurrency = screen.getByRole("combobox") as HTMLSelectElement;
+    expect(getByLabelText(/名前/)).toHaveValue(wageSystemCompany.name);
+    expect(getByLabelText(/時給制/)).toBeChecked();
+    expect(screen.getByLabelText(/時給額/)).toHaveValue(
+      wageSystemCompany.wage_amount
+    );
+    expect(selectedCurrency.value).toBe(wageSystemCompany.currency_type);
+  });
+
+  it("should not show wage amount input when hourly wage system is false", () => {
+    const { getByLabelText } = render(companyForm(nonWageSystemCompany));
+    expect(getByLabelText(/日給制/)).toBeChecked();
+    expect(screen.queryByLabelText(/時給額/)).toBeNull();
+  });
+
+  it("can input values", async () => {
+    const { getByLabelText } = render(companyForm());
+    const inputName = getByLabelText("名前:");
+    const inputWage = getByLabelText("時給額:");
+    await userEvent.type(inputName, "株式会社abc");
+    expect(inputName).toHaveValue("株式会社abc");
+    await userEvent.type(inputWage, "15");
+    expect(inputWage).toHaveValue(15);
+  });
+
+  it("can show alert", async () => {
     render(companyForm());
-    expect(screen.getByLabelText(/名前/)).toHaveValue("");
-    expect(screen.getByLabelText(/時給額/)).toHaveValue(null);
-  });
-
-  it("can render inputs with values for editing", () => {
-    render(companyForm(company));
-    const selectedOption = screen.getByRole("combobox") as HTMLSelectElement;
-    expect(screen.getByLabelText(/名前/)).toHaveValue(company.name);
-    company.hourly_wage_system &&
-      expect(screen.getByLabelText(/時給額/)).toHaveValue(company.wage_amount);
-    expect(selectedOption.value).toBe(company.currency_type);
+    await userEvent.click(screen.getByText(/保存/));
+    expect(window.alert).toHaveBeenCalledWith([
+      "名前は1～30文字にしてください。",
+      "時給額が不正な値・または大きすぎます。",
+    ]);
   });
 });
