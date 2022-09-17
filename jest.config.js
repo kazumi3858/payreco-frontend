@@ -11,6 +11,7 @@ const customJestConfig = {
     "#(.*)": "<rootDir>/src/$1",
     "firebase/*": "<rootDir>src/utils/firebase-mock.js",
   },
+  globalSetup: "<rootDir>/setup-env.js",
 };
 
 module.exports = createJestConfig(customJestConfig);
