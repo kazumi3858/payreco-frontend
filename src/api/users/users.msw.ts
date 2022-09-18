@@ -6,15 +6,23 @@
  * OpenAPI spec version: 1.0
  */
 import { rest } from "msw";
-import { faker } from "@faker-js/faker";
 
-export const getGetUsersUserIdMock = () => ({
-  id: faker.random.word(),
-  uid: faker.random.word(),
-  name: faker.random.word(),
-  target_amount: {},
-  created_at: faker.random.word(),
-  updated_at: faker.random.word(),
+export const getMockUser1 = () => ({
+  id: "userId",
+  uid: "aafjkdfenoWFAGRHR",
+  name: "Tanaka",
+  target_amount: null,
+  created_at: new Date(),
+  updated_at: new Date(),
+});
+
+export const getMockUser2 = () => ({
+  id: "userId2",
+  uid: "gjgsfioTESSF",
+  name: "Yamada",
+  target_amount: 200000,
+  created_at: new Date(),
+  updated_at: new Date(),
 });
 
 export const getUsersMSW = () => [
@@ -22,7 +30,7 @@ export const getUsersMSW = () => [
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getGetUsersUserIdMock())
+      ctx.json(getMockUser1())
     );
   }),
 ];
