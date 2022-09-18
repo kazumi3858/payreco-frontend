@@ -7,22 +7,27 @@
  */
 import { rest } from "msw";
 import { faker } from "@faker-js/faker";
+import { addHours, startOfToday, subDays } from "date-fns";
 
 export const getGetWorksMock = () =>
   Array.from(
     { length: faker.datatype.number({ min: 1, max: 10 }) },
     (_, i) => i + 1
-  ).map(() => ({
+  ).map((_, i) => ({
     id: faker.random.word(),
-    date: faker.date.recent(),
-    starting_time: {},
-    ending_time: {},
-    break_time: {},
-    working_hours: faker.datatype.number({ min: undefined, max: undefined }),
-    pay_amount: faker.datatype.number({ min: undefined, max: undefined }),
-    memo: {},
-    user_id: faker.random.word(),
-    company_id: faker.random.word(),
+    date: subDays(startOfToday(), i),
+    starting_time: addHours(subDays(startOfToday(), i), 8),
+    ending_time: addHours(subDays(startOfToday(), i), 16),
+    break_time: 60,
+    working_hours: 7.0,
+    pay_amount: 70,
+    memo: "メモ" + i,
+    user_id: "userId",
+    company_id: faker.helpers.arrayElement([
+      "companyId1",
+      "companyId2",
+      "companyId3",
+    ]),
     created_at: faker.random.word(),
     updated_at: faker.random.word(),
   }));
