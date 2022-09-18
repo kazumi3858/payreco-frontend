@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import Header from "components/organisms/Header";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -12,6 +12,6 @@ describe("Header", () => {
         <Header />
       </QueryClientProvider>
     );
-    expect(screen.getByText("ログアウト")).toBeInTheDocument();
+    expect(screen.getByText("Menu")).toBeInTheDocument();
   });
 });
