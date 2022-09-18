@@ -1,6 +1,6 @@
 import Heading from "components/atoms/Heading";
 
-type Props = { incomeList?: { [key: string]: [[Date, number]] } };
+type Props = { incomeList?: { [key: string]: [string, number][] } };
 
 function AnnualIncome({ incomeList }: Props) {
   const thisYear = new Date().getFullYear();

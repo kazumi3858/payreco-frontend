@@ -24,7 +24,7 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
         ></div>
       </div>
       <p className="text-xs">
-        現時点: {result(achievementRate)}% 見込み含め:{" "}
+        本日まで: {result(achievementRate)}% 見込み含め:{" "}
         {result(expectedAchievementRate)}%
       </p>
     </div>

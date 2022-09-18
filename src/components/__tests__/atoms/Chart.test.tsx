@@ -7,7 +7,7 @@ describe("Chart", () => {
     render(
       <Chart target={100000} earnedIncome={50000} expectedIncome={20000} />
     );
-    expect(screen.getByText(/現時点: 50%/)).toBeInTheDocument();
+    expect(screen.getByText(/本日まで: 50%/)).toBeInTheDocument();
     expect(screen.getByText(/見込み含め: 70%/)).toBeInTheDocument();
   });
 
@@ -15,7 +15,7 @@ describe("Chart", () => {
     render(
       <Chart target={100000} earnedIncome={100001} expectedIncome={120000} />
     );
-    expect(screen.getByText(/現時点: 100%/)).toBeInTheDocument();
+    expect(screen.getByText(/本日まで: 100%/)).toBeInTheDocument();
     expect(screen.getByText(/見込み含め: 100%/)).toBeInTheDocument();
   });
 });

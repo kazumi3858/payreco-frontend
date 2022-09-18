@@ -29,11 +29,11 @@ function IncomeList() {
       : 0;
     const payAmountWithJPY = Math.floor(work.pay_amount / rate);
     (map[monthOfWorks] = map[monthOfWorks] || []).push([
-      work.date,
+      String(work.date),
       payAmountWithJPY,
     ]);
     return map;
-  }, {} as { [key: string]: [[Date, number]] });
+  }, {} as { [key: string]: [string, number][] });
 
   const thisMonth = format(new Date(), "yyyyMM");
 
