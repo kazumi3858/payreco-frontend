@@ -7,7 +7,9 @@
  */
 import { rest } from "msw";
 import { faker } from "@faker-js/faker";
-import { addHours, startOfToday, subDays } from "date-fns";
+
+const thisYear = new Date().getFullYear();
+const thisMonth = new Date().getMonth() - 1;
 
 export const getGetWorksMock = () =>
   Array.from(
@@ -15,21 +17,21 @@ export const getGetWorksMock = () =>
     (_, i) => i + 1
   ).map((_, i) => ({
     id: faker.random.word(),
-    date: subDays(startOfToday(), i),
-    starting_time: addHours(subDays(startOfToday(), i), 8),
-    ending_time: addHours(subDays(startOfToday(), i), 16),
+    date: new Date(thisYear, thisMonth, i + 1),
+    starting_time: new Date(thisMonth, thisYear, i + 1, 8, 0),
+    ending_time: new Date(thisMonth, thisYear, i + 1, 16, 0),
     break_time: 60,
     working_hours: 7.0,
     pay_amount: 70,
-    memo: "メモ" + i,
+    memo: "メモ" + (i + 1),
     user_id: "userId",
     company_id: faker.helpers.arrayElement([
       "companyId1",
       "companyId2",
       "companyId3",
     ]),
-    created_at: faker.random.word(),
-    updated_at: faker.random.word(),
+    created_at: new Date(),
+    updated_at: new Date(),
   }));
 
 export const getWorksMSW = () => [
