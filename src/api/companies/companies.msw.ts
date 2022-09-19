@@ -11,7 +11,7 @@ import { faker } from "@faker-js/faker";
 export const getGetCompaniesMock = () =>
   Array.from({ length: 3 }, (_, i) => i + 1).map((_, i) => ({
     id: "companyId" + (i + 1),
-    name: "株式会社" + faker.random.word(),
+    name: "株式会社" + (i === 0 ? "abc" : faker.random.word()),
     hourly_wage_system: i % 2 === 0 ? true : false,
     wage_amount: i % 2 === 0 ? 10 : null,
     currency_type: faker.helpers.arrayElement(["米ドル", "ユーロ", "英ポンド"]),

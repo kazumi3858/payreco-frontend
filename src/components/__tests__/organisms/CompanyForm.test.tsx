@@ -20,13 +20,13 @@ describe("CompanyForm", () => {
       init,
       setMockState,
     ]);
-    window.alert = jest.fn();
   });
 
   const setMockState = jest.fn();
   const queryClient = new QueryClient();
   const wageSystemCompany = getGetCompaniesMock()[0];
   const nonWageSystemCompany = getGetCompaniesMock()[1];
+
   const companyForm = (company?: Company) => (
     <QueryClientProvider client={queryClient}>
       <CompanyForm setCompanyForm={setMockState(true)} company={company} />
@@ -70,6 +70,7 @@ describe("CompanyForm", () => {
   });
 
   it("can show alert", async () => {
+    window.alert = jest.fn();
     render(companyForm());
     await userEvent.click(screen.getByText(/保存/));
     expect(window.alert).toHaveBeenCalledWith([
