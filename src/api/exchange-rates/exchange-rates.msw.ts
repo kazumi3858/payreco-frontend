@@ -6,7 +6,6 @@
  * OpenAPI spec version: 1.0
  */
 import { rest } from "msw";
-import { faker } from "@faker-js/faker";
 import { addMonths, format, subMonths } from "date-fns";
 
 const thisMonth = format(new Date(), "yyyyMM");
