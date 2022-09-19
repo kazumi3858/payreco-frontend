@@ -2,17 +2,18 @@ import "@testing-library/jest-dom";
 import RadioButton from "components/atoms/RadioButton";
 import { render } from "@testing-library/react";
 
+const radioButton = (value: string, text: string, checked: boolean) => (
+  <RadioButton
+    type="small"
+    value={value}
+    text={text}
+    onChange={jest.fn()}
+    checked={checked}
+  />
+);
+
 describe("RadioButton", () => {
   it("can render radio buttons properly", () => {
-    const radioButton = (value: string, text: string, checked: boolean) => (
-      <RadioButton
-        type="small"
-        value={value}
-        text={text}
-        onChange={jest.fn()}
-        checked={checked}
-      />
-    );
     const firstButton = radioButton("one", "radio1", true);
     const secondButton = radioButton("two", "radio2", false);
     const { getByLabelText } = render(

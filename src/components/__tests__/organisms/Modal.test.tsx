@@ -8,14 +8,14 @@ jest.mock("react", () => ({
   useState: jest.fn(),
 }));
 
-describe("Modal", () => {
-  const setState = jest.fn();
+const setState = jest.fn();
 
+describe("Modal", () => {
   beforeEach(() => {
     (useStateMock as jest.Mock).mockImplementation((init) => [init, setState]);
   });
 
-  it("should not render modal when user does not open", async () => {
+  it("should not render modal when user has not opened", async () => {
     const [modal, setModal] = useStateMock(false);
     render(
       <Modal modal={modal} setModal={setModal}>

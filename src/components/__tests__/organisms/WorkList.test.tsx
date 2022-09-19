@@ -1,12 +1,12 @@
 import "@testing-library/jest-dom";
 import WorkList from "components/organisms/WorkList";
+import * as firebaseAuth from "firebase/auth";
 import { render, screen } from "@testing-library/react";
 import { getSelectedWorksMock } from "api/works/works.msw";
 import { getCompaniesMSW } from "api/companies/companies.msw";
 import { Work } from "api/model";
 import { setupServer } from "msw/node";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import * as firebaseAuth from "firebase/auth";
 
 jest.mock("firebase/auth", () => {
   const original: typeof firebaseAuth = jest.requireActual("firebase/auth");

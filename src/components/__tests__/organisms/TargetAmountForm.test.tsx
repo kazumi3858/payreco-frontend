@@ -39,7 +39,7 @@ describe("TargetAmountForm", () => {
     );
   });
 
-  it("can show default value if user already set target amount", () => {
+  it("can show default value if user has set target amount", () => {
     const { getByLabelText } = render(targetAmountForm(userWithTargetAmount));
     expect(getByLabelText(/毎月の目標金額/)).toHaveValue(200000);
   });

@@ -11,13 +11,14 @@ jest.mock("@tanstack/react-query", () => {
   return { ...original, useQuery: () => ({}) };
 });
 
+const thisMonth = format(new Date(), "yyyy-MM-");
+const income: [string, number][] = [
+  [thisMonth + "01", 1000],
+  [thisMonth + "10", 2000],
+];
+
 describe("MonthlyIncome", () => {
   it("can render correct income", () => {
-    const thisMonth = format(new Date(), "yyyy-MM-");
-    const income: [string, number][] = [
-      [thisMonth + "01", 1000],
-      [thisMonth + "10", 2000],
-    ];
     render(<MonthlyIncome income={income} isLoading={false} />);
 
     if (getDate(new Date()) > 10) {

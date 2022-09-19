@@ -3,19 +3,20 @@ import AnnualIncome from "components/organisms/Annualncome";
 import { render, screen } from "@testing-library/react";
 import { format } from "date-fns";
 
-describe("AnnualIncome", () => {
-  type incomeListType = { [key: string]: [string, number][] };
-  const thisYear = format(new Date(), "yyyy");
-  const incomeList: incomeListType = {};
-  incomeList[thisYear + "08"] = [
-    [thisYear + "-08-06", 3000],
-    [thisYear + "-08-31", 3000],
-  ];
-  incomeList[thisYear + "09"] = [
-    [thisYear + "-09-01", 10000],
-    [thisYear + "-09-10", 20000],
-  ];
+type incomeListType = { [key: string]: [string, number][] };
+const thisYear = format(new Date(), "yyyy");
+const incomeList: incomeListType = {};
 
+incomeList[thisYear + "08"] = [
+  [thisYear + "-08-06", 3000],
+  [thisYear + "-08-31", 3000],
+];
+incomeList[thisYear + "09"] = [
+  [thisYear + "-09-01", 10000],
+  [thisYear + "-09-10", 20000],
+];
+
+describe("AnnualIncome", () => {
   it("can render title properly", () => {
     render(<AnnualIncome incomeList={incomeList} />);
     expect(screen.getByText("年間の給料")).toBeInTheDocument();
