@@ -1,26 +1,38 @@
 import "@testing-library/jest-dom";
 import CompanyList from "components/organisms/CompanyList";
-import * as ReactQuery from "@tanstack/react-query";
+import * as firebaseAuth from "firebase/auth";
 import { render, screen } from "@testing-library/react";
-import { getGetCompaniesMock } from "api/companies/companies.msw";
+import { getCompaniesMSW2 } from "api/companies/companies.msw";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { setupServer } from "msw/node";
 
-jest.mock("@tanstack/react-query", () => {
-  const original: typeof ReactQuery = jest.requireActual(
-    "@tanstack/react-query"
-  );
-  return {
-    ...original,
-    useQuery: () => ({
-      isLoading: false,
-      data: getGetCompaniesMock(),
-    }),
-  };
+jest.mock("firebase/auth", () => {
+  const original: typeof firebaseAuth = jest.requireActual("firebase/auth");
+  return { ...original, auth: jest.fn() };
 });
 
+const server = setupServer(...getCompaniesMSW2());
+const queryClient = new QueryClient();
+
+const companyList = (
+  <QueryClientProvider client={queryClient}>
+    <CompanyList />
+  </QueryClientProvider>
+);
+
 describe("CompanyList", () => {
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+
+  it("can render loading", async () => {
+    render(companyList);
+    expect(screen.getByText(/Loading/)).toBeInTheDocument();
+  });
+
   it("can render company list", async () => {
-    render(<CompanyList />);
-    expect(screen.getAllByText(/株式会社/)).toBeTruthy();
-    expect(screen.getAllByText(/[時日]給/)).toBeTruthy();
+    render(companyList);
+    expect(await screen.findAllByText(/[時日]給/)).toBeTruthy();
+    expect(screen.getAllByText(/株式会社/)).toHaveLength(3);
   });
 });

@@ -40,3 +40,9 @@ export const getCompaniesMSW = () => [
     return res(ctx.json(getCompanyMock));
   }),
 ];
+
+export const getCompaniesMSW2 = () => [
+  rest.get("*/companies", (_req, res, ctx) => {
+    return res(ctx.json(getGetCompaniesMock()));
+  }),
+];
