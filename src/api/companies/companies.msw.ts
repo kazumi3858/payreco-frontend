@@ -21,6 +21,20 @@ export const getGetCompaniesMock = () =>
     updated_at: faker.date.recent(),
   }));
 
+export const getCompanyMock = [
+  {
+    id: "companyId1",
+    name: "株式会社山田",
+    hourly_wage_system: true,
+    wage_amount: 1500,
+    currency_type: "円",
+    user_id: "userId",
+    deleted_at: null,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+];
+
 export const getCompaniesMSW = () => [
   rest.get("*/companies", (_req, res, ctx) => {
     return res(

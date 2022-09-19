@@ -15,9 +15,10 @@ export const findCurrencyRate = (
     ? selectedMonthRateData.exchange_rate_list
     : exchangeRates.slice(-1)[0].exchange_rate_list;
 
-  const companyCurrencyRate: number = company.currency_type
-    ? Reflect.get(rate, company.currency_type)
-    : 0;
+  const companyCurrencyRate: number =
+    company.currency_type === "円"
+      ? 1
+      : Reflect.get(rate, company.currency_type);
 
   return companyCurrencyRate;
 };

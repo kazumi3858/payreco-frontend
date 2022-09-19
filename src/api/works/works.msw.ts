@@ -37,6 +37,22 @@ export const getGetWorksMock = () =>
     updated_at: new Date(),
   }));
 
+export const getSelectedWorksMock = () =>
+  Array.from({ length: 2 }, (_, i) => i + 1).map((_, i) => ({
+    id: faker.random.word(),
+    date: new Date(thisYear, thisMonth, 1),
+    starting_time: new Date(thisYear, thisMonth, 1, 8 + i * 4, 0),
+    ending_time: new Date(thisYear, thisMonth, 1, 12 + i * 4, 0),
+    break_time: 60,
+    working_hours: 3.0,
+    pay_amount: 4500,
+    memo: "メモ" + (i + 1),
+    user_id: "userId",
+    company_id: "companyId1",
+    created_at: new Date(),
+    updated_at: new Date(),
+  }));
+
 export const getWorksMSW = () => [
   rest.get("*/works", (_req, res, ctx) => {
     return res(

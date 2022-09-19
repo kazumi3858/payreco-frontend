@@ -42,7 +42,9 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <p>
           {`合計勤務: ${work.working_hours}時間 `}
           {`給料: ${work.pay_amount}${company.currency_type}`}
-          {rate > 0 && ` (${Math.floor(work.pay_amount / rate)}円)`}
+          {company.currency_type !== "円" &&
+            rate > 0 &&
+            ` (${Math.floor(work.pay_amount / rate)}円)`}
         </p>
         <p>{work.memo && `メモ: ${work.memo}`}</p>
       </div>
