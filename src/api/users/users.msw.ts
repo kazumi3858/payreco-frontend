@@ -27,10 +27,6 @@ export const getMockUser2 = () => ({
 
 export const getUsersMSW = () => [
   rest.get("*/user", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getMockUser1())
-    );
+    return res(ctx.json(getMockUser1()));
   }),
 ];

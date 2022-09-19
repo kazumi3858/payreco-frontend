@@ -37,10 +37,6 @@ export const getGetExchangeRatesMock = () =>
 
 export const getExchangeRatesMSW = () => [
   rest.get("*/exchange_rates", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetExchangeRatesMock())
-    );
+    return res(ctx.json(getGetExchangeRatesMock()));
   }),
 ];
