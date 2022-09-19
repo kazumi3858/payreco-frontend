@@ -61,8 +61,8 @@ describe("CompanyForm", () => {
 
   it("can input values", async () => {
     const { getByLabelText } = render(companyForm());
-    const inputName = getByLabelText("名前:");
-    const inputWage = getByLabelText("時給額:");
+    const inputName = getByLabelText(/名前/);
+    const inputWage = getByLabelText(/時給額/);
     await userEvent.type(inputName, "株式会社abc");
     expect(inputName).toHaveValue("株式会社abc");
     await userEvent.type(inputWage, "15");

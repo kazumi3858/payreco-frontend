@@ -139,8 +139,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
       {shiftMode ? (
         <>
           <div>
-            <label>開始時刻: </label>
+            <label htmlFor="starting-time">開始時刻: </label>
             <input
+              id="starting-time"
               type="datetime-local"
               className="block"
               min={minTime}
@@ -154,8 +155,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             />
           </div>
           <div>
-            <label>終了時刻: </label>
+            <label htmlFor="ending-time">終了時刻: </label>
             <input
+              id="ending-time"
               type="datetime-local"
               className="block"
               min={minTime}
@@ -242,8 +244,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         )}
       </div>
       <div>
-        <label>メモ: </label>
+        <label htmlFor="memo">メモ: </label>
         <input
+          id="memo"
           className="m-1"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}

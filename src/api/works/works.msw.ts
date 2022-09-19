@@ -18,18 +18,21 @@ export const getGetWorksMock = () =>
   ).map((_, i) => ({
     id: faker.random.word(),
     date: new Date(thisYear, thisMonth, i + 1),
-    starting_time: new Date(thisMonth, thisYear, i + 1, 8, 0),
-    ending_time: new Date(thisMonth, thisYear, i + 1, 16, 0),
+    starting_time: new Date(thisYear, thisMonth, i + 1, 8, 0),
+    ending_time: new Date(thisYear, thisMonth, i + 1, 16, 0),
     break_time: 60,
     working_hours: 7.0,
     pay_amount: 70,
     memo: "メモ" + (i + 1),
     user_id: "userId",
-    company_id: faker.helpers.arrayElement([
-      "companyId1",
-      "companyId2",
-      "companyId3",
-    ]),
+    company_id:
+      i === 0
+        ? "companyId1"
+        : faker.helpers.arrayElement([
+            "companyId1",
+            "companyId2",
+            "companyId3",
+          ]),
     created_at: new Date(),
     updated_at: new Date(),
   }));
