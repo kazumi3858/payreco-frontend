@@ -1,39 +1,29 @@
 import "@testing-library/jest-dom";
 import CompanyForm from "components/organisms/CompanyForm";
+import userEvent from "@testing-library/user-event";
+import * as firebaseAuth from "firebase/auth";
 import { render, screen } from "@testing-library/react";
-import { useState as useStateMock } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getGetCompaniesMock } from "api/companies/companies.msw";
 import { Company } from "api/model";
-import userEvent from "@testing-library/user-event";
 
-jest.mock("react", () => ({
-  ...jest.requireActual("react"),
-  useState: jest.fn(),
-}));
+jest.mock("firebase/auth", () => {
+  const original: typeof firebaseAuth = jest.requireActual("firebase/auth");
+  return { ...original, auth: jest.fn() };
+});
 
-jest.mock("api/default/default");
+const queryClient = new QueryClient();
+const wageSystemCompany = getGetCompaniesMock()[0];
+const nonWageSystemCompany = getGetCompaniesMock()[1];
+
+const companyForm = (company?: Company) => (
+  <QueryClientProvider client={queryClient}>
+    <CompanyForm setCompanyForm={jest.fn()} company={company} />
+  </QueryClientProvider>
+);
 
 describe("CompanyForm", () => {
-  beforeEach(() => {
-    (useStateMock as jest.Mock).mockImplementation((init) => [
-      init,
-      setMockState,
-    ]);
-  });
-
-  const setMockState = jest.fn();
-  const queryClient = new QueryClient();
-  const wageSystemCompany = getGetCompaniesMock()[0];
-  const nonWageSystemCompany = getGetCompaniesMock()[1];
-
-  const companyForm = (company?: Company) => (
-    <QueryClientProvider client={queryClient}>
-      <CompanyForm setCompanyForm={setMockState(true)} company={company} />
-    </QueryClientProvider>
-  );
-
-  it("can render posting form with empty inputs and default selected values", () => {
+  it("can render posting form with empty inputs and default values", () => {
     const { getByLabelText } = render(companyForm());
     const selectedCurrency = screen.getByRole("combobox") as HTMLSelectElement;
     expect(getByLabelText(/名前/)).toHaveValue("");
@@ -69,12 +59,40 @@ describe("CompanyForm", () => {
     expect(inputWage).toHaveValue(15);
   });
 
-  it("can show alert", async () => {
+  it("can validate incorrect name", async () => {
     window.alert = jest.fn();
-    render(companyForm());
+    const { getByLabelText } = render(companyForm());
+    const inputName = getByLabelText(/名前/);
+    const inputWage = getByLabelText(/時給額/);
+    await userEvent.type(inputName, "あ".repeat(30));
+    await userEvent.type(inputWage, "10");
+    expect(screen.queryByText("名前は1～30文字にしてください。")).toBeNull();
+    await userEvent.type(inputName, "あ".repeat(31));
+    expect(
+      screen.getByText("名前は1～30文字にしてください。")
+    ).toBeInTheDocument();
     await userEvent.click(screen.getByText(/保存/));
     expect(window.alert).toHaveBeenCalledWith([
       "名前は1～30文字にしてください。",
+    ]);
+  });
+
+  it("can validate incorrect wage amount", async () => {
+    window.alert = jest.fn();
+    const { getByLabelText } = render(companyForm());
+    const inputName = getByLabelText(/名前/);
+    const inputWage = getByLabelText(/時給額/);
+    await userEvent.type(inputName, "株式会社abc");
+    await userEvent.type(inputWage, "99999");
+    expect(
+      screen.queryByText("時給額が不正な値・または大きすぎます。")
+    ).toBeNull();
+    await userEvent.type(inputWage, "100000");
+    expect(
+      screen.getByText("時給額が不正な値・または大きすぎます。")
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByText(/保存/));
+    expect(window.alert).toHaveBeenCalledWith([
       "時給額が不正な値・または大きすぎます。",
     ]);
   });

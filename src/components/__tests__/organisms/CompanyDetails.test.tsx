@@ -8,7 +8,7 @@ const company = getGetCompaniesMock()[0];
 describe("CompanyDetails", () => {
   it("can render company details", () => {
     render(<CompanyDetails company={company} />);
-    expect(screen.getByText(/株式会社/)).toBeInTheDocument();
-    expect(screen.getByText(/[時日]給/)).toBeInTheDocument();
+    expect(screen.getByText(/株式会社abc/)).toBeInTheDocument();
+    expect(screen.getByText(/時給10米ドル/)).toBeInTheDocument();
   });
 });

@@ -9,7 +9,7 @@ import { User } from "api/model";
 
 jest.mock("firebase/auth", () => {
   const original: typeof firebaseAuth = jest.requireActual("firebase/auth");
-  return { ...original, auth: () => ({}) };
+  return { ...original, auth: jest.fn() };
 });
 
 const queryClient = new QueryClient();
@@ -30,9 +30,19 @@ describe("TargetAmountForm", () => {
     expect(input).toHaveValue(111);
   });
 
-  it("can show alert", async () => {
+  it("can validate target amount", async () => {
     window.alert = jest.fn();
-    render(targetAmountForm(user));
+    const { getByLabelText } = render(targetAmountForm(user));
+    const input = getByLabelText(/毎月の目標金額/);
+    await userEvent.type(input, "9999999");
+    expect(
+      screen.queryByText("目標金額が不正な値・または大きすぎます。")
+    ).toBeNull();
+    await userEvent.clear(input);
+    await userEvent.type(input, "10000000");
+    expect(
+      screen.getByText("目標金額が不正な値・または大きすぎます。")
+    ).toBeInTheDocument();
     await userEvent.click(screen.getByText(/保存/));
     expect(window.alert).toHaveBeenCalledWith(
       "目標金額が不正な値・または大きすぎます。"

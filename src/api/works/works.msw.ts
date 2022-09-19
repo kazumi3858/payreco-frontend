@@ -42,6 +42,21 @@ export const getSelectedWorksMock = () =>
     updated_at: new Date(),
   }));
 
+export const getIncorrectTimeWork = {
+  id: "workId1",
+  date: new Date(thisYear, thisMonth, 1),
+  starting_time: new Date(thisYear, thisMonth, 1, 9, 0),
+  ending_time: new Date(thisYear, thisMonth, 1, 8, 0),
+  break_time: 0,
+  working_hours: 0,
+  pay_amount: 0,
+  memo: null,
+  user_id: "userId1",
+  company_id: "companyId1",
+  created_at: new Date(),
+  updated_at: new Date(),
+};
+
 export const getWorksMSW = () => [
   rest.get("*/works", (_req, res, ctx) => {
     return res(ctx.json(getGetWorksMock()));

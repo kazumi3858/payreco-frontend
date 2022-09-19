@@ -98,12 +98,11 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
     e.preventDefault();
 
     const validation = [];
-    if (workingHours <= 0)
-      validation.push("合計時間は正の数でなければなりません。");
+    if (workingHours <= 0) validation.push("合計時間が正しくありません。");
     if (payAmount > 999999 || payAmount < 0)
-      validation.push("金額がマイナス・または大きすぎます。");
+      validation.push("金額が不正な値・または大きすぎます。");
     if (memo && memo.length > 50)
-      validation.push(`メモを50文字以内に収めてください。`);
+      validation.push(`メモは50文字以内に収めてください。`);
     if (validation.length > 0) return alert(validation);
 
     setDisableButton(true);
@@ -225,22 +224,24 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         </div>
       )}
       <div>
-        <label>給料: </label>
+        <label htmlFor="pay">給料: </label>
         {company.wage_amount ? (
           <span>
             {Math.round(company.wage_amount * workingHours * 100) / 100}
           </span>
         ) : (
           <input
+            id="pay"
             className="m-1 w-16"
             type="number"
             defaultValue={work?.pay_amount ? work?.pay_amount : ""}
             onChange={(e) => setPayAmount(Number(e.target.value))}
+            onFocus={(e) => e.target.select()}
           />
         )}
         {company.currency_type}
         {(payAmount > 999999 || payAmount < 0) && (
-          <p className="text-rose-600">金額がマイナス・または大きすぎます。</p>
+          <p className="text-rose-600">金額が不正な値・または大きすぎます。</p>
         )}
       </div>
       <div>
@@ -254,7 +255,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           onFocus={(e) => e.target.select()}
         />
         {memo && memo.length > 50 && (
-          <p className="text-rose-600">メモを50文字以内に収めてください。</p>
+          <p className="text-rose-600">メモは50文字以内に収めてください。</p>
         )}
       </div>
       <SubmitButton updating={updating} disabled={disableButton} />
