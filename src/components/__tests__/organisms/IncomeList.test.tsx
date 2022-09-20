@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import IncomeList from "components/organisms/IncomeList";
 import * as firebaseAuth from "firebase/auth";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { setupServer } from "msw/node";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getWorksMSW } from "api/works/works.msw";
@@ -25,9 +25,10 @@ describe("IncomeList", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  it("can render loading", () => {
+  it("can render loading", async () => {
     render(incomeList);
     expect(screen.getAllByText(/Loading/)).toBeTruthy();
+    await waitFor(() => expect(screen.queryByText(/Loading/)).toBeNull());
   });
 
   it("can render monthly and annual contents", async () => {
