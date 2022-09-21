@@ -6,26 +6,36 @@
  * OpenAPI spec version: 1.0
  */
 import { rest } from "msw";
-import { faker } from "@faker-js/faker";
+import { addMonths, format, subMonths } from "date-fns";
+
+const thisMonth = format(new Date(), "yyyyMM");
+const lastMonth = format(subMonths(new Date(), 1), "yyyyMM");
+const nextMonth = format(addMonths(new Date(), 1), "yyyyMM");
 
 export const getGetExchangeRatesMock = () =>
-  Array.from(
-    { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1
-  ).map(() => ({
-    id: faker.datatype.number({ min: undefined, max: undefined }),
-    year_and_month: faker.datatype.number({ min: undefined, max: undefined }),
-    exchange_rate_list: {},
-    created_at: faker.random.word(),
-    updated_at: faker.random.word(),
+  Array.from({ length: 3 }, (_, i) => i + 1).map((_, i) => ({
+    id: i,
+    year_and_month: [thisMonth, lastMonth, nextMonth][i],
+    exchange_rate_list: {
+      円: 1,
+      米ドル: 0.007416,
+      ユーロ: 0.007282,
+      英ポンド: 0.006149,
+      インドルピー: 0.5887,
+      豪ドル: 0.01075,
+      カナダドル: 0.009609,
+      ランド: 0.124,
+      NZドル: 0.01187,
+      SGドル: 0.01022,
+      人民元: 0.05024,
+      スイスフラン: 0.007126,
+    },
+    created_at: new Date(),
+    updated_at: new Date(),
   }));
 
 export const getExchangeRatesMSW = () => [
   rest.get("*/exchange_rates", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetExchangeRatesMock())
-    );
+    return res(ctx.json(getGetExchangeRatesMock()));
   }),
 ];

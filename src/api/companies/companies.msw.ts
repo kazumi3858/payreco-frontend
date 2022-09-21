@@ -6,30 +6,42 @@
  * OpenAPI spec version: 1.0
  */
 import { rest } from "msw";
-import { faker } from "@faker-js/faker";
 
 export const getGetCompaniesMock = () =>
-  Array.from(
-    { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1
-  ).map(() => ({
-    id: faker.random.word(),
-    name: faker.random.word(),
-    hourly_wage_system: faker.datatype.boolean(),
-    wage_amount: {},
-    currency_type: faker.random.word(),
-    user_id: faker.random.word(),
-    deleted_at: {},
-    created_at: faker.random.word(),
-    updated_at: faker.random.word(),
+  Array.from({ length: 3 }, (_, i) => i + 1).map((_, i) => ({
+    id: "companyId" + (i + 1),
+    name: "株式会社" + ["abc", "cde", "efg"][i],
+    hourly_wage_system: i % 2 === 0 ? true : false,
+    wage_amount: i % 2 === 0 ? 10 : null,
+    currency_type: ["米ドル", "ユーロ", "英ポンド"][i],
+    user_id: "userId1",
+    deleted_at: null,
+    created_at: new Date(),
+    updated_at: new Date(),
   }));
+
+export const getCompanyMock = [
+  {
+    id: "companyId1",
+    name: "株式会社田中",
+    hourly_wage_system: true,
+    wage_amount: 1500,
+    currency_type: "円",
+    user_id: "userId1",
+    deleted_at: null,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+];
 
 export const getCompaniesMSW = () => [
   rest.get("*/companies", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetCompaniesMock())
-    );
+    return res(ctx.json(getCompanyMock));
+  }),
+];
+
+export const getCompaniesMSW2 = () => [
+  rest.get("*/companies", (_req, res, ctx) => {
+    return res(ctx.json(getGetCompaniesMock()));
   }),
 ];

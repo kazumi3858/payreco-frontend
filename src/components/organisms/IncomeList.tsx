@@ -1,11 +1,12 @@
 import RadioButton from "components/atoms/RadioButton";
-import MonthlyIncome from "components/molecules/MonthlyIncome";
-import AnnualIncome from "components/molecules/Annualncome";
+import MonthlyIncome from "components/organisms/MonthlyIncome";
+import AnnualIncome from "components/organisms/Annualncome";
 import { useState } from "react";
 import { useGetWorks } from "api/works/works";
 import { useGetCompanies } from "api/companies/companies";
 import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
 import { findCurrencyRate } from "utils/find-currency-rate";
+import { format } from "date-fns";
 
 function IncomeList() {
   const { data: works, isLoading } = useGetWorks();
@@ -28,15 +29,14 @@ function IncomeList() {
       : 0;
     const payAmountWithJPY = Math.floor(work.pay_amount / rate);
     (map[monthOfWorks] = map[monthOfWorks] || []).push([
-      work.date,
+      String(work.date),
       payAmountWithJPY,
     ]);
     return map;
-  }, {} as { [key: string]: [[Date, number]] });
+  }, {} as { [key: string]: [string, number][] });
 
-  const thisMonth = Number(
-    new Date().getFullYear() + ("0" + (new Date().getMonth() + 1)).slice(-2)
-  );
+  const thisMonth = format(new Date(), "yyyyMM");
+
   const incomeOfThisMonth = incomeListByMonth && incomeListByMonth[thisMonth];
 
   return (

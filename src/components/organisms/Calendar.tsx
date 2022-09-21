@@ -82,17 +82,17 @@ function Calendar() {
               </button>
             </div>
             <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
-              {dayOfWeek.map((day, dayIdx) => (
-                <div key={dayIdx}>{day}</div>
+              {dayOfWeek.map((day, index) => (
+                <div key={index}>{day}</div>
               ))}
             </div>
             <div className="grid grid-cols-7 mt-2 text-sm">
-              {days.map((day, dayIdx) => (
+              {days.map((day, index) => (
                 <div
                   key={day.toString()}
                   onClick={() => setSelectedDay(day)}
                   className={classNames(
-                    dayIdx === 0 && colStartClasses[getDay(day)],
+                    index === 0 && colStartClasses[getDay(day)],
                     isEqual(day, selectedDay) && "text-white",
                     !isEqual(day, selectedDay) &&
                       isToday(day) &&

@@ -87,8 +87,9 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>名前: </label>
+        <label htmlFor="name">名前: </label>
         <input
+          id="name"
           defaultValue={defaultName}
           onChange={(e) => setName(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -115,8 +116,9 @@ function CompanyForm({ setCompanyForm, company }: Props) {
       </div>
       {wageSystem && (
         <div>
-          <label>時給額: </label>
+          <label htmlFor="wage">時給額: </label>
           <input
+            id="wage"
             type="number"
             step="0.01"
             defaultValue={defaultWageAmount ? defaultWageAmount : ""}

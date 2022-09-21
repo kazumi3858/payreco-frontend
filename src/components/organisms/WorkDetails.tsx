@@ -2,7 +2,7 @@ import WorkForm from "components/organisms/WorkForm";
 import Button from "components/atoms/Button";
 import DeleteConfirmation from "./DeleteConfirmation";
 import Modal from "./Modal";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 import { Company, Work } from "api/model";
 import { useState } from "react";
 import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
@@ -18,8 +18,8 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   const [workForm, setWorkForm] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const { data } = useGetExchangeRates();
-  const startingTime = parseISO(`${work.starting_time}`);
-  const endingTime = parseISO(`${work.ending_time}`);
+  const startingTime = new Date(`${work.starting_time}`);
+  const endingTime = new Date(`${work.ending_time}`);
   const hasBreak = work.break_time !== null && work.break_time > 0;
   const hourOfBreak = work.break_time ? Math.floor(work.break_time / 60) : 0;
   const minuteOfBreak = work.break_time ? work.break_time % 60 : 0;
@@ -42,7 +42,9 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <p>
           {`合計勤務: ${work.working_hours}時間 `}
           {`給料: ${work.pay_amount}${company.currency_type}`}
-          {rate > 0 && ` (${Math.floor(work.pay_amount / rate)}円)`}
+          {company.currency_type !== "円" &&
+            rate > 0 &&
+            ` (${Math.floor(work.pay_amount / rate)}円)`}
         </p>
         <p>{work.memo && `メモ: ${work.memo}`}</p>
       </div>

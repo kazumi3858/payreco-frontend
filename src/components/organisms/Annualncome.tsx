@@ -1,12 +1,12 @@
 import Heading from "components/atoms/Heading";
 
-type Props = { incomeList?: { [key: string]: [[Date, number]] } };
+type Props = { incomeList?: { [key: string]: [string, number][] } };
 
 function AnnualIncome({ incomeList }: Props) {
   const thisYear = new Date().getFullYear();
   const numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const monthsOfThisYear = numArray.map((month) =>
-    Number(thisYear + ("0" + month).slice(-2))
+  const monthsOfThisYear = numArray.map(
+    (month) => thisYear + ("0" + month).slice(-2)
   );
 
   const incomeListByMonth = monthsOfThisYear.map(
@@ -28,9 +28,9 @@ function AnnualIncome({ incomeList }: Props) {
       {incomeList && isFinite(annualTotalIncome) ? (
         <>
           <ul>
-            {incomeListByMonth.map((income, idx) => (
-              <li key={idx} className="mb-2">
-                {idx + 1}月: {income.toLocaleString()}円
+            {incomeListByMonth.map((income, index) => (
+              <li key={index} className="mb-2">
+                {index + 1}月: {income.toLocaleString()}円
               </li>
             ))}
           </ul>

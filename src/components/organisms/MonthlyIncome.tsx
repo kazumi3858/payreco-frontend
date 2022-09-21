@@ -5,17 +5,17 @@ import { useGetUsersUserId } from "api/users/users";
 import { isPast, parseISO } from "date-fns";
 
 type Props = {
-  income?: [[Date, number]];
+  income?: [string, number][];
   isLoading: boolean;
 };
 
 function MonthlyIncome({ income, isLoading }: Props) {
   const { data } = useGetUsersUserId();
-
   const totalIncome = income?.reduce((sum, array) => sum + array[1], 0) || 0;
-  const payOfPastWorks = income?.filter((data) =>
-    isPast(parseISO(String(data[0])))
+  const payOfPastWorks = income?.filter((dailyIncome) =>
+    isPast(parseISO(dailyIncome[0]))
   );
+
   const earnedIncome =
     payOfPastWorks?.reduce((sum, array) => sum + array[1], 0) || 0;
   const expectedIncome = totalIncome - earnedIncome;
@@ -26,7 +26,9 @@ function MonthlyIncome({ income, isLoading }: Props) {
       {!isLoading && isFinite(totalIncome) ? (
         <div>
           <ul>
-            <li className="mb-2">現在: {earnedIncome.toLocaleString()}円</li>
+            <li className="mb-2">
+              本日まで: {earnedIncome.toLocaleString()}円
+            </li>
             <li className="mb-2">
               見込み: {expectedIncome.toLocaleString()}円
             </li>
