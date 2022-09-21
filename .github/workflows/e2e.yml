@@ -1,39 +1,39 @@
-name: E2E Test
+# name: E2E Test
 
-on:
-  pull_request:
-    branches:
-      - master
-    types: [closed]
+# on:
+#   pull_request:
+#     branches:
+#       - master
+#     types: [closed]
 
-jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Github Action cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
-        with:
-          group: 'E2E Tests'
-          build: yarn build
-          start: yarn start
-          wait-on: 'http://localhost:3001'
-          record: true
-    env:
-      NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-      CYPRESS_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
-      CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
-      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-      GITHUB_HEAD_REF: ${{ github.head_ref }}
-      GITHUB_REF: ${{ github.ref }}
+# jobs:
+#   cypress-run:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Use Github Action cache
+#         uses: actions/cache@v3
+#         with:
+#           path: |
+#             ~/.npm
+#             ${{ github.workspace }}/.next/cache
+#           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+#           restore-keys: |
+#             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+#       - name: Cypress run
+#         uses: cypress-io/github-action@v4
+#         with:
+#           group: 'E2E Tests'
+#           build: yarn build
+#           start: yarn start
+#           wait-on: 'http://localhost:3001'
+#           record: true
+#     env:
+#       NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+#       CYPRESS_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+#       CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
+#       CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
+#       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+#       GITHUB_HEAD_REF: ${{ github.head_ref }}
+#       GITHUB_REF: ${{ github.ref }}
