@@ -6,16 +6,7 @@ describe("Work CRUD function", () => {
 
   before(() => {
     cy.login();
-    cy.visit("/");
-
-    cy.contains("button", "勤務先を追加する").click();
-    cy.get("#name").type("株式会社ジキュウ");
-    cy.get("#wage").type("1000");
-    cy.contains("input", "保存").click();
-    cy.contains("button", "勤務先を追加する").click();
-    cy.get("#name").type("株式会社ニッキュウ");
-    cy.contains("日給制").click();
-    cy.contains("input", "保存").click();
+    cy.createCompanies();
   });
 
   it("can render input for pay amount when pay system is not hourly wage", () => {
@@ -113,12 +104,7 @@ describe("Work CRUD function", () => {
   });
 
   after(() => {
-    cy.visit("/companies");
-    cy.contains("button", "削除").click();
-    cy.contains("button", "はい").click();
-    cy.contains("株式会社ジキュウ").should("not.exist");
-    cy.contains("button", "削除").click();
-    cy.contains("button", "はい").click();
+    cy.deleteCompanies();
     cy.logout();
   });
 });

@@ -16,3 +16,68 @@ const fbConfig = {
 firebase.initializeApp(fbConfig);
 
 attachCustomCommands({ Cypress, cy, firebase });
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      createCompanyAndWork: typeof createCompanyAndWork;
+      createCompanies: typeof createCompanies;
+      deleteCompanyAndWork: typeof deleteCompanyAndWork;
+      deleteCompanies: typeof deleteCompanies;
+    }
+  }
+}
+
+const createCompanyAndWork = () => {
+  cy.visit("/");
+  cy.contains("button", "勤務先を追加する").click();
+  cy.get("#name").type("株式会社ニッキュウ");
+  cy.contains("日給制").click();
+  cy.contains("input", "保存").click();
+  cy.contains("button", "株式会社ニッキュウ").click();
+  cy.contains("合計勤務時間のみ入力").click();
+  cy.get("select").first().select("5");
+  cy.get("#pay").type("10000");
+  cy.contains("input", "保存").click();
+};
+
+const createCompanies = () => {
+  cy.visit("/");
+  cy.contains("button", "勤務先を追加する").click();
+  cy.get("#name").type("株式会社ジキュウ");
+  cy.get("#wage").type("1000");
+  cy.contains("input", "保存").click();
+  cy.contains("button", "勤務先を追加する").click();
+  cy.get("#name").type("株式会社ニッキュウ");
+  cy.contains("日給制").click();
+  cy.contains("input", "保存").click();
+};
+
+const deleteCompanyAndWork = () => {
+  cy.visit("/companies");
+  cy.contains("株式会社ニッキュウ").should("have.length", 1);
+  cy.contains("button", "削除").click();
+  cy.contains("button", "はい").click();
+  cy.contains("株式会社ニッキュウ").should("have.length", 0);
+  cy.visit("/");
+  cy.contains("株式会社ニッキュウ").should("have.length", 1);
+  cy.contains("button", "削除").click();
+  cy.contains("button", "はい").click();
+  cy.contains("株式会社ニッキュウ").should("have.length", 0);
+};
+
+const deleteCompanies = () => {
+  cy.contains("株式会社").should("have.length", 2);
+  cy.visit("/companies");
+  cy.contains("button", "削除").click();
+  cy.contains("button", "はい").click();
+  cy.contains("株式会社").should("have.length", 1);
+  cy.contains("button", "削除").click();
+  cy.contains("button", "はい").click();
+  cy.contains("株式会社").should("have.length", 0);
+};
+
+Cypress.Commands.add("createCompanyAndWork", createCompanyAndWork);
+Cypress.Commands.add("createCompanies", createCompanies);
+Cypress.Commands.add("deleteCompanyAndWork", deleteCompanyAndWork);
+Cypress.Commands.add("deleteCompanies", deleteCompanies);

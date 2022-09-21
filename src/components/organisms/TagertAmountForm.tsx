@@ -42,9 +42,10 @@ function TargetAmountForm({ user }: Props) {
   return (
     <div className="pb-4">
       <form onSubmit={handleSubmit}>
-        <label>
+        <label htmlFor="target">
           毎月の目標金額:{" "}
           <input
+            id="target"
             className="w-20 bg-stone-100"
             type="number"
             defaultValue={defaultTargetAmount}
