@@ -24,6 +24,11 @@ function Login() {
   return (
     <>
       <div className="pt-5 bg-gradient-to-r from-[#E3E7E5] to-[#9EB2B4]">
+        <div className="text-right">
+          <div className="inline-block mr-10 drop-shadow-xl">
+            <h1 className="text-white/70 text-lg mx-6 my-3">ペ イ レ コ</h1>
+          </div>
+        </div>
         <div className="py-20 mb-10 max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
           <div className="lg:grid lg:grid-cols-2">
             <div className="drop-shadow-2xl flex justify-center items-center">
@@ -42,6 +47,7 @@ function Login() {
               <ul>
                 <li>働いた時間を入力して簡単に給料計算。</li>
                 <li>外貨の報酬は日本円に換算して表示。</li>
+                <li>シフト管理としても使うことができます。</li>
               </ul>
             </div>
           </div>
@@ -58,6 +64,11 @@ function Login() {
             Googleアカウントでログインして始める
           </button>
         )}
+      </div>
+      <div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
       </div>
     </>
   );

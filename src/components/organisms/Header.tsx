@@ -12,7 +12,7 @@ function Header() {
   const handleClickQuestion = () => router.push("/questions");
 
   return (
-    <header className="h-14 bg-stone-200">
+    <header className="h-14 bg-stone-100">
       <Dropdown
         logout={handleClickLogout}
         visitQuestion={handleClickQuestion}
