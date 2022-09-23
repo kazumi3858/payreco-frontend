@@ -35,7 +35,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
               endingTime,
               "h:mm a"
             )}`}
-        </span>{" "}
+        </span>
         <span>
           {hasBreak && " (休憩 "}
           {hourOfBreak > 0 && `${hourOfBreak}時間`}

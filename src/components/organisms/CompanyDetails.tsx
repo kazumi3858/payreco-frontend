@@ -14,7 +14,7 @@ function CompanyDetails({ company }: Props) {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   return (
-    <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
+    <li className="flex items-center px-4 py-2 space-x-4 group rounded-2xl focus-within:bg-gray-100 hover:bg-gray-100">
       <div className="flex-auto">
         <p>{company.name}</p>
         <p>
@@ -23,16 +23,12 @@ function CompanyDetails({ company }: Props) {
             : `日給制`}
         </p>
       </div>
-      <div>
-        <div>
-          <Button text="編集" onClick={() => setCompanyForm(true)} />
-          <Button text="削除" onClick={() => setDeleteConfirmation(true)} />
-        </div>
-
+      <div className="flex">
+        <Button text="編集" onClick={() => setCompanyForm(true)} />
+        <Button text="削除" onClick={() => setDeleteConfirmation(true)} />
         <Modal modal={companyForm} setModal={setCompanyForm}>
           <CompanyForm company={company} setCompanyForm={setCompanyForm} />
         </Modal>
-
         <Modal modal={deleteConfirmation} setModal={setDeleteConfirmation}>
           <DeleteConfirmation
             setDeleteConfirmation={setDeleteConfirmation}

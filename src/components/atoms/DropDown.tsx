@@ -1,3 +1,4 @@
+import { Bars3Icon } from "@heroicons/react/24/solid";
 import { MouseEventHandler, useState } from "react";
 
 type Props = {
@@ -16,8 +17,8 @@ function Dropdown({ logout, visitQuestion }: Props) {
       tabIndex={0}
       className="relative"
     >
-      <div className="py-2 px-5 rounded-full cursor-pointer bg-gradient-to-r from-main-g-l to-main-g-r inline absolute top-3 right-3">
-        メニュー
+      <div className="py-4 px-4 rounded-full cursor-pointer bg-gradient-to-r from-main-g-l to-main-g-r inline absolute top-3 right-3">
+        <Bars3Icon className="h-6 w-6" />
       </div>
       <ul
         className={

@@ -43,7 +43,7 @@ function IncomeList() {
     <div className="pt-5">
       <div className="max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
         <div className="flex justify-center">
-          <div className="md:hidden space-x-6 mb-6">
+          <div className="md:hidden space-x-5 mb-6">
             <RadioButton
               type="big"
               value="true"
@@ -61,10 +61,8 @@ function IncomeList() {
           </div>
         </div>
         <div className="md:grid md:grid-cols-2">
-          <div className="md:pr-14">
-            <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
-              <MonthlyIncome income={incomeOfThisMonth} isLoading={isLoading} />
-            </div>
+          <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
+            <MonthlyIncome income={incomeOfThisMonth} isLoading={isLoading} />
           </div>
           <div
             className={

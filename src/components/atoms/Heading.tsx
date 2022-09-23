@@ -3,7 +3,11 @@ type Props = {
 };
 
 function Heading({ text }: Props) {
-  return <h2 className="text-xl mb-5">{text}</h2>;
+  return (
+    <div className="text-center">
+      <h2 className="text-xl mb-3 font-bold pt-5">{text}</h2>
+    </div>
+  );
 }
 
 export default Heading;
