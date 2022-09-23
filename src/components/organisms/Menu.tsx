@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function Menu() {
   const style = (text: string) =>
-    `${text} text-white py-2 lg:py-3 px-5 bg-[#9695cc] hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:ring-lime-300`;
+    `${text} text-white py-2 lg:py-3 px-5 bg-main-g-r hover:bg-stone-500 active:bg-stone-300 focus:outline-none focus:ring focus:ring-stone-300`;
   return (
     <div className="bg-stone-100 py-5 text-center sticky bottom-5 h-14">
       <div>

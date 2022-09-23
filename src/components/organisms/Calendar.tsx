@@ -60,23 +60,23 @@ function Calendar() {
   return (
     <div className="pt-5">
       <div className="max-w-lg mx-auto md:max-w-7xl md:px-6">
-        <div className="md:grid md:grid-cols-2 drop-shadow-xl">
+        <div className="md:grid md:grid-cols-2">
           <div className="p-6 bg-white rounded-3xl">
-            <div className="flex items-center">
+            <div className="flex justify-center">
               <button
                 type="button"
                 onClick={previousMonth}
-                className="flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="text-gray-400 hover:text-gray-500"
               >
                 <span>{"<"}</span>
               </button>
-              <h2 className="flex-auto font-semibold text-gray-900">
+              <h2 className="text-xl font-bold">
                 {format(firstDayCurrentMonth, "yyyy年 MMMM", { locale: ja })}
               </h2>
               <button
                 onClick={nextMonth}
                 type="button"
-                className="flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="text-gray-400 hover:text-gray-500"
               >
                 <span>{">"}</span>
               </button>
@@ -107,7 +107,7 @@ function Calendar() {
                       "text-gray-400",
                     isEqual(day, selectedDay) &&
                       isToday(day) &&
-                      "bg-gradient-to-r from-[#E3E7E5] to-[#9EB2B4]",
+                      "bg-gradient-to-r from-main-g-l to-main-g-r",
                     isEqual(day, selectedDay) &&
                       !isToday(day) &&
                       "bg-[#D5D8AF]",

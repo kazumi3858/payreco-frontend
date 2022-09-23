@@ -16,8 +16,8 @@ function Dropdown({ logout, visitQuestion }: Props) {
       tabIndex={0}
       className="relative"
     >
-      <div className="py-2 px-5 rounded-full cursor-pointer bg-gradient-to-r from-[#E3E7E5] to-[#9EB2B4] inline absolute top-3 right-3">
-        menu
+      <div className="py-2 px-5 rounded-full cursor-pointer bg-gradient-to-r from-main-g-l to-main-g-r inline absolute top-3 right-3">
+        メニュー
       </div>
       <ul
         className={
@@ -30,7 +30,7 @@ function Dropdown({ logout, visitQuestion }: Props) {
           ログアウト
         </li>
         <li className={style} onClick={visitQuestion}>
-          よくある質問
+          ヘルプ
         </li>
       </ul>
     </div>

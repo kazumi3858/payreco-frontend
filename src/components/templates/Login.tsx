@@ -41,7 +41,7 @@ function Login() {
               />
             </div>
             <div className="text-center my-auto">
-              <h1 className="text-3xl mb-5">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-widest md:leading-relaxed mt-10 mb-5 leading-relaxed text-large-t">
                 外貨もまとめて管理できる
                 <br />
                 シフト管理・給料計算ツール
@@ -60,13 +60,16 @@ function Login() {
           <div>ログイン中</div>
         ) : (
           <button
-            className="text-xl h-14 px-10 my-10 text-white bg-gradient-to-r from-sub-g-l to-sub-g-r rounded-full"
+            className="text-xl h-14 px-10 my-10 text-white bg-gradient-to-r from-sub-g-l to-sub-g-r rounded-full tracking-wide"
             onClick={googleSignIn}
           >
             Googleアカウントでログインして始める
           </button>
         )}
       </div>
+      <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
+        使い方
+      </h2>
       <div className="md:flex md:justify-center md:space-x-20 text-center">
         <Description text={0} image={0} />
         <Description text={1} image={1} />

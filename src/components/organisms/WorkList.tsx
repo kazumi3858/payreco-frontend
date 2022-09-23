@@ -24,7 +24,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
 
   return (
     <section className="mt-12 md:mt-0 md:pl-14">
-      <span className="font-semibold text-lg text-gray-900">
+      <span className="font-semibold text-xl">
         <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
           {format(selectedDay, "MMM dd日", { locale: ja })}
         </time>
@@ -33,7 +33,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
       {isLoading ? (
         <p>Loading</p>
       ) : (
-        <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
+        <ol className="mt-4 p-3 space-y-1 text-sm md:text-base leading-7 md:leading-8 text-gray-500 bg-white rounded-3xl">
           {selectedDayWorks && selectedDayWorks.length > 0 ? (
             selectedDayWorks.map((work) => (
               <WorkDetails
@@ -44,15 +44,17 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
               />
             ))
           ) : (
-            <p>予定はありません。</p>
+            <p className="py-6">予定はありません。</p>
           )}
         </ol>
       )}
-      <p className="pt-10 pb-3 text-lg">勤務先を選んで予定を追加</p>
+      <p className="pt-10 pb-3 font-semibold text-xl">
+        勤務先を選んで予定を追加
+      </p>
       {isLoading ? (
         <p>Loading</p>
       ) : (
-        <div className="mb-10">
+        <div className="mb-10 p-3 rounded-3xl bg-white">
           {data && data.length > 0 ? (
             data.map(
               (company) =>

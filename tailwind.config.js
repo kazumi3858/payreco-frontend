@@ -7,10 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "main-g-l": "#bcd6ce",
-        "main-g-r": "#add7db",
-        "sub-g-l": "#7ec4aa",
-        "sub-g-r": "#6da7ae",
+        "main-g-l": "#C5BDD5",
+        "main-g-r": "#ADDBD8",
+        "sub-g-l": "#8F92BC",
+        "sub-g-r": "#68929C",
+        "large-t": "black/70",
+        "company-t": "#AD679B",
       },
     },
   },
