@@ -59,24 +59,24 @@ function Calendar() {
 
   return (
     <div className="pt-5">
-      <div className="max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
-        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
-          <div className="md:pr-14">
+      <div className="max-w-lg mx-auto md:max-w-7xl md:px-6">
+        <div className="md:grid md:grid-cols-2 drop-shadow-xl">
+          <div className="p-6 bg-white rounded-3xl">
             <div className="flex items-center">
+              <button
+                type="button"
+                onClick={previousMonth}
+                className="flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+              >
+                <span>{"<"}</span>
+              </button>
               <h2 className="flex-auto font-semibold text-gray-900">
                 {format(firstDayCurrentMonth, "yyyy年 MMMM", { locale: ja })}
               </h2>
               <button
-                type="button"
-                onClick={previousMonth}
-                className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
-              >
-                <span>{"<"}</span>
-              </button>
-              <button
                 onClick={nextMonth}
                 type="button"
-                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
                 <span>{">"}</span>
               </button>
@@ -96,7 +96,7 @@ function Calendar() {
                     isEqual(day, selectedDay) && "text-white",
                     !isEqual(day, selectedDay) &&
                       isToday(day) &&
-                      "text-red-500",
+                      "text-[#c698ab]",
                     !isEqual(day, selectedDay) &&
                       !isToday(day) &&
                       isSameMonth(day, firstDayCurrentMonth) &&
@@ -105,10 +105,14 @@ function Calendar() {
                       !isToday(day) &&
                       !isSameMonth(day, firstDayCurrentMonth) &&
                       "text-gray-400",
-                    isEqual(day, selectedDay) && isToday(day) && "bg-red-500",
-                    isEqual(day, selectedDay) && !isToday(day) && "bg-gray-900",
+                    isEqual(day, selectedDay) &&
+                      isToday(day) &&
+                      "bg-gradient-to-r from-[#E3E7E5] to-[#9EB2B4]",
+                    isEqual(day, selectedDay) &&
+                      !isToday(day) &&
+                      "bg-[#D5D8AF]",
                     !isEqual(day, selectedDay) &&
-                      "hover:bg-gray-200 cursor-pointer",
+                      "hover:bg-stone-100 cursor-pointer",
                     (isEqual(day, selectedDay) || isToday(day)) &&
                       "font-semibold",
                     "lg:h-20 rounded-md m-1 p-1 text-center"
@@ -117,7 +121,7 @@ function Calendar() {
                   <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
                   </time>
-                  <div className="mx-auto mt-3 h-10">
+                  <div className="text-xs mx-auto mt-3 h-6">
                     {data?.some((work) =>
                       isSameDay(parseISO(`${work.date}`), day)
                     ) && <p>●</p>}

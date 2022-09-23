@@ -1,5 +1,7 @@
 import router from "next/router";
 import axios from "axios";
+import Description from "components/atoms/Description";
+import Link from "next/link";
 import { auth, provider } from "auth/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
@@ -23,7 +25,7 @@ function Login() {
 
   return (
     <>
-      <div className="pt-5 bg-gradient-to-r from-[#E3E7E5] to-[#9EB2B4]">
+      <div className="pt-5 bg-gradient-to-r from-main-g-l to-main-g-r">
         <div className="text-right">
           <div className="inline-block mr-10 drop-shadow-xl">
             <h1 className="text-white/70 text-lg mx-6 my-3">ペ イ レ コ</h1>
@@ -58,17 +60,25 @@ function Login() {
           <div>ログイン中</div>
         ) : (
           <button
-            className="h-20 px-10 my-10 text-white bg-[#799287] rounded-full"
+            className="text-xl h-14 px-10 my-10 text-white bg-gradient-to-r from-sub-g-l to-sub-g-r rounded-full"
             onClick={googleSignIn}
           >
             Googleアカウントでログインして始める
           </button>
         )}
       </div>
-      <div>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+      <div className="md:flex md:justify-center md:space-x-20 text-center">
+        <Description text={0} image={0} />
+        <Description text={1} image={1} />
+        <Description text={2} image={2} />
+      </div>
+      <div className="space-x-10 text-center py-2">
+        <Link href="/terms">
+          <a>利用規約</a>
+        </Link>
+        <Link href="/policy">
+          <a>プライバシーポリシー</a>
+        </Link>
       </div>
     </>
   );

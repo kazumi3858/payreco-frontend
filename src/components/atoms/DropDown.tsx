@@ -16,12 +16,14 @@ function Dropdown({ logout, visitQuestion }: Props) {
       tabIndex={0}
       className="relative"
     >
-      <div className="cursor-pointer bg-stone-300 inline absolute top-0 right-0">
-        Menu
+      <div className="py-2 px-5 rounded-full cursor-pointer bg-gradient-to-r from-[#E3E7E5] to-[#9EB2B4] inline absolute top-3 right-3">
+        menu
       </div>
       <ul
         className={
-          menu ? "bg-white inline-block z-50 absolute top-0 right-0" : "hidden"
+          menu
+            ? "bg-white rounded-xl drop-shadow-xl inline-block z-50 absolute top-3 right-3"
+            : "hidden"
         }
       >
         <li className={style} onClick={logout}>
