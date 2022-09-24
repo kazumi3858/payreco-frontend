@@ -70,7 +70,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
               )
             ) : (
               <p className="mb-5">
-                勤務先の登録がありません。勤務先を登録をすると予定を追加できるようになります。
+                最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
               </p>
             )}
             <Button

@@ -29,7 +29,7 @@ function Main({ children }: Props) {
         <div className="bg-stone-100">
           <div className="min-h-screen">
             <Header />
-            <div className="z-0">{children}</div>
+            <div className="-mt-32">{children}</div>
           </div>
           <Menu />
           <Footer />

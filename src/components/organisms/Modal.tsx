@@ -11,7 +11,7 @@ function Modal({ children, modal, setModal }: Props) {
   return (
     <>
       {modal && (
-        <div className="fixed inset-0 z-50" onClick={() => setModal(false)}>
+        <div className="fixed inset-0" onClick={() => setModal(false)}>
           <div className="flex h-screen justify-center items-center">
             <div
               className="bg-stone-100 p-12 rounded-xl"

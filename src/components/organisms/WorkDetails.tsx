@@ -44,7 +44,8 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <span>
           {hasBreak && " (休憩 "}
           {hourOfBreak > 0 && `${hourOfBreak}時間`}
-          {minuteOfBreak > 0 && `${minuteOfBreak}分)`}
+          {minuteOfBreak > 0 && `${minuteOfBreak}分`}
+          {hasBreak && ")"}
         </span>
         <div>
           <ClockIcon className="h-4 w-4 inline text-main-button-color" />

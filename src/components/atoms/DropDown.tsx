@@ -17,8 +17,8 @@ function Dropdown({ logout, visitQuestion }: Props) {
       tabIndex={0}
       className="relative"
     >
-      <div className="py-4 px-4 rounded-full cursor-pointer bg-gradient-to-r from-main-gradient-l to-main-gradient-r inline absolute top-3 right-3">
-        <Bars3Icon className="h-6 w-6" />
+      <div className="py-4 px-4 cursor-pointer absolute right-3">
+        <Bars3Icon className="h-7 w-7" />
       </div>
       <ul
         className={

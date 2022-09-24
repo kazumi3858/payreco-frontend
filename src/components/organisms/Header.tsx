@@ -1,7 +1,7 @@
-import { useDeleteUsersUserId } from "api/default/default";
-import { auth } from "auth/firebase";
 import Dropdown from "components/atoms/DropDown";
 import router from "next/router";
+import { useDeleteUsersUserId } from "api/default/default";
+import { auth } from "auth/firebase";
 
 function Header() {
   const logout = useDeleteUsersUserId();
@@ -12,12 +12,14 @@ function Header() {
   const handleClickQuestion = () => router.push("/questions");
 
   return (
-    <header className="h-14">
-      <Dropdown
-        logout={handleClickLogout}
-        visitQuestion={handleClickQuestion}
-      />
-    </header>
+    <div className="w-full bg-gradient-to-r from-main-gradient-l to-main-gradient-r h-44">
+      <header className="w-full bg-gradient-to-t from-stone-100 h-44">
+        <Dropdown
+          logout={handleClickLogout}
+          visitQuestion={handleClickQuestion}
+        />
+      </header>
+    </div>
   );
 }
 
