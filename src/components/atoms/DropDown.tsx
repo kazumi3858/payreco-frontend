@@ -8,7 +8,7 @@ type Props = {
 
 function Dropdown({ logout, visitQuestion }: Props) {
   const [menu, setMenu] = useState(false);
-  const style = "cursor-pointer hover:bg-stone-100 p-3";
+  const style = "cursor-pointer hover:bg-stone-100 p-3 rounded-xl";
 
   return (
     <div
@@ -23,7 +23,7 @@ function Dropdown({ logout, visitQuestion }: Props) {
       <ul
         className={
           menu
-            ? "bg-white rounded-xl drop-shadow-xl inline-block z-50 absolute top-3 right-3"
+            ? "bg-white rounded-xl p-2 drop-shadow-xl inline-block z-50 absolute top-3 right-3"
             : "hidden"
         }
       >

@@ -5,7 +5,10 @@ type Props = {
 
 function Button({ text, onClick }: Props) {
   return (
-    <button className="bg-stone-100 py-1 px-2 m-1 rounded-lg" onClick={onClick}>
+    <button
+      className="bg-sub-gradient-l text-white px-3 m-1 rounded-2xl"
+      onClick={onClick}
+    >
       {text}
     </button>
   );
