@@ -27,9 +27,9 @@ function Main({ children }: Props) {
     <>
       {user ? (
         <>
-          <div className="min-h-screen bg-stone-100">
+          <div className="min-h-screen">
             <Header />
-            <div className="z-0 bg-stone-100">{children}</div>
+            <div className="z-0">{children}</div>
           </div>
           <Menu />
           <Footer />

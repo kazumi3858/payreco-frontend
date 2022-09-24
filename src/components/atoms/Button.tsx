@@ -5,7 +5,7 @@ type Props = {
 
 function Button({ text, onClick }: Props) {
   return (
-    <button className="bg-stone-100 p-2 m-1 rounded-md" onClick={onClick}>
+    <button className="bg-stone-100 py-1 px-2 m-1 rounded-lg" onClick={onClick}>
       {text}
     </button>
   );
