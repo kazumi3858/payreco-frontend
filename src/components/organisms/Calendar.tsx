@@ -116,7 +116,7 @@ function Calendar() {
                         "bg-gradient-to-r from-main-gradient-l to-main-gradient-r",
                       isEqual(day, selectedDay) &&
                         !isToday(day) &&
-                        "bg-[#D5D8AF]",
+                        "bg-main-gradient-r",
                       !isEqual(day, selectedDay) &&
                         "hover:bg-stone-100 cursor-pointer",
                       (isEqual(day, selectedDay) || isToday(day)) &&

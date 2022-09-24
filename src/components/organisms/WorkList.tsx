@@ -32,7 +32,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         {isLoading ? (
           <p>Loading</p>
         ) : (
-          <ol className="p-3 space-y-1 text-sm md:text-base leading-7 md:leading-8 text-gray-500">
+          <ol className="p-3 space-y-1 text-sm md:text-base leading-7 md:leading-8">
             {selectedDayWorks && selectedDayWorks.length > 0 ? (
               selectedDayWorks.map((work) => (
                 <WorkDetails

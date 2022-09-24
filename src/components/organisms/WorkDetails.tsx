@@ -7,6 +7,11 @@ import { Company, Work } from "api/model";
 import { useState } from "react";
 import { useGetExchangeRates } from "api/exchange-rates/exchange-rates";
 import { findCurrencyRate } from "utils/find-currency-rate";
+import {
+  ClockIcon,
+  CurrencyYenIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/solid";
 
 type Props = {
   work: Work;
@@ -28,8 +33,8 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-2xl focus-within:bg-gray-100 hover:bg-stone-100">
       <div className="flex-auto">
-        <p className="text-sub-color font-bold">{company.name}</p>
-        <span className="mt-0.5 font-bold">
+        <div className="text-main-button-color">{company.name}</div>
+        <span className="mt-0.5">
           {work.starting_time &&
             `${format(startingTime, "h:mm a")} - ${format(
               endingTime,
@@ -41,14 +46,23 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           {hourOfBreak > 0 && `${hourOfBreak}時間`}
           {minuteOfBreak > 0 && `${minuteOfBreak}分)`}
         </span>
-        <p>
-          {`合計勤務: ${work.working_hours}時間 `}
-          {`給料: ${work.pay_amount}${company.currency_type}`}
+        <div>
+          <ClockIcon className="h-4 w-4 inline text-main-button-color" />
+          {` ${work.working_hours}時間 `}
+          <CurrencyYenIcon className="h-4 w-4 inline text-main-button-color" />
+          {` ${work.pay_amount}${company.currency_type}`}
           {company.currency_type !== "円" &&
             rate > 0 &&
             ` (${Math.floor(work.pay_amount / rate)}円)`}
-        </p>
-        <p>{work.memo && `メモ: ${work.memo}`}</p>
+        </div>
+        <div>
+          {work.memo && (
+            <>
+              <PencilSquareIcon className="h-4 w-4 inline text-main-button-color" />
+              <span>{` ${work.memo}`}</span>
+            </>
+          )}
+        </div>
       </div>
       <div className="flex">
         <Button text="編集" onClick={() => setWorkForm(true)} />

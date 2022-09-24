@@ -81,21 +81,21 @@ describe("Work CRUD function", () => {
   it("can update work", () => {
     cy.visit("/");
     cy.contains("10:00 AM - 6:00 PM");
-    cy.contains("合計勤務: 7時間");
+    cy.contains("7時間");
     cy.contains("button", "編集").click();
     cy.contains("合計勤務時間のみ入力").click();
     cy.get("select").first().select("5");
     cy.contains("input", "保存").click();
     cy.contains("10:00 AM - 6:00 PM").should("not.exist");
-    cy.contains("合計勤務: 5時間");
+    cy.contains("5時間");
   });
 
   it("can delete work", () => {
     cy.visit("/");
-    cy.contains("合計勤務: 5時間").should("have.length", 1);
+    cy.contains("5時間").should("have.length", 1);
     cy.contains("button", "削除").click();
     cy.contains("button", "はい").click();
-    cy.contains("合計勤務: 5時間").should("have.length", 0);
+    cy.contains("5時間").should("have.length", 0);
   });
 
   it("can reflect income list after deleting", () => {
