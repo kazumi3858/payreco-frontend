@@ -28,7 +28,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-2xl focus-within:bg-gray-100 hover:bg-stone-100">
       <div className="flex-auto">
-        <p className="text-company-t font-bold">{company.name}</p>
+        <p className="text-sub-color font-bold">{company.name}</p>
         <span className="mt-0.5 font-bold">
           {work.starting_time &&
             `${format(startingTime, "h:mm a")} - ${format(

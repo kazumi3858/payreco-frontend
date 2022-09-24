@@ -7,12 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "main-g-l": "#C5BDD5",
-        "main-g-r": "#ADDBD8",
-        "sub-g-l": "#8F92BC",
-        "sub-g-r": "#68929C",
-        "large-t": "black/70",
-        "company-t": "#AD679B",
+        "main-gradient-l": "#C5BDD5",
+        "main-gradient-r": "#ADDBD8",
+        "sub-gradient-l": "#8F92BC",
+        "sub-gradient-r": "#68929C",
+        "large-description": "black/70",
+        "sub-color": "#AD679B",
       },
     },
   },
