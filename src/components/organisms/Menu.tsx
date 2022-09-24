@@ -7,28 +7,30 @@ import {
 
 function Menu() {
   const style = (text: string) =>
-    `${text} inline-block text-white py-2 lg:py-3 px-5 bg-main-gradient-r hover:bg-stone-500 active:bg-stone-300 focus:outline-none focus:ring focus:ring-stone-300`;
+    `${text} w-1/3 md:w-1/4 inline-block text-white py-2 lg:py-3 px-5 bg-main-button-color hover:bg-stone-400 active:bg-stone-200 focus:outline-none focus:ring focus:ring-stone-300`;
   return (
-    <div className="py-5 text-center sticky bottom-10 h-14 cursor-pointer">
-      <Link href="/">
-        <div className={style("rounded-l-full")}>
-          <CalendarIcon className="h-6 w-6 inline mr-2 pb-1" />
-          <a>スケジュール管理</a>
-        </div>
-      </Link>
-      <Link href="/companies">
-        <div className={style("")}>
-          <BuildingOfficeIcon className="h-6 w-6 inline mr-2 pb-1" />
+    <div className="sticky bottom-0 md:bottom-6 md:h-16 cursor-pointer">
+      <div className="text-center">
+        <Link href="/">
+          <div className={style("md:rounded-l-full")}>
+            <CalendarIcon className="h-6 w-6 inline mr-2 pb-1" />
+            <a>スケジュール</a>
+          </div>
+        </Link>
+        <Link href="/companies">
+          <div className={style("")}>
+            <BuildingOfficeIcon className="h-6 w-6 inline mr-2 pb-1" />
 
-          <a>勤務先管理</a>
-        </div>
-      </Link>
-      <Link href="/income">
-        <div className={style("rounded-r-full")}>
-          <CurrencyYenIcon className="h-6 w-6 inline mr-2 pb-1" />
-          <a>給料計算</a>
-        </div>
-      </Link>
+            <a>勤務先管理</a>
+          </div>
+        </Link>
+        <Link href="/income">
+          <div className={style("md:rounded-r-full")}>
+            <CurrencyYenIcon className="h-6 w-6 inline mr-2 pb-1" />
+            <a>給料計算</a>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }

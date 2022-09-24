@@ -13,6 +13,7 @@ module.exports = {
         "sub-gradient-r": "#68929C",
         "large-description": "black/70",
         "sub-color": "#AD679B",
+        "main-button-color": "#88BCB9",
       },
     },
   },
