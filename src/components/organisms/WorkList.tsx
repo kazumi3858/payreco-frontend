@@ -24,7 +24,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
     data?.find((company): boolean => company.id === work.company_id)!;
 
   return (
-    <div className="mt-12 md:mt-0 md:pl-14">
+    <div className="mt-12 md:mt-0 md:pl-14 drop-shadow-3xl">
       <div className="mb-10 bg-white rounded-3xl">
         <Heading
           text={`${format(selectedDay, "MMM dd日", { locale: ja })}の予定`}

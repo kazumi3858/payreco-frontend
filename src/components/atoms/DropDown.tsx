@@ -23,7 +23,7 @@ function Dropdown({ logout, visitQuestion }: Props) {
       <ul
         className={
           menu
-            ? "bg-white rounded-xl p-2 drop-shadow-xl inline-block z-50 absolute top-3 right-3"
+            ? "bg-white rounded-xl p-2 drop-shadow-2xl inline-block z-50 absolute top-3 right-3"
             : "hidden"
         }
       >

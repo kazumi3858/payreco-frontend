@@ -15,6 +15,9 @@ module.exports = {
         "sub-color": "#AD679B",
         "main-button-color": "#88BCB9",
       },
+      dropShadow: {
+        "3xl": "0 35px 35px rgba(0, 0, 0, 0.05)",
+      },
     },
   },
   plugins: [],

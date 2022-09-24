@@ -9,7 +9,7 @@ function Menu() {
   const style = (text: string) =>
     `${text} w-1/3 md:w-1/4 inline-block text-white py-2 lg:py-3 px-5 bg-main-button-color hover:bg-stone-400 active:bg-stone-200 focus:outline-none focus:ring focus:ring-stone-300`;
   return (
-    <div className="sticky bottom-0 md:bottom-6 md:h-16 cursor-pointer">
+    <div className="sticky bottom-0 md:bottom-6 md:h-16 cursor-pointer md:drop-shadow-xl">
       <div className="text-center">
         <Link href="/">
           <div className={style("md:rounded-l-full")}>
