@@ -60,7 +60,7 @@ function Calendar() {
 
   return (
     <div className="pt-5">
-      <div className="max-w-lg mx-auto md:max-w-7xl md:px-6">
+      <div className="max-w-lg px-4 mx-auto md:max-w-7xl md:px-6">
         <div className="md:grid md:grid-cols-2">
           <div>
             <div className="p-6 bg-white rounded-3xl">
