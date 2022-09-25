@@ -7,6 +7,7 @@ import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
+import { ja } from "date-fns/locale";
 
 type Props = {
   selectedDay: Date;
@@ -115,9 +116,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>勤務先: </label>
-        {company.name}
+      <div className="text-center font-bold">
+        <p>{format(selectedDay, "MMM dd日", { locale: ja })}</p>
+        <p>{company.name}</p>
       </div>
       <div className="space-x-1">
         <RadioButton
@@ -142,7 +143,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <input
               id="starting-time"
               type="datetime-local"
-              className="block"
+              className="block bg-stone-100"
               min={minTime}
               max={maxTime}
               defaultValue={
@@ -158,7 +159,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <input
               id="ending-time"
               type="datetime-local"
-              className="block"
+              className="block bg-stone-100"
               min={minTime}
               max={nextDayMaxTime}
               defaultValue={
@@ -232,7 +233,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         ) : (
           <input
             id="pay"
-            className="m-1 w-16"
+            className="m-1 w-16 bg-stone-100"
             type="number"
             defaultValue={work?.pay_amount ? work?.pay_amount : ""}
             onChange={(e) => setPayAmount(Number(e.target.value))}
@@ -248,7 +249,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         <label htmlFor="memo">メモ: </label>
         <input
           id="memo"
-          className="m-1"
+          className="m-1 bg-stone-100"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
           placeholder="任意入力"
@@ -258,7 +259,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <p className="text-rose-600">メモは50文字以内に収めてください。</p>
         )}
       </div>
-      <SubmitButton updating={updating} disabled={disableButton} />
+      <div className="text-right">
+        <SubmitButton updating={updating} disabled={disableButton} />
+      </div>
     </form>
   );
 }

@@ -15,17 +15,19 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
       <p className="pb-3">今月の目標達成率</p>
       <div className="relative w-full h-6 bg-stone-200 rounded-full">
         <div
-          className="absolute h-6 bg-stone-400 rounded-full"
+          className="absolute h-6 bg-main-gradient-l rounded-full"
           style={{ width: `${result(expectedAchievementRate)}%` }}
         ></div>
         <div
-          className="absolute h-6 text-center bg-stone-500 rounded-full"
+          className="absolute h-6 text-center bg-sub-button-color rounded-full"
           style={{ width: `${result(achievementRate)}%` }}
         ></div>
       </div>
-      <p className="text-xs">
-        本日まで: {result(achievementRate)}% 見込み含め:{" "}
-        {result(expectedAchievementRate)}%
+      <p className="text-xs ml-2 mt-2">
+        <span className="text-sub-button-color">●</span>
+        {`本日まで: ${result(achievementRate)}% `}
+        <span className="text-main-gradient-l">●</span>
+        {`見込み含め: ${result(expectedAchievementRate)}%`}
       </p>
     </div>
   );

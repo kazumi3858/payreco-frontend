@@ -13,8 +13,9 @@ import {
   startOfToday,
 } from "date-fns";
 import ja from "date-fns/locale/ja";
-import { useState } from "react";
 import WorkList from "./WorkList";
+import { PlayIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
 import { useGetWorks } from "api/works/works";
 
 const colStartClasses = [
@@ -39,19 +40,19 @@ function Calendar() {
   });
   const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
 
-  function classNames(...classes: (string | boolean)[]) {
+  const classNames = (...classes: (string | boolean)[]) => {
     return classes.filter(Boolean).join(" ");
-  }
+  };
 
-  function previousMonth() {
+  const previousMonth = () => {
     const firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
-  }
+  };
 
-  function nextMonth() {
+  const nextMonth = () => {
     const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
-  }
+  };
 
   const selectedDayWorks = data?.filter((work) =>
     isSameDay(parseISO(`${work.date}`), selectedDay)
@@ -59,71 +60,81 @@ function Calendar() {
 
   return (
     <div className="pt-5">
-      <div className="max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
-        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
-          <div className="md:pr-14">
-            <div className="flex items-center">
-              <h2 className="flex-auto font-semibold text-gray-900">
-                {format(firstDayCurrentMonth, "yyyy年 MMMM", { locale: ja })}
-              </h2>
-              <button
-                type="button"
-                onClick={previousMonth}
-                className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
-              >
-                <span>{"<"}</span>
-              </button>
-              <button
-                onClick={nextMonth}
-                type="button"
-                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
-              >
-                <span>{">"}</span>
-              </button>
-            </div>
-            <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
-              {dayOfWeek.map((day, index) => (
-                <div key={index}>{day}</div>
-              ))}
-            </div>
-            <div className="grid grid-cols-7 mt-2 text-sm">
-              {days.map((day, index) => (
-                <div
-                  key={day.toString()}
-                  onClick={() => setSelectedDay(day)}
-                  className={classNames(
-                    index === 0 && colStartClasses[getDay(day)],
-                    isEqual(day, selectedDay) && "text-white",
-                    !isEqual(day, selectedDay) &&
-                      isToday(day) &&
-                      "text-red-500",
-                    !isEqual(day, selectedDay) &&
-                      !isToday(day) &&
-                      isSameMonth(day, firstDayCurrentMonth) &&
-                      "text-gray-900",
-                    !isEqual(day, selectedDay) &&
-                      !isToday(day) &&
-                      !isSameMonth(day, firstDayCurrentMonth) &&
-                      "text-gray-400",
-                    isEqual(day, selectedDay) && isToday(day) && "bg-red-500",
-                    isEqual(day, selectedDay) && !isToday(day) && "bg-gray-900",
-                    !isEqual(day, selectedDay) &&
-                      "hover:bg-gray-200 cursor-pointer",
-                    (isEqual(day, selectedDay) || isToday(day)) &&
-                      "font-semibold",
-                    "lg:h-20 rounded-md m-1 p-1 text-center"
-                  )}
+      <div className="max-w-lg px-4 mx-auto md:max-w-7xl md:px-6">
+        <div className="md:grid md:grid-cols-2">
+          <div>
+            <div className="p-6 bg-white rounded-3xl">
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  onClick={previousMonth}
+                  className="text-gray-400 hover:text-gray-500"
                 >
-                  <time dateTime={format(day, "yyyy-MM-dd")}>
-                    {format(day, "d")}
-                  </time>
-                  <div className="mx-auto mt-3 h-10">
-                    {data?.some((work) =>
-                      isSameDay(parseISO(`${work.date}`), day)
-                    ) && <p>●</p>}
+                  <span>
+                    <PlayIcon className="h-6 w-6 text-main-button-color rotate-180" />
+                  </span>
+                </button>
+                <h2 className="text-xl font-bold w-36 text-center">
+                  {format(firstDayCurrentMonth, "yyyy年 MMMM", { locale: ja })}
+                </h2>
+                <button
+                  onClick={nextMonth}
+                  type="button"
+                  className="text-gray-400 hover:text-gray-500"
+                >
+                  <span>
+                    <PlayIcon className="h-6 w-6 text-main-button-color" />
+                  </span>
+                </button>
+              </div>
+              <div className="grid grid-cols-7 mt-8 text-xs leading-6 text-center text-gray-500">
+                {dayOfWeek.map((day, index) => (
+                  <div key={index}>{day}</div>
+                ))}
+              </div>
+              <div className="grid grid-cols-7 mt-2 text-sm">
+                {days.map((day, index) => (
+                  <div
+                    key={day.toString()}
+                    onClick={() => setSelectedDay(day)}
+                    className={classNames(
+                      index === 0 && colStartClasses[getDay(day)],
+                      isEqual(day, selectedDay) && "text-white",
+                      !isEqual(day, selectedDay) &&
+                        isToday(day) &&
+                        "text-[#c698ab]",
+                      !isEqual(day, selectedDay) &&
+                        !isToday(day) &&
+                        isSameMonth(day, firstDayCurrentMonth) &&
+                        "text-gray-900",
+                      !isEqual(day, selectedDay) &&
+                        !isToday(day) &&
+                        !isSameMonth(day, firstDayCurrentMonth) &&
+                        "text-gray-400",
+                      isEqual(day, selectedDay) &&
+                        isToday(day) &&
+                        "bg-main-button-color",
+                      isEqual(day, selectedDay) &&
+                        !isToday(day) &&
+                        "bg-[#C4D695]",
+                      !isEqual(day, selectedDay) &&
+                        "hover:bg-stone-100 cursor-pointer",
+                      (isEqual(day, selectedDay) || isToday(day)) &&
+                        "font-semibold",
+                      "lg:h-16 rounded-md m-1 p-1 text-center"
+                    )}
+                  >
+                    <time dateTime={format(day, "yyyy-MM-dd")}>
+                      {format(day, "d")}
+                    </time>
+                    <div className="text-xs mx-auto mt-3 h-6">
+                      {data?.some((work) =>
+                        isSameDay(parseISO(`${work.date}`), day)
+                      ) && <p>●</p>}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           <WorkList

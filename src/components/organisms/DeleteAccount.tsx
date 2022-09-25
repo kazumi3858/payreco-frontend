@@ -47,7 +47,7 @@ function DeleteAccount() {
   };
   return (
     <div className="flex justify-center mt-6">
-      <div>
+      <div className="max-w-2xl p-6">
         <Heading text="退会方法" />
         <p>退会処理は以下のボタンから行うことができます。</p>
         <p>
@@ -58,7 +58,12 @@ function DeleteAccount() {
           ※ 退会処理を行う際にGoogleアカウントの再認証が必要な場合がございます。
         </p>
         <div className="my-6 text-center">
-          <Button text="退会する" onClick={handleClick} />
+          <button
+            className="text-lg bg-stone-300 px-2 py-1 rounded-lg"
+            onClick={handleClick}
+          >
+            退会する
+          </button>
         </div>
       </div>
     </div>

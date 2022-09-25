@@ -10,7 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <SiteHead />
       <QueryClientProvider client={client}>
-        <Component {...pageProps} />
+        <div className="tracking-wide font-sans leading-8 text-slate-800">
+          <Component {...pageProps} />
+        </div>
       </QueryClientProvider>
     </>
   );

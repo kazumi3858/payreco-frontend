@@ -40,10 +40,10 @@ function IncomeList() {
   const incomeOfThisMonth = incomeListByMonth && incomeListByMonth[thisMonth];
 
   return (
-    <div className="pt-5">
-      <div className="max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
+    <div className="px-4 pt-5 pb-10">
+      <div className="bg-white rounded-3xl px-6 pb-5 md:pb-0 md:px-0 md:bg-transparent max-w-lg mx-auto md:max-w-7xl">
         <div className="flex justify-center">
-          <div className="md:hidden space-x-6 mb-6">
+          <div className="md:hidden space-x-5 my-3">
             <RadioButton
               type="big"
               value="true"
@@ -60,11 +60,9 @@ function IncomeList() {
             />
           </div>
         </div>
-        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
-          <div className="md:pr-14">
-            <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
-              <MonthlyIncome income={incomeOfThisMonth} isLoading={isLoading} />
-            </div>
+        <div className="md:grid md:grid-cols-2">
+          <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
+            <MonthlyIncome income={incomeOfThisMonth} isLoading={isLoading} />
           </div>
           <div
             className={

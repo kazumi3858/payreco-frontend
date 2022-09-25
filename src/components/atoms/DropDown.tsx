@@ -1,3 +1,4 @@
+import { Bars3Icon } from "@heroicons/react/24/solid";
 import { MouseEventHandler, useState } from "react";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 
 function Dropdown({ logout, visitQuestion }: Props) {
   const [menu, setMenu] = useState(false);
-  const style = "cursor-pointer hover:bg-stone-100 p-3";
+  const style = "cursor-pointer hover:bg-stone-100 p-3 rounded-xl";
 
   return (
     <div
@@ -16,19 +17,21 @@ function Dropdown({ logout, visitQuestion }: Props) {
       tabIndex={0}
       className="relative"
     >
-      <div className="cursor-pointer bg-stone-300 inline absolute top-0 right-0">
-        Menu
+      <div className="py-4 px-4 cursor-pointer absolute right-3">
+        <Bars3Icon className="h-7 w-7" />
       </div>
       <ul
         className={
-          menu ? "bg-white inline-block z-50 absolute top-0 right-0" : "hidden"
+          menu
+            ? "bg-white rounded-xl p-2 drop-shadow-2xl inline-block z-50 absolute top-3 right-3"
+            : "hidden"
         }
       >
         <li className={style} onClick={logout}>
           ログアウト
         </li>
         <li className={style} onClick={visitQuestion}>
-          よくある質問
+          ヘルプ
         </li>
       </ul>
     </div>

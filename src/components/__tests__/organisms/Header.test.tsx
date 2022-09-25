@@ -12,6 +12,7 @@ describe("Header", () => {
         <Header />
       </QueryClientProvider>
     );
-    expect(screen.getByText("Menu")).toBeInTheDocument();
+    expect(screen.getByText("ログアウト")).toBeInTheDocument();
+    expect(screen.getByText("ヘルプ")).toBeInTheDocument();
   });
 });

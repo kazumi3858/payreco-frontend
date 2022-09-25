@@ -54,7 +54,6 @@ describe("WorkList", () => {
 
   it("cannot render data if selected day does not have works", () => {
     render(workList());
-    expect(screen.queryByText(/合計勤務/)).toBeNull();
     expect(screen.getByText("予定はありません。")).toBeInTheDocument();
   });
 });

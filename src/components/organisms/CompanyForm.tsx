@@ -90,6 +90,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
         <label htmlFor="name">名前: </label>
         <input
           id="name"
+          className="bg-stone-100"
+          placeholder="例) 〇〇ワークス"
           defaultValue={defaultName}
           onChange={(e) => setName(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -121,6 +123,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
             id="wage"
             type="number"
             step="0.01"
+            className="bg-stone-100 w-20"
             defaultValue={defaultWageAmount ? defaultWageAmount : ""}
             onChange={(e) => setWageAmount(Number(e.target.value))}
             onFocus={(e) => e.target.select()}
@@ -138,7 +141,9 @@ function CompanyForm({ setCompanyForm, company }: Props) {
         changeEvent={(e) => setCurrencyType(e.target.value)}
         array={currencyList}
       />
-      <SubmitButton updating={updating} disabled={disableButton} />
+      <div className="text-right">
+        <SubmitButton updating={updating} disabled={disableButton} />
+      </div>
     </form>
   );
 }

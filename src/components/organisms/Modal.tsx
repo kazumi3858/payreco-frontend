@@ -1,5 +1,5 @@
-import Button from "components/atoms/Button";
-import { SetStateAction, useEffect, useRef } from "react";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { SetStateAction } from "react";
 
 type Props = {
   children: JSX.Element;
@@ -12,14 +12,18 @@ function Modal({ children, modal, setModal }: Props) {
     <>
       {modal && (
         <div className="fixed inset-0 z-50" onClick={() => setModal(false)}>
-          <div className="flex h-screen justify-center items-center">
+          <div className="flex h-5/6 justify-center items-center">
             <div
-              className="bg-stone-100 p-12 rounded-xl"
+              className="bg-white p-4 rounded-lg drop-shadow-4xl"
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
-              <Button text="閉じる" onClick={() => setModal(false)} />
+              <div className="text-right">
+                <button onClick={() => setModal(false)}>
+                  <XMarkIcon className="w-6 h-6 text-main-button-color" />
+                </button>
+              </div>
               {children}
             </div>
           </div>

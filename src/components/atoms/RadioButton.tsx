@@ -7,17 +7,15 @@ type Props = {
 };
 
 function RadioButton({ type, value, text, onChange, checked }: Props) {
-  const smallButtonStyle =
-    "cursor-pointer bg-stone-200 rounded-lg p-1" +
-    (checked ? " bg-stone-400" : "");
-  const bigButtonStyle =
-    "cursor-pointer py-2 px-10 bg-stone-200 rounded-full" +
-    (checked ? " bg-stone-400" : "");
+  const smallButtonStyle = "cursor-pointer rounded-lg p-1";
+  const bigButtonStyle = "cursor-pointer py-2 px-10 rounded-full";
   const style = type === "small" ? smallButtonStyle : bigButtonStyle;
 
   return (
     <div className="my-4 inline-block">
-      <label className={style}>
+      <label
+        className={style + (checked ? " bg-main-gradient-l" : " bg-stone-200")}
+      >
         <input
           type="radio"
           className={type === "small" ? "" : "hidden"}

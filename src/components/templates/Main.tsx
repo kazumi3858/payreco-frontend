@@ -26,14 +26,14 @@ function Main({ children }: Props) {
   return (
     <>
       {user ? (
-        <>
+        <div className="bg-stone-100">
           <div className="min-h-screen">
             <Header />
-            <div className="z-0">{children}</div>
+            <div className="z-0 -mt-12">{children}</div>
           </div>
           <Menu />
           <Footer />
-        </>
+        </div>
       ) : (
         redirect()
       )}

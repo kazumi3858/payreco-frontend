@@ -5,7 +5,7 @@ describe("Company CRUD function", () => {
 
   it("can validate incorrect name", () => {
     cy.visit("/companies");
-    cy.contains("button", "新規登録").click();
+    cy.contains("button", "＋勤務先を追加する").click();
     cy.get("#name").type("あ".repeat(30));
     cy.contains("名前は1～30文字にしてください。").should("not.exist");
     cy.get("#name").clear().type("あ".repeat(31));
@@ -18,7 +18,7 @@ describe("Company CRUD function", () => {
 
   it("can validate incorrect wage amount", () => {
     cy.visit("/companies");
-    cy.contains("button", "新規登録").click();
+    cy.contains("button", "＋勤務先を追加する").click();
     cy.get("#wage").type("99999");
     cy.contains("時給額が不正な値・または大きすぎます。").should("not.exist");
     cy.get("#wage").clear().type("100000");
@@ -32,7 +32,7 @@ describe("Company CRUD function", () => {
   it("can post company", () => {
     cy.visit("/companies");
     cy.contains("株式会社ジキュウ").should("have.length", 0);
-    cy.contains("button", "新規登録").click();
+    cy.contains("button", "＋勤務先を追加する").click();
     cy.get("#name").type("株式会社ジキュウ");
     cy.get("#wage").type("15");
     cy.get("select").select("米ドル");
