@@ -44,7 +44,7 @@ function MonthlyIncome({ income, isLoading }: Props) {
           {data && <TargetAmountForm user={data} />}
         </div>
       ) : (
-        <p>Loading</p>
+        <p className="ml-5">Loading</p>
       )}
     </div>
   );

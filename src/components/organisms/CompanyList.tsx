@@ -16,7 +16,7 @@ function CompapyList() {
         <div className="mb-5 bg-white rounded-3xl pb-4">
           <Heading text="勤務先一覧" />
           {isLoading ? (
-            <p>Loading</p>
+            <p className="ml-5">Loading</p>
           ) : (
             <div>
               <ul className="p-3">

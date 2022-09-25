@@ -30,7 +30,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
           text={`${format(selectedDay, "MMM dd日", { locale: ja })}の予定`}
         />
         {isLoading ? (
-          <p>Loading</p>
+          <p className="ml-5">Loading</p>
         ) : (
           <ol className="p-3 space-y-1 md:text-base leading-7 md:leading-8">
             {selectedDayWorks && selectedDayWorks.length > 0 ? (
@@ -51,7 +51,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
       <div className="mb-10 pb-5 px-3 rounded-3xl bg-white">
         <Heading text="勤務先を選んで予定を追加" />
         {isLoading ? (
-          <p>Loading</p>
+          <p className="ml-5">Loading</p>
         ) : (
           <div>
             {data && data.length > 0 ? (
