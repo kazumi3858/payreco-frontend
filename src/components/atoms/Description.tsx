@@ -18,7 +18,7 @@ function Description({ text, image }: Props) {
     <div className="mt-10 w-full">
       <div>
         <img
-          className="drop-shadow-3xl rounded-full w-72 inline-block"
+          className="drop-shadow-2xl rounded-full w-72 inline-block"
           src={src}
           alt="main content image"
         />

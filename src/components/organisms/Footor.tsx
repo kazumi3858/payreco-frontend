@@ -15,7 +15,11 @@ function Footer() {
         </Link>
       </div>
       <small>
-        <a href="https://github.com/kazumi3858/payreco-backend" target="_blank">
+        <a
+          href="https://github.com/kazumi3858/payreco-backend"
+          target="_blank"
+          rel="noreferrer"
+        >
           GitHub repository
         </a>{" "}
         ©2022 kazumi

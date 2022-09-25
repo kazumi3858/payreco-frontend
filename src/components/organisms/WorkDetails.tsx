@@ -33,7 +33,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-2xl focus-within:bg-gray-100 hover:bg-stone-100">
       <div className="flex-auto">
-        <div className="text-main-button-color">{company.name}</div>
+        <div className="font-bold">{company.name}</div>
         <span className="mt-0.5">
           {work.starting_time &&
             `${format(startingTime, "h:mm a")} - ${format(
@@ -48,9 +48,9 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           {hasBreak && ")"}
         </span>
         <div>
-          <ClockIcon className="h-4 w-4 inline text-main-button-color" />
+          <ClockIcon className="h-4 w-4 inline text-sub-button-color" />
           {` ${work.working_hours}時間 `}
-          <CurrencyYenIcon className="h-4 w-4 inline text-main-button-color" />
+          <CurrencyYenIcon className="h-4 w-4 inline text-sub-button-color" />
           {` ${work.pay_amount}${company.currency_type}`}
           {company.currency_type !== "円" &&
             rate > 0 &&
@@ -59,7 +59,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <div>
           {work.memo && (
             <>
-              <PencilSquareIcon className="h-4 w-4 inline text-main-button-color" />
+              <PencilSquareIcon className="h-4 w-4 inline text-sub-button-color" />
               <span>{` ${work.memo}`}</span>
             </>
           )}

@@ -71,7 +71,7 @@ function Calendar() {
                   className="text-gray-400 hover:text-gray-500"
                 >
                   <span>
-                    <PlayIcon className="h-6 w-6 text-main-gradient-r rotate-180" />
+                    <PlayIcon className="h-6 w-6 text-main-button-color rotate-180" />
                   </span>
                 </button>
                 <h2 className="text-xl font-bold w-36 text-center">
@@ -83,7 +83,7 @@ function Calendar() {
                   className="text-gray-400 hover:text-gray-500"
                 >
                   <span>
-                    <PlayIcon className="h-6 w-6 text-main-gradient-r" />
+                    <PlayIcon className="h-6 w-6 text-main-button-color" />
                   </span>
                 </button>
               </div>
@@ -113,10 +113,10 @@ function Calendar() {
                         "text-gray-400",
                       isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "bg-gradient-to-r from-main-gradient-l to-main-gradient-r",
+                        "bg-main-button-color",
                       isEqual(day, selectedDay) &&
                         !isToday(day) &&
-                        "bg-main-gradient-r",
+                        "bg-[#C4D695]",
                       !isEqual(day, selectedDay) &&
                         "hover:bg-stone-100 cursor-pointer",
                       (isEqual(day, selectedDay) || isToday(day)) &&
