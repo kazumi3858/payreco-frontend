@@ -7,6 +7,7 @@ import { usePatchWorksWorkId, usePostWorks } from "api/default/default";
 import { Company, Work } from "api/model";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
+import { ja } from "date-fns/locale";
 
 type Props = {
   selectedDay: Date;
@@ -115,9 +116,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>勤務先: </label>
-        {company.name}
+      <div className="text-center font-bold">
+        <p>{format(selectedDay, "MMM dd日", { locale: ja })}</p>
+        <p>{company.name}</p>
       </div>
       <div className="space-x-1">
         <RadioButton

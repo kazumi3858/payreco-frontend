@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useGetCompanies } from "api/companies/companies";
 import { Company, Work } from "api/model";
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
 
 type Props = {
   selectedDay: Date;
@@ -73,10 +74,14 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                 最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
               </p>
             )}
-            <Button
-              text="＋勤務先を追加する"
+
+            <button
+              className="bg-stone-200 hover:bg-stone-300 rounded-lg px-3 m-1"
               onClick={() => setCompanyForm(true)}
-            />
+            >
+              <PlusCircleIcon className="text-sub-button-color h-5 w-5 inline mx-1 mb-1" />
+              勤務先を追加する
+            </button>
           </div>
         )}
       </div>

@@ -1,10 +1,10 @@
 import CompanyForm from "components/organisms/CompanyForm";
 import CompanyDetails from "./CompanyDetails";
-import Button from "components/atoms/Button";
 import Modal from "./Modal";
 import Heading from "components/atoms/Heading";
 import { useGetCompanies } from "api/companies/companies";
 import { useState } from "react";
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
 
 function CompapyList() {
   const [companyForm, setCompanyForm] = useState(false);
@@ -28,10 +28,13 @@ function CompapyList() {
                 )}
               </ul>
               <div className="text-center mt-5">
-                <Button
-                  text="＋勤務先を追加する"
+                <button
+                  className="bg-stone-200 hover:bg-stone-300 rounded-lg px-3 m-1"
                   onClick={() => setCompanyForm(true)}
-                />
+                >
+                  <PlusCircleIcon className="text-sub-button-color h-5 w-5 inline mx-1 mb-1" />
+                  勤務先を追加する
+                </button>
               </div>
             </div>
           )}
