@@ -34,23 +34,25 @@ function Login() {
         <div className="py-20 mb-10 max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
           <div className="lg:grid lg:grid-cols-2">
             <div className="drop-shadow-3xl flex justify-center items-center">
-              <img
-                className="rounded-3xl"
-                src="https://user-images.githubusercontent.com/97820517/191658227-9e607d49-fc2c-40b3-8d17-2580688ccdcd.png"
-                alt="main content image"
-              />
+              <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r p-5">
+                <img
+                  className="rounded-3xl"
+                  src="https://user-images.githubusercontent.com/97820517/192142063-09efaffc-86db-46fd-bb62-6d1224a32ba7.png"
+                  alt="main content image"
+                />
+              </div>
             </div>
             <div className="text-center my-auto">
-              <h1 className="text-3xl md:text-4xl font-bold tracking-widest md:leading-relaxed mt-10 mb-5 leading-relaxed text-black/70">
+              <h1 className="text-2xl md:text-3xl font-bold tracking-widest md:leading-relaxed mt-10 mb-5 leading-relaxed text-black/70">
                 外貨もまとめて管理できる
                 <br />
                 シフト管理・給料計算ツール
               </h1>
               <div className="flex justify-center">
-                <div className="text-left text-lg tracking-widest">
+                <div className="text-left text-base md:text-lg tracking-widest">
                   <ul className="list-disc">
-                    <li className="mb-2">働いた時間を入力して簡単に給料計算</li>
-                    <li className="mb-2">外貨の報酬は日本円に換算して表示</li>
+                    <li className="mb-1">働いた時間を入力して簡単に給料計算</li>
+                    <li className="mb-1">外貨の報酬は日本円に換算して表示</li>
                     <li>シフト管理としても使える</li>
                   </ul>
                 </div>
@@ -64,7 +66,7 @@ function Login() {
           <div>ログイン中</div>
         ) : (
           <button
-            className="text-xl h-14 px-10 my-10 text-white bg-gradient-to-r from-main-button-color to-[#7196A9] rounded-full tracking-wide"
+            className="text-base md:text-xl h-14 px-10 my-10 text-white bg-gradient-to-r from-main-button-color to-[#7196A9] rounded-full tracking-wide"
             onClick={googleSignIn}
           >
             Googleアカウントでログインして始める
