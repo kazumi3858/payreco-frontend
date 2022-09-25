@@ -13,7 +13,7 @@ describe("Work CRUD function", () => {
     cy.visit("/");
     cy.contains("button", "株式会社ジキュウ").click();
     cy.get("#pay").should("not.exist");
-    cy.contains("button", "閉じる").click();
+    cy.get("button").eq(8).click();
     cy.contains("button", "株式会社ニッキュウ").click();
     cy.get("#pay").should("be.visible");
   });
