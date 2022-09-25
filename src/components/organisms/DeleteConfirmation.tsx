@@ -29,10 +29,22 @@ function DeleteConfirmation({ id, queryKey, setDeleteConfirmation }: Props) {
   };
 
   return (
-    <div>
+    <div className="p-5">
       <p>本当に削除しますか？</p>
-      <Button text="はい" onClick={handleDelete} />
-      <Button text="いいえ" onClick={() => setDeleteConfirmation(false)} />
+      <div className="text-center text-lg font-bold space-x-6 mt-3">
+        <button
+          className="text-red-400 hover:brightness-75"
+          onClick={handleDelete}
+        >
+          はい
+        </button>
+        <button
+          className="text-sub-gradient-r hover:brightness-75"
+          onClick={() => setDeleteConfirmation(false)}
+        >
+          いいえ
+        </button>
+      </div>
     </div>
   );
 }

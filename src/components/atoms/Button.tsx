@@ -6,7 +6,7 @@ type Props = {
 function Button({ text, onClick }: Props) {
   return (
     <button
-      className="bg-main-button-color text-white px-3 m-1 rounded-2xl"
+      className="bg-main-button-color hover:bg-sub-gradient-r text-white px-3 m-1 rounded-lg"
       onClick={onClick}
     >
       {text}
