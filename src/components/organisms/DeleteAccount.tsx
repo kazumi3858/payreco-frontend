@@ -58,7 +58,12 @@ function DeleteAccount() {
           ※ 退会処理を行う際にGoogleアカウントの再認証が必要な場合がございます。
         </p>
         <div className="my-6 text-center">
-          <button className="text-lg bg-stone-300 px-2 py-1 rounded-lg" onClick={handleClick}>退会する</button>
+          <button
+            className="text-lg bg-stone-300 px-2 py-1 rounded-lg"
+            onClick={handleClick}
+          >
+            退会する
+          </button>
         </div>
       </div>
     </div>

@@ -68,14 +68,31 @@ function Login() {
         )}
       </div>
       <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
+        どんなサービス？
+      </h2>
+      <div className="flex justify-center py-5 px-8">
+        <div>
+          <p className="mb-3">
+            外貨の報酬がある方に向けて、働いた時間を登録するだけで今月いくら稼いだかを日本円表示してくれるサービスです。
+          </p>
+          <p className="mb-3">
+            日本円の報酬も登録・管理できます。シフト時刻を入力できるのでシフト管理してもご利用いただけます。
+          </p>
+          <p className="text-sm mt-2">
+            ※対応している通貨: 円 米ドル ユーロ 英ポンド インドルピー 豪ドル
+            カナダドル ランド NZドル SGドル 人民元 スイスフラン
+          </p>
+        </div>
+      </div>
+      <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
         使い方
       </h2>
-      <div className="md:flex md:justify-center md:space-x-20 text-center">
+      <div className="md:flex md:justify-center md:space-x-20 text-center px-8">
         <Description text={0} image={0} />
         <Description text={1} image={1} />
         <Description text={2} image={2} />
       </div>
-      <div className="space-x-10 text-center py-2">
+      <div className="space-x-10 text-center mt-4 py-2 bg-stone-200">
         <Link href="/terms">
           <a>利用規約</a>
         </Link>
