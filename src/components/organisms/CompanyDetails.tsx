@@ -23,7 +23,7 @@ function CompanyDetails({ company }: Props) {
             : `日給制`}
         </p>
       </div>
-      <div className="flex">
+      <div>
         <Button text="編集" onClick={() => setCompanyForm(true)} />
         <Button text="削除" onClick={() => setDeleteConfirmation(true)} />
         <Modal modal={companyForm} setModal={setCompanyForm}>

@@ -13,34 +13,32 @@ function CompapyList() {
   return (
     <div className="pt-5">
       <div className="max-w-lg px-4 mx-auto sm:px-7 md:max-w-1xl md:px-6">
-        <div className="bg-white rounded-3xl pb-4 drop-shadow-3xl">
+        <div className="mb-5 bg-white rounded-3xl pb-4">
           <Heading text="勤務先一覧" />
-          <div className="mb-5">
-            {isLoading ? (
-              <p>Loading</p>
-            ) : (
-              <div>
-                <ul className="p-3">
-                  {data?.map(
-                    (company) =>
-                      company.deleted_at === null && (
-                        <CompanyDetails key={company.id} company={company} />
-                      )
-                  )}
-                </ul>
-                <div className="text-center mt-5">
-                  <Button
-                    text="＋勤務先を追加する"
-                    onClick={() => setCompanyForm(true)}
-                  />
-                </div>
+          {isLoading ? (
+            <p>Loading</p>
+          ) : (
+            <div>
+              <ul className="p-3">
+                {data?.map(
+                  (company) =>
+                    company.deleted_at === null && (
+                      <CompanyDetails key={company.id} company={company} />
+                    )
+                )}
+              </ul>
+              <div className="text-center mt-5">
+                <Button
+                  text="＋勤務先を追加する"
+                  onClick={() => setCompanyForm(true)}
+                />
               </div>
-            )}
-          </div>
-          <Modal modal={companyForm} setModal={setCompanyForm}>
-            <CompanyForm setCompanyForm={setCompanyForm} />
-          </Modal>
+            </div>
+          )}
         </div>
+        <Modal modal={companyForm} setModal={setCompanyForm}>
+          <CompanyForm setCompanyForm={setCompanyForm} />
+        </Modal>
       </div>
     </div>
   );
