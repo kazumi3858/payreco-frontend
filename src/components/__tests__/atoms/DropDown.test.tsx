@@ -6,7 +6,7 @@ describe("DropDown", () => {
   it("can render header properly", () => {
     render(<DropDown logout={jest.fn()} visitQuestion={jest.fn()} />);
     expect(screen.getByText("ログアウト")).toBeInTheDocument();
-    expect(screen.getByText("よくある質問")).toBeInTheDocument();
+    expect(screen.getByText("ヘルプ")).toBeInTheDocument();
   });
 
   it("can call click event", () => {
@@ -15,7 +15,7 @@ describe("DropDown", () => {
     render(<DropDown logout={clickLogout} visitQuestion={clickQuestion} />);
     fireEvent.click(screen.getByText("ログアウト"));
     expect(clickLogout).toHaveBeenCalled();
-    fireEvent.click(screen.getByText("よくある質問"));
+    fireEvent.click(screen.getByText("ヘルプ"));
     expect(clickQuestion).toHaveBeenCalled();
   });
 });
