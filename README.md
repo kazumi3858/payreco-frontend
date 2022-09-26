@@ -1,3 +1,10 @@
-# Payreco Frontend
+⚠️こちらのサービスは現在作成中でございます⚠️
 
-ペイレコ(https://github.com/kazumi3858/payreco-backend)のフロントエンドリポジトリです。
+作業中の内容：デザインの改善、テストケースの追加・見直し
+
+# ペイレコ(frontend)
+
+ペイレコのフロントエンドリポジトリです。
+サービスの説明等は、下記リンク先のバックエンドリポジトリからご覧くださいませ。
+
+https://github.com/kazumi3858/payreco-backend
