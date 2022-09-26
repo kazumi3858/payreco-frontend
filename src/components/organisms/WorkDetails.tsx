@@ -10,7 +10,7 @@ import { findCurrencyRate } from "utils/find-currency-rate";
 import {
   ClockIcon,
   CurrencyYenIcon,
-  PencilSquareIcon,
+  DocumentIcon,
 } from "@heroicons/react/24/solid";
 
 type Props = {
@@ -59,7 +59,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <div>
           {work.memo && (
             <>
-              <PencilSquareIcon className="h-4 w-4 inline text-sub-button-color" />
+              <DocumentIcon className="h-4 w-4 inline text-sub-button-color" />
               <span>{` ${work.memo}`}</span>
             </>
           )}

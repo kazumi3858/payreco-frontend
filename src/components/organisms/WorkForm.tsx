@@ -117,16 +117,19 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="text-center font-bold">
-        <p>{format(selectedDay, "MMM dd日", { locale: ja })}</p>
+        <p className="text-lg">
+          {format(selectedDay, "MMM dd日", { locale: ja })}
+        </p>
         <p>{company.name}</p>
       </div>
-      <div className="space-x-1">
+      <div>
         <RadioButton
           type="small"
           value="true"
           text="シフト時刻を入力"
           onChange={changeShiftMode}
           checked={shiftMode}
+          position="l"
         />
         <RadioButton
           type="small"
@@ -134,6 +137,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           text="合計勤務時間のみ入力"
           onChange={changeShiftMode}
           checked={!shiftMode}
+          position="r"
         />
       </div>
       {shiftMode ? (
@@ -143,7 +147,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <input
               id="starting-time"
               type="datetime-local"
-              className="block bg-stone-100"
+              className="bg-stone-100 w-40 p-1 mb-3 rounded-md"
               min={minTime}
               max={maxTime}
               defaultValue={
@@ -159,7 +163,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <input
               id="ending-time"
               type="datetime-local"
-              className="block bg-stone-100"
+              className="bg-stone-100 w-40 p-1 mb-3 rounded-md"
               min={minTime}
               max={nextDayMaxTime}
               defaultValue={
@@ -170,25 +174,24 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
               onChange={(e) => setEndingTime(new Date(e.target.value))}
             />
           </div>
-          <div>
+          <div className="ml-8 mb-1">
             <label>休憩: </label>
             <SelectBox
               defaultValue={defaultBreakHours}
               changeEvent={(e) => setBreakHours(Number(e.target.value))}
               array={["0", "1", "2", "3", "4", "5", "6", "7", "8"]}
             />
-            時間
+            <span className="mx-2">時間</span>
             <SelectBox
               defaultValue={defaultBreakMinutes}
               changeEvent={(e) => setBreakMinutes(Number(e.target.value))}
               array={Object.keys([...Array(60)])}
             />
-            分
+            <span className="mx-2">分</span>
           </div>
-          <div>
+          <div className="mt-2">
             <p>
-              合計時間:{" "}
-              {`${Math.floor(startAndEndTimeDifference / 60)}時間${
+              {`合計時間: ${Math.floor(startAndEndTimeDifference / 60)}時間${
                 startAndEndTimeDifference % 60
               }分`}
             </p>
@@ -198,7 +201,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           </div>
         </>
       ) : (
-        <div>
+        <div className="mb-1">
           <label>合計時間: </label>
           <SelectBox
             defaultValue={
@@ -207,7 +210,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             changeEvent={(e) => setWorkedHours(Number(e.target.value))}
             array={Object.keys([...Array(24)])}
           />
-          時間
+          <span className="mx-2">時間</span>
           <SelectBox
             defaultValue={
               work?.working_hours
@@ -221,10 +224,10 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             changeEvent={(e) => setWorkedMinutes(Number(e.target.value))}
             array={Object.keys([...Array(60)])}
           />
-          分
+          <span className="mx-2">分</span>
         </div>
       )}
-      <div>
+      <div className="ml-8">
         <label htmlFor="pay">給料: </label>
         {company.wage_amount ? (
           <span>
@@ -245,11 +248,11 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <p className="text-rose-600">金額が不正な値・または大きすぎます。</p>
         )}
       </div>
-      <div>
+      <div className="ml-10">
         <label htmlFor="memo">メモ: </label>
         <input
           id="memo"
-          className="m-1 bg-stone-100"
+          className="m-1 bg-stone-100 p-1 rounded-md"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
           placeholder="任意入力"
@@ -259,7 +262,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <p className="text-rose-600">メモは50文字以内に収めてください。</p>
         )}
       </div>
-      <div className="text-right">
+      <div className="text-right mt-5">
         <SubmitButton updating={updating} disabled={disableButton} />
       </div>
     </form>

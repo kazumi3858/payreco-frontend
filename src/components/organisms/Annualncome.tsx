@@ -35,7 +35,9 @@ function AnnualIncome({ incomeList }: Props) {
             ))}
           </ul>
           <div className="text-right">
-            <p className="mt-2">合計: {annualTotalIncome.toLocaleString()}円</p>
+            <p className="mt-2 font-bold">
+              合計: {annualTotalIncome.toLocaleString()}円
+            </p>
           </div>
         </>
       ) : (

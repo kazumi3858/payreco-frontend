@@ -116,7 +116,7 @@ function Calendar() {
                         "bg-main-button-color",
                       isEqual(day, selectedDay) &&
                         !isToday(day) &&
-                        "bg-[#C4D695]",
+                        "bg-yellow-button",
                       !isEqual(day, selectedDay) &&
                         "hover:bg-stone-100 cursor-pointer",
                       (isEqual(day, selectedDay) || isToday(day)) &&
@@ -127,7 +127,7 @@ function Calendar() {
                     <time dateTime={format(day, "yyyy-MM-dd")}>
                       {format(day, "d")}
                     </time>
-                    <div className="text-xs mx-auto mt-3 h-6">
+                    <div className="text-xs mx-auto mt-1 md:mt-3 h-4 lg:6">
                       {data?.some((work) =>
                         isSameDay(parseISO(`${work.date}`), day)
                       ) && <p>●</p>}

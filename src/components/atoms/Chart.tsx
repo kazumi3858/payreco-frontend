@@ -15,7 +15,7 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
       <p className="pb-3">今月の目標達成率</p>
       <div className="relative w-full h-6 bg-stone-200 rounded-full">
         <div
-          className="absolute h-6 bg-main-gradient-l rounded-full"
+          className="absolute h-6 bg-main-button-color rounded-full"
           style={{ width: `${result(expectedAchievementRate)}%` }}
         ></div>
         <div

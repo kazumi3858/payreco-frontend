@@ -43,13 +43,14 @@ function IncomeList() {
     <div className="px-4 pt-5 pb-10">
       <div className="bg-white rounded-3xl px-6 pb-5 md:pb-0 md:px-0 md:bg-transparent max-w-lg mx-auto md:max-w-7xl">
         <div className="flex justify-center">
-          <div className="md:hidden space-x-5 my-3">
+          <div className="md:hidden my-3">
             <RadioButton
               type="big"
               value="true"
               text="今月の給料"
               onChange={changeMode}
               checked={monthlyMode}
+              position="l"
             />
             <RadioButton
               type="big"
@@ -57,6 +58,7 @@ function IncomeList() {
               text="年間の給料"
               onChange={changeMode}
               checked={!monthlyMode}
+              position="r"
             />
           </div>
         </div>

@@ -7,13 +7,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "main-gradient-l": "#BBCCD6",
-        "main-gradient-r": "#CEE1CA",
-        "sub-gradient-l": "#948AA8",
-        "sub-gradient-r": "#689588",
+        "main-gradient-l": "#A8D5DD",
+        "main-gradient-r": "#E3E3E3",
+        "sub-gradient-l": "#A8D5DD",
+        "sub-gradient-r": "#E3E3E3",
         "sub-color": "#AD679B",
-        "main-button-color": "#93B8CD",
-        "sub-button-color": "#7495A8",
+        "main-button-color": "#C8DDE0",
+        "sub-button-color": "#A3C1C5",
+        "yellow-button": "#CEDEBB",
         "point-color": "#58307F",
       },
       dropShadow: {

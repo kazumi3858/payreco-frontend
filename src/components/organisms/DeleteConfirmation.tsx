@@ -33,7 +33,7 @@ function DeleteConfirmation({ id, queryKey, setDeleteConfirmation }: Props) {
       <p>本当に削除しますか？</p>
       <div className="text-center text-lg font-bold space-x-6 mt-3">
         <button
-          className="text-main-button-color hover:brightness-75"
+          className="text-sub-button-color hover:brightness-75"
           onClick={handleDelete}
         >
           はい

@@ -46,7 +46,7 @@ function TargetAmountForm({ user }: Props) {
           毎月の目標金額:{" "}
           <input
             id="target"
-            className="w-20 bg-stone-100"
+            className="w-20 bg-stone-100 rounded-md mr-2"
             type="number"
             defaultValue={defaultTargetAmount}
             onChange={(e) => setTargetAmount(Number(e.target.value))}

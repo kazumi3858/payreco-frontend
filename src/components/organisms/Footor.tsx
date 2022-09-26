@@ -2,8 +2,8 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <div className="text-sm text-center bg-stone-300 md:mt-5 py-2">
-      <div className="space-x-4 mb-1">
+    <div className="text-sm text-center bg-sub-button-color md:mt-5 py-2">
+      <div className="space-x-4 mt-1">
         <Link href="/terms">
           <a>利用規約</a>
         </Link>

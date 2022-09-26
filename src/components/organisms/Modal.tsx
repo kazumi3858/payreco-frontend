@@ -14,7 +14,7 @@ function Modal({ children, modal, setModal }: Props) {
         <div className="fixed inset-0 z-50" onClick={() => setModal(false)}>
           <div className="flex h-5/6 justify-center items-center">
             <div
-              className="bg-white p-4 rounded-lg drop-shadow-4xl"
+              className="bg-white py-4 px-4 md:px-8 rounded-lg drop-shadow-4xl"
               onClick={(e) => {
                 e.stopPropagation();
               }}

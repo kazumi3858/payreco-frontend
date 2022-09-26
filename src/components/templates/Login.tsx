@@ -66,7 +66,7 @@ function Login() {
           <div>ログイン中</div>
         ) : (
           <button
-            className="text-base md:text-xl h-14 px-10 my-10 text-white bg-gradient-to-r from-main-button-color to-[#7196A9] rounded-full tracking-wide"
+            className="text-base md:text-xl h-14 px-10 my-10 text-white bg-gradient-to-r from-main-gradient-l to-[#ACACA3] rounded-full tracking-wide"
             onClick={googleSignIn}
           >
             Googleアカウントでログインして始める
