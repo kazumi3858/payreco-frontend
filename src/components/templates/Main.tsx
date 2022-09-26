@@ -32,7 +32,7 @@ function Main({ children }: Props) {
             <div className="z-0 -mt-32">{children}</div>
           </div>
           <Menu />
-          <Footer />
+          <Footer loginPage={false} />
         </div>
       ) : (
         redirect()

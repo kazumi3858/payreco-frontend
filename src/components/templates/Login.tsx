@@ -1,7 +1,7 @@
 import router from "next/router";
 import axios from "axios";
 import Description from "components/atoms/Description";
-import Link from "next/link";
+import Footor from "components/organisms/Footor";
 import { auth, provider } from "auth/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
@@ -28,17 +28,19 @@ function Login() {
       <div className="pt-5 bg-gradient-to-r from-main-gradient-l to-main-gradient-r">
         <div className="text-right">
           <div className="inline-block mr-10 drop-shadow-xl">
-            <h1 className="text-white/90 text-lg mx-6 my-3">ペ イ レ コ</h1>
+            <h1 className="text-white/90 text-xl drop-shadow-lg mx-6 mt-3">
+              ペ イ レ コ
+            </h1>
           </div>
         </div>
-        <div className="py-20 mb-10 max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
+        <div className="py-10 md:pb-20 mb-10 max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
           <div className="lg:grid lg:grid-cols-2">
             <div className="drop-shadow-3xl flex justify-center items-center">
               <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r p-5">
                 <img
-                  className="rounded-3xl"
-                  src="https://user-images.githubusercontent.com/97820517/192142063-09efaffc-86db-46fd-bb62-6d1224a32ba7.png"
-                  alt="main content image"
+                  className="rounded-xl"
+                  src="/main-image.png"
+                  alt="サービスのメイン画像"
                 />
               </div>
             </div>
@@ -78,10 +80,10 @@ function Login() {
       </h2>
       <div className="flex justify-center py-5 px-10">
         <div>
-          <p className="mb-3">
+          <p className="mb-5">
             外貨の報酬がある方に向けて、働いた時間を登録するだけで今月いくら稼いだかを日本円表示してくれるサービスです。
           </p>
-          <p className="mb-3">
+          <p className="mb-5">
             日本円の報酬も登録・管理できます。シフト時刻を入力できるのでシフト管理してもご利用いただけます。
           </p>
           <p className="text-sm mt-2">
@@ -98,14 +100,7 @@ function Login() {
         <Description text={1} image={1} />
         <Description text={2} image={2} />
       </div>
-      <div className="space-x-10 text-center mt-4 py-2 bg-stone-200">
-        <Link href="/terms">
-          <a>利用規約</a>
-        </Link>
-        <Link href="/policy">
-          <a>プライバシーポリシー</a>
-        </Link>
-      </div>
+      <Footor loginPage={true} />
     </>
   );
 }

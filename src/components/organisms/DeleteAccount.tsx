@@ -1,4 +1,3 @@
-import Button from "components/atoms/Button";
 import Heading from "components/atoms/Heading";
 import { auth, provider } from "auth/firebase";
 import { deleteUser, reauthenticateWithPopup } from "firebase/auth";
@@ -59,7 +58,7 @@ function DeleteAccount() {
         </p>
         <div className="my-6 text-center">
           <button
-            className="text-lg bg-stone-300 px-2 py-1 rounded-lg"
+            className="bg-stone-300 px-2 py-1 rounded-lg"
             onClick={handleClick}
           >
             退会する
