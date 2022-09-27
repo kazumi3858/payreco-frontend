@@ -13,7 +13,7 @@ jest.mock("firebase/auth", () => {
   return { ...original, auth: jest.fn() };
 });
 
-export const handlers = [
+const handlers = [
   ...getWorksMSW(),
   ...getCompaniesMSW(),
   ...getExchangeRatesMSW(),
