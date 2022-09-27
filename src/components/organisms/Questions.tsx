@@ -26,7 +26,7 @@ function Questions() {
         <p>
           退会処理は
           <Link href="/delete-account">
-            <a className="text-sub-gradient-r">こちら</a>
+            <a className="text-stone-400 hover:text-stone-600">こちら</a>
           </Link>
           のページから行うことができます。
         </p>

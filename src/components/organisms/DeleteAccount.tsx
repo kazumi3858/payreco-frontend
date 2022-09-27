@@ -49,16 +49,17 @@ function DeleteAccount() {
       <div className="max-w-2xl p-6">
         <Heading text="退会方法" />
         <p>退会処理は以下のボタンから行うことができます。</p>
-        <p>
+        <p className="text-red-500">
           ※
           退会処理を行うとこれまでのデータが全て消えてしまいますのでご注意ください。
         </p>
-        <p>
-          ※ 退会処理を行う際にGoogleアカウントの再認証が必要な場合がございます。
+        <p className="text-red-500">
+          ※
+          最終ログインから一定時間が経っている場合、退会処理実行時にGoogleアカウントの再認証が必要となります。処理に失敗した場合はログインし直してから再度お試しください。
         </p>
         <div className="my-6 text-center">
           <button
-            className="bg-stone-300 px-2 py-1 rounded-lg"
+            className="bg-stone-300 hover:bg-stone-200 px-2 py-1 rounded-lg"
             onClick={handleClick}
           >
             退会する

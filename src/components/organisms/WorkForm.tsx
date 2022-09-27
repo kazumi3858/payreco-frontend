@@ -147,7 +147,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <input
               id="starting-time"
               type="datetime-local"
-              className="bg-stone-100 w-40 p-1 mb-3 rounded-md"
+              className="bg-stone-100 w-48 p-1 mb-3 rounded-md"
               min={minTime}
               max={maxTime}
               defaultValue={
@@ -163,7 +163,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <input
               id="ending-time"
               type="datetime-local"
-              className="bg-stone-100 w-40 p-1 mb-3 rounded-md"
+              className="bg-stone-100 w-48 p-1 mb-3 rounded-md"
               min={minTime}
               max={nextDayMaxTime}
               defaultValue={

@@ -40,7 +40,7 @@ function Login() {
               <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r lg:to-[#CFDEE1] p-3">
                 <img
                   className="rounded-2xl"
-                  src="/main-image.png"
+                  src="main-image.png"
                   alt="サービスのメイン画像"
                 />
               </div>
@@ -117,10 +117,10 @@ function Login() {
         <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
           使い方
         </h2>
-        <div className="md:flex md:justify-center md:space-x-20 text-center px-8 xl:px-44">
-          <Description text={0} image={0} />
-          <Description text={1} image={1} />
-          <Description text={2} image={2} />
+        <div className="md:flex md:justify-center md:space-x-20 text-center md:mx-8 xl:mx-60">
+          <Description position={1} />
+          <Description position={2} />
+          <Description position={3} />
         </div>
       </section>
       <Footor loginPage={true} />
