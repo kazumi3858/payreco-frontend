@@ -12,9 +12,7 @@ describe("Chart", () => {
   });
 
   it("can render text '100%' when earned income is higher than target", async () => {
-    render(
-      <Chart target={100000} earnedIncome={100001} expectedIncome={0} />
-    );
+    render(<Chart target={100000} earnedIncome={100001} expectedIncome={0} />);
     expect(screen.getByText(/本日まで: 100%/)).toBeInTheDocument();
     expect(screen.getByText(/見込み含め: 100%/)).toBeInTheDocument();
   });

@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import CompanyList from "components/organisms/CompanyList";
 import * as firebaseAuth from "firebase/auth";
 import { render, screen } from "@testing-library/react";
-import { getCompaniesMSW2 } from "api/companies/companies.msw";
+import { getCompaniesMSW } from "api/companies/companies.msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { setupServer } from "msw/node";
 
@@ -11,7 +11,7 @@ jest.mock("firebase/auth", () => {
   return { ...original, auth: jest.fn() };
 });
 
-const server = setupServer(...getCompaniesMSW2());
+const server = setupServer(...getCompaniesMSW());
 const queryClient = new QueryClient();
 
 const companyList = (

@@ -9,7 +9,7 @@ describe("Work CRUD function", () => {
     cy.createCompanies();
   });
 
-  it("can render input for pay amount when pay system is not hourly wage", () => {
+  it("can render input for pay amount when hourly wage system is true", () => {
     cy.visit("/");
     cy.contains("button", "株式会社ジキュウ").click();
     cy.get("#pay").should("not.exist");

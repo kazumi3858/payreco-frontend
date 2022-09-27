@@ -40,7 +40,7 @@ describe("WorkList", () => {
 
   it("can render work list in selected day", async () => {
     render(workList(works));
-    expect(await screen.findAllByText(/株式会社田中/)).toHaveLength(3);
+    expect(await screen.findAllByText(/株式会社abc/)).toHaveLength(3);
     expect(screen.getByText(/8:00 AM - 12:00 PM/)).toBeInTheDocument();
     expect(screen.getByText(/12:00 PM - 4:00 PM/)).toBeInTheDocument();
   });
