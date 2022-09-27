@@ -12,8 +12,8 @@ function CompapyList() {
 
   return (
     <div className="pt-5">
-      <div className="max-w-lg px-4 mx-auto sm:px-7 md:max-w-1xl md:px-6">
-        <div className="mb-5 bg-white rounded-3xl pb-4">
+      <div className="md:max-w-1xl mx-auto max-w-lg px-4 sm:px-7 md:px-6">
+        <div className="mb-5 rounded-3xl bg-white pb-4">
           <Heading text="勤務先一覧" />
           {isLoading ? (
             <p className="ml-5">Loading</p>
@@ -27,12 +27,12 @@ function CompapyList() {
                     )
                 )}
               </ul>
-              <div className="text-right mt-5 mb-2 mr-6">
+              <div className="mt-5 mb-2 mr-6 text-right">
                 <button
-                  className="bg-yellow-button hover:bg-stone-300 rounded-lg px-3 m-1"
+                  className="m-1 rounded-lg bg-yellow-button px-3 hover:brightness-90"
                   onClick={() => setCompanyForm(true)}
                 >
-                  <PlusSmallIcon className="h-5 w-5 inline pb-1" />
+                  <PlusSmallIcon className="inline h-5 w-5 pb-1" />
                   勤務先を追加する
                 </button>
               </div>

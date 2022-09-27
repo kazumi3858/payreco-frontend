@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Questions() {
   return (
-    <div className="flex justify-center mt-6">
+    <div className="mt-6 flex justify-center">
       <div className="max-w-2xl p-6">
         <Heading text="ヘルプ" />
         <h3 className="font-bold">使い方を教えてください。</h3>
@@ -13,7 +13,7 @@ function Questions() {
         <p>
           勤務先を登録したらトップページの「勤務先を選んで予定を追加」から勤務先をクリックしてスケジュールを登録できるようになります。
         </p>
-        <h3 className="font-bold mt-3">
+        <h3 className="mt-3 font-bold">
           為替レートは更新されているのでしょうか？
         </h3>
         <p>
@@ -22,7 +22,7 @@ function Questions() {
         <p>
           月末に取得したレートをその月の最終レートとして確定し、その月の給料を計算します。
         </p>
-        <h3 className="font-bold mt-3">退会方法を教えてください。</h3>
+        <h3 className="mt-3 font-bold">退会方法を教えてください。</h3>
         <p>
           退会処理は
           <Link href="/delete-account">

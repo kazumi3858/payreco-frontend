@@ -31,7 +31,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   const rate = data ? findCurrencyRate(work, company, data) : 0;
 
   return (
-    <li className="flex items-center px-4 py-2 space-x-4 group rounded-2xl focus-within:bg-gray-100 hover:bg-stone-100">
+    <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 focus-within:bg-gray-100 hover:bg-stone-100">
       <div className="flex-1">
         <div className="font-bold">{company.name}</div>
         <span className="mt-0.5">
@@ -48,9 +48,9 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           {hasBreak && ")"}
         </span>
         <div>
-          <ClockIcon className="h-4 w-4 inline text-sub-button-color" />
+          <ClockIcon className="inline h-4 w-4 text-sub-button-color" />
           {` ${work.working_hours}時間 `}
-          <CurrencyYenIcon className="h-4 w-4 inline text-sub-button-color" />
+          <CurrencyYenIcon className="inline h-4 w-4 text-sub-button-color" />
           {` ${work.pay_amount}${company.currency_type}`}
           {company.currency_type !== "円" &&
             rate > 0 &&
@@ -59,7 +59,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <div>
           {work.memo && (
             <>
-              <DocumentIcon className="h-4 w-4 inline text-sub-button-color" />
+              <DocumentIcon className="inline h-4 w-4 text-sub-button-color" />
               <span>{` ${work.memo}`}</span>
             </>
           )}

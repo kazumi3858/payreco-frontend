@@ -17,13 +17,13 @@ function Dropdown({ logout, visitQuestion }: Props) {
       tabIndex={0}
       className="relative"
     >
-      <div className="py-4 px-4 cursor-pointer absolute right-3">
+      <div className="absolute right-3 cursor-pointer py-4 px-4">
         <Bars3Icon className="h-7 w-7" />
       </div>
       <ul
         className={
           menu
-            ? "bg-white rounded-xl p-2 drop-shadow-2xl inline-block z-50 absolute top-3 right-3"
+            ? "absolute top-3 right-3 z-50 inline-block rounded-xl bg-white p-2 drop-shadow-2xl"
             : "hidden"
         }
       >

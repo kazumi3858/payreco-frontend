@@ -147,7 +147,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <input
               id="starting-time"
               type="datetime-local"
-              className="bg-stone-100 w-48 p-1 mb-3 rounded-md"
+              className="mb-3 w-48 rounded-md bg-stone-100 p-1"
               min={minTime}
               max={maxTime}
               defaultValue={
@@ -163,7 +163,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
             <input
               id="ending-time"
               type="datetime-local"
-              className="bg-stone-100 w-48 p-1 mb-3 rounded-md"
+              className="mb-3 w-48 rounded-md bg-stone-100 p-1"
               min={minTime}
               max={nextDayMaxTime}
               defaultValue={
@@ -252,7 +252,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         <label htmlFor="memo">メモ: </label>
         <input
           id="memo"
-          className="m-1 bg-stone-100 p-1 rounded-md"
+          className="m-1 rounded-md bg-stone-100 p-1"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
           placeholder="任意入力"
@@ -262,7 +262,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <p className="text-rose-600">メモは50文字以内に収めてください。</p>
         )}
       </div>
-      <div className="text-right mt-5">
+      <div className="mt-5 text-right">
         <SubmitButton updating={updating} disabled={disableButton} />
       </div>
     </form>

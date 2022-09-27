@@ -60,10 +60,10 @@ function Calendar() {
 
   return (
     <div className="pt-5">
-      <div className="max-w-lg px-4 mx-auto md:max-w-7xl md:px-6">
+      <div className="mx-auto max-w-lg px-4 md:max-w-7xl md:px-6">
         <div className="md:grid md:grid-cols-2">
           <div>
-            <div className="p-6 bg-white rounded-3xl">
+            <div className="rounded-3xl bg-white p-6">
               <div className="flex justify-center">
                 <button
                   type="button"
@@ -71,10 +71,10 @@ function Calendar() {
                   className="text-gray-400 hover:text-gray-500"
                 >
                   <span>
-                    <PlayIcon className="h-6 w-6 text-main-button-color rotate-180" />
+                    <PlayIcon className="h-6 w-6 rotate-180 text-main-button-color" />
                   </span>
                 </button>
-                <h2 className="text-xl font-bold w-36 text-center">
+                <h2 className="w-36 text-center text-xl font-bold">
                   {format(firstDayCurrentMonth, "yyyy年 MMMM", { locale: ja })}
                 </h2>
                 <button
@@ -87,12 +87,12 @@ function Calendar() {
                   </span>
                 </button>
               </div>
-              <div className="grid grid-cols-7 mt-8 text-xs leading-6 text-center text-gray-500">
+              <div className="mt-8 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
                 {dayOfWeek.map((day, index) => (
                   <div key={index}>{day}</div>
                 ))}
               </div>
-              <div className="grid grid-cols-7 mt-2 text-sm">
+              <div className="mt-2 grid grid-cols-7 text-sm">
                 {days.map((day, index) => (
                   <div
                     key={day.toString()}
@@ -118,16 +118,16 @@ function Calendar() {
                         !isToday(day) &&
                         "bg-yellow-button",
                       !isEqual(day, selectedDay) &&
-                        "hover:bg-stone-100 cursor-pointer",
+                        "cursor-pointer hover:bg-stone-100",
                       (isEqual(day, selectedDay) || isToday(day)) &&
                         "font-semibold",
-                      "lg:h-16 rounded-md m-1 p-1 text-center"
+                      "m-1 rounded-md p-1 text-center lg:h-16"
                     )}
                   >
                     <time dateTime={format(day, "yyyy-MM-dd")}>
                       {format(day, "d")}
                     </time>
-                    <div className="text-xs mx-auto mt-1 md:mt-3 h-4 lg:6">
+                    <div className="lg:6 mx-auto mt-1 h-4 text-xs md:mt-3">
                       {data?.some((work) =>
                         isSameDay(parseISO(`${work.date}`), day)
                       ) && <p>●</p>}

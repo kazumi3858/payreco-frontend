@@ -5,9 +5,9 @@ function Terms() {
   const listStyle = "my-2 list-disc pl-5";
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="mx-auto max-w-2xl">
       <div className="my-10 px-5">
-        <h2 className="text-3xl text-center mb-4 font-bold">利用規約</h2>
+        <h2 className="mb-4 text-center text-3xl font-bold">利用規約</h2>
         この利用規約（以下、「本規約」といいます。）は、このウェブサイト上で提供するサービス（以下、「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下、「ユーザー」といいます。）には、本規約に従って、本サービスをご利用いただきます。
         <h3 className={headStyle}>第1条（適用）</h3>
         <p>

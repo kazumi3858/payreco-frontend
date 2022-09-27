@@ -5,8 +5,8 @@ type Props = {
 };
 function Footer({ loginPage }: Props) {
   return (
-    <div className="text-sm text-center bg-sub-button-color md:mt-5 py-2">
-      <div className="space-x-4 mt-1">
+    <div className="bg-sub-button-color py-2 text-center text-sm md:mt-5">
+      <div className="mt-1 space-x-4">
         <Link href="/terms">
           <a>利用規約</a>
         </Link>

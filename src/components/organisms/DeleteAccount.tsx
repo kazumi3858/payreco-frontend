@@ -45,7 +45,7 @@ function DeleteAccount() {
     confirmation ? deleteAccount() : console.log("Canceled.");
   };
   return (
-    <div className="flex justify-center mt-6">
+    <div className="mt-6 flex justify-center">
       <div className="max-w-2xl p-6">
         <Heading text="退会方法" />
         <p>退会処理は以下のボタンから行うことができます。</p>
@@ -59,7 +59,7 @@ function DeleteAccount() {
         </p>
         <div className="my-6 text-center">
           <button
-            className="bg-stone-300 hover:bg-stone-200 px-2 py-1 rounded-lg"
+            className="rounded-lg bg-stone-200 px-2 py-1 hover:bg-stone-300"
             onClick={handleClick}
           >
             退会する

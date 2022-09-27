@@ -27,12 +27,12 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
 
   return (
     <div className="mt-12 md:mt-0 md:pl-14">
-      <div className="mb-10 bg-white rounded-3xl">
+      <div className="mb-10 rounded-3xl bg-white">
         <Heading text={`${date}の予定`} />
         {isLoading ? (
           <p className="ml-5">Loading</p>
         ) : (
-          <ol className="p-3 space-y-1 md:text-base leading-7 md:leading-8">
+          <ol className="space-y-1 p-3 leading-7 md:text-base md:leading-8">
             {selectedDayWorks && selectedDayWorks.length > 0 ? (
               selectedDayWorks.map((work) => (
                 <WorkDetails
@@ -48,7 +48,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
           </ol>
         )}
       </div>
-      <div className="mb-10 pb-5 px-3 rounded-3xl bg-white">
+      <div className="mb-10 rounded-3xl bg-white px-3 pb-5">
         <Heading text={`勤務先を選んで${date}の予定を追加`} />
         {isLoading ? (
           <p className="ml-5">Loading</p>
@@ -69,16 +69,16 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                   )
               )
             ) : (
-              <p className="mb-5 mx-5">
+              <p className="mx-5 mb-5">
                 最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
               </p>
             )}
 
             <button
-              className="text-sm bg-yellow-button hover:bg-stone-300 rounded-lg py-1 px-3 m-1"
+              className="m-1 rounded-lg bg-yellow-button py-1 px-3 text-sm hover:brightness-90"
               onClick={() => setCompanyForm(true)}
             >
-              <PlusSmallIcon className="h-5 w-5 inline pb-1" />
+              <PlusSmallIcon className="inline h-5 w-5 pb-1" />
               勤務先を追加する
             </button>
           </div>

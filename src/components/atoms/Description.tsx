@@ -11,9 +11,9 @@ function Description({ position }: Props) {
 
   return (
     <div className="mt-12">
-      <p className="text-[#84a4aa] text-3xl mb-4 font-bold">{position}</p>
+      <p className="mb-4 text-3xl font-bold text-[#84a4aa]">{position}</p>
       <img
-        className="mx-auto rounded-full max-w-xs md:max-w-full"
+        className="mx-auto max-w-xs rounded-full md:max-w-full"
         src={`sub-image${position}.gif`}
         alt={`使い方の画像${position}番`}
       />

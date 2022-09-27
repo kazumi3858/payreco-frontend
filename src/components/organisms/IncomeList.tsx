@@ -41,9 +41,9 @@ function IncomeList() {
 
   return (
     <div className="px-4 pt-5 pb-10">
-      <div className="bg-white rounded-3xl px-6 pb-5 md:pb-0 md:px-0 md:bg-transparent max-w-lg mx-auto md:max-w-7xl">
+      <div className="mx-auto max-w-lg rounded-3xl bg-white px-6 pb-5 md:max-w-7xl md:bg-transparent md:px-0 md:pb-0">
         <div className="flex justify-center">
-          <div className="md:hidden my-3">
+          <div className="my-3 md:hidden">
             <RadioButton
               type="big"
               value="true"
