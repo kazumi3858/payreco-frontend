@@ -13,7 +13,7 @@ describe("Work CRUD function", () => {
     cy.visit("/");
     cy.contains("button", "株式会社ジキュウ").click();
     cy.get("#pay").should("not.exist");
-    cy.get("button").eq(8).click();
+    cy.get("body").click(0, 0);
     cy.contains("button", "株式会社ニッキュウ").click();
     cy.get("#pay").should("be.visible");
   });
@@ -69,7 +69,7 @@ describe("Work CRUD function", () => {
     cy.contains("input", "保存").click();
     cy.contains("10:00 AM - 6:00 PM");
     cy.contains("株式会社ジキュウ");
-    cy.contains("給料: 7000円");
+    cy.contains("7000円");
     cy.contains("予定はありません。").should("have.length", 0);
   });
 
