@@ -248,7 +248,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <p className="text-rose-600">金額が不正な値・または大きすぎます。</p>
         )}
       </div>
-      <div className="ml-10">
+      <div className="ml-8">
         <label htmlFor="memo">メモ: </label>
         <input
           id="memo"
