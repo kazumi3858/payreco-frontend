@@ -36,7 +36,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         {isLoading ? (
           <p className="ml-5">Loading</p>
         ) : (
-          <ol className="space-y-1 p-3 leading-7 md:text-base md:leading-8">
+          <ul className="space-y-1 p-3 leading-7 md:text-base md:leading-8">
             {selectedDayWorks && selectedDayWorks.length > 0 ? (
               selectedDayWorks.map((work) => (
                 <WorkDetails
@@ -49,7 +49,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
             ) : (
               <p className="py-6 px-3">予定はありません。</p>
             )}
-          </ol>
+          </ul>
         )}
       </div>
       <div className="mb-10 rounded-3xl bg-white px-3 pb-5">
