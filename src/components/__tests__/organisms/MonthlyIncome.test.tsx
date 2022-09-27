@@ -21,7 +21,7 @@ describe("MonthlyIncome", () => {
   it("can render correct income", () => {
     render(<MonthlyIncome income={income} isLoading={false} />);
 
-    if (getDate(new Date()) > 10) {
+    if (getDate(new Date()) >= 10) {
       expect(screen.getByText(/本日まで: 3,000円/)).toBeInTheDocument();
     } else {
       expect(screen.getByText(/本日まで: 1,000円/)).toBeInTheDocument();
