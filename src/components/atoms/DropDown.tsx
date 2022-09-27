@@ -2,11 +2,11 @@ import { Bars3Icon } from "@heroicons/react/24/solid";
 import { MouseEventHandler, useState } from "react";
 
 type Props = {
-  logout: MouseEventHandler<HTMLLIElement>;
-  visitQuestion: MouseEventHandler<HTMLLIElement>;
+  logoutEvent: MouseEventHandler<HTMLLIElement>;
+  helpEvent: MouseEventHandler<HTMLLIElement>;
 };
 
-function Dropdown({ logout, visitQuestion }: Props) {
+function Dropdown({ logoutEvent, helpEvent }: Props) {
   const [menu, setMenu] = useState(false);
   const style = "cursor-pointer hover:bg-stone-100 p-3 rounded-xl";
 
@@ -27,10 +27,10 @@ function Dropdown({ logout, visitQuestion }: Props) {
             : "hidden"
         }
       >
-        <li className={style} onClick={logout}>
+        <li className={style} onClick={logoutEvent}>
           ログアウト
         </li>
-        <li className={style} onClick={visitQuestion}>
+        <li className={style} onClick={helpEvent}>
           ヘルプ
         </li>
       </ul>
