@@ -18,11 +18,15 @@ type Props = {
 
 function WorkList({ selectedDay, selectedDayWorks }: Props) {
   const date = format(selectedDay, "MMM dd日", { locale: ja });
+
   const { data, isLoading } = useGetCompanies();
+  const companies = data?.filter((companies) => companies.deleted_at === null);
+
   const [workForm, setWorkForm] = useState(false);
   const [companyForm, setCompanyForm] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
-  const company = (work: Work) =>
+
+  const companyOfTheWork = (work: Work) =>
     data?.find((company): boolean => company.id === work.company_id)!;
 
   return (
@@ -39,7 +43,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                   selectedDay={selectedDay}
                   work={work}
                   key={work.id}
-                  company={company(work)}
+                  company={companyOfTheWork(work)}
                 />
               ))
             ) : (
@@ -50,12 +54,12 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
       </div>
       <div className="mb-10 rounded-3xl bg-white px-3 pb-5">
         <Heading text={`勤務先を選んで${date}の予定を追加`} />
-        {isLoading ? (
+        {!companies ? (
           <p className="ml-5">Loading</p>
         ) : (
           <div>
-            {data && data.length > 0 ? (
-              data.map(
+            {companies.length > 0 ? (
+              companies.map(
                 (company) =>
                   company.deleted_at === null && (
                     <Button
