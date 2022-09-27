@@ -32,7 +32,7 @@ describe("CompanyList", () => {
 
   it("can render company list", async () => {
     render(companyList);
-    expect(await screen.findAllByText(/[時日]給/)).toBeTruthy();
+    expect(await screen.findAllByText(/[時日]給/)).toHaveLength(3);
     expect(screen.getAllByText(/株式会社/)).toHaveLength(3);
   });
 });

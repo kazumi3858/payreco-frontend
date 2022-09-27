@@ -12,7 +12,7 @@ jest.mock("firebase/auth", () => {
 const queryClient = new QueryClient();
 
 describe("DeleteAccount", () => {
-  it("can render delete account button", () => {
+  it("can render delete account page", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <DeleteAccount />

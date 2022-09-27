@@ -8,7 +8,7 @@
 import { rest } from "msw";
 
 const thisYear = new Date().getFullYear();
-const thisMonth = new Date().getMonth() - 1;
+const thisMonth = new Date().getMonth() + 1;
 
 export const getGetWorksMock = () =>
   Array.from({ length: 10 }, (_, i) => i + 1).map((_, i) => ({
