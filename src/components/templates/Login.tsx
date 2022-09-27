@@ -117,7 +117,7 @@ function Login() {
         <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
           使い方
         </h2>
-        <div className="md:flex md:justify-center md:space-x-20 text-center px-8">
+        <div className="md:flex md:justify-center md:space-x-20 text-center px-8 xl:px-44">
           <Description text={0} image={0} />
           <Description text={1} image={1} />
           <Description text={2} image={2} />

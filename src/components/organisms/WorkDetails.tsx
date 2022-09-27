@@ -32,7 +32,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
 
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-2xl focus-within:bg-gray-100 hover:bg-stone-100">
-      <div className="flex-auto">
+      <div className="flex-1">
         <div className="font-bold">{company.name}</div>
         <span className="mt-0.5">
           {work.starting_time &&

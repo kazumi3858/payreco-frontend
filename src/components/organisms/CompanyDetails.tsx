@@ -15,8 +15,8 @@ function CompanyDetails({ company }: Props) {
 
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-2xl focus-within:bg-gray-100 hover:bg-gray-100">
-      <div className="flex-auto">
-        <p>{company.name}</p>
+      <div className="flex-1">
+        <p className="font-bold">{company.name}</p>
         <p>
           {company.hourly_wage_system
             ? `時給${company.wage_amount}${company.currency_type}`
