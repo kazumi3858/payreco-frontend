@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import * as firebaseAuth from "firebase/auth";
 import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { getGetCompaniesMock } from "api/companies/companies.msw";
+import { getCompaniesMock } from "api/companies/companies.msw";
 import { Company } from "api/model";
 
 jest.mock("firebase/auth", () => {
@@ -13,8 +13,8 @@ jest.mock("firebase/auth", () => {
 });
 
 const queryClient = new QueryClient();
-const wageSystemCompany = getGetCompaniesMock()[0];
-const nonWageSystemCompany = getGetCompaniesMock()[1];
+const wageSystemCompany = getCompaniesMock()[0];
+const nonWageSystemCompany = getCompaniesMock()[1];
 
 const companyForm = (company?: Company) => (
   <QueryClientProvider client={queryClient}>

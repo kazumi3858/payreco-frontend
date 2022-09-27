@@ -7,7 +7,7 @@
  */
 import { rest } from "msw";
 
-export const getGetCompaniesMock = () =>
+export const getCompaniesMock = () =>
   Array.from({ length: 3 }, (_, i) => i + 1).map((_, i) => ({
     id: "companyId" + (i + 1),
     name: "株式会社" + ["abc", "cde", "efg"][i],
@@ -42,6 +42,6 @@ export const getCompaniesMSW = () => [
 
 export const getCompaniesMSW2 = () => [
   rest.get("*/companies", (_req, res, ctx) => {
-    return res(ctx.json(getGetCompaniesMock()));
+    return res(ctx.json(getCompaniesMock()));
   }),
 ];
