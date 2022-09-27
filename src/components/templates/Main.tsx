@@ -18,8 +18,8 @@ function Main({ children }: Props) {
 
   if (isLoading)
     return (
-      <div className="h-screen w-screen flex justify-center items-center">
-        <div className="animate-spin h-16 w-16 bg-stone-200 rounded-xl"></div>
+      <div className="flex h-screen w-screen items-center justify-center">
+        <div className="h-16 w-16 animate-spin rounded-xl bg-stone-200"></div>
       </div>
     );
 
@@ -32,7 +32,7 @@ function Main({ children }: Props) {
             <div className="z-0 -mt-32">{children}</div>
           </div>
           <Menu />
-          <Footer />
+          <Footer loginPage={false} />
         </div>
       ) : (
         redirect()

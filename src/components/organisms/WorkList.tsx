@@ -9,7 +9,7 @@ import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useGetCompanies } from "api/companies/companies";
 import { Company, Work } from "api/model";
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { PlusSmallIcon } from "@heroicons/react/24/solid";
 
 type Props = {
   selectedDay: Date;
@@ -17,46 +17,49 @@ type Props = {
 };
 
 function WorkList({ selectedDay, selectedDayWorks }: Props) {
+  const date = format(selectedDay, "MMM dd日", { locale: ja });
+
   const { data, isLoading } = useGetCompanies();
+  const companies = data?.filter((companies) => companies.deleted_at === null);
+
   const [workForm, setWorkForm] = useState(false);
   const [companyForm, setCompanyForm] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
-  const company = (work: Work) =>
+
+  const companyOfTheWork = (work: Work) =>
     data?.find((company): boolean => company.id === work.company_id)!;
 
   return (
     <div className="mt-12 md:mt-0 md:pl-14">
-      <div className="mb-10 bg-white rounded-3xl">
-        <Heading
-          text={`${format(selectedDay, "MMM dd日", { locale: ja })}の予定`}
-        />
+      <div className="mb-10 rounded-3xl bg-white">
+        <Heading text={`${date}の予定`} />
         {isLoading ? (
           <p className="ml-5">Loading</p>
         ) : (
-          <ol className="p-3 space-y-1 md:text-base leading-7 md:leading-8">
+          <ul className="space-y-1 p-3 leading-7 md:text-base md:leading-8">
             {selectedDayWorks && selectedDayWorks.length > 0 ? (
               selectedDayWorks.map((work) => (
                 <WorkDetails
                   selectedDay={selectedDay}
                   work={work}
                   key={work.id}
-                  company={company(work)}
+                  company={companyOfTheWork(work)}
                 />
               ))
             ) : (
               <p className="py-6 px-3">予定はありません。</p>
             )}
-          </ol>
+          </ul>
         )}
       </div>
-      <div className="mb-10 pb-5 px-3 rounded-3xl bg-white">
-        <Heading text="勤務先を選んで予定を追加" />
-        {isLoading ? (
+      <div className="mb-10 rounded-3xl bg-white px-3 pb-5">
+        <Heading text={`勤務先を選んで${date}の予定を追加`} />
+        {!companies ? (
           <p className="ml-5">Loading</p>
         ) : (
           <div>
-            {data && data.length > 0 ? (
-              data.map(
+            {companies.length > 0 ? (
+              companies.map(
                 (company) =>
                   company.deleted_at === null && (
                     <Button
@@ -70,16 +73,16 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                   )
               )
             ) : (
-              <p className="mb-5">
+              <p className="mx-5 mb-5">
                 最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
               </p>
             )}
 
             <button
-              className="bg-stone-200 hover:bg-stone-300 rounded-lg px-3 m-1"
+              className="m-1 rounded-lg bg-yellow-button py-1 px-3 text-sm hover:brightness-90"
               onClick={() => setCompanyForm(true)}
             >
-              <PlusCircleIcon className="text-sub-button-color h-5 w-5 inline mx-1 mb-1" />
+              <PlusSmallIcon className="inline h-5 w-5 pb-1" />
               勤務先を追加する
             </button>
           </div>

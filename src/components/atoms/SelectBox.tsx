@@ -7,7 +7,7 @@ type Props = {
 function SelectBox({ defaultValue, changeEvent, array }: Props) {
   return (
     <select
-      className="bg-stone-100"
+      className="h-8 rounded-md bg-stone-100 py-1 px-2"
       defaultValue={defaultValue}
       onChange={changeEvent}
     >

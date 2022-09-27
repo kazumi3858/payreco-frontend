@@ -23,7 +23,7 @@ function AnnualIncome({ incomeList }: Props) {
   );
 
   return (
-    <div className="md:bg-white md:rounded-3xl md:pb-5 md:px-6">
+    <div className="md:rounded-3xl md:bg-white md:px-6 md:pb-5">
       <Heading text="年間の給料" />
       {incomeList && isFinite(annualTotalIncome) ? (
         <>
@@ -35,7 +35,9 @@ function AnnualIncome({ incomeList }: Props) {
             ))}
           </ul>
           <div className="text-right">
-            <p className="mt-2">合計: {annualTotalIncome.toLocaleString()}円</p>
+            <p className="mt-2 font-bold">
+              合計: {annualTotalIncome.toLocaleString()}円
+            </p>
           </div>
         </>
       ) : (

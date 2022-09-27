@@ -86,11 +86,31 @@ function CompanyForm({ setCompanyForm, company }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      <div className="flex justify-center">
+        <div>
+          <RadioButton
+            type="small"
+            value="true"
+            text="時給制"
+            onChange={changeWageSystem}
+            checked={wageSystem}
+            first={true}
+          />
+          <RadioButton
+            type="small"
+            value=""
+            text="日給制"
+            onChange={changeWageSystem}
+            checked={!wageSystem}
+            first={false}
+          />
+        </div>
+      </div>
+      <div className="ml-4">
         <label htmlFor="name">名前: </label>
         <input
           id="name"
-          className="bg-stone-100"
+          className="mb-3 rounded-md bg-stone-100 p-1"
           placeholder="例) 〇〇ワークス"
           defaultValue={defaultName}
           onChange={(e) => setName(e.target.value)}
@@ -100,22 +120,6 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           <p className="text-rose-600">名前は1～30文字にしてください。</p>
         )}
       </div>
-      <div className="space-x-1">
-        <RadioButton
-          type="small"
-          value="true"
-          text="時給制"
-          onChange={changeWageSystem}
-          checked={wageSystem}
-        />
-        <RadioButton
-          type="small"
-          value=""
-          text="日給制"
-          onChange={changeWageSystem}
-          checked={!wageSystem}
-        />
-      </div>
       {wageSystem && (
         <div>
           <label htmlFor="wage">時給額: </label>
@@ -123,7 +127,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
             id="wage"
             type="number"
             step="0.01"
-            className="bg-stone-100 w-20"
+            className="mb-3 w-20 rounded-md bg-stone-100 p-1"
             defaultValue={defaultWageAmount ? defaultWageAmount : ""}
             onChange={(e) => setWageAmount(Number(e.target.value))}
             onFocus={(e) => e.target.select()}
@@ -135,13 +139,15 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           )}
         </div>
       )}
-      <label>通貨: </label>
-      <SelectBox
-        defaultValue={defaultCurrencyType}
-        changeEvent={(e) => setCurrencyType(e.target.value)}
-        array={currencyList}
-      />
-      <div className="text-right">
+      <div className="ml-4">
+        <label>通貨: </label>
+        <SelectBox
+          defaultValue={defaultCurrencyType}
+          changeEvent={(e) => setCurrencyType(e.target.value)}
+          array={currencyList}
+        />
+      </div>
+      <div className="mt-5 text-right">
         <SubmitButton updating={updating} disabled={disableButton} />
       </div>
     </form>

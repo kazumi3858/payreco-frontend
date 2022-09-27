@@ -1,6 +1,7 @@
 import router from "next/router";
 import axios from "axios";
 import Description from "components/atoms/Description";
+import Footor from "components/organisms/Footor";
 import Link from "next/link";
 import { auth, provider } from "auth/firebase";
 import { signInWithPopup } from "firebase/auth";
@@ -25,39 +26,47 @@ function Login() {
 
   return (
     <>
-      <div className="pt-5 bg-gradient-to-r from-main-gradient-l to-main-gradient-r">
+      <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r pt-5">
         <div className="text-right">
-          <div className="inline-block mr-10 drop-shadow-xl">
-            <h1 className="text-white/90 text-lg mx-6 my-3">ペ イ レ コ</h1>
+          <div className="mr-10 inline-block drop-shadow-xl">
+            <h1 className="mx-6 mt-3 font-['游ゴシック'] text-2xl font-bold text-white drop-shadow-xl">
+              ペ イ レ コ
+            </h1>
           </div>
         </div>
-        <div className="py-20 mb-10 max-w-lg px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
+        <div className="mx-auto mb-10 max-w-lg py-10 px-4 sm:px-7 md:max-w-7xl md:px-6 md:pb-20">
           <div className="lg:grid lg:grid-cols-2">
-            <div className="drop-shadow-3xl flex justify-center items-center">
-              <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r p-5">
+            <div className="flex items-center justify-center drop-shadow-4xl">
+              <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r p-3 lg:to-[#CFDEE1]">
                 <img
-                  className="rounded-3xl"
-                  src="https://user-images.githubusercontent.com/97820517/192142063-09efaffc-86db-46fd-bb62-6d1224a32ba7.png"
-                  alt="main content image"
+                  className="rounded-2xl"
+                  src="main-image.png"
+                  alt="サービスのメイン画像"
                 />
               </div>
             </div>
-            <div className="text-center my-auto">
-              <h1 className="text-2xl md:text-3xl font-bold tracking-widest md:leading-relaxed mt-10 mb-5 leading-relaxed text-black/70">
+            <section className="my-auto text-center">
+              <h1 className="mt-10 mb-5 font-['游ゴシック'] text-2xl font-bold leading-relaxed tracking-widest text-black/70 md:text-3xl md:leading-relaxed">
                 外貨もまとめて管理できる
                 <br />
                 シフト管理・給料計算ツール
               </h1>
               <div className="flex justify-center">
-                <div className="text-left text-base md:text-lg tracking-widest">
-                  <ul className="list-disc">
-                    <li className="mb-1">働いた時間を入力して簡単に給料計算</li>
-                    <li className="mb-1">外貨の報酬は日本円に換算して表示</li>
-                    <li>シフト管理としても使える</li>
+                <div className="text-left text-sm tracking-widest md:text-base">
+                  <ul>
+                    <li className="mb-3 border-b-2 border-stone-100/50 pb-2">
+                      働いた時間を入力して簡単に給料計算
+                    </li>
+                    <li className="mb-3 border-b-2 border-stone-100/50 pb-2">
+                      外貨の報酬は日本円に換算して表示
+                    </li>
+                    <li className="border-b-2 border-stone-100/50 pb-2">
+                      シフト管理としても使える
+                    </li>
                   </ul>
                 </div>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </div>
@@ -66,46 +75,55 @@ function Login() {
           <div>ログイン中</div>
         ) : (
           <button
-            className="text-base md:text-xl h-14 px-10 my-10 text-white bg-gradient-to-r from-main-button-color to-[#7196A9] rounded-full tracking-wide"
+            className="mt-10 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
             onClick={googleSignIn}
           >
             Googleアカウントでログインして始める
           </button>
         )}
       </div>
-      <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
-        どんなサービス？
-      </h2>
-      <div className="flex justify-center py-5 px-10">
-        <div>
-          <p className="mb-3">
-            外貨の報酬がある方に向けて、働いた時間を登録するだけで今月いくら稼いだかを日本円表示してくれるサービスです。
-          </p>
-          <p className="mb-3">
-            日本円の報酬も登録・管理できます。シフト時刻を入力できるのでシフト管理してもご利用いただけます。
-          </p>
-          <p className="text-sm mt-2">
-            ※対応している通貨: 円 米ドル ユーロ 英ポンド インドルピー 豪ドル
-            カナダドル ランド NZドル SGドル 人民元 スイスフラン
-          </p>
-        </div>
-      </div>
-      <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
-        使い方
-      </h2>
-      <div className="md:flex md:justify-center md:space-x-20 text-center px-8">
-        <Description text={0} image={0} />
-        <Description text={1} image={1} />
-        <Description text={2} image={2} />
-      </div>
-      <div className="space-x-10 text-center mt-4 py-2 bg-stone-200">
+      <p className="px-10 text-center text-sm">
+        ※上記ボタンをクリックすることで
         <Link href="/terms">
-          <a>利用規約</a>
+          <a className="text-stone-500 hover:text-stone-700">利用規約</a>
         </Link>
+        ・
         <Link href="/policy">
-          <a>プライバシーポリシー</a>
+          <a className="text-stone-500 hover:text-stone-700">
+            プライバシーポリシー
+          </a>
         </Link>
-      </div>
+        に同意したものとみなします。
+      </p>
+      <section>
+        <h2 className="mt-14 mb-2 flex justify-center text-3xl font-bold md:mt-20">
+          どんなサービス？
+        </h2>
+        <div className="flex justify-center py-5 px-10">
+          <div className="max-w-2xl">
+            <p className="mb-5">
+              外貨の報酬がある方に向けた、働いた時間を登録するだけで
+              <b>今月いくら稼いだかを日本円表示してくれるサービス</b>
+              です。日本円の報酬も管理できます。シフトの確認もカンタンなのでスケジュール帳としても使えます。
+            </p>
+            <p className="mt-2 text-xs">
+              ※対応している通貨: 円 米ドル ユーロ 英ポンド インドルピー 豪ドル
+              カナダドル ランド NZドル SGドル 人民元 スイスフラン
+            </p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
+          使い方
+        </h2>
+        <div className="text-center md:mx-8 md:flex md:justify-center md:space-x-20 xl:mx-60">
+          <Description position={1} />
+          <Description position={2} />
+          <Description position={3} />
+        </div>
+      </section>
+      <Footor loginPage={true} />
     </>
   );
 }

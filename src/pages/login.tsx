@@ -12,8 +12,8 @@ export default function LoginPage() {
 
   if (isLoading)
     return (
-      <div className="h-screen w-screen flex justify-center items-center">
-        <div className="animate-spin h-16 w-16 bg-stone-200 rounded-xl"></div>
+      <div className="flex h-screen w-screen items-center justify-center">
+        <div className="h-16 w-16 animate-spin rounded-xl bg-stone-200"></div>
       </div>
     );
 

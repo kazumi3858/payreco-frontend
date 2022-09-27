@@ -5,9 +5,9 @@ function Policy() {
   const listStyle = "my-2 list-disc pl-5";
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="mx-auto max-w-2xl">
       <div className="my-10 px-5">
-        <h2 className="text-3xl text-center mb-4 font-bold">
+        <h2 className="mb-4 text-center text-3xl font-bold">
           プライバシーポリシー
         </h2>
         <p>

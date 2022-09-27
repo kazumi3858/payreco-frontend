@@ -1,18 +1,23 @@
 import Link from "next/link";
 
-function Footer() {
+type Props = {
+  loginPage: boolean;
+};
+function Footer({ loginPage }: Props) {
   return (
-    <div className="text-sm text-center bg-stone-300 md:mt-5 py-2">
-      <div className="space-x-4 mb-1">
+    <div className="bg-sub-button-color py-2 text-center text-sm md:mt-5">
+      <div className="mt-1 space-x-4">
         <Link href="/terms">
           <a>利用規約</a>
         </Link>
         <Link href="/policy">
           <a>プライバシーポリシー</a>
         </Link>
-        <Link href="/delete-account">
-          <a>退会方法</a>
-        </Link>
+        {!loginPage && (
+          <Link href="/delete-account">
+            <a>退会方法</a>
+          </Link>
+        )}
       </div>
       <small>
         <a

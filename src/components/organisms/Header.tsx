@@ -12,8 +12,8 @@ function Header() {
   const handleClickQuestion = () => router.push("/questions");
 
   return (
-    <div className="w-full bg-gradient-to-r from-main-gradient-l to-[#DBECD9] h-40">
-      <header className="w-full bg-gradient-to-t from-stone-100 h-44">
+    <div className="h-44 w-full bg-gradient-to-l from-stone-100 to-[#C8DDE0]">
+      <header className="h-44 w-full bg-gradient-to-t from-stone-100">
         <Dropdown
           logout={handleClickLogout}
           visitQuestion={handleClickQuestion}
