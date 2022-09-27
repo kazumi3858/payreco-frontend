@@ -22,6 +22,15 @@ module.exports = {
         "4xl": "0 40px 40px rgba(0, 0, 0, 0.2)",
       },
     },
+    fontFamily: {
+      body: [
+        "Hiragino Sans",
+        "ヒラギノ角ゴシック",
+        "メイリオ",
+        "Meiryo",
+        "sans-serif",
+      ],
+    },
   },
   plugins: [],
 };

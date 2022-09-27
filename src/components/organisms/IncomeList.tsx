@@ -50,7 +50,7 @@ function IncomeList() {
               text="今月の給料"
               onChange={changeMode}
               checked={monthlyMode}
-              position="l"
+              first={true}
             />
             <RadioButton
               type="big"
@@ -58,7 +58,7 @@ function IncomeList() {
               text="年間の給料"
               onChange={changeMode}
               checked={!monthlyMode}
-              position="r"
+              first={false}
             />
           </div>
         </div>

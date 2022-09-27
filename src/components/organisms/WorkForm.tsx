@@ -129,7 +129,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           text="シフト時刻を入力"
           onChange={changeShiftMode}
           checked={shiftMode}
-          position="l"
+          first={true}
         />
         <RadioButton
           type="small"
@@ -137,7 +137,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           text="合計勤務時間のみ入力"
           onChange={changeShiftMode}
           checked={!shiftMode}
-          position="r"
+          first={false}
         />
       </div>
       {shiftMode ? (

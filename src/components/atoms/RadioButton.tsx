@@ -4,19 +4,13 @@ type Props = {
   text: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   checked: boolean;
-  position: string;
+  first: boolean;
 };
 
-function RadioButton({
-  type,
-  value,
-  text,
-  onChange,
-  checked,
-  position,
-}: Props) {
-  const smallButtonStyle = `cursor-pointer p-1 rounded-${position}-full`;
-  const bigButtonStyle = `cursor-pointer py-2 px-4 rounded-${position}-full`;
+function RadioButton({ type, value, text, onChange, checked, first }: Props) {
+  const baseStyle = first ? "rounded-l-full" : "rounded-r-full";
+  const smallButtonStyle = `cursor-pointer p-1 ${baseStyle}`;
+  const bigButtonStyle = `cursor-pointer py-2 px-4 ${baseStyle}`;
   const style = type === "small" ? smallButtonStyle : bigButtonStyle;
 
   return (

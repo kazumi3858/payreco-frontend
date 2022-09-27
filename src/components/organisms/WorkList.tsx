@@ -17,6 +17,7 @@ type Props = {
 };
 
 function WorkList({ selectedDay, selectedDayWorks }: Props) {
+  const date = format(selectedDay, "MMM dd日", { locale: ja });
   const { data, isLoading } = useGetCompanies();
   const [workForm, setWorkForm] = useState(false);
   const [companyForm, setCompanyForm] = useState(false);
@@ -27,9 +28,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
   return (
     <div className="mt-12 md:mt-0 md:pl-14">
       <div className="mb-10 bg-white rounded-3xl">
-        <Heading
-          text={`${format(selectedDay, "MMM dd日", { locale: ja })}の予定`}
-        />
+        <Heading text={`${date}の予定`} />
         {isLoading ? (
           <p className="ml-5">Loading</p>
         ) : (
@@ -50,7 +49,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         )}
       </div>
       <div className="mb-10 pb-5 px-3 rounded-3xl bg-white">
-        <Heading text="勤務先を選んで予定を追加" />
+        <Heading text={`勤務先を選んで${date}の予定を追加`} />
         {isLoading ? (
           <p className="ml-5">Loading</p>
         ) : (

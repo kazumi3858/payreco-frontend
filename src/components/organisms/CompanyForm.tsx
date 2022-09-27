@@ -94,7 +94,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
             text="時給制"
             onChange={changeWageSystem}
             checked={wageSystem}
-            position="l"
+            first={true}
           />
           <RadioButton
             type="small"
@@ -102,7 +102,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
             text="日給制"
             onChange={changeWageSystem}
             checked={!wageSystem}
-            position="r"
+            first={false}
           />
         </div>
       </div>
