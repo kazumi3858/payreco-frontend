@@ -35,21 +35,21 @@ describe("WorkList", () => {
 
   it("can render loading", async () => {
     render(workList(works));
-    expect(screen.getAllByText(/Loading/)).toBeTruthy();
+    expect(screen.getAllByText("Loading")).toBeTruthy();
   });
 
   it("can render work list in selected day", async () => {
     render(workList(works));
-    expect(await screen.findAllByText(/株式会社abc/)).toHaveLength(3);
-    expect(screen.getByText(/8:00 AM - 12:00 PM/)).toBeInTheDocument();
-    expect(screen.getByText(/12:00 PM - 4:00 PM/)).toBeInTheDocument();
+    expect(await screen.findAllByText("株式会社abc")).toHaveLength(3);
+    expect(screen.getByText("8:00 AM - 12:00 PM")).toBeInTheDocument();
+    expect(screen.getByText("12:00 PM - 4:00 PM")).toBeInTheDocument();
   });
 
   it("can render work list ordered by starting time", () => {
     render(workList(works));
-    const elements = screen.getAllByText(/M - /);
-    expect(elements[0]).toHaveTextContent(/8:00 AM - 12:00 PM/);
-    expect(elements[1]).toHaveTextContent(/12:00 PM - 4:00 PM/);
+    const elements = screen.getAllByText(/[AP]M - /);
+    expect(elements[0]).toHaveTextContent("8:00 AM - 12:00 PM");
+    expect(elements[1]).toHaveTextContent("12:00 PM - 4:00 PM");
   });
 
   it("cannot render data if selected day does not have works", () => {

@@ -35,14 +35,14 @@ describe("IncomeList", () => {
 
   it("can render loading", async () => {
     render(incomeList);
-    expect(screen.getAllByText(/Loading/)).toBeTruthy();
-    await waitFor(() => expect(screen.queryByText(/Loading/)).toBeNull());
+    expect(screen.getAllByText("Loading")).toBeTruthy();
+    await waitFor(() => expect(screen.queryByText("Loading")).toBeNull());
   });
 
   it("can render monthly and annual contents", async () => {
     render(incomeList);
     expect(screen.getAllByText("今月の給料")).toBeTruthy();
     expect(screen.getAllByText("年間の給料")).toBeTruthy();
-    expect(screen.getAllByText(/合計: 100,741円/)).toBeTruthy();
+    expect(screen.getAllByText("合計: 100,741円")).toBeTruthy();
   });
 });

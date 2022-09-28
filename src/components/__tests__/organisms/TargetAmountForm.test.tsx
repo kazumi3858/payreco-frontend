@@ -52,7 +52,7 @@ describe("TargetAmountForm", () => {
     expect(
       screen.getByText("目標金額が不正な値・または大きすぎます。")
     ).toBeInTheDocument();
-    await userEvent.click(screen.getByText(/保存/));
+    await userEvent.click(screen.getByText("保存"));
     expect(window.alert).toHaveBeenCalledWith(
       "目標金額が不正な値・または大きすぎます。"
     );
