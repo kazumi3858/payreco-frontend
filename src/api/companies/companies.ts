@@ -38,7 +38,7 @@ export const getCompanies = (
   );
 };
 
-export const getGetCompaniesQueryKey = () => [`/companies`];
+export const getCompaniesQueryKey = () => [`/companies`];
 
 export type GetCompaniesQueryResult = NonNullable<
   Awaited<ReturnType<typeof getCompanies>>
@@ -58,7 +58,7 @@ export const useGetCompanies = <
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetCompaniesQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getCompaniesQueryKey();
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getCompanies>>> = ({
     signal,
