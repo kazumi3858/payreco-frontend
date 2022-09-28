@@ -37,6 +37,7 @@ describe("Company CRUD function", () => {
     cy.get("#wage").type("15");
     cy.get("select").select("米ドル");
     cy.contains("input", "保存").click();
+    cy.contains("保存").should('not.exist')
     cy.contains("株式会社ジキュウ").should("have.length", 1);
   });
 
@@ -48,6 +49,7 @@ describe("Company CRUD function", () => {
     cy.get("#name").clear().type("株式会社ニッキュウ");
     cy.contains("日給制").click();
     cy.contains("input", "保存").click();
+    cy.contains("保存").should('not.exist')
     cy.contains("株式会社ニッキュウ");
     cy.contains("日給制");
   });
@@ -57,6 +59,7 @@ describe("Company CRUD function", () => {
     cy.contains("株式会社ニッキュウ").should("have.length", 1);
     cy.contains("button", "削除").click();
     cy.contains("button", "はい").click();
+    cy.contains("はい").should('not.exist')
     cy.contains("株式会社ニッキュウ").should("have.length", 0);
   });
 
