@@ -60,13 +60,13 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
 
   const breakTime = breakHours * 60 + breakMinutes;
   const startAndEndTimeDifference =
-    (Date.parse(String(endingTime ? endingTime : minTime)) -
-      Date.parse(String(startingTime ? startingTime : minTime))) /
+    (Date.parse(String(endingTime)) - Date.parse(String(startingTime))) /
       (1000 * 60) -
-    (breakTime ? breakTime : 0);
+    breakTime;
   const changeShiftMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShiftMode(Boolean(e.target.value));
   };
+  const invalidHours = Math.sign(startAndEndTimeDifference) === -1;
   const workingHours =
     Math.round(
       shiftMode
@@ -193,11 +193,13 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <div className="mt-2">
             <span className="mr-2 inline-block w-20 text-right">合計時間</span>
             <span>
-              {`${Math.floor(startAndEndTimeDifference / 60)}時間${
-                startAndEndTimeDifference % 60
-              }分`}
+              {`${
+                invalidHours
+                  ? Math.ceil(startAndEndTimeDifference / 60)
+                  : Math.floor(startAndEndTimeDifference / 60)
+              }時間${startAndEndTimeDifference % 60}分`}
             </span>
-            {Math.sign(startAndEndTimeDifference) === -1 && (
+            {invalidHours && (
               <p className="text-rose-600">合計時間が正しくありません。</p>
             )}
           </div>
