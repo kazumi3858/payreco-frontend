@@ -18,7 +18,7 @@ describe("DeleteAccount", () => {
         <DeleteAccount />
       </QueryClientProvider>
     );
-    expect(screen.getByText(/退会方法/)).toBeInTheDocument();
+    expect(screen.getByText("退会方法")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: "退会する" })
     ).toBeInTheDocument();

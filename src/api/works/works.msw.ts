@@ -19,7 +19,7 @@ export const getGetWorksMock = () =>
     break_time: 60,
     working_hours: 7.0,
     pay_amount: 70,
-    memo: "メモ",
+    memo: "メモです",
     user_id: "userId1",
     company_id: "companyId" + [1, 2, 3, 1, 2, 3, 1, 2, 3, 1][i],
     created_at: new Date(),

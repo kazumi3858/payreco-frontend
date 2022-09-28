@@ -34,29 +34,29 @@ const workForm = (company: Company, work?: Work) => (
 describe("WorkForm", () => {
   it("can render posting form properly", () => {
     const { getByLabelText } = render(workForm(wageSystemCompany));
-    expect(getByLabelText(/開始時刻/)).toHaveValue(
+    expect(getByLabelText("開始時刻")).toHaveValue(
       `${thisMonthFirstDay}T00:00`
     );
-    expect(getByLabelText(/終了時刻/)).toHaveValue(
+    expect(getByLabelText("終了時刻")).toHaveValue(
       `${thisMonthFirstDay}T00:00`
     );
-    expect(screen.getByText(/休憩/)).toBeInTheDocument();
+    expect(screen.getByText("休憩")).toBeInTheDocument();
     expect(screen.getByText(/0時間/)).toBeInTheDocument();
-    expect(screen.getByText(/給料/)).toBeInTheDocument();
+    expect(screen.getByText("給料")).toBeInTheDocument();
   });
 
   it("can render editing form with current saved values", () => {
     const { getByLabelText } = render(workForm(wageSystemCompany, work));
-    expect(screen.getByText(/株式会社abc/)).toBeInTheDocument();
-    expect(screen.getByText(/7時間0分/)).toBeInTheDocument();
-    expect(screen.getByText(/70/)).toBeInTheDocument();
-    expect(getByLabelText(/メモ/)).toHaveValue("メモ1");
+    expect(screen.getByText("株式会社abc")).toBeInTheDocument();
+    expect(screen.getByText("7時間0分")).toBeInTheDocument();
+    expect(screen.getByText("70")).toBeInTheDocument();
+    expect(getByLabelText("メモ")).toHaveValue("メモです");
   });
 
   it("can validate incorrect pay amount", async () => {
     window.alert = jest.fn();
     const { getByLabelText } = render(workForm(nonWageSystemCompany, work));
-    const inputPay = getByLabelText(/給料/);
+    const inputPay = getByLabelText("給料");
     await userEvent.type(inputPay, "999999");
     expect(
       screen.queryByText("金額が不正な値・または大きすぎます。")
@@ -65,7 +65,7 @@ describe("WorkForm", () => {
     expect(
       screen.getByText("金額が不正な値・または大きすぎます。")
     ).toBeInTheDocument();
-    await userEvent.click(screen.getByText(/保存/));
+    await userEvent.click(screen.getByText("保存"));
     expect(window.alert).toHaveBeenCalledWith([
       "金額が不正な値・または大きすぎます。",
     ]);
@@ -74,14 +74,14 @@ describe("WorkForm", () => {
   it("can validate incorrect memo", async () => {
     window.alert = jest.fn();
     const { getByLabelText } = render(workForm(wageSystemCompany, work));
-    const inputWage = getByLabelText(/メモ/);
+    const inputWage = getByLabelText("メモ");
     await userEvent.type(inputWage, "あ".repeat(50));
     expect(screen.queryByText("メモは50文字以内に収めてください。")).toBeNull();
     await userEvent.type(inputWage, "あ".repeat(51));
     expect(
       screen.getByText("メモは50文字以内に収めてください。")
     ).toBeInTheDocument();
-    await userEvent.click(screen.getByText(/保存/));
+    await userEvent.click(screen.getByText("保存"));
     expect(window.alert).toHaveBeenCalledWith([
       "メモは50文字以内に収めてください。",
     ]);
@@ -93,7 +93,7 @@ describe("WorkForm", () => {
     expect(
       screen.getByText("合計時間が正しくありません。")
     ).toBeInTheDocument();
-    await userEvent.click(screen.getByText(/保存/));
+    await userEvent.click(screen.getByText("保存"));
     expect(window.alert).toHaveBeenCalledWith(["合計時間が正しくありません。"]);
   });
 });
