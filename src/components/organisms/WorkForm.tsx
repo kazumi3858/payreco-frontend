@@ -238,8 +238,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         ) : (
           <input
             id="pay"
-            className="mt-2 mb-3 w-16 rounded-md bg-stone-100 p-1"
+            className="mt-2 mb-3 mr-2 w-28 rounded-md bg-stone-100 p-1"
             type="number"
+            placeholder="数値を入力"
             defaultValue={work?.pay_amount ? work?.pay_amount : ""}
             onChange={(e) => setPayAmount(Number(e.target.value))}
             onFocus={(e) => e.target.select()}

@@ -128,7 +128,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
             id="wage"
             type="number"
             step="0.01"
-            className="mb-3 w-20 rounded-md bg-stone-100 p-1"
+            placeholder="数値を入力"
+            className="mb-3 w-28 rounded-md bg-stone-100 p-1"
             defaultValue={defaultWageAmount ? defaultWageAmount : ""}
             onChange={(e) => setWageAmount(Number(e.target.value))}
             onFocus={(e) => e.target.select()}
