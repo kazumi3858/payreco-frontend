@@ -1,4 +1,5 @@
 import Heading from "components/atoms/Heading";
+import LoadingIcon from "components/atoms/LoadingIcon";
 
 type Props = { incomeList?: { [key: string]: [string, number][] } };
 
@@ -41,7 +42,9 @@ function AnnualIncome({ incomeList }: Props) {
           </div>
         </>
       ) : (
-        <p>Laoding</p>
+        <div>
+          <LoadingIcon />
+        </div>
       )}
     </div>
   );

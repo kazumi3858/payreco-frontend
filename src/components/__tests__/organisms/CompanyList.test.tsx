@@ -27,7 +27,7 @@ describe("CompanyList", () => {
 
   it("can render loading", async () => {
     render(companyList);
-    expect(screen.getByText(/Loading/)).toBeInTheDocument();
+    expect(screen.getByText("Loading")).toBeInTheDocument();
   });
 
   it("can render company list", async () => {

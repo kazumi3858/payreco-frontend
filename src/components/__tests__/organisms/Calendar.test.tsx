@@ -32,7 +32,7 @@ describe("Calendar", () => {
       </QueryClientProvider>
     );
     expect(screen.getByText(thisMonth)).toBeInTheDocument();
-    await waitFor(() => expect(screen.queryByText(/Loading/)).toBeNull());
+    await waitFor(() => expect(screen.queryByText("Loading")).toBeNull());
     expect(await screen.findAllByText(/●/)).toHaveLength(10);
   });
 });
