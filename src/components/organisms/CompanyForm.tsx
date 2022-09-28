@@ -121,26 +121,24 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           <p className="text-rose-600">名前は1～30文字にしてください。</p>
         )}
       </div>
-      {wageSystem && (
-        <div>
-          <Label width="w-14" htmlFor="wage" title="時給額" />
-          <input
-            id="wage"
-            type="number"
-            step="0.01"
-            placeholder="数値を入力"
-            className="mb-3 w-28 rounded-md bg-stone-100 p-1"
-            defaultValue={defaultWageAmount ? defaultWageAmount : ""}
-            onChange={(e) => setWageAmount(Number(e.target.value))}
-            onFocus={(e) => e.target.select()}
-          />
-          {wageAmount != null && (wageAmount > 99999 || wageAmount < 0) && (
-            <p className="text-rose-600">
-              時給額が不正な値・または大きすぎます。
-            </p>
-          )}
-        </div>
-      )}
+      <div className={wageSystem ? "" : "hidden"}>
+        <Label width="w-14" htmlFor="wage" title="時給額" />
+        <input
+          id="wage"
+          type="number"
+          step="0.01"
+          placeholder="数値を入力"
+          className="mb-3 w-28 rounded-md bg-stone-100 p-1"
+          defaultValue={defaultWageAmount ? defaultWageAmount : ""}
+          onChange={(e) => setWageAmount(Number(e.target.value))}
+          onFocus={(e) => e.target.select()}
+        />
+        {wageAmount != null && (wageAmount > 99999 || wageAmount < 0) && (
+          <p className="text-rose-600">
+            時給額が不正な値・または大きすぎます。
+          </p>
+        )}
+      </div>
       <div>
         <Label width="w-14" title="通貨" />
         <SelectBox

@@ -141,96 +141,94 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           first={false}
         />
       </div>
-      {shiftMode ? (
-        <>
-          <div>
-            <Label width="w-20" htmlFor="starting-time" title="開始時刻" />
-            <input
-              id="starting-time"
-              type="datetime-local"
-              className="mb-3 w-48 rounded-md bg-stone-100 p-1"
-              min={minTime}
-              max={maxTime}
-              defaultValue={
-                work?.starting_time
-                  ? String(work.starting_time).substring(0, 16)
-                  : minTime
-              }
-              onChange={(e) => setStartingTime(new Date(e.target.value))}
-            />
-          </div>
-          <div>
-            <Label width="w-20" htmlFor="ending-time" title="終了時刻" />
-            <input
-              id="ending-time"
-              type="datetime-local"
-              className="mb-3 w-48 rounded-md bg-stone-100 p-1"
-              min={minTime}
-              max={nextDayMaxTime}
-              defaultValue={
-                work?.ending_time
-                  ? String(work.ending_time).substring(0, 16)
-                  : minTime
-              }
-              onChange={(e) => setEndingTime(new Date(e.target.value))}
-            />
-          </div>
-          <div>
-            <Label width="w-20" title="休憩" />
-            <SelectBox
-              defaultValue={defaultBreakHours}
-              changeEvent={(e) => setBreakHours(Number(e.target.value))}
-              array={["0", "1", "2", "3", "4", "5", "6", "7", "8"]}
-            />
-            <span className="mx-2">時間</span>
-            <SelectBox
-              defaultValue={defaultBreakMinutes}
-              changeEvent={(e) => setBreakMinutes(Number(e.target.value))}
-              array={Object.keys([...Array(60)])}
-            />
-            <span className="mx-2">分</span>
-          </div>
-          <div className="mt-2">
-            <span className="mr-2 inline-block w-20 text-right">合計時間</span>
-            <span>
-              {`${
-                invalidHours
-                  ? Math.ceil(startAndEndTimeDifference / 60)
-                  : Math.floor(startAndEndTimeDifference / 60)
-              }時間${startAndEndTimeDifference % 60}分`}
-            </span>
-            {invalidHours && (
-              <p className="text-rose-600">合計時間が正しくありません。</p>
-            )}
-          </div>
-        </>
-      ) : (
-        <div className="mb-1">
-          <Label width="w-20" title="合計時間" />
-          <SelectBox
+      <div className={shiftMode ? "" : "hidden"}>
+        <div>
+          <Label width="w-20" htmlFor="starting-time" title="開始時刻" />
+          <input
+            id="starting-time"
+            type="datetime-local"
+            className="mb-3 w-48 rounded-md bg-stone-100 p-1"
+            min={minTime}
+            max={maxTime}
             defaultValue={
-              work?.working_hours ? Math.floor(work.working_hours) : 0
+              work?.starting_time
+                ? String(work.starting_time).substring(0, 16)
+                : minTime
             }
-            changeEvent={(e) => setWorkedHours(Number(e.target.value))}
-            array={Object.keys([...Array(24)])}
+            onChange={(e) => setStartingTime(new Date(e.target.value))}
+          />
+        </div>
+        <div>
+          <Label width="w-20" htmlFor="ending-time" title="終了時刻" />
+          <input
+            id="ending-time"
+            type="datetime-local"
+            className="mb-3 w-48 rounded-md bg-stone-100 p-1"
+            min={minTime}
+            max={nextDayMaxTime}
+            defaultValue={
+              work?.ending_time
+                ? String(work.ending_time).substring(0, 16)
+                : minTime
+            }
+            onChange={(e) => setEndingTime(new Date(e.target.value))}
+          />
+        </div>
+        <div>
+          <Label width="w-20" title="休憩" />
+          <SelectBox
+            defaultValue={defaultBreakHours}
+            changeEvent={(e) => setBreakHours(Number(e.target.value))}
+            array={["0", "1", "2", "3", "4", "5", "6", "7", "8"]}
           />
           <span className="mx-2">時間</span>
           <SelectBox
-            defaultValue={
-              work?.working_hours
-                ? Math.round(
-                    (Number(work.working_hours.toFixed(2)) -
-                      Math.floor(work.working_hours)) *
-                      60
-                  )
-                : 0
-            }
-            changeEvent={(e) => setWorkedMinutes(Number(e.target.value))}
+            defaultValue={defaultBreakMinutes}
+            changeEvent={(e) => setBreakMinutes(Number(e.target.value))}
             array={Object.keys([...Array(60)])}
           />
           <span className="mx-2">分</span>
         </div>
-      )}
+        <div className="mt-2">
+          <span className="mr-2 inline-block w-20 text-right">合計時間</span>
+          <span>
+            {`${
+              invalidHours
+                ? Math.ceil(startAndEndTimeDifference / 60)
+                : Math.floor(startAndEndTimeDifference / 60)
+            }時間${startAndEndTimeDifference % 60}分`}
+          </span>
+          {invalidHours && (
+            <p className="text-rose-600">合計時間が正しくありません。</p>
+          )}
+        </div>
+      </div>
+      <div className={shiftMode ? "hidden" : ""}>
+        <Label width="w-20" title="合計時間" />
+        <SelectBox
+          defaultValue={
+            work?.working_hours ? Math.floor(work.working_hours) : 0
+          }
+          changeEvent={(e) => setWorkedHours(Number(e.target.value))}
+          array={Object.keys([...Array(24)])}
+        />
+        <span className="mx-2">時間</span>
+        <SelectBox
+          defaultValue={
+            work?.working_hours
+              ? Math.round(
+                  (Number(work.working_hours.toFixed(2)) -
+                    Math.floor(work.working_hours)) *
+                    60
+                )
+              : 0
+          }
+          changeEvent={(e) => setWorkedMinutes(Number(e.target.value))}
+          array={Object.keys([...Array(60)])}
+        />
+        <span className="mx-2">分</span>
+      </div>
+
       <div>
         <Label width="w-20" htmlFor="pay" title="給料" />
         {company.wage_amount ? (
