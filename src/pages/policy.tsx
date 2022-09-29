@@ -7,7 +7,7 @@ function Policy() {
   return (
     <div className="mx-auto max-w-2xl">
       <div className="my-10 px-5">
-        <h2 className="mb-4 text-center text-3xl font-bold">
+        <h2 className="mb-4 border-b-4 border-main-button-color pb-3 text-center text-3xl font-bold">
           プライバシーポリシー
         </h2>
         <p>
