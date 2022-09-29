@@ -11,16 +11,18 @@ import { useState } from "react";
 function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const googleSignIn = async () => {
+  const googleSignIn = () => {
     setIsLoading(true);
-    await signInWithPopup(auth, provider)
+    signInWithPopup(auth, provider)
       .then((result) => {
-        result.user.getIdToken(true).then(async (idToken) => {
-          await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/user`, {
-            headers: { Authorization: `Bearer ${idToken}` },
-          });
-          router.push("/");
-        });
+        result.user
+          .getIdToken(true)
+          .then((idToken) => {
+            axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/user`, {
+              headers: { Authorization: `Bearer ${idToken}` },
+            });
+          })
+          .then(() => router.push("/"));
       })
       .catch((error) => console.log(error.message));
   };
