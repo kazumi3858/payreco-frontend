@@ -14,7 +14,6 @@ jest.mock("firebase/auth", () => {
 
 const queryClient = new QueryClient();
 const wageSystemCompany = getCompaniesMock()[0];
-const nonWageSystemCompany = getCompaniesMock()[1];
 
 const companyForm = (company?: Company) => (
   <QueryClientProvider client={queryClient}>
@@ -41,12 +40,6 @@ describe("CompanyForm", () => {
       wageSystemCompany.wage_amount
     );
     expect(selectedCurrency.value).toBe(wageSystemCompany.currency_type);
-  });
-
-  it("should not show wage amount input when hourly wage system is false", () => {
-    const { getByLabelText } = render(companyForm(nonWageSystemCompany));
-    expect(getByLabelText(/日給制/)).toBeChecked();
-    expect(screen.queryByLabelText(/時給額/)).toBeNull();
   });
 
   it("can input values", async () => {
