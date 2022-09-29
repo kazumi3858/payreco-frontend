@@ -4,6 +4,7 @@ import WorkForm from "components/organisms/WorkForm";
 import Modal from "./Modal";
 import WorkDetails from "./WorkDetails";
 import Heading from "components/atoms/Heading";
+import LoadingIcon from "components/atoms/LoadingIcon";
 import { useState } from "react";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
@@ -31,10 +32,12 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
 
   return (
     <div className="mt-12 md:mt-0 md:pl-14">
-      <div className="mb-10 rounded-3xl bg-white">
+      <div className="mb-10 rounded-xl bg-white">
         <Heading text={`${date}の予定`} />
         {isLoading ? (
-          <p className="ml-5">Loading</p>
+          <div className="ml-8 pb-5">
+            <LoadingIcon />
+          </div>
         ) : (
           <ul className="space-y-1 p-3 leading-7 md:text-base md:leading-8">
             {selectedDayWorks && selectedDayWorks.length > 0 ? (
@@ -52,10 +55,12 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
           </ul>
         )}
       </div>
-      <div className="mb-10 rounded-3xl bg-white px-3 pb-5">
+      <div className="mb-10 rounded-xl bg-white px-3 pb-5">
         <Heading text={`勤務先を選んで${date}の予定を追加`} />
         {!companies ? (
-          <p className="ml-5">Loading</p>
+          <div className="ml-5">
+            <LoadingIcon />
+          </div>
         ) : (
           <div>
             {companies.length > 0 ? (

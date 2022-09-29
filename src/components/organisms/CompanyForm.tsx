@@ -1,14 +1,15 @@
-import {
-  usePatchCompaniesCompanyId,
-  usePostCompanies,
-} from "api/default/default";
+import RadioButton from "components/atoms/RadioButton";
+import SelectBox from "components/atoms/SelectBox";
+import SubmitButton from "components/atoms/SubmitButton";
+import Label from "components/atoms/Label";
 import { Company } from "api/model";
 import { useQueryClient } from "@tanstack/react-query";
 import { SetStateAction, useState } from "react";
 import { customMutationResult } from "api/custom-mutation-result";
-import RadioButton from "components/atoms/RadioButton";
-import SelectBox from "components/atoms/SelectBox";
-import SubmitButton from "components/atoms/SubmitButton";
+import {
+  usePatchCompaniesCompanyId,
+  usePostCompanies,
+} from "api/default/default";
 
 type Props = {
   setCompanyForm: React.Dispatch<SetStateAction<boolean>>;
@@ -106,8 +107,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           />
         </div>
       </div>
-      <div className="ml-4">
-        <label htmlFor="name">名前: </label>
+      <div>
+        <Label width="w-14" htmlFor="name" title="名前" />
         <input
           id="name"
           className="mb-3 rounded-md bg-stone-100 p-1"
@@ -120,27 +121,26 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           <p className="text-rose-600">名前は1～30文字にしてください。</p>
         )}
       </div>
-      {wageSystem && (
-        <div>
-          <label htmlFor="wage">時給額: </label>
-          <input
-            id="wage"
-            type="number"
-            step="0.01"
-            className="mb-3 w-20 rounded-md bg-stone-100 p-1"
-            defaultValue={defaultWageAmount ? defaultWageAmount : ""}
-            onChange={(e) => setWageAmount(Number(e.target.value))}
-            onFocus={(e) => e.target.select()}
-          />
-          {wageAmount != null && (wageAmount > 99999 || wageAmount < 0) && (
-            <p className="text-rose-600">
-              時給額が不正な値・または大きすぎます。
-            </p>
-          )}
-        </div>
-      )}
-      <div className="ml-4">
-        <label>通貨: </label>
+      <div className={wageSystem ? "" : "hidden"}>
+        <Label width="w-14" htmlFor="wage" title="時給額" />
+        <input
+          id="wage"
+          type="number"
+          step="0.01"
+          placeholder="数値を入力"
+          className="mb-3 w-28 rounded-md bg-stone-100 p-1"
+          defaultValue={defaultWageAmount ? defaultWageAmount : ""}
+          onChange={(e) => setWageAmount(Number(e.target.value))}
+          onFocus={(e) => e.target.select()}
+        />
+        {wageAmount != null && (wageAmount > 99999 || wageAmount < 0) && (
+          <p className="text-rose-600">
+            時給額が不正な値・または大きすぎます。
+          </p>
+        )}
+      </div>
+      <div>
+        <Label width="w-14" title="通貨" />
         <SelectBox
           defaultValue={defaultCurrencyType}
           changeEvent={(e) => setCurrencyType(e.target.value)}

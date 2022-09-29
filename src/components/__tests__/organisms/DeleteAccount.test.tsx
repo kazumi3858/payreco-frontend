@@ -12,13 +12,13 @@ jest.mock("firebase/auth", () => {
 const queryClient = new QueryClient();
 
 describe("DeleteAccount", () => {
-  it("can render delete account button", () => {
+  it("can render delete account page", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <DeleteAccount />
       </QueryClientProvider>
     );
-    expect(screen.getByText(/退会方法/)).toBeInTheDocument();
+    expect(screen.getByText("退会方法")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: "退会する" })
     ).toBeInTheDocument();

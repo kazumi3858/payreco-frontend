@@ -3,6 +3,7 @@ import axios from "axios";
 import Description from "components/atoms/Description";
 import Footor from "components/organisms/Footor";
 import Link from "next/link";
+import Image from "next/image";
 import { auth, provider } from "auth/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
@@ -37,11 +38,13 @@ function Login() {
         <div className="mx-auto mb-10 max-w-lg py-10 px-4 sm:px-7 md:max-w-7xl md:px-6 md:pb-20">
           <div className="lg:grid lg:grid-cols-2">
             <div className="flex items-center justify-center drop-shadow-4xl">
-              <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r p-3 lg:to-[#CFDEE1]">
-                <img
+              <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r px-3 pt-3 lg:to-[#CFDEE1]">
+                <Image
                   className="rounded-2xl"
-                  src="main-image.png"
+                  src="/main-image.png"
                   alt="サービスのメイン画像"
+                  width={640}
+                  height={400}
                 />
               </div>
             </div>

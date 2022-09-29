@@ -21,7 +21,7 @@ function Modal({ children, modal, setModal }: Props) {
             >
               <div className="text-right">
                 <button onClick={() => setModal(false)}>
-                  <XMarkIcon className="h-6 w-6 text-main-button-color" />
+                  <XMarkIcon className="h-6 w-6 text-sub-button-color hover:brightness-75" />
                 </button>
               </div>
               {children}

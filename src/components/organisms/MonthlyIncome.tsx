@@ -1,5 +1,6 @@
 import Chart from "components/atoms/Chart";
 import Heading from "components/atoms/Heading";
+import LoadingIcon from "components/atoms/LoadingIcon";
 import TargetAmountForm from "components/organisms/TagertAmountForm";
 import { useGetUsersUserId } from "api/users/users";
 import { isPast, parseISO } from "date-fns";
@@ -21,7 +22,7 @@ function MonthlyIncome({ income, isLoading }: Props) {
   const expectedIncome = totalIncome - earnedIncome;
 
   return (
-    <div className="md:rounded-3xl md:bg-white md:px-6 md:pb-5">
+    <div className="md:rounded-xl md:bg-white md:px-6 md:pb-5">
       <Heading text="今月の給料" />
       {!isLoading && isFinite(totalIncome) ? (
         <div>
@@ -44,7 +45,9 @@ function MonthlyIncome({ income, isLoading }: Props) {
           {data && <TargetAmountForm user={data} />}
         </div>
       ) : (
-        <p className="ml-5">Loading</p>
+        <div className="ml-5">
+          <LoadingIcon />
+        </div>
       )}
     </div>
   );

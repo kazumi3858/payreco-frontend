@@ -1,4 +1,5 @@
 import Heading from "components/atoms/Heading";
+import LoadingIcon from "components/atoms/LoadingIcon";
 
 type Props = { incomeList?: { [key: string]: [string, number][] } };
 
@@ -23,7 +24,7 @@ function AnnualIncome({ incomeList }: Props) {
   );
 
   return (
-    <div className="md:rounded-3xl md:bg-white md:px-6 md:pb-5">
+    <div className="md:rounded-xl md:bg-white md:px-6 md:pb-5">
       <Heading text="年間の給料" />
       {incomeList && isFinite(annualTotalIncome) ? (
         <>
@@ -41,7 +42,9 @@ function AnnualIncome({ incomeList }: Props) {
           </div>
         </>
       ) : (
-        <p>Laoding</p>
+        <div>
+          <LoadingIcon />
+        </div>
       )}
     </div>
   );

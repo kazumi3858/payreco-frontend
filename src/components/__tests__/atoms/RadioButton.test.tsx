@@ -9,6 +9,7 @@ const radioButton = (value: string, text: string, checked: boolean) => (
     text={text}
     onChange={jest.fn()}
     checked={checked}
+    first={true}
   />
 );
 

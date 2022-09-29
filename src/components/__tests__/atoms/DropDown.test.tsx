@@ -4,18 +4,18 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 describe("DropDown", () => {
   it("can render header properly", () => {
-    render(<DropDown logout={jest.fn()} visitQuestion={jest.fn()} />);
+    render(<DropDown logoutEvent={jest.fn()} helpEvent={jest.fn()} />);
     expect(screen.getByText("ログアウト")).toBeInTheDocument();
     expect(screen.getByText("ヘルプ")).toBeInTheDocument();
   });
 
   it("can call click event", () => {
     const clickLogout = jest.fn();
-    const clickQuestion = jest.fn();
-    render(<DropDown logout={clickLogout} visitQuestion={clickQuestion} />);
+    const clickHelp = jest.fn();
+    render(<DropDown logoutEvent={clickLogout} helpEvent={clickHelp} />);
     fireEvent.click(screen.getByText("ログアウト"));
     expect(clickLogout).toHaveBeenCalled();
     fireEvent.click(screen.getByText("ヘルプ"));
-    expect(clickQuestion).toHaveBeenCalled();
+    expect(clickHelp).toHaveBeenCalled();
   });
 });

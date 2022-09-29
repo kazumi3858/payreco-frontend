@@ -23,6 +23,15 @@ const targetAmountForm = (user: User) => (
 );
 
 describe("TargetAmountForm", () => {
+  it("can render target amount form properly", async () => {
+    render(targetAmountForm(user));
+    expect(
+      screen.getByText(
+        "※目標金額を設定すると現時点での達成率が確認できるようになります。"
+      )
+    ).toBeInTheDocument();
+  });
+
   it("can input value properly", async () => {
     const { getByLabelText } = render(targetAmountForm(user));
     const input = getByLabelText(/毎月の目標金額/);
@@ -43,7 +52,7 @@ describe("TargetAmountForm", () => {
     expect(
       screen.getByText("目標金額が不正な値・または大きすぎます。")
     ).toBeInTheDocument();
-    await userEvent.click(screen.getByText(/保存/));
+    await userEvent.click(screen.getByText("保存"));
     expect(window.alert).toHaveBeenCalledWith(
       "目標金額が不正な値・または大きすぎます。"
     );
@@ -52,5 +61,10 @@ describe("TargetAmountForm", () => {
   it("can show default value if user has set target amount", () => {
     const { getByLabelText } = render(targetAmountForm(userWithTargetAmount));
     expect(getByLabelText(/毎月の目標金額/)).toHaveValue(200000);
+    expect(
+      screen.queryByText(
+        "※目標金額を設定すると現時点での達成率が確認できるようになります。"
+      )
+    ).toBeNull();
   });
 });

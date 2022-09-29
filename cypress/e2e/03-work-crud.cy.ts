@@ -9,11 +9,11 @@ describe("Work CRUD function", () => {
     cy.createCompanies();
   });
 
-  it("can render input for pay amount when pay system is not hourly wage", () => {
+  it("can render input for pay amount when hourly wage system is true", () => {
     cy.visit("/");
     cy.contains("button", "株式会社ジキュウ").click();
     cy.get("#pay").should("not.exist");
-    cy.get("button").eq(8).click();
+    cy.get("body").click(0, 0);
     cy.contains("button", "株式会社ニッキュウ").click();
     cy.get("#pay").should("be.visible");
   });
@@ -67,9 +67,10 @@ describe("Work CRUD function", () => {
     cy.get("#ending-time").clear().type(timeValue(`18:00`));
     cy.get("select").first().select("1");
     cy.contains("input", "保存").click();
+    cy.contains("保存").should("not.exist");
     cy.contains("10:00 AM - 6:00 PM");
     cy.contains("株式会社ジキュウ");
-    cy.contains("給料: 7000円");
+    cy.contains("7000円");
     cy.contains("予定はありません。").should("have.length", 0);
   });
 
@@ -84,8 +85,9 @@ describe("Work CRUD function", () => {
     cy.contains("7時間");
     cy.contains("button", "編集").click();
     cy.contains("合計勤務時間のみ入力").click();
-    cy.get("select").first().select("5");
+    cy.get("select").eq(2).select("5");
     cy.contains("input", "保存").click();
+    cy.contains("保存").should("not.exist");
     cy.contains("10:00 AM - 6:00 PM").should("not.exist");
     cy.contains("5時間");
   });
@@ -95,6 +97,7 @@ describe("Work CRUD function", () => {
     cy.contains("5時間").should("have.length", 1);
     cy.contains("button", "削除").click();
     cy.contains("button", "はい").click();
+    cy.contains("はい").should("not.exist");
     cy.contains("5時間").should("have.length", 0);
   });
 

@@ -7,7 +7,7 @@
  */
 import { rest } from "msw";
 
-export const getGetCompaniesMock = () =>
+export const getCompaniesMock = () =>
   Array.from({ length: 3 }, (_, i) => i + 1).map((_, i) => ({
     id: "companyId" + (i + 1),
     name: "株式会社" + ["abc", "cde", "efg"][i],
@@ -20,28 +20,8 @@ export const getGetCompaniesMock = () =>
     updated_at: new Date(),
   }));
 
-export const getCompanyMock = [
-  {
-    id: "companyId1",
-    name: "株式会社田中",
-    hourly_wage_system: true,
-    wage_amount: 1500,
-    currency_type: "円",
-    user_id: "userId1",
-    deleted_at: null,
-    created_at: new Date(),
-    updated_at: new Date(),
-  },
-];
-
 export const getCompaniesMSW = () => [
   rest.get("*/companies", (_req, res, ctx) => {
-    return res(ctx.json(getCompanyMock));
-  }),
-];
-
-export const getCompaniesMSW2 = () => [
-  rest.get("*/companies", (_req, res, ctx) => {
-    return res(ctx.json(getGetCompaniesMock()));
+    return res(ctx.json(getCompaniesMock()));
   }),
 ];

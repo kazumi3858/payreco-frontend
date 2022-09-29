@@ -36,7 +36,7 @@ const createCompanyAndWork = () => {
   cy.contains("input", "保存").click();
   cy.contains("button", "株式会社ニッキュウ").click();
   cy.contains("合計勤務時間のみ入力").click();
-  cy.get("select").first().select("5");
+  cy.get("select").eq(2).select("5");
   cy.get("#pay").type("10000");
   cy.contains("input", "保存").click();
 };

@@ -2,6 +2,7 @@ import CompanyForm from "components/organisms/CompanyForm";
 import CompanyDetails from "./CompanyDetails";
 import Modal from "./Modal";
 import Heading from "components/atoms/Heading";
+import LoadingIcon from "components/atoms/LoadingIcon";
 import { useGetCompanies } from "api/companies/companies";
 import { useState } from "react";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
@@ -14,10 +15,12 @@ function CompapyList() {
   return (
     <div className="pt-5">
       <div className="md:max-w-1xl mx-auto max-w-lg px-4 sm:px-7 md:px-6">
-        <div className="mb-5 rounded-3xl bg-white pb-4">
+        <div className="mb-5 rounded-xl bg-white pb-4">
           <Heading text="勤務先一覧" />
           {!companies ? (
-            <p className="ml-5">Loading</p>
+            <div className="ml-5">
+              <LoadingIcon />
+            </div>
           ) : (
             <div>
               {companies.length > 0 ? (
