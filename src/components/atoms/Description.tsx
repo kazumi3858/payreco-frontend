@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Props = {
   position: number;
 };
@@ -10,14 +12,15 @@ function Description({ position }: Props) {
   ][position - 1];
 
   return (
-    <div className="mt-12">
+    <div className="mt-12 md:basis-1/3">
       <p className="mb-4 text-3xl font-bold text-[#84a4aa]">{position}</p>
-      <img
+      <Image
         className="mx-auto max-w-xs rounded-full md:max-w-full"
-        src={`sub-image${position}.gif`}
+        src={`/sub-image${position}.gif`}
         alt={`使い方の画像${position}番`}
+        width={250}
+        height={250}
       />
-
       <p className="my-8">{message}</p>
     </div>
   );
