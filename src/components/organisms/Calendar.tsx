@@ -140,10 +140,12 @@ function Calendar() {
               </div>
             </div>
           </div>
-          <WorkList
-            selectedDay={selectedDay}
-            selectedDayWorks={selectedDayWorks}
-          />
+          {data && (
+            <WorkList
+              selectedDay={selectedDay}
+              selectedDayWorks={selectedDayWorks}
+            />
+          )}
         </div>
       </div>
     </div>

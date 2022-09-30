@@ -1,5 +1,3 @@
-import router from "next/router";
-import axios from "axios";
 import Description from "components/atoms/Description";
 import Footor from "components/organisms/Footor";
 import Link from "next/link";
@@ -14,16 +12,7 @@ function Login() {
   const googleSignIn = () => {
     setIsLoading(true);
     signInWithPopup(auth, provider)
-      .then((result) => {
-        result.user
-          .getIdToken(true)
-          .then((idToken) => {
-            axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/user`, {
-              headers: { Authorization: `Bearer ${idToken}` },
-            });
-          })
-          .then(() => router.push("/"));
-      })
+      .then(() => console.log("Logged in"))
       .catch((error) => console.log(error.message));
   };
 
