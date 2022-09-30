@@ -66,7 +66,7 @@ function Calendar() {
       <div className="mx-auto max-w-lg px-4 md:max-w-7xl md:px-6">
         <div className="md:grid md:grid-cols-2">
           <div>
-            <div className="rounded-xl bg-white p-6">
+            <div className="rounded-xl bg-white p-6 md:mb-10">
               <div className="flex justify-center">
                 <button
                   type="button"
@@ -130,7 +130,7 @@ function Calendar() {
                     <time dateTime={format(day, "yyyy-MM-dd")}>
                       {format(day, "d")}
                     </time>
-                    <div className="lg:6 mx-auto mt-1 h-4 text-xs md:mt-3">
+                    <div className="mx-auto mt-1 h-4 text-xs md:mt-2">
                       {data?.some((work) =>
                         isSameDay(parseISO(`${work.date}`), day)
                       ) && <p>●</p>}
