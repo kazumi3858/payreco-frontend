@@ -7,7 +7,7 @@ import {
 
 function Menu() {
   const style = (text: string) =>
-    `${text} w-1/3 md:w-1/4 inline-block text-sm md:text-base py-3 px-1 sm:px-3 md:px-5 bg-[#C8DDE0] hover:text-white hover:bg-sub-button-color focus:outline-none focus:ring focus:ring-stone-300`;
+    `${text} w-1/3 md:w-1/4 inline-block text-sm md:text-base py-3 px-0 sm:px-3 md:px-5 bg-[#C8DDE0] hover:text-white hover:bg-sub-button-color`;
   return (
     <div className="sticky bottom-0 cursor-pointer md:bottom-6 md:h-16">
       <div className="text-center">

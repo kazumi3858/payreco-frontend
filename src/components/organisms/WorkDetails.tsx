@@ -33,7 +33,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   return (
     <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 focus-within:bg-gray-100 hover:bg-stone-100">
       <div className="flex-1">
-        <div className="font-bold">{company.name}</div>
+        <div className="break-all font-bold">{company.name}</div>
         <span className="mt-0.5">
           {work.starting_time &&
             `${format(startingTime, "h:mm a")} - ${format(
@@ -56,7 +56,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
             rate > 0 &&
             ` (${Math.floor(work.pay_amount / rate)}円)`}
         </div>
-        <div>
+        <div className="break-all">
           {work.memo && (
             <>
               <DocumentIcon className="inline h-4 w-4 text-sub-button-color" />
