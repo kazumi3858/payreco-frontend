@@ -18,17 +18,10 @@ function Login() {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r pt-5">
-        <div className="text-right">
-          <div className="mr-10 inline-block drop-shadow-xl">
-            <h1 className="mx-6 mt-3 font-['游ゴシック'] text-2xl font-bold text-white drop-shadow-xl">
-              ペ イ レ コ
-            </h1>
-          </div>
-        </div>
-        <div className="mx-auto mb-10 max-w-lg py-10 px-4 sm:px-7 md:max-w-7xl md:px-6 md:pb-20">
+      <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r">
+        <div className="mx-auto mb-10 max-w-lg py-5 px-4 sm:px-7 md:max-w-7xl md:px-6 lg:pb-20">
           <div className="lg:grid lg:grid-cols-2">
-            <div className="flex items-center justify-center drop-shadow-4xl">
+            <div className="flex items-center justify-center pt-7 drop-shadow-3xl">
               <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r px-3 pt-3 lg:to-[#CFDEE1]">
                 <Image
                   className="rounded-2xl"
@@ -39,13 +32,16 @@ function Login() {
                 />
               </div>
             </div>
-            <section className="my-auto text-center">
-              <h1 className="mt-10 mb-5 font-['游ゴシック'] text-2xl font-bold leading-relaxed tracking-widest text-black/70 md:text-3xl md:leading-relaxed">
+            <section className="my-auto mt-auto text-center">
+              <div className="mt-6">
+                <Image src="/logo.png" alt="ロゴ" width={250} height={60} />
+              </div>
+              <h1 className="mt-5 mb-5 font-['游ゴシック'] text-2xl font-bold leading-relaxed tracking-widest text-black/70 md:text-3xl md:leading-relaxed">
                 外貨もまとめて管理できる
                 <br />
-                シフト管理・給料計算ツール
+                シフト管理･給料計算ツール
               </h1>
-              <div className="flex justify-center">
+              <div className="flex justify-center pb-5">
                 <div className="text-left text-sm tracking-widest md:text-base">
                   <ul>
                     <li className="mb-3 border-b-2 border-stone-100/50 pb-2">
@@ -68,12 +64,22 @@ function Login() {
         {isLoading ? (
           <div>ログイン中</div>
         ) : (
-          <button
-            className="mt-10 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
-            onClick={googleSignIn}
-          >
-            Googleアカウントでログインして始める
-          </button>
+          <div>
+            <div className="mr-5 text-right">
+              <Image
+                src="/free-mark.png"
+                alt="無料であることの説明"
+                width={120}
+                height={40}
+              />
+            </div>
+            <button
+              className="mt-1 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
+              onClick={googleSignIn}
+            >
+              Googleアカウントでログインして始める
+            </button>
+          </div>
         )}
       </div>
       <p className="px-10 text-center text-sm">

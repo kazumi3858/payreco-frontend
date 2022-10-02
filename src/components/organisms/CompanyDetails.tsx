@@ -1,9 +1,9 @@
-import { Company } from "api/model";
-import Button from "components/atoms/Button";
+import IconButton from "components/atoms/IconButton";
 import CompanyForm from "components/organisms/CompanyForm";
-import { useState } from "react";
 import DeleteConfirmation from "./DeleteConfirmation";
 import Modal from "./Modal";
+import { Company } from "api/model";
+import { useState } from "react";
 
 type Props = {
   company: Company;
@@ -14,7 +14,7 @@ function CompanyDetails({ company }: Props) {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   return (
-    <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 focus-within:bg-gray-100 hover:bg-gray-100">
+    <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 focus-within:bg-gray-100 hover:bg-gray-button">
       <div className="flex-1 break-all">
         <p className="font-bold">{company.name}</p>
         <p>
@@ -24,8 +24,8 @@ function CompanyDetails({ company }: Props) {
         </p>
       </div>
       <div>
-        <Button text="編集" onClick={() => setCompanyForm(true)} />
-        <Button text="削除" onClick={() => setDeleteConfirmation(true)} />
+        <IconButton edit={true} onClick={() => setCompanyForm(true)} />
+        <IconButton edit={false} onClick={() => setDeleteConfirmation(true)} />
         <Modal modal={companyForm} setModal={setCompanyForm}>
           <CompanyForm company={company} setCompanyForm={setCompanyForm} />
         </Modal>

@@ -9,13 +9,10 @@ module.exports = {
       colors: {
         "main-gradient-l": "#A8D5DD",
         "main-gradient-r": "#E3E3E3",
-        "sub-gradient-l": "#A8D5DD",
-        "sub-gradient-r": "#E3E3E3",
-        "sub-color": "#AD679B",
         "main-button-color": "#C8DDE0",
         "sub-button-color": "#A3C1C5",
         "yellow-button": "#CEDEBB",
-        "point-color": "#58307F",
+        "gray-button": "#F5F3F2",
       },
       dropShadow: {
         "3xl": "0 30px 55px rgba(0, 0, 0, 0.2)",
