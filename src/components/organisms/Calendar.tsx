@@ -74,10 +74,10 @@ function Calendar() {
                   className="text-gray-400 hover:text-gray-500"
                 >
                   <span>
-                    <PlayIcon className="h-6 w-6 rotate-180 text-main-button-color" />
+                    <PlayIcon className="h-4 w-4 rotate-180 text-sub-button-color hover:brightness-75" />
                   </span>
                 </button>
-                <h2 className="w-36 text-center text-xl font-bold">
+                <h2 className="w-40 text-center text-xl font-bold">
                   {format(firstDayCurrentMonth, "yyyy年 MMMM", { locale: ja })}
                 </h2>
                 <button
@@ -86,7 +86,7 @@ function Calendar() {
                   className="text-gray-400 hover:text-gray-500"
                 >
                   <span>
-                    <PlayIcon className="h-6 w-6 text-main-button-color" />
+                    <PlayIcon className="h-4 w-4 text-sub-button-color hover:brightness-75" />
                   </span>
                 </button>
               </div>
