@@ -64,12 +64,22 @@ function Login() {
         {isLoading ? (
           <div>ログイン中</div>
         ) : (
-          <button
-            className="mt-10 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
-            onClick={googleSignIn}
-          >
-            Googleアカウントでログインして始める
-          </button>
+          <div>
+            <div className="mr-5 text-right">
+              <Image
+                src="/free-mark.png"
+                alt="無料マーク"
+                width={100}
+                height={30}
+              />
+            </div>
+            <button
+              className="mt-1 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
+              onClick={googleSignIn}
+            >
+              Googleアカウントでログインして始める
+            </button>
+          </div>
         )}
       </div>
       <p className="px-10 text-center text-sm">
