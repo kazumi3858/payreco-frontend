@@ -45,7 +45,7 @@ describe("Company CRUD function", () => {
     cy.visit("/companies");
     cy.contains("株式会社ジキュウ");
     cy.contains("時給15米ドル");
-    cy.contains("button", "編集").click();
+    cy.get('button[title="編集"]').click();
     cy.get("#name").clear().type("株式会社ニッキュウ");
     cy.contains("日給制").click();
     cy.contains("input", "保存").click();
@@ -57,7 +57,7 @@ describe("Company CRUD function", () => {
   it("can delete company", () => {
     cy.visit("/companies");
     cy.contains("株式会社ニッキュウ").should("have.length", 1);
-    cy.contains("button", "削除").click();
+    cy.get('button[title="削除"]').click();
     cy.contains("button", "はい").click();
     cy.contains("はい").should("not.exist");
     cy.contains("株式会社ニッキュウ").should("have.length", 0);

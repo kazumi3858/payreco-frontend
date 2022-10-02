@@ -55,22 +55,22 @@ const createCompanies = () => {
 
 const deleteCompanyAndWork = () => {
   cy.visit("/companies");
-  cy.contains("button", "削除").click();
+  cy.get('button[title="削除"]').click();
   cy.contains("button", "はい").click();
   cy.contains("株式会社ニッキュウ").should("have.length", 0);
   cy.visit("/");
-  cy.contains("button", "削除").click();
+  cy.get('button[title="削除"]').click();
   cy.contains("button", "はい").click();
   cy.contains("株式会社ニッキュウ").should("have.length", 0);
 };
 
 const deleteCompanies = () => {
   cy.visit("/companies");
-  cy.contains("button", "削除").click();
+  cy.get('button[title="削除"]').first().click();
   cy.contains("button", "はい").click();
   cy.contains("株式会社").should("have.length", 1);
   cy.reload();
-  cy.contains("button", "削除").click();
+  cy.get('button[title="削除"]').click();
   cy.contains("button", "はい").click();
   cy.contains("株式会社").should("have.length", 0);
 };

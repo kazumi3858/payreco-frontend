@@ -83,7 +83,7 @@ describe("Work CRUD function", () => {
     cy.visit("/");
     cy.contains("10:00 AM - 6:00 PM");
     cy.contains("7時間");
-    cy.contains("button", "編集").click();
+    cy.get('button[title="編集"]').click();
     cy.contains("合計勤務時間のみ入力").click();
     cy.get("select").eq(2).select("5");
     cy.contains("input", "保存").click();
@@ -95,7 +95,7 @@ describe("Work CRUD function", () => {
   it("can delete work", () => {
     cy.visit("/");
     cy.contains("5時間").should("have.length", 1);
-    cy.contains("button", "削除").click();
+    cy.get('button[title="削除"]').click();
     cy.contains("button", "はい").click();
     cy.contains("はい").should("not.exist");
     cy.contains("5時間").should("have.length", 0);

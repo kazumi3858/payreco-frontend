@@ -36,7 +36,7 @@ function CompapyList() {
               )}
               <div className="mt-5 mb-2 mr-6 text-right">
                 <button
-                  className="m-1 rounded-lg bg-stone-200 px-3 hover:brightness-90"
+                  className="m-1 rounded-lg bg-main-button-color px-3 hover:brightness-90"
                   onClick={() => setCompanyForm(true)}
                 >
                   <PlusSmallIcon className="inline h-5 w-5 pb-1" />
