@@ -16,7 +16,7 @@ function RadioButton({ type, value, text, onChange, checked, first }: Props) {
   return (
     <div className="my-4 inline-block">
       <label
-        className={style + (checked ? " bg-yellow-button" : " bg-stone-200")}
+        className={style + (checked ? " bg-sub-button-color" : " bg-stone-200")}
       >
         <input
           type="radio"

@@ -68,9 +68,9 @@ function Login() {
             <div className="mr-5 text-right">
               <Image
                 src="/free-mark.png"
-                alt="無料マーク"
-                width={100}
-                height={30}
+                alt="無料であることの説明"
+                width={120}
+                height={40}
               />
             </div>
             <button
