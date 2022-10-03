@@ -96,7 +96,7 @@ describe("Work CRUD function", () => {
     cy.visit("/");
     cy.contains("5時間").should("have.length", 1);
     cy.get('button[title="削除"]').click();
-    cy.contains("button", "はい").click();
+    cy.contains("はい").click();
     cy.contains("はい").should("not.exist");
     cy.contains("5時間").should("have.length", 0);
   });

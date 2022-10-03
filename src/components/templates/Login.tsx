@@ -34,7 +34,7 @@ function Login() {
             </div>
             <section className="my-auto mt-auto text-center">
               <div className="mt-6">
-                <Image src="/logo.png" alt="ロゴ" width={250} height={60} />
+                <Image src="/logo.png" alt="ロゴ" width={250} height={50} />
               </div>
               <h1 className="mt-5 mb-5 font-['游ゴシック'] text-2xl font-bold leading-relaxed tracking-widest text-black/70 md:text-3xl md:leading-relaxed">
                 外貨もまとめて管理できる
@@ -65,14 +65,6 @@ function Login() {
           <div>ログイン中</div>
         ) : (
           <div>
-            <div className="mr-5 text-right">
-              <Image
-                src="/free-mark.png"
-                alt="無料であることの説明"
-                width={120}
-                height={40}
-              />
-            </div>
             <button
               className="mt-1 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
               onClick={googleSignIn}
@@ -82,19 +74,24 @@ function Login() {
           </div>
         )}
       </div>
-      <p className="px-10 text-center text-sm">
-        ※上記ボタンをクリックすることで
-        <Link href="/terms">
-          <a className="text-stone-500 hover:text-stone-700">利用規約</a>
-        </Link>
-        ・
-        <Link href="/policy">
-          <a className="text-stone-500 hover:text-stone-700">
-            プライバシーポリシー
-          </a>
-        </Link>
-        に同意したものとみなします。
-      </p>
+      <div className="flex justify-center px-10">
+        <div className="max-w-2xl text-sm">
+          <p className="mb-2">
+            ※上記ボタンをクリックすることで
+            <Link href="/terms">
+              <a className="text-stone-500 hover:text-stone-700">利用規約</a>
+            </Link>
+            ・
+            <Link href="/policy">
+              <a className="text-stone-500 hover:text-stone-700">
+                プライバシーポリシー
+              </a>
+            </Link>
+            に同意したものとみなします。
+          </p>
+          <p>※無料でご利用いただけます。</p>
+        </div>
+      </div>
       <section>
         <h2 className="mt-14 mb-2 flex justify-center text-3xl font-bold md:mt-20">
           どんなサービス？

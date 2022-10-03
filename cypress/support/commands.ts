@@ -39,6 +39,7 @@ const createCompanyAndWork = () => {
   cy.get("select").eq(2).select("5");
   cy.get("#pay").type("10000");
   cy.contains("input", "保存").click();
+  cy.contains("●");
 };
 
 const createCompanies = () => {
@@ -68,11 +69,11 @@ const deleteCompanies = () => {
   cy.visit("/companies");
   cy.get('button[title="削除"]').first().click();
   cy.contains("button", "はい").click();
-  cy.contains("株式会社").should("have.length", 1);
+  cy.contains("株式会社ジキュウ").should("not.exist");
   cy.reload();
   cy.get('button[title="削除"]').click();
   cy.contains("button", "はい").click();
-  cy.contains("株式会社").should("have.length", 0);
+  cy.contains("株式会社ニッキュウ").should("not.exist");
 };
 
 Cypress.Commands.add("createCompanyAndWork", createCompanyAndWork);
