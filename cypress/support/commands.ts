@@ -59,6 +59,7 @@ const deleteCompanyAndWork = () => {
   cy.contains("button", "はい").click();
   cy.contains("株式会社ニッキュウ").should("have.length", 0);
   cy.visit("/");
+  cy.contains("●").click();
   cy.get('button[title="削除"]').click();
   cy.contains("button", "はい").click();
   cy.contains("株式会社ニッキュウ").should("have.length", 0);

@@ -61,17 +61,17 @@ describe("Work CRUD function", () => {
 
   it("can post work", () => {
     cy.visit("/");
-    cy.contains("予定はありません。").should("have.length", 1);
     cy.contains("button", "株式会社ジキュウ").click();
     cy.get("#starting-time").clear().type(timeValue(`10:00`));
     cy.get("#ending-time").clear().type(timeValue(`18:00`));
     cy.get("select").first().select("1");
     cy.contains("input", "保存").click();
     cy.contains("保存").should("not.exist");
+    cy.contains("●").click();
     cy.contains("10:00 AM - 6:00 PM");
     cy.contains("株式会社ジキュウ");
     cy.contains("7000円");
-    cy.contains("予定はありません。").should("have.length", 0);
+    cy.contains("予定はありません。").should("not.exist");
   });
 
   it("can reflect income list after posting", () => {
@@ -81,6 +81,7 @@ describe("Work CRUD function", () => {
 
   it("can update work", () => {
     cy.visit("/");
+    cy.contains("●").click();
     cy.contains("10:00 AM - 6:00 PM");
     cy.contains("7時間");
     cy.get('button[title="編集"]').click();
@@ -94,6 +95,7 @@ describe("Work CRUD function", () => {
 
   it("can delete work", () => {
     cy.visit("/");
+    cy.contains("●").click();
     cy.contains("5時間").should("have.length", 1);
     cy.get('button[title="削除"]').click();
     cy.contains("button", "はい").click();
