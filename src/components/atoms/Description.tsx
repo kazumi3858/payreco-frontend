@@ -21,7 +21,7 @@ function Description({ position }: Props) {
         width={250}
         height={250}
       />
-      <p className="my-8">{message}</p>
+      <p className="my-8 mx-20 md:mx-0">{message}</p>
     </div>
   );
 }
