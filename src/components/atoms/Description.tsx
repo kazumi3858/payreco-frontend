@@ -13,7 +13,9 @@ function Description({ position }: Props) {
 
   return (
     <div className="mt-12 md:basis-1/3">
-      <p className="mb-4 text-3xl font-bold text-[#84a4aa]">{position}</p>
+      <p className="mb-4 text-4xl font-bold text-sub-button-color">
+        {position}
+      </p>
       <Image
         className="mx-auto rounded-xl md:max-w-full"
         src={`/sub-image${position}.png`}
