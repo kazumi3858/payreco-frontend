@@ -67,6 +67,7 @@ const deleteCompanyAndWork = () => {
 
 const deleteCompanies = () => {
   cy.visit("/companies");
+  cy.contains("株式会社").should("have.length", 2);
   cy.get('button[title="削除"]').first().click();
   cy.contains("button", "はい").click();
   cy.contains("株式会社").should("have.length", 1);
