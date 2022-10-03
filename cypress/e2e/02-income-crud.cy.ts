@@ -8,6 +8,8 @@ describe("Income list", () => {
     cy.visit("/income");
     cy.get("#target").clear().type("50000");
     cy.contains("input", "保存").click();
+    cy.contains("input", "保存中...");
+    cy.contains("input", "保存");
     cy.contains("今月の目標達成率");
     cy.contains(/20%/);
   });
