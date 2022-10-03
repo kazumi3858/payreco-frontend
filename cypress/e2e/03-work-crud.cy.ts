@@ -87,6 +87,7 @@ describe("Work CRUD function", () => {
     cy.contains("合計勤務時間のみ入力").click();
     cy.get("select").eq(2).select("5");
     cy.contains("input", "保存").click();
+    cy.contains("input", "保存中...");
     cy.contains("input", "保存").should("not.exist");
     cy.contains("●").click();
     cy.contains("10:00 AM - 6:00 PM").should("not.exist");
