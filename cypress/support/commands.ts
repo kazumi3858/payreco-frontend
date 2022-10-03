@@ -39,6 +39,7 @@ const createCompanyAndWork = () => {
   cy.get("select").eq(2).select("5");
   cy.get("#pay").type("10000");
   cy.contains("input", "保存").click();
+  cy.contains("●");
 };
 
 const createCompanies = () => {
