@@ -119,7 +119,7 @@ function Calendar() {
                         "bg-main-button-color",
                       isEqual(day, selectedDay) &&
                         !isToday(day) &&
-                        "bg-yellow-button",
+                        "bg-main-button-color",
                       !isEqual(day, selectedDay) &&
                         "cursor-pointer hover:bg-stone-100",
                       (isEqual(day, selectedDay) || isToday(day)) &&
