@@ -15,13 +15,13 @@ function Description({ position }: Props) {
     <div className="mt-12 md:basis-1/3">
       <p className="mb-4 text-3xl font-bold text-[#84a4aa]">{position}</p>
       <Image
-        className="mx-auto max-w-xs rounded-full md:max-w-full"
-        src={`/sub-image${position}.gif`}
+        className="mx-auto rounded-xl md:max-w-full"
+        src={`/sub-image${position}.png`}
         alt={`使い方の画像${position}番`}
-        width={250}
-        height={250}
+        width={500}
+        height={300}
       />
-      <p className="my-8 mx-20 md:mx-0">{message}</p>
+      <p className="py-4 text-sm">{message}</p>
     </div>
   );
 }
