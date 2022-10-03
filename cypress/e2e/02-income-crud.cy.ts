@@ -11,7 +11,7 @@ describe("Income list", () => {
     cy.contains("input", "保存中...");
     cy.contains("input", "保存");
     cy.contains("今月の目標達成率");
-    cy.contains(/20%/);
+    cy.contains("本日まで: 20%");
   });
 
   after(() => {

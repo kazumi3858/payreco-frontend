@@ -39,7 +39,6 @@ const createCompanyAndWork = () => {
   cy.get("select").eq(2).select("5");
   cy.get("#pay").type("10000");
   cy.contains("input", "保存").click();
-  cy.contains("●");
 };
 
 const createCompanies = () => {
@@ -60,7 +59,6 @@ const deleteCompanyAndWork = () => {
   cy.contains("button", "はい").click();
   cy.contains("株式会社ニッキュウ").should("have.length", 0);
   cy.visit("/");
-  cy.contains("●").click();
   cy.get('button[title="削除"]').click();
   cy.contains("button", "はい").click();
   cy.contains("株式会社ニッキュウ").should("have.length", 0);
