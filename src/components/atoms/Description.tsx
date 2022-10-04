@@ -17,13 +17,17 @@ function Description({ position }: Props) {
         {position}
       </p>
       <Image
-        className="mx-auto rounded-xl md:max-w-full"
-        src={`/sub-image${position}.png`}
+        className="mx-auto rounded-full md:max-w-full"
+        src={
+          ["/sub-image1.gif", "/sub-image2.gif", "/sub-image3.png"][
+            position - 1
+          ]
+        }
         alt={`使い方の画像${position}番`}
-        width={500}
+        width={300}
         height={300}
       />
-      <p className="py-4 text-sm">{message}</p>
+      <p className="mx-8 py-4 text-sm">{message}</p>
     </div>
   );
 }

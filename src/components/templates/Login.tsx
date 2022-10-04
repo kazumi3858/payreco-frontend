@@ -19,7 +19,7 @@ function Login() {
   return (
     <>
       <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r">
-        <div className="mx-auto mb-10 max-w-lg py-5 px-4 sm:px-7 md:max-w-7xl md:px-6 lg:pb-20">
+        <div className="mx-auto mb-10 max-w-lg py-10 px-4 sm:px-7 md:max-w-7xl md:px-6 lg:pb-20">
           <div className="lg:grid lg:grid-cols-2">
             <div className="flex items-center justify-center pt-7 drop-shadow-3xl">
               <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r px-3 pt-3 lg:to-[#CFDEE1]">
@@ -33,7 +33,7 @@ function Login() {
               </div>
             </div>
             <section className="my-auto mt-auto text-center">
-              <div className="mt-6">
+              <div className="mt-10">
                 <Image src="/logo.png" alt="ロゴ" width={200} height={40} />
               </div>
               <h1 className="mt-5 mb-5 font-['游ゴシック'] text-2xl leading-relaxed tracking-widest text-black/70 md:text-3xl md:font-bold md:leading-relaxed">
@@ -66,7 +66,7 @@ function Login() {
         ) : (
           <div>
             <button
-              className="mt-10 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
+              className="mt-4 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
               onClick={googleSignIn}
             >
               Googleでログインして始める
