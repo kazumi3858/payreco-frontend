@@ -45,7 +45,7 @@ function IncomeList() {
         <div className="flex justify-center">
           <div className="my-3 md:hidden">
             <RadioButton
-              type="big"
+              small={false}
               value="true"
               text="今月の給料"
               onChange={changeMode}
@@ -53,7 +53,7 @@ function IncomeList() {
               first={true}
             />
             <RadioButton
-              type="big"
+              small={false}
               value=""
               text="年間の給料"
               onChange={changeMode}

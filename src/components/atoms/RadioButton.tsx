@@ -1,5 +1,5 @@
 type Props = {
-  type: string;
+  small: boolean;
   value: string;
   text: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
@@ -7,22 +7,22 @@ type Props = {
   first: boolean;
 };
 
-function RadioButton({ type, value, text, onChange, checked, first }: Props) {
-  const baseStyle = first ? "rounded-l-full" : "rounded-r-full";
-  const smallButtonStyle = `cursor-pointer p-1 ${baseStyle}`;
-  const bigButtonStyle = `cursor-pointer py-2 px-4 ${baseStyle}`;
-  const style = type === "small" ? smallButtonStyle : bigButtonStyle;
+function RadioButton({ small, value, text, onChange, checked, first }: Props) {
+  const roundStyle = first ? "rounded-l-full" : "rounded-r-full";
+  const smallButtonStyle = "cursor-pointer p-1 " + roundStyle;
+  const bigButtonStyle = "cursor-pointer py-2 px-4 " + roundStyle;
 
   return (
     <div className="my-4 inline-block">
       <label
         className={
-          style + (checked ? " bg-main-button-color" : " bg-stone-200")
+          (small ? smallButtonStyle : bigButtonStyle) +
+          (checked ? " bg-main-button-color" : " bg-stone-200")
         }
       >
         <input
           type="radio"
-          className={type === "small" ? "" : "hidden"}
+          className={small ? "" : "hidden"}
           value={value}
           onChange={onChange}
           checked={checked}
