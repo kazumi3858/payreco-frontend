@@ -8,16 +8,14 @@ type Props = {
 };
 
 function RadioButton({ small, value, text, onChange, checked, first }: Props) {
-  const roundStyle = first ? "rounded-l-full" : "rounded-r-full";
-  const smallButtonStyle = "cursor-pointer p-1 " + roundStyle;
-  const bigButtonStyle = "cursor-pointer py-2 px-4 " + roundStyle;
-
   return (
     <div className="my-4 inline-block">
       <label
         className={
-          (small ? smallButtonStyle : bigButtonStyle) +
-          (checked ? " bg-main-button-color" : " bg-stone-200")
+          (first ? "rounded-l-full " : "rounded-r-full ") +
+          (small ? "p-1 " : "py-2 px-4 ") +
+          (checked ? "bg-main-button-color" : "bg-stone-200") +
+          " cursor-pointer text-sm"
         }
       >
         <input

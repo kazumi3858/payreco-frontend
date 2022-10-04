@@ -83,7 +83,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
             )}
 
             <button
-              className="m-1 rounded-lg bg-stone-200 py-1 px-3 text-sm hover:brightness-90"
+              className="m-1 rounded-md bg-stone-200 py-1 px-3 text-sm hover:brightness-90"
               onClick={() => setCompanyForm(true)}
             >
               勤務先を追加する

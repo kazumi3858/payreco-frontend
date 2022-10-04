@@ -110,9 +110,11 @@ function Login() {
           </div>
         </div>
       </section>
-      <section className="mt-20 bg-stone-100 pt-14">
-        <h2 className="flex justify-center text-3xl font-bold">使い方</h2>
-        <div className="mx-20 pb-10 text-center sm:mx-32 md:mx-8 md:flex md:justify-center md:space-x-20 xl:mx-60">
+      <section>
+        <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
+          使い方
+        </h2>
+        <div className="mb-20 text-center md:mx-8 md:flex md:justify-center md:space-x-20 xl:mx-60">
           <Description position={1} />
           <Description position={2} />
           <Description position={3} />
