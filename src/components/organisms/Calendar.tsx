@@ -77,7 +77,7 @@ function Calendar() {
                     <PlayIcon className="h-4 w-4 rotate-180 text-sub-button-color hover:brightness-75" />
                   </span>
                 </button>
-                <h2 className="w-40 text-center text-xl font-bold">
+                <h2 className="text-md w-40 text-center font-bold">
                   {format(firstDayCurrentMonth, "yyyy年 MMMM", { locale: ja })}
                 </h2>
                 <button
@@ -95,7 +95,7 @@ function Calendar() {
                   <div key={index}>{day}</div>
                 ))}
               </div>
-              <div className="mt-2 grid grid-cols-7 text-sm">
+              <div className="mt-2 grid grid-cols-7 text-xs">
                 {days.map((day, index) => (
                   <div
                     key={day.toString()}
@@ -119,7 +119,7 @@ function Calendar() {
                         "bg-main-button-color",
                       isEqual(day, selectedDay) &&
                         !isToday(day) &&
-                        "bg-yellow-button",
+                        "bg-main-button-color",
                       !isEqual(day, selectedDay) &&
                         "cursor-pointer hover:bg-stone-100",
                       (isEqual(day, selectedDay) || isToday(day)) &&
@@ -133,7 +133,7 @@ function Calendar() {
                     <div className="mx-auto mt-1 h-4 text-xs md:mt-2">
                       {data?.some((work) =>
                         isSameDay(parseISO(`${work.date}`), day)
-                      ) && <p>●</p>}
+                      ) && <span>●</span>}
                     </div>
                   </div>
                 ))}

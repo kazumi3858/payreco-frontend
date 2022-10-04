@@ -11,7 +11,6 @@ module.exports = {
         "main-gradient-r": "#E3E3E3",
         "main-button-color": "#C8DDE0",
         "sub-button-color": "#A3C1C5",
-        "yellow-button": "#CEDEBB",
         "gray-button": "#F5F3F2",
       },
       dropShadow: {

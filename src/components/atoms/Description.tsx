@@ -13,15 +13,21 @@ function Description({ position }: Props) {
 
   return (
     <div className="mt-12 md:basis-1/3">
-      <p className="mb-4 text-3xl font-bold text-[#84a4aa]">{position}</p>
+      <p className="mb-4 text-4xl font-bold text-sub-button-color">
+        {position}
+      </p>
       <Image
-        className="mx-auto max-w-xs rounded-full md:max-w-full"
-        src={`/sub-image${position}.gif`}
+        className="mx-auto rounded-full md:max-w-full"
+        src={
+          ["/sub-image1.gif", "/sub-image2.gif", "/sub-image3.png"][
+            position - 1
+          ]
+        }
         alt={`使い方の画像${position}番`}
-        width={250}
-        height={250}
+        width={300}
+        height={300}
       />
-      <p className="my-8">{message}</p>
+      <p className="mx-8 py-4 text-sm">{message}</p>
     </div>
   );
 }

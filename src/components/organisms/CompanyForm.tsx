@@ -90,7 +90,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
       <div className="flex justify-center">
         <div>
           <RadioButton
-            type="small"
+            small={true}
             value="true"
             text="時給制"
             onChange={changeWageSystem}
@@ -98,7 +98,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
             first={true}
           />
           <RadioButton
-            type="small"
+            small={true}
             value=""
             text="日給制"
             onChange={changeWageSystem}

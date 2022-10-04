@@ -25,7 +25,7 @@ function MonthlyIncome({ income, isLoading }: Props) {
     <div className="md:rounded-xl md:bg-white md:px-6 md:pb-5">
       <Heading text="今月の給料" />
       {!isLoading && isFinite(totalIncome) ? (
-        <div>
+        <div className="text-sm">
           <ul>
             <li className="mb-2">
               本日まで: {earnedIncome.toLocaleString()}円
