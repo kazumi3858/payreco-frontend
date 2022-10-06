@@ -7,29 +7,31 @@ import {
 
 function Menu() {
   const style = (text: string) =>
-    `${text} w-1/3 md:w-1/4 inline-block text-sm md:text-base py-3 px-0 sm:px-3 md:px-5 bg-[#C8DDE0] hover:text-white hover:bg-sub-button-color`;
+    `${text} w-1/3 inline-block text-sm md:text-base py-3 px-0 sm:px-3 md:px-5 hover:text-white hover:bg-sub-button-color`;
   return (
     <div className="sticky bottom-0 cursor-pointer md:bottom-6 md:h-16">
-      <div className="text-center">
-        <Link href="/">
-          <div className={style("md:rounded-l-full")}>
-            <CalendarIcon className="mr-2 inline h-6 w-6 pb-1" />
-            <a>スケジュール</a>
-          </div>
-        </Link>
-        <Link href="/companies">
-          <div className={style("")}>
-            <BuildingOfficeIcon className="mr-2 inline h-6 w-6 pb-1" />
+      <div className="text-center md:flex md:justify-center">
+        <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r md:w-3/4 md:rounded-full">
+          <Link href="/">
+            <div className={style("md:rounded-l-full")}>
+              <CalendarIcon className="mr-2 inline h-6 w-6 pb-1" />
+              <a>スケジュール</a>
+            </div>
+          </Link>
+          <Link href="/companies">
+            <div className={style("")}>
+              <BuildingOfficeIcon className="mr-2 inline h-6 w-6 pb-1" />
 
-            <a>勤務先管理</a>
-          </div>
-        </Link>
-        <Link href="/income">
-          <div className={style("md:rounded-r-full")}>
-            <CurrencyYenIcon className="mr-2 inline h-6 w-6 pb-1" />
-            <a>給料計算</a>
-          </div>
-        </Link>
+              <a>勤務先管理</a>
+            </div>
+          </Link>
+          <Link href="/income">
+            <div className={style("md:rounded-r-full")}>
+              <CurrencyYenIcon className="mr-2 inline h-6 w-6 pb-1" />
+              <a>給料計算</a>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
