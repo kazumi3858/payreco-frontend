@@ -10,12 +10,12 @@ import { rest } from "msw";
 const thisYear = new Date().getFullYear();
 const thisMonth = new Date().getMonth();
 
-export const getGetWorksMock = () =>
+export const getWorksMock = () =>
   Array.from({ length: 10 }, (_, i) => i + 1).map((_, i) => ({
     id: "workId" + (i + 1),
-    date: new Date(thisYear, thisMonth, i + 1),
-    starting_time: new Date(thisYear, thisMonth, i + 1, 8, 0),
-    ending_time: new Date(thisYear, thisMonth, i + 1, 16, 0),
+    date: new Date(thisYear, thisMonth, i + 2),
+    starting_time: new Date(thisYear, thisMonth, i + 2, 8, 0),
+    ending_time: new Date(thisYear, thisMonth, i + 2, 16, 0),
     break_time: 60,
     working_hours: 7.0,
     pay_amount: 70,
@@ -29,13 +29,13 @@ export const getGetWorksMock = () =>
 export const getSelectedWorksMock = () =>
   Array.from({ length: 2 }, (_, i) => i + 1).map((_, i) => ({
     id: "workId" + (i + 1),
-    date: new Date(thisYear, thisMonth, 1),
-    starting_time: new Date(thisYear, thisMonth, 1, 8 + i * 4, 0),
-    ending_time: new Date(thisYear, thisMonth, 1, 12 + i * 4, 0),
+    date: new Date(thisYear, thisMonth, 2),
+    starting_time: new Date(thisYear, thisMonth, 2, 8 + i * 4, 0),
+    ending_time: new Date(thisYear, thisMonth, 2, 12 + i * 4, 0),
     break_time: 60,
     working_hours: 3.0,
     pay_amount: 4500,
-    memo: "メモ" + (i + 1),
+    memo: "メモです",
     user_id: "userId1",
     company_id: "companyId1",
     created_at: new Date(),
@@ -44,9 +44,9 @@ export const getSelectedWorksMock = () =>
 
 export const getIncorrectTimeWork = {
   id: "workId1",
-  date: new Date(thisYear, thisMonth, 1),
-  starting_time: new Date(thisYear, thisMonth, 1, 9, 0),
-  ending_time: new Date(thisYear, thisMonth, 1, 8, 0),
+  date: new Date(thisYear, thisMonth, 2),
+  starting_time: new Date(thisYear, thisMonth, 2, 9, 0),
+  ending_time: new Date(thisYear, thisMonth, 2, 8, 0),
   break_time: 0,
   working_hours: 0,
   pay_amount: 0,
@@ -57,8 +57,23 @@ export const getIncorrectTimeWork = {
   updated_at: new Date(),
 };
 
+export const getLastMonthWork = {
+  id: "workId1",
+  date: new Date(thisYear, thisMonth - 1, 2),
+  starting_time: new Date(thisYear, thisMonth - 1, 2, 7, 0),
+  ending_time: new Date(thisYear, thisMonth - 1, 2, 14, 0),
+  break_time: 0,
+  working_hours: 7,
+  pay_amount: 70,
+  memo: null,
+  user_id: "userId1",
+  company_id: "companyId1",
+  created_at: new Date(),
+  updated_at: new Date(),
+};
+
 export const getWorksMSW = () => [
   rest.get("*/works", (_req, res, ctx) => {
-    return res(ctx.json(getGetWorksMock()));
+    return res(ctx.json(getWorksMock()));
   }),
 ];

@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import WorkDetails from "components/organisms/WorkDetails";
 import * as firebaseAuth from "firebase/auth";
 import { render, screen } from "@testing-library/react";
-import { getGetWorksMock } from "api/works/works.msw";
+import { getWorksMock, getLastMonthWork } from "api/works/works.msw";
 import { getCompaniesMock } from "api/companies/companies.msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getExchangeRatesMSW } from "api/exchange-rates/exchange-rates.msw";
@@ -15,7 +15,8 @@ jest.mock("firebase/auth", () => {
 });
 
 const server = setupServer(...getExchangeRatesMSW());
-const work = getGetWorksMock()[0];
+const work = getWorksMock()[0];
+const lastMonthWork = getLastMonthWork;
 const company = getCompaniesMock()[0];
 const queryClient = new QueryClient();
 
@@ -40,8 +41,13 @@ describe("WorkDetails", () => {
     expect(screen.getByText("メモです")).toBeInTheDocument();
   });
 
-  it("can render japanese yen calclated by exchange rates properly", async () => {
+  it("can render JPY calclated by exchange rates properly", async () => {
     render(workDetails(work));
     expect(await screen.findByText(/(9439円)/)).toBeInTheDocument();
+  });
+
+  it("can render JPY calclated by exchange rates in different month properly", async () => {
+    render(workDetails(lastMonthWork));
+    expect(await screen.findByText(/(9223円)/)).toBeInTheDocument();
   });
 });

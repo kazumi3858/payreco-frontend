@@ -5,10 +5,13 @@ export const findCurrencyRate = (
   company: Company,
   exchangeRates: ExchangeRate[]
 ) => {
-  const monthOfWorks = String(work.date).substring(0, 7).replace("-", "");
+  const monthOfWork = new Date(work.date)
+    .toISOString()
+    .substring(0, 7)
+    .replace("-", "");
 
   const selectedMonthRateData = exchangeRates.find(
-    (data) => String(data.year_and_month) === monthOfWorks
+    (data) => String(data.year_and_month) === monthOfWork
   );
 
   const rate = selectedMonthRateData
