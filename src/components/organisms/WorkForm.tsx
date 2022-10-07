@@ -258,7 +258,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           className="rounded-md bg-stone-100 p-1"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
-          placeholder="例) 10時にミーティング"
+          placeholder="10時にミーティング"
           onFocus={(e) => e.target.select()}
         />
         {memo && memo.length > 50 && (

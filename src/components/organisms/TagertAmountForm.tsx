@@ -49,7 +49,7 @@ function TargetAmountForm({ user }: Props) {
             className="mr-2 w-24 rounded-md bg-stone-100 p-1"
             type="number"
             defaultValue={defaultTargetAmount}
-            placeholder="例) 90000"
+            placeholder="数値を入力"
             onChange={(e) => setTargetAmount(Number(e.target.value))}
           />
           円
