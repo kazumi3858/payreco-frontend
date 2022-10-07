@@ -7,9 +7,9 @@ import {
 
 function Menu() {
   const style = (text: string) =>
-    `${text} w-1/3 inline-block text-sm md:text-base py-3 px-0 sm:px-3 md:px-5 hover:text-white hover:bg-sub-button-color`;
+    `${text} w-1/3 inline-block text-sm md:text-base py-4 px-0 sm:px-3 md:px-5 hover:text-white hover:bg-sub-button-color`;
   return (
-    <div className="sticky bottom-0 cursor-pointer md:bottom-6 md:h-16">
+    <div className="sticky bottom-0 cursor-pointer md:bottom-4 md:h-20">
       <div className="text-center md:flex md:justify-center">
         <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r md:w-3/4 md:rounded-full">
           <Link href="/">

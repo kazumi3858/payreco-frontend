@@ -5,8 +5,8 @@ type Props = {
 };
 function Footer({ loginPage }: Props) {
   return (
-    <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r py-2 text-center text-xs">
-      <div className="mt-1 space-x-4">
+    <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r py-4 text-center text-xs">
+      <div className="my-1 space-x-4">
         <Link href="/terms">
           <a>利用規約</a>
         </Link>
