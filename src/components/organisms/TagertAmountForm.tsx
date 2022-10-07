@@ -46,14 +46,15 @@ function TargetAmountForm({ user }: Props) {
           毎月の目標金額:{" "}
           <input
             id="target"
-            className="mr-2 w-20 rounded-md bg-stone-100 p-1"
+            className="mr-2 w-24 rounded-md bg-stone-100 p-1"
             type="number"
             defaultValue={defaultTargetAmount}
+            placeholder="数値を入力"
             onChange={(e) => setTargetAmount(Number(e.target.value))}
           />
           円
         </label>
-        <div className="ml-3 inline">
+        <div className="ml-3 inline text-base">
           <SubmitButton updating={updating} />
         </div>
       </form>

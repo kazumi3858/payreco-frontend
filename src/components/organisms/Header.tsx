@@ -12,11 +12,9 @@ function Header() {
   const handleClickHelp = () => router.push("/questions");
 
   return (
-    <div className="h-44 w-full bg-gradient-to-l from-stone-100 to-[#C8DDE0]">
-      <header className="h-44 w-full bg-gradient-to-t from-stone-100">
-        <Dropdown logoutEvent={handleClickLogout} helpEvent={handleClickHelp} />
-      </header>
-    </div>
+    <header className="h-10 w-full">
+      <Dropdown logoutEvent={handleClickLogout} helpEvent={handleClickHelp} />
+    </header>
   );
 }
 

@@ -118,7 +118,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="text-center font-bold">
-        <p className="text-lg">
+        <p className="text-base">
           {format(selectedDay, "MMM dd日", { locale: ja })}
         </p>
         <p>{company.name}</p>
@@ -252,13 +252,13 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         )}
       </div>
       <div>
-        <Label width="w-20" htmlFor="memo" title="メモ" />
+        <Label width="w-22" htmlFor="memo" title="メモ(任意)" />
         <input
           id="memo"
           className="rounded-md bg-stone-100 p-1"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
-          placeholder="任意入力"
+          placeholder="10時にミーティング"
           onFocus={(e) => e.target.select()}
         />
         {memo && memo.length > 50 && (

@@ -2,6 +2,7 @@ import Description from "components/atoms/Description";
 import Footor from "components/organisms/Footor";
 import Link from "next/link";
 import Image from "next/image";
+import WaveImage from "components/atoms/WaveImage";
 import { auth, provider } from "auth/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
@@ -98,10 +99,10 @@ function Login() {
         </h2>
         <div className="flex justify-center py-5 px-10">
           <div className="max-w-2xl">
-            <p className="mb-5">
+            <p className="mb-5 underline decoration-main-button-color decoration-wavy underline-offset-8">
               外貨の報酬がある方に向けた、働いた時間を登録するだけで
               <b>今月いくら稼いだかを日本円表示してくれるサービス</b>
-              です。日本円の報酬も管理できます。シフトの確認もカンタンなのでスケジュール帳としても使えます。
+              です。シフトの確認もカンタンなのでスケジュール帳としても使えます。
             </p>
             <p className="mt-2 text-xs">
               ※対応している通貨: 円 米ドル ユーロ 英ポンド インドルピー 豪ドル
@@ -114,12 +115,13 @@ function Login() {
         <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
           使い方
         </h2>
-        <div className="mb-20 text-center md:mx-8 md:flex md:justify-center md:space-x-20 xl:mx-60">
+        <div className="mb-10 text-center md:mx-20 md:flex md:justify-center md:space-x-20 xl:mx-60 xl:space-x-28">
           <Description position={1} />
           <Description position={2} />
           <Description position={3} />
         </div>
       </section>
+      <WaveImage />
       <Footor loginPage={true} />
     </>
   );

@@ -50,7 +50,7 @@ describe("WorkForm", () => {
     expect(screen.getByText("株式会社abc")).toBeInTheDocument();
     expect(screen.getByText("7時間0分")).toBeInTheDocument();
     expect(screen.getByText("70")).toBeInTheDocument();
-    expect(getByLabelText("メモ")).toHaveValue("メモです");
+    expect(getByLabelText("メモ(任意)")).toHaveValue("メモです");
   });
 
   it("can validate incorrect pay amount", async () => {
@@ -74,7 +74,7 @@ describe("WorkForm", () => {
   it("can validate incorrect memo", async () => {
     window.alert = jest.fn();
     const { getByLabelText } = render(workForm(wageSystemCompany, work));
-    const inputWage = getByLabelText("メモ");
+    const inputWage = getByLabelText("メモ(任意)");
     await userEvent.type(inputWage, "あ".repeat(50));
     expect(screen.queryByText("メモは50文字以内に収めてください。")).toBeNull();
     await userEvent.type(inputWage, "あ".repeat(51));

@@ -112,7 +112,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
         <input
           id="name"
           className="mb-3 rounded-md bg-stone-100 p-1"
-          placeholder="例) 〇〇ワークス"
+          placeholder="〇〇ワークス"
           defaultValue={defaultName}
           onChange={(e) => setName(e.target.value)}
           onFocus={(e) => e.target.select()}
