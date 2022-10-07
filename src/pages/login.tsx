@@ -1,5 +1,6 @@
 import Login from "components/templates/Login";
 import router from "next/router";
+import Head from "next/head";
 import { auth } from "auth/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -17,5 +18,16 @@ export default function LoginPage() {
       </div>
     );
 
-  return user ? redirect() : <Login />;
+  return user ? (
+    redirect()
+  ) : (
+    <>
+      <Head>
+        <title>
+          ペイレコ - 外貨もまとめて管理できるシフト管理･給料計算ツール
+        </title>
+      </Head>
+      <Login />
+    </>
+  );
 }
