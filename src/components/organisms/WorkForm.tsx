@@ -118,7 +118,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="text-center font-bold">
-        <p className="text-lg">
+        <p className="text-base">
           {format(selectedDay, "MMM dd日", { locale: ja })}
         </p>
         <p>{company.name}</p>
