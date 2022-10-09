@@ -15,9 +15,9 @@ jest.mock("firebase/auth", () => {
 
 const server = setupServer(...getCompaniesMSW());
 const works = getSelectedWorksMock();
+const queryClient = new QueryClient();
 const thisYear = new Date().getFullYear();
 const thisMonth = new Date().getMonth();
-const queryClient = new QueryClient();
 
 const workList = (works?: Work[]) => (
   <QueryClientProvider client={queryClient}>

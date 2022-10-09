@@ -15,7 +15,6 @@ jest.mock("firebase/auth", () => {
 });
 
 const thisMonth = format(new Date(), "yyyy年 MMMM", { locale: ja });
-
 const handlers = [...getWorksMSW(), ...getCompaniesMSW()];
 const server = setupServer(...handlers);
 const queryClient = new QueryClient();
