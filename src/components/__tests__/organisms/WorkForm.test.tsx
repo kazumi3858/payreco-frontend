@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import * as firebaseAuth from "firebase/auth";
 import { render, screen } from "@testing-library/react";
 import { getCompaniesMock } from "api/companies/companies.msw";
-import { getGetWorksMock, getIncorrectTimeWork } from "api/works/works.msw";
+import { getWorksMock, getIncorrectTimeWork } from "api/works/works.msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Company, Work } from "api/model";
 import { format } from "date-fns";
@@ -16,7 +16,7 @@ jest.mock("firebase/auth", () => {
 
 const wageSystemCompany = getCompaniesMock()[0];
 const nonWageSystemCompany = getCompaniesMock()[1];
-const work = getGetWorksMock()[0];
+const work = getWorksMock()[0];
 const thisMonthFirstDay = format(new Date(), "yyyy-MM-01");
 const queryClient = new QueryClient();
 

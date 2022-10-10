@@ -3,7 +3,7 @@ import DropDown from "components/atoms/DropDown";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 describe("DropDown", () => {
-  it("can render header properly", () => {
+  it("can render dropdown menu properly", () => {
     render(<DropDown logoutEvent={jest.fn()} helpEvent={jest.fn()} />);
     expect(screen.getByText("ログアウト")).toBeInTheDocument();
     expect(screen.getByText("ヘルプ")).toBeInTheDocument();

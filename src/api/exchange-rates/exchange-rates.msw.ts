@@ -6,19 +6,18 @@
  * OpenAPI spec version: 1.0
  */
 import { rest } from "msw";
-import { addMonths, format, subMonths } from "date-fns";
+import { format, subMonths } from "date-fns";
 
 const thisMonth = format(new Date(), "yyyyMM");
 const lastMonth = format(subMonths(new Date(), 1), "yyyyMM");
-const nextMonth = format(addMonths(new Date(), 1), "yyyyMM");
 
-export const getGetExchangeRatesMock = () =>
-  Array.from({ length: 3 }, (_, i) => i + 1).map((_, i) => ({
+export const getExchangeRatesMock = () =>
+  Array.from({ length: 2 }, (_, i) => i + 1).map((_, i) => ({
     id: i,
-    year_and_month: [thisMonth, lastMonth, nextMonth][i],
+    year_and_month: Number([thisMonth, lastMonth][i]),
     exchange_rate_list: {
       円: 1,
-      米ドル: 0.007416,
+      米ドル: i == 0 ? 0.007416 : 0.007589,
       ユーロ: 0.007282,
       英ポンド: 0.006149,
       インドルピー: 0.5887,
@@ -36,6 +35,6 @@ export const getGetExchangeRatesMock = () =>
 
 export const getExchangeRatesMSW = () => [
   rest.get("*/exchange_rates", (_req, res, ctx) => {
-    return res(ctx.json(getGetExchangeRatesMock()));
+    return res(ctx.json(getExchangeRatesMock()));
   }),
 ];
