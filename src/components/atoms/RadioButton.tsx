@@ -14,7 +14,7 @@ function RadioButton({ small, value, text, onChange, checked, first }: Props) {
         className={
           (first ? "rounded-l-full " : "rounded-r-full ") +
           (small ? "p-1 " : "py-2 px-4 ") +
-          (checked ? "bg-main-button-color" : "bg-stone-200") +
+          (checked ? "bg-[#d1dee0]" : "bg-stone-200") +
           " cursor-pointer text-sm"
         }
       >

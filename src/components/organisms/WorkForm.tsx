@@ -118,12 +118,12 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="text-center font-bold">
-        <p className="text-base">
-          {format(selectedDay, "MMM dd日", { locale: ja })}
+        <p className="text-lg">
+          {format(selectedDay, "MMM dd日", { locale: ja })}の予定
         </p>
         <p>{company.name}</p>
       </div>
-      <div>
+      <div className="mb-3">
         <RadioButton
           small={true}
           value="true"
@@ -147,7 +147,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <input
             id="starting-time"
             type="datetime-local"
-            className="mb-3 w-48 rounded-md bg-stone-100 p-1"
+            className="mb-5 w-48 rounded-md bg-stone-100 px-1"
             min={minTime}
             max={maxTime}
             defaultValue={
@@ -163,7 +163,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <input
             id="ending-time"
             type="datetime-local"
-            className="mb-3 w-48 rounded-md bg-stone-100 p-1"
+            className="mb-5 w-48 rounded-md bg-stone-100 px-1"
             min={minTime}
             max={nextDayMaxTime}
             defaultValue={
@@ -189,7 +189,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           />
           <span className="mx-2">分</span>
         </div>
-        <div className="mt-2">
+        <div className="mt-4 mb-2">
           <span className="mr-2 inline-block w-20 text-right">合計時間</span>
           <span>
             {`${
@@ -203,7 +203,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           )}
         </div>
       </div>
-      <div className={shiftMode ? "hidden" : ""}>
+      <div className={shiftMode ? "hidden" : "mb-4"}>
         <Label width="w-20" title="合計時間" />
         <SelectBox
           defaultValue={
@@ -229,7 +229,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         <span className="mx-2">分</span>
       </div>
 
-      <div>
+      <div className="mb-2">
         <Label width="w-20" htmlFor="pay" title="給料" />
         {company.wage_amount ? (
           <span>
@@ -238,7 +238,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         ) : (
           <input
             id="pay"
-            className="mt-2 mb-3 mr-2 w-28 rounded-md bg-stone-100 p-1"
+            className="mt-2 mb-1 mr-2 w-28 rounded-md bg-stone-100 px-1"
             type="number"
             placeholder="数値を入力"
             defaultValue={work?.pay_amount ? work?.pay_amount : ""}
@@ -252,13 +252,14 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         )}
       </div>
       <div>
-        <Label width="w-22" htmlFor="memo" title="メモ(任意)" />
+        <Label width="" htmlFor="memo" title="メモ" />
+        <span className="mr-2 text-sm text-dark-blue-color">(任意)</span>
         <input
           id="memo"
-          className="rounded-md bg-stone-100 p-1"
+          className="rounded-md bg-stone-100 px-1"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
-          placeholder="10時にミーティング"
+          placeholder="例: 10時にミーティング"
           onFocus={(e) => e.target.select()}
         />
         {memo && memo.length > 50 && (

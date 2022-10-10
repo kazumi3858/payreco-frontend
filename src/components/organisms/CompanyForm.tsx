@@ -88,7 +88,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex justify-center">
-        <div>
+        <div className="mb-3">
           <RadioButton
             small={true}
             value="true"
@@ -111,8 +111,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
         <Label width="w-14" htmlFor="name" title="名前" />
         <input
           id="name"
-          className="mb-3 rounded-md bg-stone-100 p-1"
-          placeholder="〇〇ワークス"
+          className="mb-5 rounded-md bg-stone-100 px-1"
+          placeholder="例: 〇〇ワークス"
           defaultValue={defaultName}
           onChange={(e) => setName(e.target.value)}
           onFocus={(e) => e.target.select()}
@@ -128,7 +128,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           type="number"
           step="0.01"
           placeholder="数値を入力"
-          className="mb-3 w-28 rounded-md bg-stone-100 p-1"
+          className="mb-5 w-28 rounded-md bg-stone-100 px-1"
           defaultValue={defaultWageAmount ? defaultWageAmount : ""}
           onChange={(e) => setWageAmount(Number(e.target.value))}
           onFocus={(e) => e.target.select()}
