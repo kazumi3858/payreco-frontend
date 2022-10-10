@@ -46,7 +46,7 @@ describe("WorkList", () => {
     expect(screen.queryByText("予定はありません。")).toBeNull();
   });
 
-  it("can render work scheduls ordered by starting time", () => {
+  it("can render work schedules ordered by starting time", () => {
     render(workList(works));
     const elements = screen.getAllByText(/[AP]M - /);
     expect(elements[0]).toHaveTextContent("8:00 AM - 12:00 PM");
