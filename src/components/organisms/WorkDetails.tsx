@@ -31,7 +31,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   const rate = data ? findCurrencyRate(work, company, data) : 0;
 
   return (
-    <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 focus-within:bg-gray-100 hover:bg-gray-button">
+    <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 hover:bg-gray-button">
       <div className="flex-1 text-sm">
         <div className="break-all font-bold">{company.name}</div>
         <span className="mt-0.5">
@@ -80,7 +80,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           <DeleteConfirmation
             setDeleteConfirmation={setDeleteConfirmation}
             id={work.id}
-            queryKey={`/works`}
+            queryKey="/works"
           />
         </Modal>
       </div>
