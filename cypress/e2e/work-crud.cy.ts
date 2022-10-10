@@ -21,11 +21,11 @@ describe("Work CRUD function", () => {
   it("can validate incorrect work time", () => {
     cy.visit("/");
     cy.contains("button", "株式会社ジキュウ").click();
-    cy.get("#starting-time").clear().type(timeValue(`07:59`));
-    cy.get("#ending-time").clear().type(timeValue(`08:00`));
+    cy.get("#starting-time").clear().type(timeValue("07:59"));
+    cy.get("#ending-time").clear().type(timeValue("08:00"));
     cy.contains("合計時間が正しくありません。").should("not.exist");
-    cy.get("#starting-time").clear().type(timeValue(`08:00`));
-    cy.get("#ending-time").clear().type(timeValue(`07:59`));
+    cy.get("#starting-time").clear().type(timeValue("08:00"));
+    cy.get("#ending-time").clear().type(timeValue("07:59"));
     cy.contains("合計時間が正しくありません。");
     cy.contains("input", "保存").click();
     cy.on("window:alert", (text) => {
@@ -63,8 +63,8 @@ describe("Work CRUD function", () => {
     cy.visit("/");
     cy.contains("予定はありません。").should("have.length", 1);
     cy.contains("button", "株式会社ジキュウ").click();
-    cy.get("#starting-time").clear().type(timeValue(`10:00`));
-    cy.get("#ending-time").clear().type(timeValue(`18:00`));
+    cy.get("#starting-time").clear().type(timeValue("10:00"));
+    cy.get("#ending-time").clear().type(timeValue("18:00"));
     cy.get("select").first().select("1");
     cy.contains("input", "保存").click();
     cy.contains("保存").should("not.exist");

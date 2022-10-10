@@ -104,7 +104,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
     if (payAmount > 999999 || payAmount < 0)
       validation.push("金額が不正な値・または大きすぎます。");
     if (memo && memo.length > 50)
-      validation.push(`メモは50文字以内に収めてください。`);
+      validation.push("メモは50文字以内に収めてください。");
     if (validation.length > 0) return alert(validation);
 
     setDisableButton(true);
