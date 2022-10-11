@@ -8,7 +8,8 @@ type Props = {
 
 function Dropdown({ logoutEvent, helpEvent }: Props) {
   const [menu, setMenu] = useState(false);
-  const style = "text-sm cursor-pointer hover:bg-stone-100 p-3 rounded-xl";
+  const style =
+    "font-bold text-sm cursor-pointer hover:bg-stone-100 p-3 rounded-xl";
 
   return (
     <div

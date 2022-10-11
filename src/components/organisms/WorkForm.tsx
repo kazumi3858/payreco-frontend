@@ -137,7 +137,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         <RadioButton
           small={true}
           value=""
-          text="合計勤務時間のみ入力"
+          text="合計勤務時間を入力"
           onChange={changeShiftMode}
           checked={!shiftMode}
           first={false}
@@ -256,8 +256,8 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         )}
       </div>
       <div>
-        <Label width="" htmlFor="memo" title="メモ" />
-        <span className="mr-2 text-sm text-dark-blue-color">(任意)</span>
+        <Label width="w-9" htmlFor="memo" title="メモ" />
+        <span className="mr-3 text-sm text-dark-blue-color">任意</span>
         <input
           id="memo"
           className="rounded-md bg-stone-100 px-1"
