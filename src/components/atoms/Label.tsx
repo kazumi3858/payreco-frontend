@@ -7,7 +7,7 @@ type Props = {
 function Label({ width, htmlFor, title }: Props) {
   return (
     <label
-      className={`mr-2 inline-block ${width} text-right`}
+      className={`mr-2 inline-block ${width} text-right font-bold`}
       htmlFor={htmlFor}
     >
       {title}

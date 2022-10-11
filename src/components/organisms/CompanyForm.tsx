@@ -87,6 +87,9 @@ function CompanyForm({ setCompanyForm, company }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div className="w-72 text-center font-bold">
+        <p>{company ? `${company.name}の詳細` : "勤務先を追加する"}</p>
+      </div>
       <div className="flex justify-center">
         <div className="mb-3">
           <RadioButton

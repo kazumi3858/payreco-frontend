@@ -445,15 +445,15 @@ export const useDeleteCompaniesCompanyId = <
   >(mutationFn, mutationOptions);
 };
 /**
- * Delete an authentication
- * @summary Delete an authentication
+ * Delete an account
+ * @summary Delete an account
  */
 export const deleteAuthentication = (
   userId: string,
   options?: SecondParameter<typeof customInstance>
 ) => {
   return customInstance<void>(
-    { url: `/authentications/${userId}`, method: "delete" },
+    { url: `/accounts/${userId}`, method: "delete" },
     options
   );
 };

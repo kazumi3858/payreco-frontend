@@ -9,6 +9,7 @@ import { Company, Work } from "api/model";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ja } from "date-fns/locale";
+import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
 
 type Props = {
   selectedDay: Date;
@@ -117,11 +118,12 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="text-center font-bold">
-        <p className="text-lg">
+      <div className="w-72 text-center">
+        <p className="font-bold">
           {format(selectedDay, "MMM dd日", { locale: ja })}の予定
         </p>
-        <p>{company.name}</p>
+        <BuildingOffice2Icon className="mr-1 inline h-4 w-4" />
+        <span className="text-sm">{company.name}</span>
       </div>
       <div className="mb-3">
         <RadioButton
@@ -190,7 +192,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <span className="mx-2">分</span>
         </div>
         <div className="mt-4 mb-2">
-          <span className="mr-2 inline-block w-20 text-right">合計時間</span>
+          <span className="mr-2 inline-block w-20 text-right font-bold">
+            合計時間
+          </span>
           <span>
             {`${
               invalidHours
@@ -238,7 +242,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         ) : (
           <input
             id="pay"
-            className="mt-2 mb-1 mr-2 w-28 rounded-md bg-stone-100 px-1"
+            className="mt-2 mb-3 mr-2 w-28 rounded-md bg-stone-100 px-1"
             type="number"
             placeholder="数値を入力"
             defaultValue={work?.pay_amount ? work?.pay_amount : ""}

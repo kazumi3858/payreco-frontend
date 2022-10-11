@@ -29,12 +29,12 @@ function DeleteConfirmation({ id, queryKey, setDeleteConfirmation }: Props) {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5 font-bold">
       <p>本当に削除しますか？</p>
       <div className="my-4 flex justify-center">
         <TrashIcon className="h-10 w-10 text-stone-300" />
       </div>
-      <div className="mt-3 space-x-6 text-center text-xl font-bold">
+      <div className="mt-3 space-x-6 text-center text-xl">
         <button
           className="text-dark-blue-color hover:brightness-75"
           onClick={handleDelete}
