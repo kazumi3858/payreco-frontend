@@ -23,7 +23,7 @@ function DeleteConfirmation({ id, queryKey, setDeleteConfirmation }: Props) {
   );
 
   const handleDelete = () => {
-    queryKey === `/works`
+    queryKey === "/works"
       ? deleteWork.mutate({ workId: id }, mutationResult)
       : deleteCompany.mutate({ companyId: id }, mutationResult);
   };
