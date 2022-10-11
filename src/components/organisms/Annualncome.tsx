@@ -1,5 +1,6 @@
 import Heading from "components/atoms/Heading";
 import LoadingIcon from "components/atoms/LoadingIcon";
+import PayAmount from "components/atoms/PayAmount";
 
 type Props = { incomeList?: { [key: string]: [string, number][] } };
 
@@ -24,21 +25,20 @@ function AnnualIncome({ incomeList }: Props) {
   );
 
   return (
-    <div className="md:rounded-xl md:bg-white md:px-6 md:pb-5">
+    <div className="md:rounded-xl md:bg-white md:px-6 md:pb-2">
       <Heading text="年間の給料" />
       {incomeList && isFinite(annualTotalIncome) ? (
         <>
           <ul>
             {incomeListByMonth.map((income, index) => (
-              <li key={index} className="mb-2 text-sm">
-                {index + 1}月: {income.toLocaleString()}円
+              <li key={index} className="mb-3 text-sm">
+                <span className="mr-2 font-bold">{index + 1}月</span>
+                <span>{income.toLocaleString()}円</span>
               </li>
             ))}
           </ul>
           <div className="text-right">
-            <p className="mt-2 font-bold">
-              合計: {annualTotalIncome.toLocaleString()}円
-            </p>
+            <PayAmount text="年間合計" amount={annualTotalIncome} />
           </div>
         </>
       ) : (

@@ -43,10 +43,10 @@ function TargetAmountForm({ user }: Props) {
     <div className="pb-4">
       <form onSubmit={handleSubmit}>
         <label htmlFor="target">
-          毎月の目標金額:{" "}
+          毎月の目標金額
           <input
             id="target"
-            className="mr-2 w-24 rounded-md bg-stone-100 p-1"
+            className="mx-2 w-24 rounded-md bg-stone-100 p-1"
             type="number"
             defaultValue={defaultTargetAmount}
             placeholder="数値を入力"

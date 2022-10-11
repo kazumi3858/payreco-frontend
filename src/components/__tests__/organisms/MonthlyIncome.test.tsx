@@ -22,12 +22,12 @@ describe("MonthlyIncome", () => {
     render(<MonthlyIncome income={income} isLoading={false} />);
 
     if (getDate(new Date()) >= 10) {
-      expect(screen.getByText("本日まで: 3,000円")).toBeInTheDocument();
+      expect(screen.getAllByText(/3,000/)).toHaveLength(2);
     } else {
-      expect(screen.getByText("本日まで: 1,000円")).toBeInTheDocument();
-      expect(screen.getByText("見込み: 2,000円")).toBeInTheDocument();
+      expect(screen.getByText(/1,000/)).toBeInTheDocument();
+      expect(screen.getByText(/2,000/)).toBeInTheDocument();
+      expect(screen.getByText(/3,000/)).toBeInTheDocument();
     }
-    expect(screen.getByText("合計: 3,000円")).toBeInTheDocument();
   });
 
   it("can render loading", () => {

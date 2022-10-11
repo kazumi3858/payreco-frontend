@@ -24,7 +24,7 @@ function RadioButton({
       >
         <input
           type="radio"
-          className={padding === "py-2 px-4" ? "hidden" : ""}
+          className={padding === "py-2 px-4" ? "hidden" : "mr-1"}
           value={value}
           onChange={onChange}
           checked={checked}
