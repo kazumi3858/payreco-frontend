@@ -127,20 +127,20 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
       </div>
       <div className="mb-3">
         <RadioButton
-          small={true}
           value="true"
           text="シフト時刻を入力"
           onChange={changeShiftMode}
           checked={shiftMode}
-          first={true}
+          shape="rounded-l-full"
+          padding="px-2 py-1"
         />
         <RadioButton
-          small={true}
           value=""
           text="合計勤務時間を入力"
           onChange={changeShiftMode}
           checked={!shiftMode}
-          first={false}
+          shape="rounded-r-full"
+          padding="px-2 py-1"
         />
       </div>
       <div className={shiftMode ? "" : "hidden"}>
@@ -260,7 +260,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         <span className="mr-3 text-sm text-dark-blue-color">任意</span>
         <input
           id="memo"
-          className="rounded-md bg-stone-100 px-1"
+          className="w-48 rounded-md bg-stone-100 px-1"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
           placeholder="例: 10時にミーティング"

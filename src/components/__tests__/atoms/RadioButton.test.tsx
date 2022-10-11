@@ -4,12 +4,12 @@ import { render } from "@testing-library/react";
 
 const radioButton = (value: string, text: string, checked: boolean) => (
   <RadioButton
-    small={true}
     value={value}
     text={text}
     onChange={jest.fn()}
     checked={checked}
-    first={true}
+    shape=""
+    padding=""
   />
 );
 

@@ -45,20 +45,20 @@ function IncomeList() {
         <div className="flex justify-center">
           <div className="my-3 md:hidden">
             <RadioButton
-              small={false}
               value="true"
               text="今月の給料"
               onChange={changeMode}
               checked={monthlyMode}
-              first={true}
+              shape="rounded-l-full"
+              padding="py-2 px-4"
             />
             <RadioButton
-              small={false}
               value=""
               text="年間の給料"
               onChange={changeMode}
               checked={!monthlyMode}
-              first={false}
+              shape="rounded-r-full"
+              padding="py-2 px-4"
             />
           </div>
         </div>
