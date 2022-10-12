@@ -2,7 +2,7 @@ import Heading from "components/atoms/Heading";
 import { auth, provider } from "auth/firebase";
 import { deleteUser, reauthenticateWithPopup } from "firebase/auth";
 import { useGetUsersUserId } from "api/users/users";
-import { useDeleteAuthentication } from "api/default/default";
+import { useDeleteAccount } from "api/default/default";
 
 function DeleteAccount() {
   const { data } = useGetUsersUserId();
@@ -17,7 +17,7 @@ function DeleteAccount() {
         });
   };
 
-  const deleteServerSideData = useDeleteAuthentication();
+  const deleteServerSideData = useDeleteAccount();
 
   const deleteAccount = () =>
     user &&
