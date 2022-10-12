@@ -1,6 +1,6 @@
-import Button from "components/atoms/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import { customMutationResult } from "api/custom-mutation-result";
+import { TrashIcon } from "@heroicons/react/24/solid";
 import {
   useDeleteCompaniesCompanyId,
   useDeleteWorksWorkId,
@@ -23,17 +23,20 @@ function DeleteConfirmation({ id, queryKey, setDeleteConfirmation }: Props) {
   );
 
   const handleDelete = () => {
-    queryKey === `/works`
+    queryKey === "/works"
       ? deleteWork.mutate({ workId: id }, mutationResult)
       : deleteCompany.mutate({ companyId: id }, mutationResult);
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5 font-bold">
       <p>本当に削除しますか？</p>
-      <div className="mt-3 space-x-6 text-center text-lg font-bold">
+      <div className="my-4 flex justify-center">
+        <TrashIcon className="h-10 w-10 text-stone-300" />
+      </div>
+      <div className="mt-3 space-x-6 text-center text-xl">
         <button
-          className="text-sub-button-color hover:brightness-75"
+          className="text-dark-blue-color hover:brightness-75"
           onClick={handleDelete}
         >
           はい

@@ -43,6 +43,6 @@ describe("IncomeList", () => {
     render(incomeList);
     expect(screen.getAllByText("今月の給料")).toBeTruthy();
     expect(screen.getAllByText("年間の給料")).toBeTruthy();
-    expect(screen.getAllByText("合計: 100,741円")).toBeTruthy();
+    expect(screen.getAllByText("100,741円")).toBeTruthy();
   });
 });

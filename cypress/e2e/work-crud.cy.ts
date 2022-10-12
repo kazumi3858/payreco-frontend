@@ -21,11 +21,11 @@ describe("Work CRUD function", () => {
   it("can validate incorrect work time", () => {
     cy.visit("/");
     cy.contains("button", "株式会社ジキュウ").click();
-    cy.get("#starting-time").clear().type(timeValue(`07:59`));
-    cy.get("#ending-time").clear().type(timeValue(`08:00`));
+    cy.get("#starting-time").clear().type(timeValue("07:59"));
+    cy.get("#ending-time").clear().type(timeValue("08:00"));
     cy.contains("合計時間が正しくありません。").should("not.exist");
-    cy.get("#starting-time").clear().type(timeValue(`08:00`));
-    cy.get("#ending-time").clear().type(timeValue(`07:59`));
+    cy.get("#starting-time").clear().type(timeValue("08:00"));
+    cy.get("#ending-time").clear().type(timeValue("07:59"));
     cy.contains("合計時間が正しくありません。");
     cy.contains("input", "保存").click();
     cy.on("window:alert", (text) => {
@@ -63,20 +63,20 @@ describe("Work CRUD function", () => {
     cy.visit("/");
     cy.contains("予定はありません。").should("have.length", 1);
     cy.contains("button", "株式会社ジキュウ").click();
-    cy.get("#starting-time").clear().type(timeValue(`10:00`));
-    cy.get("#ending-time").clear().type(timeValue(`18:00`));
+    cy.get("#starting-time").clear().type(timeValue("10:00"));
+    cy.get("#ending-time").clear().type(timeValue("18:00"));
     cy.get("select").first().select("1");
     cy.contains("input", "保存").click();
     cy.contains("保存").should("not.exist");
     cy.contains("10:00 AM - 6:00 PM");
     cy.contains("株式会社ジキュウ");
-    cy.contains("7000円");
+    cy.contains("7,000円");
     cy.contains("予定はありません。").should("have.length", 0);
   });
 
   it("can reflect income list after posting", () => {
     cy.visit("/income");
-    cy.contains("合計: 7,000円");
+    cy.contains("7,000円");
   });
 
   it("can update work", () => {
@@ -84,7 +84,7 @@ describe("Work CRUD function", () => {
     cy.contains("10:00 AM - 6:00 PM");
     cy.contains("7時間");
     cy.get('button[title="編集"]').click();
-    cy.contains("合計勤務時間のみ入力").click();
+    cy.contains("合計勤務時間を入力").click();
     cy.get("select").eq(2).select("5");
     cy.contains("input", "保存").click();
     cy.contains("保存").should("not.exist");
@@ -99,11 +99,6 @@ describe("Work CRUD function", () => {
     cy.contains("はい").click();
     cy.contains("はい").should("not.exist");
     cy.contains("5時間").should("have.length", 0);
-  });
-
-  it("can reflect income list after deleting", () => {
-    cy.visit("/income");
-    cy.contains("合計: 0円");
   });
 
   after(() => {

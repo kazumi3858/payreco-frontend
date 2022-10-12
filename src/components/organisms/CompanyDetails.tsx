@@ -14,7 +14,7 @@ function CompanyDetails({ company }: Props) {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   return (
-    <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 focus-within:bg-gray-100 hover:bg-gray-button">
+    <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 hover:bg-stone-100">
       <div className="flex-1 break-all text-sm">
         <p className="font-bold">{company.name}</p>
         <p>
@@ -33,7 +33,7 @@ function CompanyDetails({ company }: Props) {
           <DeleteConfirmation
             setDeleteConfirmation={setDeleteConfirmation}
             id={company.id}
-            queryKey={`/companies`}
+            queryKey="/companies"
           />
         </Modal>
       </div>

@@ -24,18 +24,13 @@ describe("AnnualIncome", () => {
 
   it("can render pay amount for months which have income", () => {
     render(<AnnualIncome incomeList={incomeList} />);
-    expect(screen.getByText("8月: 6,000円")).toBeInTheDocument();
-    expect(screen.getByText("9月: 30,000円")).toBeInTheDocument();
-    expect(screen.getAllByText(/ 0円/)).toHaveLength(10);
+    expect(screen.getByText("6,000円")).toBeInTheDocument();
+    expect(screen.getByText("30,000円")).toBeInTheDocument();
+    expect(screen.getAllByText("0円")).toHaveLength(10);
   });
 
   it("can render annual pay amount", () => {
     render(<AnnualIncome incomeList={incomeList} />);
-    expect(screen.getByText("合計: 36,000円")).toBeInTheDocument();
-  });
-
-  it("can render '0円' for each month and annual pay when there is no income at all", () => {
-    render(<AnnualIncome incomeList={{}} />);
-    expect(screen.getAllByText(/ 0円/)).toHaveLength(13);
+    expect(screen.getByText(/36,000/)).toBeInTheDocument();
   });
 });

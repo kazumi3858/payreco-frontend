@@ -12,6 +12,7 @@ module.exports = {
         "main-button-color": "#C8DDE0",
         "sub-button-color": "#A3C1C5",
         "gray-button": "#F5F3F2",
+        "dark-blue-color": "#7dacb3",
       },
       dropShadow: {
         "3xl": "0 30px 55px rgba(0, 0, 0, 0.2)",

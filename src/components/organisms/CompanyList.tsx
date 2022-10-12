@@ -30,11 +30,11 @@ function CompapyList() {
                   ))}
                 </ul>
               ) : (
-                <p className="mx-5 mb-5 text-sm">
+                <p className="mx-6 mb-5 text-sm">
                   最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
                 </p>
               )}
-              <div className="mt-5 mb-2 mr-6 text-right align-middle">
+              <div className="my-2 ml-3">
                 <button
                   className="text-sm hover:text-stone-500"
                   onClick={() => setCompanyForm(true)}

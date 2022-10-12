@@ -9,6 +9,7 @@ import { Company, Work } from "api/model";
 import { addDays, format } from "date-fns";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ja } from "date-fns/locale";
+import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
 
 type Props = {
   selectedDay: Date;
@@ -104,7 +105,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
     if (payAmount > 999999 || payAmount < 0)
       validation.push("金額が不正な値・または大きすぎます。");
     if (memo && memo.length > 50)
-      validation.push(`メモは50文字以内に収めてください。`);
+      validation.push("メモは50文字以内に収めてください。");
     if (validation.length > 0) return alert(validation);
 
     setDisableButton(true);
@@ -117,28 +118,29 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="text-center font-bold">
-        <p className="text-base">
-          {format(selectedDay, "MMM dd日", { locale: ja })}
+      <div className="w-72 text-center">
+        <p className="font-bold">
+          {format(selectedDay, "MMM dd日", { locale: ja })}の予定
         </p>
-        <p>{company.name}</p>
+        <BuildingOffice2Icon className="mr-1 inline h-4 w-4" />
+        <span className="text-sm">{company.name}</span>
       </div>
-      <div>
+      <div className="mb-3">
         <RadioButton
-          small={true}
           value="true"
           text="シフト時刻を入力"
           onChange={changeShiftMode}
           checked={shiftMode}
-          first={true}
+          shape="rounded-l-full"
+          padding="px-2 py-1"
         />
         <RadioButton
-          small={true}
           value=""
-          text="合計勤務時間のみ入力"
+          text="合計勤務時間を入力"
           onChange={changeShiftMode}
           checked={!shiftMode}
-          first={false}
+          shape="rounded-r-full"
+          padding="px-2 py-1"
         />
       </div>
       <div className={shiftMode ? "" : "hidden"}>
@@ -147,7 +149,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <input
             id="starting-time"
             type="datetime-local"
-            className="mb-3 w-48 rounded-md bg-stone-100 p-1"
+            className="mb-5 w-48 rounded-md bg-stone-100 px-1"
             min={minTime}
             max={maxTime}
             defaultValue={
@@ -163,7 +165,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           <input
             id="ending-time"
             type="datetime-local"
-            className="mb-3 w-48 rounded-md bg-stone-100 p-1"
+            className="mb-5 w-48 rounded-md bg-stone-100 px-1"
             min={minTime}
             max={nextDayMaxTime}
             defaultValue={
@@ -189,8 +191,10 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           />
           <span className="mx-2">分</span>
         </div>
-        <div className="mt-2">
-          <span className="mr-2 inline-block w-20 text-right">合計時間</span>
+        <div className="mt-4 mb-2">
+          <span className="mr-2 inline-block w-20 text-right font-bold">
+            合計時間
+          </span>
           <span>
             {`${
               invalidHours
@@ -203,7 +207,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           )}
         </div>
       </div>
-      <div className={shiftMode ? "hidden" : ""}>
+      <div className={shiftMode ? "hidden" : "mb-4"}>
         <Label width="w-20" title="合計時間" />
         <SelectBox
           defaultValue={
@@ -229,7 +233,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         <span className="mx-2">分</span>
       </div>
 
-      <div>
+      <div className="mb-2">
         <Label width="w-20" htmlFor="pay" title="給料" />
         {company.wage_amount ? (
           <span>
@@ -238,7 +242,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         ) : (
           <input
             id="pay"
-            className="mt-2 mb-3 mr-2 w-28 rounded-md bg-stone-100 p-1"
+            className="mt-2 mb-3 mr-2 w-28 rounded-md bg-stone-100 px-1"
             type="number"
             placeholder="数値を入力"
             defaultValue={work?.pay_amount ? work?.pay_amount : ""}
@@ -252,13 +256,14 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
         )}
       </div>
       <div>
-        <Label width="w-22" htmlFor="memo" title="メモ(任意)" />
+        <Label width="w-9" htmlFor="memo" title="メモ" />
+        <span className="mr-3 text-sm text-dark-blue-color">任意</span>
         <input
           id="memo"
-          className="rounded-md bg-stone-100 p-1"
+          className="w-48 rounded-md bg-stone-100 px-1"
           defaultValue={memo ? memo : ""}
           onChange={(e) => setMemo(e.target.value)}
-          placeholder="10時にミーティング"
+          placeholder="例: 10時にミーティング"
           onFocus={(e) => e.target.select()}
         />
         {memo && memo.length > 50 && (

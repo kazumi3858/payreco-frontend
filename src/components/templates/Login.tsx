@@ -37,7 +37,7 @@ function Login() {
               <div className="mt-10">
                 <Image src="/logo.png" alt="ロゴ" width={200} height={40} />
               </div>
-              <h1 className="mt-5 mb-5 font-['游ゴシック'] text-2xl leading-relaxed tracking-widest text-black/70 md:text-3xl md:font-bold md:leading-relaxed">
+              <h1 className="mt-5 mb-5 font-['游ゴシック'] text-2xl font-semibold leading-relaxed tracking-widest text-black/70 md:text-3xl md:leading-relaxed">
                 外貨もまとめて管理できる
                 <br />
                 シフト管理･給料計算ツール

@@ -19,7 +19,7 @@ function Main({ children }: Props) {
   if (isLoading)
     return (
       <div className="flex h-screen w-screen items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-xl bg-stone-200"></div>
+        <div className="h-16 w-16 animate-spin rounded-xl bg-main-button-color"></div>
       </div>
     );
 

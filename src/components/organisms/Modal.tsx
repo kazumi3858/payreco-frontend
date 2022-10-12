@@ -12,19 +12,19 @@ function Modal({ children, modal, setModal }: Props) {
     <>
       {modal && (
         <div className="fixed inset-0 z-50" onClick={() => setModal(false)}>
-          <div className="flex h-5/6 items-center justify-center">
+          <div className="flex h-full items-center justify-center">
             <div
-              className="rounded-lg bg-white py-4 px-4 drop-shadow-4xl md:px-8"
+              className="rounded-lg bg-white drop-shadow-4xl"
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
               <div className="text-right">
                 <button onClick={() => setModal(false)}>
-                  <XMarkIcon className="h-6 w-6 text-sub-button-color hover:brightness-75" />
+                  <XMarkIcon className="mt-3 mr-3 h-8 w-8 text-sub-button-color hover:brightness-75" />
                 </button>
               </div>
-              {children}
+              <div className="px-6 pb-8 sm:px-14">{children}</div>
             </div>
           </div>
         </div>

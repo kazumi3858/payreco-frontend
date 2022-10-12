@@ -78,9 +78,9 @@ function Calendar() {
                     <PlayIcon className="h-4 w-4 rotate-180 text-sub-button-color hover:brightness-75" />
                   </span>
                 </button>
-                <h2 className="text-md w-40 text-center font-bold">
+                <h1 className="text-md w-40 text-center font-bold">
                   {format(firstDayCurrentMonth, "yyyy年 MMMM", { locale: ja })}
-                </h2>
+                </h1>
                 <button
                   onClick={nextMonth}
                   type="button"

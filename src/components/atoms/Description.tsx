@@ -7,13 +7,13 @@ type Props = {
 function Description({ position }: Props) {
   const message = [
     "勤務先情報を登録",
-    "働いた合計時間、またはシフトの開始・終了時刻を登録",
+    "合計勤務時間、またはシフトの開始・終了時刻を登録",
     "給料を日本円で自動計算",
   ][position - 1];
 
   return (
     <div className="mt-12 md:basis-1/3">
-      <p className="mb-4 text-4xl font-bold text-sub-button-color">
+      <p className="mb-4 text-5xl font-bold text-sub-button-color">
         {position}
       </p>
       <Image

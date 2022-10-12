@@ -11,8 +11,8 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
   const result = (rate: number) => (rate >= 100 ? 100 : rate);
 
   return (
-    <div className="py-6">
-      <p className="pb-3">今月の目標達成率</p>
+    <div className="pt-2 pb-8">
+      <p className="pb-3 font-bold">今月の目標達成率</p>
       <div className="relative h-6 w-full rounded-full bg-stone-200">
         <div
           className="absolute h-6 rounded-full bg-main-button-color"

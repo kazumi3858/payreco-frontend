@@ -31,7 +31,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   const rate = data ? findCurrencyRate(work, company, data) : 0;
 
   return (
-    <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 focus-within:bg-gray-100 hover:bg-gray-button">
+    <li className="group mb-2 flex items-center space-x-4 rounded-2xl px-4 py-2 hover:bg-stone-100">
       <div className="flex-1 text-sm">
         <div className="break-all font-bold">{company.name}</div>
         <span className="mt-0.5">
@@ -51,10 +51,10 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           <ClockIcon className="inline h-4 w-4 text-sub-button-color" />
           {` ${work.working_hours}時間 `}
           <CurrencyYenIcon className="inline h-4 w-4 text-sub-button-color" />
-          {` ${work.pay_amount}${company.currency_type}`}
+          {` ${work.pay_amount.toLocaleString()}${company.currency_type}`}
           {company.currency_type !== "円" &&
             rate > 0 &&
-            ` (${Math.floor(work.pay_amount / rate)}円)`}
+            ` (${Math.floor(work.pay_amount / rate).toLocaleString()}円)`}
         </div>
         <div className="break-all">
           {work.memo && (
@@ -80,7 +80,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           <DeleteConfirmation
             setDeleteConfirmation={setDeleteConfirmation}
             id={work.id}
-            queryKey={`/works`}
+            queryKey="/works"
           />
         </Modal>
       </div>

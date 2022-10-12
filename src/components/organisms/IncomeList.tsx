@@ -41,24 +41,24 @@ function IncomeList() {
 
   return (
     <div className="px-4 pt-5 pb-10">
-      <div className="mx-auto max-w-lg rounded-xl bg-white px-6 pb-5 md:max-w-7xl md:bg-transparent md:px-0 md:pb-0">
+      <div className="mx-auto max-w-lg rounded-xl bg-white px-6 pb-3 md:max-w-7xl md:bg-transparent md:px-0 md:pb-0">
         <div className="flex justify-center">
           <div className="my-3 md:hidden">
             <RadioButton
-              small={false}
               value="true"
               text="今月の給料"
               onChange={changeMode}
               checked={monthlyMode}
-              first={true}
+              shape="rounded-l-full"
+              padding="py-2 px-4"
             />
             <RadioButton
-              small={false}
               value=""
               text="年間の給料"
               onChange={changeMode}
               checked={!monthlyMode}
-              first={false}
+              shape="rounded-r-full"
+              padding="py-2 px-4"
             />
           </div>
         </div>
@@ -68,7 +68,7 @@ function IncomeList() {
           </div>
           <div
             className={
-              monthlyMode ? "hidden md:inline-block md:pl-14" : "mb-8 md:pl-14"
+              monthlyMode ? "hidden md:inline-block md:pl-14" : "md:pl-14"
             }
           >
             <AnnualIncome incomeList={incomeListByMonth} />
