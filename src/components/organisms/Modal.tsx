@@ -3,15 +3,18 @@ import { SetStateAction } from "react";
 
 type Props = {
   children: JSX.Element;
-  modal: boolean;
-  setModal: React.Dispatch<SetStateAction<boolean>>;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<SetStateAction<boolean>>;
 };
 
-function Modal({ children, modal, setModal }: Props) {
+function Modal({ children, isModalOpen, setIsModalOpen }: Props) {
   return (
     <>
-      {modal && (
-        <div className="fixed inset-0 z-50" onClick={() => setModal(false)}>
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-50"
+          onClick={() => setIsModalOpen(false)}
+        >
           <div className="flex h-full items-center justify-center">
             <div
               className="rounded-lg bg-white drop-shadow-4xl"
@@ -20,7 +23,7 @@ function Modal({ children, modal, setModal }: Props) {
               }}
             >
               <div className="text-right">
-                <button onClick={() => setModal(false)}>
+                <button onClick={() => setIsModalOpen(false)}>
                   <XMarkIcon className="mt-3 mr-3 h-8 w-8 text-sub-button-color hover:brightness-75" />
                 </button>
               </div>

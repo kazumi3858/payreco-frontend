@@ -9,15 +9,11 @@ import { findCurrencyRate } from "utils/find-currency-rate";
 import { format } from "date-fns";
 
 function IncomeList() {
-  const { data: works, isLoading } = useGetWorks();
+  const { data: works } = useGetWorks();
   const { data: companies } = useGetCompanies();
   const { data: exchangeRates } = useGetExchangeRates();
 
-  const [monthlyMode, setMonthlyMode] = useState(true);
-
-  const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMonthlyMode(Boolean(e.target.value));
-  };
+  const [isMonthlyMode, setIsMonthlyMode] = useState(true);
 
   const incomeListByMonth = works?.reduce((map, work) => {
     const monthOfWorks = String(work.date).substring(0, 7).replace("-", "");
@@ -47,28 +43,28 @@ function IncomeList() {
             <RadioButton
               value="true"
               text="今月の給料"
-              onChange={changeMode}
-              checked={monthlyMode}
+              onChange={(e) => setIsMonthlyMode(Boolean(e.target.value))}
+              isChecked={isMonthlyMode}
               shape="rounded-l-full"
               padding="py-2 px-4"
             />
             <RadioButton
               value=""
               text="年間の給料"
-              onChange={changeMode}
-              checked={!monthlyMode}
+              onChange={(e) => setIsMonthlyMode(Boolean(e.target.value))}
+              isChecked={!isMonthlyMode}
               shape="rounded-r-full"
               padding="py-2 px-4"
             />
           </div>
         </div>
         <div className="md:grid md:grid-cols-2">
-          <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
-            <MonthlyIncome income={incomeOfThisMonth} isLoading={isLoading} />
+          <div className={!isMonthlyMode ? "hidden md:inline-block" : ""}>
+            <MonthlyIncome income={incomeOfThisMonth} />
           </div>
           <div
             className={
-              monthlyMode ? "hidden md:inline-block md:pl-14" : "md:pl-14"
+              isMonthlyMode ? "hidden md:inline-block md:pl-14" : "md:pl-14"
             }
           >
             <AnnualIncome incomeList={incomeListByMonth} />

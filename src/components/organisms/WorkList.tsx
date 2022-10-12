@@ -18,13 +18,13 @@ type Props = {
 };
 
 function WorkList({ selectedDay, selectedDayWorks }: Props) {
-  const date = format(selectedDay, "MMM dd日", { locale: ja });
+  const date = format(selectedDay, "MMMd日", { locale: ja });
 
   const { data, isLoading } = useGetCompanies();
   const companies = data?.filter((companies) => companies.deleted_at === null);
 
-  const [workForm, setWorkForm] = useState(false);
-  const [companyForm, setCompanyForm] = useState(false);
+  const [isWorkFormOpen, setIsWorkFormOpen] = useState(false);
+  const [isCompanyFormOpen, setIsCompanyFormOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
 
   const companyOfTheWork = (work: Work) =>
@@ -50,7 +50,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                 />
               ))
             ) : (
-              <p className="py-6 px-3 text-sm">予定はありません。</p>
+              <p className="mx-3 mb-4 text-sm">予定はありません。</p>
             )}
           </ul>
         )}
@@ -64,28 +64,24 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         ) : (
           <div>
             {companies.length > 0 ? (
-              companies.map(
-                (company) =>
-                  company.deleted_at === null && (
-                    <Button
-                      key={company.id}
-                      text={company.name}
-                      onClick={() => {
-                        setWorkForm(true);
-                        setSelectedCompany(company);
-                      }}
-                    />
-                  )
-              )
+              companies.map((company) => (
+                <Button
+                  key={company.id}
+                  text={company.name}
+                  onClick={() => {
+                    setIsWorkFormOpen(true);
+                    setSelectedCompany(company);
+                  }}
+                />
+              ))
             ) : (
-              <p className="mx-5 mb-5 text-sm">
+              <p className="mx-5 my-5 text-sm">
                 最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
               </p>
             )}
-
             <button
               className="text-sm hover:text-stone-500"
-              onClick={() => setCompanyForm(true)}
+              onClick={() => setIsCompanyFormOpen(true)}
             >
               <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button-color" />
               勤務先を追加する
@@ -94,16 +90,19 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         )}
       </div>
       {selectedCompany && (
-        <Modal modal={workForm} setModal={setWorkForm}>
+        <Modal isModalOpen={isWorkFormOpen} setIsModalOpen={setIsWorkFormOpen}>
           <WorkForm
             selectedDay={selectedDay}
             company={selectedCompany}
-            setWorkForm={setWorkForm}
+            setIsFormOpen={setIsWorkFormOpen}
           />
         </Modal>
       )}
-      <Modal modal={companyForm} setModal={setCompanyForm}>
-        <CompanyForm setCompanyForm={setCompanyForm} />
+      <Modal
+        isModalOpen={isCompanyFormOpen}
+        setIsModalOpen={setIsCompanyFormOpen}
+      >
+        <CompanyForm setIsFormOpen={setIsCompanyFormOpen} />
       </Modal>
     </div>
   );

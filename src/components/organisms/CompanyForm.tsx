@@ -12,46 +12,42 @@ import {
 } from "api/default/default";
 
 type Props = {
-  setCompanyForm: React.Dispatch<SetStateAction<boolean>>;
+  setIsFormOpen: React.Dispatch<SetStateAction<boolean>>;
   company?: Company;
 };
 
-const currencyList = [
-  "円",
-  "米ドル",
-  "ユーロ",
-  "英ポンド",
-  "インドルピー",
-  "豪ドル",
-  "カナダドル",
-  "ランド",
-  "NZドル",
-  "SGドル",
-  "人民元",
-  "スイスフラン",
-];
+function CompanyForm({ setIsFormOpen, company }: Props) {
+  const currencyList = [
+    "円",
+    "米ドル",
+    "ユーロ",
+    "英ポンド",
+    "インドルピー",
+    "豪ドル",
+    "カナダドル",
+    "ランド",
+    "NZドル",
+    "SGドル",
+    "人民元",
+    "スイスフラン",
+  ];
 
-function CompanyForm({ setCompanyForm, company }: Props) {
-  const defaultName = company ? company.name : "";
+  const defaultName = company?.name || "";
   const defaultWageSystem = company ? company.hourly_wage_system : true;
-  const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
-  const defaultCurrencyType = company ? company.currency_type : "円";
+  const defaultWageAmount = company?.wage_amount || 0;
+  const defaultCurrencyType = company?.currency_type || "円";
 
-  const [wageSystem, setWageSystem] = useState(defaultWageSystem);
+  const [isWageSystem, setIsWageSystem] = useState(defaultWageSystem);
   const [name, setName] = useState(defaultName);
   const [wageAmount, setWageAmount] = useState(defaultWageAmount);
   const [currencyType, setCurrencyType] = useState(defaultCurrencyType);
-  const [updating, setUpdating] = useState(false);
-  const [disableButton, setDisableButton] = useState(false);
-
-  const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWageSystem(Boolean(e.target.value));
-  };
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const formData = {
     name: name,
-    hourly_wage_system: wageSystem,
-    wage_amount: wageSystem ? wageAmount : null,
+    hourly_wage_system: isWageSystem,
+    wage_amount: isWageSystem ? wageAmount : null,
     currency_type: currencyType,
   };
 
@@ -60,24 +56,24 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   const patchCompany = usePatchCompaniesCompanyId();
   const mutationResult = customMutationResult(
     queryClient,
-    `/companies`,
-    setCompanyForm
+    "/companies",
+    setIsFormOpen
   );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const validation = [];
+    const validations = [];
     if (name.length < 1 || name.length > 30)
-      validation.push("名前は1～30文字にしてください。");
-    if (wageSystem && (wageAmount > 99999 || wageAmount <= 0))
-      validation.push("時給額が不正な値・または大きすぎます。");
-    if (validation.length > 0) return alert(validation);
+      validations.push("名前は1～30文字にしてください。");
+    if (isWageSystem && (wageAmount > 99999 || wageAmount <= 0))
+      validations.push("時給額が不正な値・または大きすぎます。");
+    if (validations.length > 0) return alert(validations);
 
-    setDisableButton(true);
-    setUpdating(true);
+    setIsDisabled(true);
+    setIsUpdating(true);
 
-    company?.id
+    company
       ? patchCompany.mutate(
           { companyId: company.id, data: formData },
           mutationResult
@@ -95,16 +91,16 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           <RadioButton
             value="true"
             text="時給制"
-            onChange={changeWageSystem}
-            checked={wageSystem}
+            onChange={(e) => setIsWageSystem(Boolean(e.target.value))}
+            isChecked={isWageSystem}
             shape="rounded-l-full"
             padding="px-6 py-1"
           />
           <RadioButton
             value=""
             text="日給制"
-            onChange={changeWageSystem}
-            checked={!wageSystem}
+            onChange={(e) => setIsWageSystem(Boolean(e.target.value))}
+            isChecked={!isWageSystem}
             shape="rounded-r-full"
             padding="px-6 py-1"
           />
@@ -124,7 +120,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
           <p className="text-rose-600">名前は1～30文字にしてください。</p>
         )}
       </div>
-      <div className={wageSystem ? "" : "hidden"}>
+      <div className={isWageSystem ? "" : "hidden"}>
         <Label width="w-14" htmlFor="wage" title="時給額" />
         <input
           id="wage"
@@ -151,7 +147,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
         />
       </div>
       <div className="mt-5 text-right">
-        <SubmitButton updating={updating} disabled={disableButton} />
+        <SubmitButton isUpdating={isUpdating} isDisabled={isDisabled} />
       </div>
     </form>
   );

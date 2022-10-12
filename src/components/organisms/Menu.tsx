@@ -7,7 +7,7 @@ import {
 
 function Menu() {
   const style =
-    "inline-block w-1/3 py-4 px-0 text-sm font-bold hover:bg-sub-button-color hover:text-white sm:px-3 md:px-5 md:text-base";
+    "inline-block w-1/3 py-4 text-sm font-bold hover:bg-sub-button-color hover:text-white sm:px-3 md:px-5 md:text-base";
 
   return (
     <div className="sticky bottom-0 cursor-pointer md:bottom-4 md:h-20">
@@ -22,7 +22,6 @@ function Menu() {
           <Link href="/companies">
             <div className={style}>
               <BuildingOfficeIcon className="mr-2 inline h-6 w-6 pb-1" />
-
               <a>勤務先管理</a>
             </div>
           </Link>

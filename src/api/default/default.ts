@@ -32,7 +32,7 @@ export const patchUsersUserId = (
 ) => {
   return customInstance<void>(
     {
-      url: `/user`,
+      url: "/user",
       method: "patch",
       headers: { "Content-Type": "application/json" },
       data: userParams,
@@ -84,7 +84,7 @@ export const usePatchUsersUserId = <
 export const deleteUsersUserId = (
   options?: SecondParameter<typeof customInstance>
 ) => {
-  return customInstance<string>({ url: `/user`, method: "delete" }, options);
+  return customInstance<string>({ url: "/user", method: "delete" }, options);
 };
 
 export type DeleteUsersUserIdMutationResult = NonNullable<
@@ -93,7 +93,7 @@ export type DeleteUsersUserIdMutationResult = NonNullable<
 
 export type DeleteUsersUserIdMutationError = ErrorType<unknown>;
 
-export const useDeleteUsersUserId = <
+export const useDeleteUser = <
   TError = ErrorType<unknown>,
   TVariables = void,
   TContext = unknown
@@ -238,7 +238,7 @@ export const postWorks = (
 ) => {
   return customInstance<void>(
     {
-      url: `/works`,
+      url: "/works",
       method: "post",
       headers: { "Content-Type": "application/json" },
       data: workParams,
@@ -293,7 +293,7 @@ export const postCompanies = (
 ) => {
   return customInstance<void>(
     {
-      url: `/companies`,
+      url: "/companies",
       method: "post",
       headers: { "Content-Type": "application/json" },
       data: companyParams,
@@ -448,7 +448,7 @@ export const useDeleteCompaniesCompanyId = <
  * Delete an account
  * @summary Delete an account
  */
-export const deleteAuthentication = (
+export const deleteAccount = (
   userId: string,
   options?: SecondParameter<typeof customInstance>
 ) => {
@@ -458,18 +458,18 @@ export const deleteAuthentication = (
   );
 };
 
-export type DeleteAuthenticationMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteAuthentication>>
+export type DeleteAccountMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteAccount>>
 >;
 
-export type DeleteAuthenticationMutationError = ErrorType<unknown>;
+export type DeleteAccountMutationError = ErrorType<unknown>;
 
-export const useDeleteAuthentication = <
+export const useDeleteAccount = <
   TError = ErrorType<unknown>,
   TContext = unknown
 >(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteAuthentication>>,
+    Awaited<ReturnType<typeof deleteAccount>>,
     TError,
     { userId: string },
     TContext
@@ -479,16 +479,16 @@ export const useDeleteAuthentication = <
   const { mutation: mutationOptions, request: requestOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteAuthentication>>,
+    Awaited<ReturnType<typeof deleteAccount>>,
     { userId: string }
   > = (props) => {
     const { userId } = props ?? {};
 
-    return deleteAuthentication(userId, requestOptions);
+    return deleteAccount(userId, requestOptions);
   };
 
   return useMutation<
-    Awaited<ReturnType<typeof deleteAuthentication>>,
+    Awaited<ReturnType<typeof deleteAccount>>,
     TError,
     { userId: string },
     TContext

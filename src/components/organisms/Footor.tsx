@@ -1,8 +1,7 @@
 import Link from "next/link";
 
-type Props = {
-  loginPage: boolean;
-};
+type Props = { loginPage: boolean };
+
 function Footer({ loginPage }: Props) {
   return (
     <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r py-4 text-center text-xs">
@@ -24,11 +23,19 @@ function Footer({ loginPage }: Props) {
           href="https://github.com/kazumi3858/payreco-backend"
           target="_blank"
           rel="noreferrer"
-          className="hover:opacity-50"
+          className="mr-1 hover:opacity-50"
         >
           GitHub repository
-        </a>{" "}
-        ©2022 kazumi
+        </a>
+        ©2022
+        <a
+          href="https://twitter.com/kazumi3858"
+          target="_blank"
+          rel="noreferrer"
+          className="ml-1 hover:opacity-50"
+        >
+          kazumi
+        </a>
       </small>
     </div>
   );

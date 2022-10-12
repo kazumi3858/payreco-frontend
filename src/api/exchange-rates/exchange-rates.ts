@@ -33,12 +33,12 @@ export const getExchangeRates = (
   signal?: AbortSignal
 ) => {
   return customInstance<ExchangeRate[]>(
-    { url: `/exchange_rates`, method: "get", signal },
+    { url: "/exchange_rates", method: "get", signal },
     options
   );
 };
 
-export const getGetExchangeRatesQueryKey = () => [`/exchange_rates`];
+export const getGetExchangeRatesQueryKey = () => ["/exchange_rates"];
 
 export type GetExchangeRatesQueryResult = NonNullable<
   Awaited<ReturnType<typeof getExchangeRates>>

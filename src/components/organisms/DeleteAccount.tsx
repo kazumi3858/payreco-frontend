@@ -2,7 +2,7 @@ import Heading from "components/atoms/Heading";
 import { auth, provider } from "auth/firebase";
 import { deleteUser, reauthenticateWithPopup } from "firebase/auth";
 import { useGetUsersUserId } from "api/users/users";
-import { useDeleteAuthentication } from "api/default/default";
+import { useDeleteAccount } from "api/default/default";
 
 function DeleteAccount() {
   const { data } = useGetUsersUserId();
@@ -10,14 +10,12 @@ function DeleteAccount() {
 
   const reauthenticate = () => {
     user &&
-      reauthenticateWithPopup(user, provider)
-        .then(() => {})
-        .catch((error) => {
-          console.log(error);
-        });
+      reauthenticateWithPopup(user, provider).catch((error) => {
+        console.log(error);
+      });
   };
 
-  const deleteServerSideData = useDeleteAuthentication();
+  const deleteServerSideData = useDeleteAccount();
 
   const deleteAccount = () =>
     user &&
@@ -44,6 +42,7 @@ function DeleteAccount() {
     );
     confirmation ? deleteAccount() : console.log("Canceled.");
   };
+
   return (
     <div className="mt-6 flex justify-center">
       <div className="max-w-2xl p-6">

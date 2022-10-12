@@ -33,12 +33,12 @@ export const getCompanies = (
   signal?: AbortSignal
 ) => {
   return customInstance<Company[]>(
-    { url: `/companies`, method: "get", signal },
+    { url: "/companies", method: "get", signal },
     options
   );
 };
 
-export const getCompaniesQueryKey = () => [`/companies`];
+export const getCompaniesQueryKey = () => ["/companies"];
 
 export type GetCompaniesQueryResult = NonNullable<
   Awaited<ReturnType<typeof getCompanies>>

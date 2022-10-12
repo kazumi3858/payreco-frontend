@@ -8,7 +8,7 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
   const calcRate = (income: number) => Math.floor((income / target) * 100);
   const achievementRate = calcRate(earnedIncome);
   const expectedAchievementRate = calcRate(expectedIncome) + achievementRate;
-  const result = (rate: number) => (rate >= 100 ? 100 : rate);
+  const showRate = (rate: number) => (rate >= 100 ? 100 : rate);
 
   return (
     <div className="pt-2 pb-8">
@@ -16,18 +16,18 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
       <div className="relative h-6 w-full rounded-full bg-stone-200">
         <div
           className="absolute h-6 rounded-full bg-main-button-color"
-          style={{ width: `${result(expectedAchievementRate)}%` }}
+          style={{ width: `${showRate(expectedAchievementRate)}%` }}
         ></div>
         <div
           className="absolute h-6 rounded-full bg-sub-button-color text-center"
-          style={{ width: `${result(achievementRate)}%` }}
+          style={{ width: `${showRate(achievementRate)}%` }}
         ></div>
       </div>
       <p className="ml-2 mt-2 text-xs">
         <span className="text-sub-button-color">●</span>
-        {`本日まで: ${result(achievementRate)}% `}
+        {`本日まで: ${showRate(achievementRate)}% `}
         <span className="text-main-gradient-l">●</span>
-        {`見込み含め: ${result(expectedAchievementRate)}%`}
+        {`見込み含め: ${showRate(expectedAchievementRate)}%`}
       </p>
     </div>
   );

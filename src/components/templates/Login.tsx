@@ -63,7 +63,7 @@ function Login() {
       </div>
       <div className="flex justify-center">
         {isLoading ? (
-          <div>ログイン中</div>
+          <p>ログイン中</p>
         ) : (
           <div>
             <button
@@ -122,7 +122,7 @@ function Login() {
         </div>
       </section>
       <WaveImage />
-      <Footor loginPage={true} />
+      <Footor loginPage />
     </>
   );
 }

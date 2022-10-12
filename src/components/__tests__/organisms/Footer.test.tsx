@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 
 describe("Footor", () => {
   it("can render footor properly in login page", () => {
-    render(<Footor loginPage={true} />);
+    render(<Footor loginPage />);
     expect(screen.queryByText("退会方法")).toBeNull();
   });
 

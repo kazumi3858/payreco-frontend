@@ -7,7 +7,7 @@ const radioButton = (value: string, text: string, checked: boolean) => (
     value={value}
     text={text}
     onChange={jest.fn()}
-    checked={checked}
+    isChecked={checked}
     shape=""
     padding=""
   />
