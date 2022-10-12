@@ -18,7 +18,7 @@ type Props = {
 };
 
 function WorkList({ selectedDay, selectedDayWorks }: Props) {
-  const date = format(selectedDay, "MMM dd日", { locale: ja });
+  const date = format(selectedDay, "MMMd日", { locale: ja });
 
   const { data, isLoading } = useGetCompanies();
   const companies = data?.filter((companies) => companies.deleted_at === null);

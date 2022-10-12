@@ -15,10 +15,6 @@ function IncomeList() {
 
   const [isMonthlyMode, setIsMonthlyMode] = useState(true);
 
-  const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsMonthlyMode(Boolean(e.target.value));
-  };
-
   const incomeListByMonth = works?.reduce((map, work) => {
     const monthOfWorks = String(work.date).substring(0, 7).replace("-", "");
     const company = companies?.find(
@@ -47,7 +43,7 @@ function IncomeList() {
             <RadioButton
               value="true"
               text="今月の給料"
-              onChange={changeMode}
+              onChange={(e) => setIsMonthlyMode(Boolean(e.target.value))}
               isChecked={isMonthlyMode}
               shape="rounded-l-full"
               padding="py-2 px-4"
@@ -55,7 +51,7 @@ function IncomeList() {
             <RadioButton
               value=""
               text="年間の給料"
-              onChange={changeMode}
+              onChange={(e) => setIsMonthlyMode(Boolean(e.target.value))}
               isChecked={!isMonthlyMode}
               shape="rounded-r-full"
               padding="py-2 px-4"

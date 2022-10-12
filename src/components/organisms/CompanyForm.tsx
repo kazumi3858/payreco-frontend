@@ -32,10 +32,10 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
     "スイスフラン",
   ];
 
-  const defaultName = company ? company.name : "";
+  const defaultName = company?.name || "";
   const defaultWageSystem = company ? company.hourly_wage_system : true;
-  const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
-  const defaultCurrencyType = company ? company.currency_type : "円";
+  const defaultWageAmount = company?.wage_amount || 0;
+  const defaultCurrencyType = company?.currency_type || "円";
 
   const [isWageSystem, setIsWageSystem] = useState(defaultWageSystem);
   const [name, setName] = useState(defaultName);
@@ -43,10 +43,6 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
   const [currencyType, setCurrencyType] = useState(defaultCurrencyType);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-
-  const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsWageSystem(Boolean(e.target.value));
-  };
 
   const formData = {
     name: name,
@@ -67,17 +63,17 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const validation = [];
+    const validations = [];
     if (name.length < 1 || name.length > 30)
-      validation.push("名前は1～30文字にしてください。");
+      validations.push("名前は1～30文字にしてください。");
     if (isWageSystem && (wageAmount > 99999 || wageAmount <= 0))
-      validation.push("時給額が不正な値・または大きすぎます。");
-    if (validation.length > 0) return alert(validation);
+      validations.push("時給額が不正な値・または大きすぎます。");
+    if (validations.length > 0) return alert(validations);
 
     setIsDisabled(true);
     setIsUpdating(true);
 
-    company?.id
+    company
       ? patchCompany.mutate(
           { companyId: company.id, data: formData },
           mutationResult
@@ -95,7 +91,7 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
           <RadioButton
             value="true"
             text="時給制"
-            onChange={changeWageSystem}
+            onChange={(e) => setIsWageSystem(Boolean(e.target.value))}
             isChecked={isWageSystem}
             shape="rounded-l-full"
             padding="px-6 py-1"
@@ -103,7 +99,7 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
           <RadioButton
             value=""
             text="日給制"
-            onChange={changeWageSystem}
+            onChange={(e) => setIsWageSystem(Boolean(e.target.value))}
             isChecked={!isWageSystem}
             shape="rounded-r-full"
             padding="px-6 py-1"
