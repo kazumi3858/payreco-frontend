@@ -8,8 +8,7 @@ type Props = {
 
 function Dropdown({ logoutEvent, helpEvent }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const style =
-    "font-bold text-sm cursor-pointer hover:bg-stone-100 p-3 rounded-xl";
+  const style = "cursor-pointer hover:bg-stone-100 p-3 rounded-xl";
 
   return (
     <div
@@ -24,7 +23,7 @@ function Dropdown({ logoutEvent, helpEvent }: Props) {
       <ul
         className={
           isMenuOpen
-            ? "absolute top-3 right-3 z-50 inline-block rounded-xl bg-white p-2 drop-shadow-3xl"
+            ? "absolute top-3 right-3 z-50 inline-block rounded-xl bg-white p-2 text-sm font-bold drop-shadow-3xl"
             : "hidden"
         }
       >
