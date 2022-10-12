@@ -30,7 +30,7 @@ function CompapyList() {
                   ))}
                 </ul>
               ) : (
-                <p className="mx-6 mb-5 text-sm">
+                <p className="mx-7 my-6 text-sm">
                   最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
                 </p>
               )}
