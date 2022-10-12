@@ -6,8 +6,8 @@ type Props = { incomeList?: { [key: string]: [string, number][] } };
 
 function AnnualIncome({ incomeList }: Props) {
   const thisYear = new Date().getFullYear();
-  const numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const monthsOfThisYear = numArray.map(
+  const monthNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const monthsOfThisYear = monthNumbers.map(
     (month) => thisYear + ("0" + month).slice(-2)
   );
 
