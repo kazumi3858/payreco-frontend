@@ -13,10 +13,10 @@ function IncomeList() {
   const { data: companies } = useGetCompanies();
   const { data: exchangeRates } = useGetExchangeRates();
 
-  const [monthlyMode, setMonthlyMode] = useState(true);
+  const [isMonthlyMode, setIsMonthlyMode] = useState(true);
 
   const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMonthlyMode(Boolean(e.target.value));
+    setIsMonthlyMode(Boolean(e.target.value));
   };
 
   const incomeListByMonth = works?.reduce((map, work) => {
@@ -48,7 +48,7 @@ function IncomeList() {
               value="true"
               text="今月の給料"
               onChange={changeMode}
-              checked={monthlyMode}
+              isChecked={isMonthlyMode}
               shape="rounded-l-full"
               padding="py-2 px-4"
             />
@@ -56,19 +56,19 @@ function IncomeList() {
               value=""
               text="年間の給料"
               onChange={changeMode}
-              checked={!monthlyMode}
+              isChecked={!isMonthlyMode}
               shape="rounded-r-full"
               padding="py-2 px-4"
             />
           </div>
         </div>
         <div className="md:grid md:grid-cols-2">
-          <div className={!monthlyMode ? "hidden md:inline-block" : ""}>
+          <div className={!isMonthlyMode ? "hidden md:inline-block" : ""}>
             <MonthlyIncome income={incomeOfThisMonth} isLoading={isLoading} />
           </div>
           <div
             className={
-              monthlyMode ? "hidden md:inline-block md:pl-14" : "md:pl-14"
+              isMonthlyMode ? "hidden md:inline-block md:pl-14" : "md:pl-14"
             }
           >
             <AnnualIncome incomeList={incomeListByMonth} />

@@ -2,7 +2,7 @@ type Props = {
   value: string;
   text: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  checked: boolean;
+  isChecked: boolean;
   shape: string;
   padding: string;
 };
@@ -11,7 +11,7 @@ function RadioButton({
   value,
   text,
   onChange,
-  checked,
+  isChecked,
   shape,
   padding,
 }: Props) {
@@ -19,7 +19,7 @@ function RadioButton({
     <div className="my-4 inline-block">
       <label
         className={`cursor-pointer text-sm ${shape} ${padding} ${
-          checked ? "bg-[#d1dee0]" : "bg-stone-200"
+          isChecked ? "bg-[#d1dee0]" : "bg-stone-200"
         }`}
       >
         <input
@@ -27,7 +27,7 @@ function RadioButton({
           className={padding === "py-2 px-4" ? "hidden" : "mr-1"}
           value={value}
           onChange={onChange}
-          checked={checked}
+          checked={isChecked}
         />
         {text}
       </label>

@@ -55,7 +55,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const [breakHours, setBreakHours] = useState(defaultBreakHours);
   const [breakMinutes, setBreakMinutes] = useState(defaultBreakMinutes);
   const [memo, setMemo] = useState<string | null>(defaultMemo);
-  const [shiftMode, setShiftMode] = useState(defaultShiftMode);
+  const [isShiftMode, setIsShiftMode] = useState(defaultShiftMode);
   const [updating, setUpdating] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
 
@@ -65,12 +65,12 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
       (1000 * 60) -
     breakTime;
   const changeShiftMode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setShiftMode(Boolean(e.target.value));
+    setIsShiftMode(Boolean(e.target.value));
   };
   const invalidHours = Math.sign(startAndEndTimeDifference) === -1;
   const workingHours =
     Math.round(
-      shiftMode
+      isShiftMode
         ? (startAndEndTimeDifference / 60) * 100
         : (workedHours + workedMinutes / 60) * 100
     ) / 100;
@@ -78,9 +78,9 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const formData = {
     date: addDays(selectedDay, 1),
     company_id: company.id,
-    starting_time: shiftMode ? startingTime : null,
-    ending_time: shiftMode ? endingTime : null,
-    break_time: shiftMode ? breakTime : null,
+    starting_time: isShiftMode ? startingTime : null,
+    ending_time: isShiftMode ? endingTime : null,
+    break_time: isShiftMode ? breakTime : null,
     working_hours: workingHours,
     pay_amount: company.wage_amount
       ? Math.round(company.wage_amount * workingHours * 100) / 100
@@ -130,7 +130,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           value="true"
           text="シフト時刻を入力"
           onChange={changeShiftMode}
-          checked={shiftMode}
+          isChecked={isShiftMode}
           shape="rounded-l-full"
           padding="px-2 py-1"
         />
@@ -138,12 +138,12 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           value=""
           text="合計勤務時間を入力"
           onChange={changeShiftMode}
-          checked={!shiftMode}
+          isChecked={!isShiftMode}
           shape="rounded-r-full"
           padding="px-2 py-1"
         />
       </div>
-      <div className={shiftMode ? "" : "hidden"}>
+      <div className={isShiftMode ? "" : "hidden"}>
         <div>
           <Label width="w-20" htmlFor="starting-time" title="開始時刻" />
           <input
@@ -207,7 +207,7 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
           )}
         </div>
       </div>
-      <div className={shiftMode ? "hidden" : "mb-4"}>
+      <div className={isShiftMode ? "hidden" : "mb-4"}>
         <Label width="w-20" title="合計時間" />
         <SelectBox
           defaultValue={
