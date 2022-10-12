@@ -25,10 +25,8 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
   const maxTime = formatTime(selectedDay, "23:59");
   const nextDayMaxTime = formatTime(addDays(selectedDay, 1), "23:59");
 
-  const defaultWorkedHours = work?.working_hours
-    ? Math.floor(work.working_hours)
-    : 0;
-  const defaultWorkedMinutes = work?.working_hours
+  const defaultWorkedHours = work ? Math.floor(work.working_hours) : 0;
+  const defaultWorkedMinutes = work
     ? Math.round(
         (Number(work.working_hours.toFixed(2)) -
           Math.floor(work.working_hours)) *
