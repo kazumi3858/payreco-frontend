@@ -5,13 +5,13 @@ type Props = {
 
 function PayAmount({ text, amount }: Props) {
   return (
-    <div className="mb-6">
+    <div className="mb-6 font-bold">
       {text === "年間合計" ? (
-        <h2 className="mr-2 inline font-bold">{text}</h2>
+        <h2 className="mr-2 inline">{text}</h2>
       ) : (
-        <h2 className="mb-2 font-bold">{text}</h2>
+        <h2 className="mb-2">{text}</h2>
       )}
-      <span className="text-lg font-bold text-dark-blue-color">
+      <span className="text-lg text-dark-blue-color">
         {amount.toLocaleString()}
       </span>
       <span className="ml-1">円</span>
