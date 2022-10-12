@@ -10,11 +10,9 @@ function DeleteAccount() {
 
   const reauthenticate = () => {
     user &&
-      reauthenticateWithPopup(user, provider)
-        .then(() => {})
-        .catch((error) => {
-          console.log(error);
-        });
+      reauthenticateWithPopup(user, provider).catch((error) => {
+        console.log(error);
+      });
   };
 
   const deleteServerSideData = useDeleteAccount();
@@ -44,6 +42,7 @@ function DeleteAccount() {
     );
     confirmation ? deleteAccount() : console.log("Canceled.");
   };
+
   return (
     <div className="mt-6 flex justify-center">
       <div className="max-w-2xl p-6">
