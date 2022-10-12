@@ -1,8 +1,6 @@
 import Image from "next/image";
 
-type Props = {
-  position: number;
-};
+type Props = { position: number };
 
 function Description({ position }: Props) {
   const message = [
