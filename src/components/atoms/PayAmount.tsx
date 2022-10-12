@@ -1,7 +1,4 @@
-type Props = {
-  text: string;
-  amount: number;
-};
+type Props = { text: string; amount: number };
 
 function PayAmount({ text, amount }: Props) {
   return (
