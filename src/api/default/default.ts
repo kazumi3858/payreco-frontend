@@ -93,7 +93,7 @@ export type DeleteUsersUserIdMutationResult = NonNullable<
 
 export type DeleteUsersUserIdMutationError = ErrorType<unknown>;
 
-export const useDeleteUsersUserId = <
+export const useDeleteUser = <
   TError = ErrorType<unknown>,
   TVariables = void,
   TContext = unknown
