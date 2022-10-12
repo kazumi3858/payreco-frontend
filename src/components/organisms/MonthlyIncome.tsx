@@ -8,10 +8,9 @@ import { isPast, parseISO } from "date-fns";
 
 type Props = {
   income?: [string, number][];
-  isLoading: boolean;
 };
 
-function MonthlyIncome({ income, isLoading }: Props) {
+function MonthlyIncome({ income }: Props) {
   const { data } = useGetUsersUserId();
   const payOfPastWorks = income?.filter((dailyIncome) =>
     isPast(parseISO(dailyIncome[0]))
@@ -24,7 +23,7 @@ function MonthlyIncome({ income, isLoading }: Props) {
   return (
     <div className="md:rounded-xl md:bg-white md:px-6 md:pb-5">
       <Heading text="今月の給料" />
-      {!isLoading && isFinite(totalIncome) ? (
+      {data && isFinite(totalIncome) ? (
         <div className="text-sm">
           <ul>
             <li>
@@ -37,14 +36,14 @@ function MonthlyIncome({ income, isLoading }: Props) {
               <PayAmount text="合計" amount={totalIncome} />
             </li>
           </ul>
-          {data?.target_amount && (
+          {data.target_amount && (
             <Chart
               target={data.target_amount}
               earnedIncome={earnedIncome}
               expectedIncome={expectedIncome}
             />
           )}
-          {data && <TargetAmountForm user={data} />}
+          <TargetAmountForm user={data} />
         </div>
       ) : (
         <div className="ml-5">

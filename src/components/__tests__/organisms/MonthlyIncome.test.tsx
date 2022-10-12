@@ -19,7 +19,7 @@ const income: [string, number][] = [
 
 describe("MonthlyIncome", () => {
   it("can render correct income", () => {
-    render(<MonthlyIncome income={income} isLoading={false} />);
+    render(<MonthlyIncome income={income} />);
 
     if (getDate(new Date()) >= 10) {
       expect(screen.getAllByText(/3,000/)).toHaveLength(2);
@@ -28,10 +28,5 @@ describe("MonthlyIncome", () => {
       expect(screen.getByText(/2,000/)).toBeInTheDocument();
       expect(screen.getByText(/3,000/)).toBeInTheDocument();
     }
-  });
-
-  it("can render loading", () => {
-    render(<MonthlyIncome income={[]} isLoading={true} />);
-    expect(screen.getByText("Loading")).toBeInTheDocument();
   });
 });

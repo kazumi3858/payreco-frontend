@@ -9,7 +9,7 @@ import { findCurrencyRate } from "utils/find-currency-rate";
 import { format } from "date-fns";
 
 function IncomeList() {
-  const { data: works, isLoading } = useGetWorks();
+  const { data: works } = useGetWorks();
   const { data: companies } = useGetCompanies();
   const { data: exchangeRates } = useGetExchangeRates();
 
@@ -64,7 +64,7 @@ function IncomeList() {
         </div>
         <div className="md:grid md:grid-cols-2">
           <div className={!isMonthlyMode ? "hidden md:inline-block" : ""}>
-            <MonthlyIncome income={incomeOfThisMonth} isLoading={isLoading} />
+            <MonthlyIncome income={incomeOfThisMonth} />
           </div>
           <div
             className={
