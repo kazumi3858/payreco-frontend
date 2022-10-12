@@ -1,6 +1,4 @@
-type Props = {
-  text: string;
-};
+type Props = { text: string };
 
 function Heading({ text }: Props) {
   return (
