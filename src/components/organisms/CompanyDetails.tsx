@@ -24,8 +24,8 @@ function CompanyDetails({ company }: Props) {
         </p>
       </div>
       <div>
-        <IconButton edit={true} onClick={() => setCompanyForm(true)} />
-        <IconButton edit={false} onClick={() => setDeleteConfirmation(true)} />
+        <IconButton isEditMode onClick={() => setCompanyForm(true)} />
+        <IconButton isEditMode={false} onClick={() => setDeleteConfirmation(true)} />
         <Modal modal={companyForm} setModal={setCompanyForm}>
           <CompanyForm company={company} setCompanyForm={setCompanyForm} />
         </Modal>
