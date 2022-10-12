@@ -76,7 +76,7 @@ describe("Work CRUD function", () => {
 
   it("can reflect income list after posting", () => {
     cy.visit("/income");
-    cy.contains("合計: 7,000円");
+    cy.contains("7,000円");
   });
 
   it("can update work", () => {
@@ -99,11 +99,6 @@ describe("Work CRUD function", () => {
     cy.contains("はい").click();
     cy.contains("はい").should("not.exist");
     cy.contains("5時間").should("have.length", 0);
-  });
-
-  it("can reflect income list after deleting", () => {
-    cy.visit("/income");
-    cy.contains("合計: 0円");
   });
 
   after(() => {
