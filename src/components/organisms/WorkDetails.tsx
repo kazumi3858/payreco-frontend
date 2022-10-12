@@ -67,7 +67,10 @@ function WorkDetails({ work, selectedDay, company }: Props) {
       </div>
       <div className="flex">
         <IconButton isEditMode onClick={() => setWorkForm(true)} />
-        <IconButton isEditMode={false} onClick={() => setDeleteConfirmation(true)} />
+        <IconButton
+          isEditMode={false}
+          onClick={() => setDeleteConfirmation(true)}
+        />
         <Modal modal={workForm} setModal={setWorkForm}>
           <WorkForm
             selectedDay={selectedDay}
