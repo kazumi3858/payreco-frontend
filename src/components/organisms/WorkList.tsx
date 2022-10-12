@@ -23,8 +23,8 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
   const { data, isLoading } = useGetCompanies();
   const companies = data?.filter((companies) => companies.deleted_at === null);
 
-  const [workForm, setWorkForm] = useState(false);
-  const [companyForm, setCompanyForm] = useState(false);
+  const [isWorkFormOpen, setIsWorkFormOpen] = useState(false);
+  const [isCompanyFormOpen, setIsCompanyFormOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<Company>();
 
   const companyOfTheWork = (work: Work) =>
@@ -71,7 +71,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                       key={company.id}
                       text={company.name}
                       onClick={() => {
-                        setWorkForm(true);
+                        setIsWorkFormOpen(true);
                         setSelectedCompany(company);
                       }}
                     />
@@ -85,7 +85,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
 
             <button
               className="text-sm hover:text-stone-500"
-              onClick={() => setCompanyForm(true)}
+              onClick={() => setIsCompanyFormOpen(true)}
             >
               <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button-color" />
               勤務先を追加する
@@ -94,16 +94,19 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         )}
       </div>
       {selectedCompany && (
-        <Modal modal={workForm} setModal={setWorkForm}>
+        <Modal isModalOpen={isWorkFormOpen} setIsModalOpen={setIsWorkFormOpen}>
           <WorkForm
             selectedDay={selectedDay}
             company={selectedCompany}
-            setWorkForm={setWorkForm}
+            setIsFormOpen={setIsWorkFormOpen}
           />
         </Modal>
       )}
-      <Modal modal={companyForm} setModal={setCompanyForm}>
-        <CompanyForm setCompanyForm={setCompanyForm} />
+      <Modal
+        isModalOpen={isCompanyFormOpen}
+        setIsModalOpen={setIsCompanyFormOpen}
+      >
+        <CompanyForm setIsFormOpen={setIsCompanyFormOpen} />
       </Modal>
     </div>
   );

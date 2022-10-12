@@ -20,8 +20,8 @@ type Props = {
 };
 
 function WorkDetails({ work, selectedDay, company }: Props) {
-  const [workForm, setWorkForm] = useState(false);
-  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const { data } = useGetExchangeRates();
   const startingTime = new Date(`${work.starting_time}`);
   const endingTime = new Date(`${work.ending_time}`);
@@ -66,22 +66,25 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         </div>
       </div>
       <div className="flex">
-        <IconButton isEditMode onClick={() => setWorkForm(true)} />
+        <IconButton isEditMode onClick={() => setIsFormOpen(true)} />
         <IconButton
           isEditMode={false}
-          onClick={() => setDeleteConfirmation(true)}
+          onClick={() => setIsConfirmationOpen(true)}
         />
-        <Modal modal={workForm} setModal={setWorkForm}>
+        <Modal isModalOpen={isFormOpen} setIsModalOpen={setIsFormOpen}>
           <WorkForm
             selectedDay={selectedDay}
             company={company}
-            setWorkForm={setWorkForm}
+            setIsFormOpen={setIsFormOpen}
             work={work}
           />
         </Modal>
-        <Modal modal={deleteConfirmation} setModal={setDeleteConfirmation}>
+        <Modal
+          isModalOpen={isConfirmationOpen}
+          setIsModalOpen={setIsConfirmationOpen}
+        >
           <DeleteConfirmation
-            setDeleteConfirmation={setDeleteConfirmation}
+            setIsConfirmationOpen={setIsConfirmationOpen}
             id={work.id}
             queryKey="/works"
           />

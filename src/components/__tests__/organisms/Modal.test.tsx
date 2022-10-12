@@ -5,7 +5,7 @@ import { render, screen } from "@testing-library/react";
 describe("Modal", () => {
   it("cannot render content when modal closed", async () => {
     render(
-      <Modal modal={false} setModal={jest.fn()}>
+      <Modal isModalOpen={false} setIsModalOpen={jest.fn()}>
         <p>content</p>
       </Modal>
     );
@@ -14,7 +14,7 @@ describe("Modal", () => {
 
   it("can render content when modal opened", async () => {
     render(
-      <Modal modal={true} setModal={jest.fn()}>
+      <Modal isModalOpen={true} setIsModalOpen={jest.fn()}>
         <p>content</p>
       </Modal>
     );

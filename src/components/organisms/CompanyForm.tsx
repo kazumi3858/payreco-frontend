@@ -12,7 +12,7 @@ import {
 } from "api/default/default";
 
 type Props = {
-  setCompanyForm: React.Dispatch<SetStateAction<boolean>>;
+  setIsFormOpen: React.Dispatch<SetStateAction<boolean>>;
   company?: Company;
 };
 
@@ -31,7 +31,7 @@ const currencyList = [
   "スイスフラン",
 ];
 
-function CompanyForm({ setCompanyForm, company }: Props) {
+function CompanyForm({ setIsFormOpen, company }: Props) {
   const defaultName = company ? company.name : "";
   const defaultWageSystem = company ? company.hourly_wage_system : true;
   const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
@@ -60,8 +60,8 @@ function CompanyForm({ setCompanyForm, company }: Props) {
   const patchCompany = usePatchCompaniesCompanyId();
   const mutationResult = customMutationResult(
     queryClient,
-    `/companies`,
-    setCompanyForm
+    "/companies",
+    setIsFormOpen
   );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

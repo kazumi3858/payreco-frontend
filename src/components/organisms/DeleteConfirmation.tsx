@@ -9,17 +9,17 @@ import {
 type Props = {
   id: string;
   queryKey: string;
-  setDeleteConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsConfirmationOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function DeleteConfirmation({ id, queryKey, setDeleteConfirmation }: Props) {
+function DeleteConfirmation({ id, queryKey, setIsConfirmationOpen }: Props) {
   const queryClient = useQueryClient();
   const deleteWork = useDeleteWorksWorkId();
   const deleteCompany = useDeleteCompaniesCompanyId();
   const mutationResult = customMutationResult(
     queryClient,
     queryKey,
-    setDeleteConfirmation
+    setIsConfirmationOpen
   );
 
   const handleDelete = () => {
@@ -43,7 +43,7 @@ function DeleteConfirmation({ id, queryKey, setDeleteConfirmation }: Props) {
         </button>
         <button
           className="text-stone-400 hover:brightness-75"
-          onClick={() => setDeleteConfirmation(false)}
+          onClick={() => setIsConfirmationOpen(false)}
         >
           いいえ
         </button>

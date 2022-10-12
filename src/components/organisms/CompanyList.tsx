@@ -8,7 +8,7 @@ import { useState } from "react";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 
 function CompapyList() {
-  const [companyForm, setCompanyForm] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const { data } = useGetCompanies();
   const companies = data?.filter((companies) => companies.deleted_at === null);
 
@@ -37,7 +37,7 @@ function CompapyList() {
               <div className="my-2 ml-3">
                 <button
                   className="text-sm hover:text-stone-500"
-                  onClick={() => setCompanyForm(true)}
+                  onClick={() => setIsFormOpen(true)}
                 >
                   <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button-color" />
                   勤務先を追加する
@@ -46,8 +46,8 @@ function CompapyList() {
             </div>
           )}
         </div>
-        <Modal modal={companyForm} setModal={setCompanyForm}>
-          <CompanyForm setCompanyForm={setCompanyForm} />
+        <Modal isModalOpen={isFormOpen} setIsModalOpen={setIsFormOpen}>
+          <CompanyForm setIsFormOpen={setIsFormOpen} />
         </Modal>
       </div>
     </div>

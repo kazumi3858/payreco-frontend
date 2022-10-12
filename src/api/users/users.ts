@@ -32,10 +32,10 @@ export const getUsersUserId = (
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<User>({ url: `/user`, method: "get", signal }, options);
+  return customInstance<User>({ url: "/user", method: "get", signal }, options);
 };
 
-export const getGetUsersUserIdQueryKey = () => [`/user`];
+export const getGetUsersUserIdQueryKey = () => ["/user"];
 
 export type GetUsersUserIdQueryResult = NonNullable<
   Awaited<ReturnType<typeof getUsersUserId>>

@@ -15,10 +15,10 @@ type Props = {
   selectedDay: Date;
   company: Company;
   work?: Work;
-  setWorkForm: Dispatch<SetStateAction<boolean>>;
+  setIsFormOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
+function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
   const formatTime = (day: Date, time: string) =>
     format(day, `yyyy-MM-dd ${time}`).replace(" ", "T");
   const minTime = formatTime(selectedDay, "00:00");
@@ -93,8 +93,8 @@ function WorkForm({ selectedDay, company, work, setWorkForm }: Props) {
   const patchWork = usePatchWorksWorkId();
   const mutationResult = customMutationResult(
     queryClient,
-    `/works`,
-    setWorkForm
+    "/works",
+    setIsFormOpen
   );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -33,12 +33,12 @@ export const getWorks = (
   signal?: AbortSignal
 ) => {
   return customInstance<Work[]>(
-    { url: `/works`, method: "get", signal },
+    { url: "/works", method: "get", signal },
     options
   );
 };
 
-export const getGetWorksQueryKey = () => [`/works`];
+export const getGetWorksQueryKey = () => ["/works"];
 
 export type GetWorksQueryResult = NonNullable<
   Awaited<ReturnType<typeof getWorks>>

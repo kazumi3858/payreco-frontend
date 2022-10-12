@@ -5,13 +5,11 @@ import Modal from "./Modal";
 import { Company } from "api/model";
 import { useState } from "react";
 
-type Props = {
-  company: Company;
-};
+type Props = { company: Company };
 
 function CompanyDetails({ company }: Props) {
-  const [companyForm, setCompanyForm] = useState(false);
-  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
   return (
     <li className="group flex items-center space-x-4 rounded-2xl px-4 py-2 hover:bg-stone-100">
@@ -24,17 +22,20 @@ function CompanyDetails({ company }: Props) {
         </p>
       </div>
       <div>
-        <IconButton isEditMode onClick={() => setCompanyForm(true)} />
+        <IconButton isEditMode onClick={() => setIsFormOpen(true)} />
         <IconButton
           isEditMode={false}
-          onClick={() => setDeleteConfirmation(true)}
+          onClick={() => setIsConfirmationOpen(true)}
         />
-        <Modal modal={companyForm} setModal={setCompanyForm}>
-          <CompanyForm company={company} setCompanyForm={setCompanyForm} />
+        <Modal isModalOpen={isFormOpen} setIsModalOpen={setIsFormOpen}>
+          <CompanyForm company={company} setIsFormOpen={setIsFormOpen} />
         </Modal>
-        <Modal modal={deleteConfirmation} setModal={setDeleteConfirmation}>
+        <Modal
+          isModalOpen={isConfirmationOpen}
+          setIsModalOpen={setIsConfirmationOpen}
+        >
           <DeleteConfirmation
-            setDeleteConfirmation={setDeleteConfirmation}
+            setIsConfirmationOpen={setIsConfirmationOpen}
             id={company.id}
             queryKey="/companies"
           />

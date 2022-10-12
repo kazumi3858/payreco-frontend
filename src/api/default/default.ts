@@ -32,7 +32,7 @@ export const patchUsersUserId = (
 ) => {
   return customInstance<void>(
     {
-      url: `/user`,
+      url: "/user",
       method: "patch",
       headers: { "Content-Type": "application/json" },
       data: userParams,
@@ -84,7 +84,7 @@ export const usePatchUsersUserId = <
 export const deleteUsersUserId = (
   options?: SecondParameter<typeof customInstance>
 ) => {
-  return customInstance<string>({ url: `/user`, method: "delete" }, options);
+  return customInstance<string>({ url: "/user", method: "delete" }, options);
 };
 
 export type DeleteUsersUserIdMutationResult = NonNullable<
@@ -238,7 +238,7 @@ export const postWorks = (
 ) => {
   return customInstance<void>(
     {
-      url: `/works`,
+      url: "/works",
       method: "post",
       headers: { "Content-Type": "application/json" },
       data: workParams,
@@ -293,7 +293,7 @@ export const postCompanies = (
 ) => {
   return customInstance<void>(
     {
-      url: `/companies`,
+      url: "/companies",
       method: "post",
       headers: { "Content-Type": "application/json" },
       data: companyParams,

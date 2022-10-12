@@ -18,7 +18,7 @@ function TargetAmountForm({ user }: Props) {
   const mutation = usePatchUsersUserId();
   const mutationResult = customMutationResult(
     queryClient,
-    `/user`,
+    "/user",
     setUpdating
   );
 
