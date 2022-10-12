@@ -1,13 +1,11 @@
 import Header from "components/organisms/Header";
 import Footer from "components/organisms/Footor";
 import Menu from "components/organisms/Menu";
+import router from "next/router";
 import { auth } from "auth/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import router from "next/router";
 
-type Props = {
-  children: JSX.Element;
-};
+type Props = { children: JSX.Element };
 
 function Main({ children }: Props) {
   const [user, isLoading] = useAuthState(auth);
