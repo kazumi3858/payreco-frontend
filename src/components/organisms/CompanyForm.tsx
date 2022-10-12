@@ -16,22 +16,22 @@ type Props = {
   company?: Company;
 };
 
-const currencyList = [
-  "円",
-  "米ドル",
-  "ユーロ",
-  "英ポンド",
-  "インドルピー",
-  "豪ドル",
-  "カナダドル",
-  "ランド",
-  "NZドル",
-  "SGドル",
-  "人民元",
-  "スイスフラン",
-];
-
 function CompanyForm({ setIsFormOpen, company }: Props) {
+  const currencyList = [
+    "円",
+    "米ドル",
+    "ユーロ",
+    "英ポンド",
+    "インドルピー",
+    "豪ドル",
+    "カナダドル",
+    "ランド",
+    "NZドル",
+    "SGドル",
+    "人民元",
+    "スイスフラン",
+  ];
+
   const defaultName = company ? company.name : "";
   const defaultWageSystem = company ? company.hourly_wage_system : true;
   const defaultWageAmount = company?.wage_amount ? company.wage_amount : 0;
@@ -41,8 +41,8 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
   const [name, setName] = useState(defaultName);
   const [wageAmount, setWageAmount] = useState(defaultWageAmount);
   const [currencyType, setCurrencyType] = useState(defaultCurrencyType);
-  const [updating, setUpdating] = useState(false);
-  const [disableButton, setDisableButton] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const changeWageSystem = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsWageSystem(Boolean(e.target.value));
@@ -74,8 +74,8 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
       validation.push("時給額が不正な値・または大きすぎます。");
     if (validation.length > 0) return alert(validation);
 
-    setDisableButton(true);
-    setUpdating(true);
+    setIsDisabled(true);
+    setIsUpdating(true);
 
     company?.id
       ? patchCompany.mutate(
@@ -151,7 +151,7 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
         />
       </div>
       <div className="mt-5 text-right">
-        <SubmitButton isUpdating={updating} isDisabled={disableButton} />
+        <SubmitButton isUpdating={isUpdating} isDisabled={isDisabled} />
       </div>
     </form>
   );
