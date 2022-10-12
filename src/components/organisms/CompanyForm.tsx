@@ -151,7 +151,7 @@ function CompanyForm({ setCompanyForm, company }: Props) {
         />
       </div>
       <div className="mt-5 text-right">
-        <SubmitButton updating={updating} disabled={disableButton} />
+        <SubmitButton isUpdating={updating} isDisabled={disableButton} />
       </div>
     </form>
   );
