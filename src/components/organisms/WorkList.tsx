@@ -64,25 +64,21 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
         ) : (
           <div>
             {companies.length > 0 ? (
-              companies.map(
-                (company) =>
-                  company.deleted_at === null && (
-                    <Button
-                      key={company.id}
-                      text={company.name}
-                      onClick={() => {
-                        setIsWorkFormOpen(true);
-                        setSelectedCompany(company);
-                      }}
-                    />
-                  )
-              )
+              companies.map((company) => (
+                <Button
+                  key={company.id}
+                  text={company.name}
+                  onClick={() => {
+                    setIsWorkFormOpen(true);
+                    setSelectedCompany(company);
+                  }}
+                />
+              ))
             ) : (
               <p className="mx-5 my-5 text-sm">
                 最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
               </p>
             )}
-
             <button
               className="text-sm hover:text-stone-500"
               onClick={() => setIsCompanyFormOpen(true)}
