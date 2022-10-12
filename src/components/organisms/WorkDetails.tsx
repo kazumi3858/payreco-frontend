@@ -51,10 +51,10 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           <ClockIcon className="inline h-4 w-4 text-sub-button-color" />
           {` ${work.working_hours}時間 `}
           <CurrencyYenIcon className="inline h-4 w-4 text-sub-button-color" />
-          {` ${work.pay_amount}${company.currency_type}`}
+          {` ${work.pay_amount.toLocaleString()}${company.currency_type}`}
           {company.currency_type !== "円" &&
             rate > 0 &&
-            ` (${Math.floor(work.pay_amount / rate)}円)`}
+            ` (${Math.floor(work.pay_amount / rate).toLocaleString()}円)`}
         </div>
         <div className="break-all">
           {work.memo && (

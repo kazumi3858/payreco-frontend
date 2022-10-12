@@ -70,7 +70,7 @@ describe("Work CRUD function", () => {
     cy.contains("保存").should("not.exist");
     cy.contains("10:00 AM - 6:00 PM");
     cy.contains("株式会社ジキュウ");
-    cy.contains("7000円");
+    cy.contains("7,000円");
     cy.contains("予定はありません。").should("have.length", 0);
   });
 

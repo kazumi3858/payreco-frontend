@@ -43,11 +43,11 @@ describe("WorkDetails", () => {
 
   it("can render JPY calclated by exchange rates properly", async () => {
     render(workDetails(work));
-    expect(await screen.findByText(/(9439円)/)).toBeInTheDocument();
+    expect(await screen.findByText(/(9,439円)/)).toBeInTheDocument();
   });
 
   it("can render JPY calclated by exchange rates in different month properly", async () => {
     render(workDetails(lastMonthWork));
-    expect(await screen.findByText(/(9223円)/)).toBeInTheDocument();
+    expect(await screen.findByText(/(9,223円)/)).toBeInTheDocument();
   });
 });
