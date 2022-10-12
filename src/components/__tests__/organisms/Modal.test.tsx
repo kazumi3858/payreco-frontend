@@ -14,7 +14,7 @@ describe("Modal", () => {
 
   it("can render content when modal opened", async () => {
     render(
-      <Modal isModalOpen={true} setIsModalOpen={jest.fn()}>
+      <Modal isModalOpen setIsModalOpen={jest.fn()}>
         <p>content</p>
       </Modal>
     );
