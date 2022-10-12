@@ -2,6 +2,11 @@
  * The calendar design was created based on the following URL https://www.youtube.com/watch?v=9ySmMd5Cjc0&t=171s
  */
 
+import WorkList from "./WorkList";
+import ja from "date-fns/locale/ja";
+import { PlayIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
+import { useGetWorks } from "api/works/works";
 import {
   add,
   eachDayOfInterval,
@@ -16,21 +21,6 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
-import ja from "date-fns/locale/ja";
-import WorkList from "./WorkList";
-import { PlayIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
-import { useGetWorks } from "api/works/works";
-
-const colStartClasses = [
-  "",
-  "col-start-2",
-  "col-start-3",
-  "col-start-4",
-  "col-start-5",
-  "col-start-6",
-  "col-start-7",
-];
 
 function Calendar() {
   const { data } = useGetWorks();
@@ -42,22 +32,30 @@ function Calendar() {
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
   });
+
   const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
+
+  const colStartClasses = [
+    "",
+    "col-start-2",
+    "col-start-3",
+    "col-start-4",
+    "col-start-5",
+    "col-start-6",
+    "col-start-7",
+  ];
 
   const classNames = (...classes: (string | boolean)[]) => {
     return classes.filter(Boolean).join(" ");
   };
-
   const previousMonth = () => {
     const firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
-
   const nextMonth = () => {
     const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   };
-
   const selectedDayWorks = data?.filter((work) =>
     isSameDay(parseISO(`${work.date}`), selectedDay)
   );
