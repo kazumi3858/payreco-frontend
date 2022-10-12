@@ -6,11 +6,7 @@ type Props = {
 function PayAmount({ text, amount }: Props) {
   return (
     <div className="mb-6 font-bold">
-      {text === "年間合計" ? (
-        <h2 className="mr-2 inline">{text}</h2>
-      ) : (
-        <h2 className="mb-2">{text}</h2>
-      )}
+      <h2 className={text === "年間合計" ? "mr-2 inline" : "mb-2"}>{text}</h2>
       <span className="text-lg text-dark-blue-color">
         {amount.toLocaleString()}
       </span>
