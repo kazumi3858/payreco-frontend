@@ -12,7 +12,7 @@ function Terms() {
       </Head>
       <div className="mx-auto max-w-2xl">
         <div className="my-10 px-5 text-sm">
-          <h1 className="mb-4 border-b-4 border-main-button-color pb-3 text-center text-3xl font-bold">
+          <h1 className="mb-4 border-b-4 border-main-button pb-3 text-center text-3xl font-bold">
             利用規約
           </h1>
           この利用規約（以下、「本規約」といいます。）は、このウェブサイト上で提供するサービス（以下、「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下、「ユーザー」といいます。）には、本規約に従って、本サービスをご利用いただきます。

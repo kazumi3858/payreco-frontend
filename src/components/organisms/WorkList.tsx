@@ -31,8 +31,8 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
     data?.find((company): boolean => company.id === work.company_id)!;
 
   return (
-    <div className="mt-12 md:mt-0 md:pl-14">
-      <div className="mb-10 rounded-xl bg-white">
+    <div className="mt-4 md:mt-0 md:pl-14">
+      <div className="mb-4 rounded-xl border border-stone-300 bg-white md:mb-10">
         <Heading text={`${date}の予定`} />
         {isLoading ? (
           <div className="ml-8 pb-5">
@@ -55,7 +55,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
           </ul>
         )}
       </div>
-      <div className="mb-10 rounded-xl bg-white px-3 pb-5">
+      <div className="rounded-xl border border-stone-300 bg-white px-3 pb-5 md:mb-10">
         <Heading text={`勤務先を選んで${date}の予定を追加`} />
         {!companies ? (
           <div className="ml-5">
@@ -83,7 +83,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
               className="text-sm hover:text-stone-500"
               onClick={() => setIsCompanyFormOpen(true)}
             >
-              <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button-color" />
+              <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button" />
               勤務先を追加する
             </button>
           </div>

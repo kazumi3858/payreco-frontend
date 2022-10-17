@@ -61,11 +61,11 @@ function Calendar() {
   );
 
   return (
-    <div className="pt-5">
-      <div className="mx-auto max-w-lg px-4 md:max-w-7xl md:px-6">
+    <div className="pt-5 pb-10 md:px-4">
+      <div className="mx-auto max-w-lg px-4 sm:px-0 md:max-w-7xl md:border-0">
         <div className="md:grid md:grid-cols-2">
           <div>
-            <div className="rounded-xl bg-white p-6 md:mb-10">
+            <div className="rounded-xl border border-stone-300 bg-white p-6 md:mb-10">
               <div className="flex justify-center">
                 <button
                   type="button"
@@ -73,7 +73,7 @@ function Calendar() {
                   className="text-gray-400 hover:text-gray-500"
                 >
                   <span>
-                    <PlayIcon className="h-4 w-4 rotate-180 text-sub-button-color hover:brightness-75" />
+                    <PlayIcon className="h-4 w-4 rotate-180 text-sub-button hover:brightness-75" />
                   </span>
                 </button>
                 <h1 className="text-md w-40 text-center font-bold">
@@ -85,11 +85,11 @@ function Calendar() {
                   className="text-gray-400 hover:text-gray-500"
                 >
                   <span>
-                    <PlayIcon className="h-4 w-4 text-sub-button-color hover:brightness-75" />
+                    <PlayIcon className="h-4 w-4 text-sub-button hover:brightness-75" />
                   </span>
                 </button>
               </div>
-              <div className="mt-8 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
+              <div className="mt-2 grid grid-cols-7 text-center text-xs leading-6 text-gray-500 md:mt-8">
                 {dayOfWeek.map((day, index) => (
                   <div key={index}>{day}</div>
                 ))}
@@ -101,10 +101,10 @@ function Calendar() {
                     onClick={() => setSelectedDay(day)}
                     className={classNames(
                       index === 0 && colStartClasses[getDay(day)],
-                      isEqual(day, selectedDay) && "text-white",
+                      isEqual(day, selectedDay),
                       !isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "text-[#c698ab]",
+                        "bg-[#f3f7e6]",
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&
@@ -115,10 +115,10 @@ function Calendar() {
                         "text-gray-400",
                       isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "bg-main-button-color",
+                        "bg-main-button",
                       isEqual(day, selectedDay) &&
                         !isToday(day) &&
-                        "bg-main-button-color",
+                        "bg-main-button",
                       !isEqual(day, selectedDay) &&
                         "cursor-pointer hover:bg-stone-100",
                       (isEqual(day, selectedDay) || isToday(day)) &&

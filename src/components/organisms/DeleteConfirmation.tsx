@@ -36,7 +36,7 @@ function DeleteConfirmation({ id, queryKey, setIsConfirmationOpen }: Props) {
       </div>
       <div className="mt-3 space-x-6 text-center text-xl">
         <button
-          className="text-dark-blue-color hover:brightness-75"
+          className="text-dark-blue-text hover:brightness-75"
           onClick={handleDelete}
         >
           はい

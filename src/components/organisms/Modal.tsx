@@ -24,7 +24,7 @@ function Modal({ children, isModalOpen, setIsModalOpen }: Props) {
             >
               <div className="text-right">
                 <button onClick={() => setIsModalOpen(false)}>
-                  <XMarkIcon className="mt-3 mr-3 h-8 w-8 text-sub-button-color hover:brightness-75" />
+                  <XMarkIcon className="mt-3 mr-3 h-8 w-8 text-sub-button hover:brightness-75" />
                 </button>
               </div>
               <div className="px-6 pb-8 sm:px-14">{children}</div>

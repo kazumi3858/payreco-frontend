@@ -94,7 +94,7 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
             onChange={(e) => setIsWageSystem(Boolean(e.target.value))}
             isChecked={isWageSystem}
             shape="rounded-l-full"
-            padding="px-6 py-1"
+            padding="px-12 py-1"
           />
           <RadioButton
             value=""
@@ -102,7 +102,7 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
             onChange={(e) => setIsWageSystem(Boolean(e.target.value))}
             isChecked={!isWageSystem}
             shape="rounded-r-full"
-            padding="px-6 py-1"
+            padding="px-12 py-1"
           />
         </div>
       </div>
@@ -110,7 +110,7 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
         <Label width="w-14" htmlFor="name" title="名前" />
         <input
           id="name"
-          className="mb-5 w-48 rounded-md bg-stone-100 px-1"
+          className="mb-5 w-52 rounded-md bg-stone-100 px-1"
           placeholder="例: 〇〇ワークス"
           defaultValue={defaultName}
           onChange={(e) => setName(e.target.value)}

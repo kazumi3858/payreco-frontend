@@ -125,7 +125,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           onChange={(e) => setIsShiftMode(Boolean(e.target.value))}
           isChecked={isShiftMode}
           shape="rounded-l-full"
-          padding="px-2 py-1"
+          padding="px-4 py-1"
         />
         <RadioButton
           value=""
@@ -133,7 +133,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           onChange={(e) => setIsShiftMode(Boolean(e.target.value))}
           isChecked={!isShiftMode}
           shape="rounded-r-full"
-          padding="px-2 py-1"
+          padding="px-4 py-1"
         />
       </div>
       <div className={isShiftMode ? "" : "hidden"}>
@@ -142,7 +142,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           <input
             id="starting-time"
             type="datetime-local"
-            className="mb-5 w-48 rounded-md bg-stone-100 px-1"
+            className="mb-5 w-56 rounded-md bg-stone-100 px-1"
             min={minTime}
             max={maxTime}
             defaultValue={
@@ -158,7 +158,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           <input
             id="ending-time"
             type="datetime-local"
-            className="mb-5 w-48 rounded-md bg-stone-100 px-1"
+            className="mb-5 w-56 rounded-md bg-stone-100 px-1"
             min={minTime}
             max={nextDayMaxTime}
             defaultValue={
@@ -185,9 +185,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           <span className="mx-2">分</span>
         </div>
         <div className="mt-4 mb-2">
-          <span className="mr-2 inline-block w-20 text-right font-bold">
-            合計時間
-          </span>
+          <span className="mr-2 inline-block w-20 font-bold">合計時間</span>
           <span>
             {`${
               isInvalidHours
@@ -248,10 +246,10 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
       </div>
       <div>
         <Label width="w-9" htmlFor="memo" title="メモ" />
-        <span className="mr-3 text-sm text-dark-blue-color">任意</span>
+        <span className="mr-3 text-sm text-dark-blue-text">任意</span>
         <input
           id="memo"
-          className="w-48 rounded-md bg-stone-100 px-1"
+          className="w-56 rounded-md bg-stone-100 px-1"
           defaultValue={memo || ""}
           onChange={(e) => setMemo(e.target.value)}
           placeholder="例: 10時にミーティング"

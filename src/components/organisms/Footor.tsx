@@ -4,7 +4,12 @@ type Props = { loginPage: boolean };
 
 function Footer({ loginPage }: Props) {
   return (
-    <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r py-4 text-center text-xs">
+    <div
+      className={
+        "bg-gradient-to-r from-main-gradient-l to-main-gradient-r py-4 text-center text-xs" +
+        (loginPage ? "" : " md:bg-none")
+      }
+    >
       <div className="my-1 space-x-4">
         <Link href="/terms">
           <a className="hover:opacity-50">利用規約</a>
