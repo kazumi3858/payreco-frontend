@@ -12,7 +12,7 @@ function Menu() {
   return (
     <div className="sticky bottom-0 cursor-pointer md:bottom-4 md:h-20">
       <div className="text-center md:flex md:justify-center">
-        <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r md:w-3/4 md:rounded-full">
+        <div className="w-full bg-gradient-to-r from-main-gradient-l to-main-gradient-r md:mx-4 md:max-w-7xl md:rounded-full">
           <Link href="/">
             <div className={style + " md:rounded-l-full"}>
               <CalendarIcon className="mr-2 inline h-6 w-6 pb-1" />
