@@ -83,7 +83,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
               className="text-sm hover:text-stone-500"
               onClick={() => setIsCompanyFormOpen(true)}
             >
-              <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button-color" />
+              <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button" />
               勤務先を追加する
             </button>
           </div>

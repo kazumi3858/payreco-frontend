@@ -6,7 +6,7 @@ type Props = {
 function SubmitButton({ isUpdating, isDisabled }: Props) {
   return (
     <input
-      className="m-1 cursor-pointer rounded-md bg-main-button-color px-3 hover:bg-sub-button-color hover:text-white"
+      className="m-1 cursor-pointer rounded-md bg-main-button px-3 hover:bg-sub-button hover:text-white"
       type="submit"
       disabled={isDisabled}
       value={isUpdating ? "保存中..." : "保存"}

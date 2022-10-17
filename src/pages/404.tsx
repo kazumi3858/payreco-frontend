@@ -9,8 +9,8 @@ export default function Custom404() {
       </Head>
       <div className="flex h-screen items-center justify-center">
         <div className="text-center">
-          <p className="text-9xl font-bold text-sub-button-color">404</p>
-          <p className="mb-10 text-2xl font-bold text-sub-button-color">
+          <p className="text-9xl font-bold text-sub-button">404</p>
+          <p className="mb-10 text-2xl font-bold text-sub-button">
             存在しないページです
           </p>
           <Link href="/">

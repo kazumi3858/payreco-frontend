@@ -39,7 +39,7 @@ function CompapyList() {
                   className="text-sm hover:text-stone-500"
                   onClick={() => setIsFormOpen(true)}
                 >
-                  <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button-color" />
+                  <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button" />
                   勤務先を追加する
                 </button>
               </div>

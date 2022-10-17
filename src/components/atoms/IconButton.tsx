@@ -12,7 +12,7 @@ function IconButton({ isEditMode, onClick }: Props) {
       className={
         "m-1 rounded-full " +
         (isEditMode
-          ? "bg-sub-button-color hover:bg-dark-blue-color"
+          ? "bg-sub-button hover:bg-dark-blue-text"
           : "bg-stone-200 hover:bg-stone-300")
       }
       onClick={onClick}

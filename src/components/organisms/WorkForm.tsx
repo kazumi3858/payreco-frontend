@@ -248,7 +248,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
       </div>
       <div>
         <Label width="w-9" htmlFor="memo" title="メモ" />
-        <span className="mr-3 text-sm text-dark-blue-color">任意</span>
+        <span className="mr-3 text-sm text-dark-blue-text">任意</span>
         <input
           id="memo"
           className="w-48 rounded-md bg-stone-100 px-1"

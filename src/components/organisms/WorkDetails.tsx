@@ -48,9 +48,9 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           {hasBreak && ")"}
         </span>
         <div>
-          <ClockIcon className="inline h-4 w-4 text-sub-button-color" />
+          <ClockIcon className="inline h-4 w-4 text-sub-button" />
           {` ${work.working_hours}時間 `}
-          <CurrencyYenIcon className="inline h-4 w-4 text-sub-button-color" />
+          <CurrencyYenIcon className="inline h-4 w-4 text-sub-button" />
           {` ${work.pay_amount.toLocaleString()}${company.currency_type}`}
           {company.currency_type !== "円" &&
             rate > 0 &&
@@ -59,7 +59,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <div className="break-all">
           {work.memo && (
             <>
-              <DocumentIcon className="inline h-4 w-4 text-sub-button-color" />
+              <DocumentIcon className="inline h-4 w-4 text-sub-button" />
               <span>{` ${work.memo}`}</span>
             </>
           )}
