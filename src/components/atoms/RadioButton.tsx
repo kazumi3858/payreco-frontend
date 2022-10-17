@@ -18,13 +18,13 @@ function RadioButton({
   return (
     <div className="my-4 inline-block">
       <label
-        className={`cursor-pointer text-sm ${shape} ${padding} ${
-          isChecked ? "bg-[#d1dee0]" : "bg-stone-200"
+        className={`block cursor-pointer text-sm font-bold ${shape} ${padding} ${
+          isChecked ? "bg-[#d1dee0]" : "bg-stone-200 text-stone-400"
         }`}
       >
         <input
           type="radio"
-          className={padding === "py-2 px-4" ? "hidden" : "mr-1"}
+          className="hidden"
           value={value}
           onChange={onChange}
           checked={isChecked}

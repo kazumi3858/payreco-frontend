@@ -94,7 +94,7 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
             onChange={(e) => setIsWageSystem(Boolean(e.target.value))}
             isChecked={isWageSystem}
             shape="rounded-l-full"
-            padding="px-6 py-1"
+            padding="px-12 py-1"
           />
           <RadioButton
             value=""
@@ -102,7 +102,7 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
             onChange={(e) => setIsWageSystem(Boolean(e.target.value))}
             isChecked={!isWageSystem}
             shape="rounded-r-full"
-            padding="px-6 py-1"
+            padding="px-12 py-1"
           />
         </div>
       </div>
