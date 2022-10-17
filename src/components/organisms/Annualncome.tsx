@@ -25,7 +25,7 @@ function AnnualIncome({ incomeList }: Props) {
   );
 
   return (
-    <div className="md:rounded-xl md:border md:border-stone-200 md:bg-white md:px-6 md:pb-2">
+    <div className="md:rounded-xl md:border md:border-stone-300 md:bg-white md:px-6 md:pb-2">
       <Heading text="年間の給料" />
       {incomeList && isFinite(annualTotalIncome) ? (
         <>

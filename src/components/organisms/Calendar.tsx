@@ -65,7 +65,7 @@ function Calendar() {
       <div className="mx-auto max-w-lg px-4 sm:px-0 md:max-w-7xl md:border-0">
         <div className="md:grid md:grid-cols-2">
           <div>
-            <div className="rounded-xl border border-stone-200 bg-white p-6 md:mb-10">
+            <div className="rounded-xl border border-stone-300 bg-white p-6 md:mb-10">
               <div className="flex justify-center">
                 <button
                   type="button"
@@ -89,7 +89,7 @@ function Calendar() {
                   </span>
                 </button>
               </div>
-              <div className="mt-8 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
+              <div className="mt-2 grid grid-cols-7 text-center text-xs leading-6 text-gray-500 md:mt-8">
                 {dayOfWeek.map((day, index) => (
                   <div key={index}>{day}</div>
                 ))}

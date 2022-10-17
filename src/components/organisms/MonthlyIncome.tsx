@@ -21,7 +21,7 @@ function MonthlyIncome({ income }: Props) {
   const expectedIncome = totalIncome - earnedIncome;
 
   return (
-    <div className="md:rounded-xl md:border md:border-stone-200 md:bg-white md:px-6 md:pb-5">
+    <div className="md:rounded-xl md:border md:border-stone-300 md:bg-white md:px-6 md:pb-5">
       <Heading text="今月の給料" />
       {data && isFinite(totalIncome) ? (
         <div className="text-sm">
