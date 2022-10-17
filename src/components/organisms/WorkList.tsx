@@ -32,7 +32,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
 
   return (
     <div className="mt-12 md:mt-0 md:pl-14">
-      <div className="mb-10 rounded-xl bg-white">
+      <div className="mb-10 rounded-xl border border-stone-200 bg-white">
         <Heading text={`${date}の予定`} />
         {isLoading ? (
           <div className="ml-8 pb-5">
@@ -55,7 +55,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
           </ul>
         )}
       </div>
-      <div className="mb-10 rounded-xl bg-white px-3 pb-5">
+      <div className="mb-10 rounded-xl border border-stone-200 bg-white px-3 pb-5">
         <Heading text={`勤務先を選んで${date}の予定を追加`} />
         {!companies ? (
           <div className="ml-5">

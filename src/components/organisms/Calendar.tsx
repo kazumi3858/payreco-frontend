@@ -65,7 +65,7 @@ function Calendar() {
       <div className="mx-auto max-w-lg px-4 md:max-w-7xl md:px-6">
         <div className="md:grid md:grid-cols-2">
           <div>
-            <div className="rounded-xl bg-white p-6 md:mb-10">
+            <div className="rounded-xl border border-stone-200 bg-white p-6 md:mb-10">
               <div className="flex justify-center">
                 <button
                   type="button"
