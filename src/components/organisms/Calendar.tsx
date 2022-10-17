@@ -101,10 +101,10 @@ function Calendar() {
                     onClick={() => setSelectedDay(day)}
                     className={classNames(
                       index === 0 && colStartClasses[getDay(day)],
-                      isEqual(day, selectedDay) && "text-white",
+                      isEqual(day, selectedDay),
                       !isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "text-[#c698ab]",
+                        "bg-[#faf8e6]",
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&
