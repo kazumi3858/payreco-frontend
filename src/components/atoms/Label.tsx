@@ -6,10 +6,7 @@ type Props = {
 
 function Label({ width, htmlFor, title }: Props) {
   return (
-    <label
-      className={`mr-2 inline-block text-right font-bold ${width}`}
-      htmlFor={htmlFor}
-    >
+    <label className={`mr-2 inline-block font-bold ${width}`} htmlFor={htmlFor}>
       {title}
     </label>
   );
