@@ -69,7 +69,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
     ) / 100;
 
   const formData = {
-    date: addDays(selectedDay, 1),
+    date: formatTime(selectedDay, "00:00"),
     company_id: company.id,
     starting_time: isShiftMode ? startingTime : null,
     ending_time: isShiftMode ? endingTime : null,

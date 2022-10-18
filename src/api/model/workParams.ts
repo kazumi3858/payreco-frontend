@@ -7,7 +7,7 @@
  */
 
 export interface WorkParams {
-  date: Date;
+  date: string;
   starting_time: Date | null;
   ending_time: Date | null;
   break_time: number | null;
