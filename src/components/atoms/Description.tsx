@@ -14,11 +14,7 @@ function Description({ position }: Props) {
       <p className="mb-4 text-5xl font-bold text-sub-button">{position}</p>
       <Image
         className="mx-auto rounded-full md:max-w-full"
-        src={
-          ["/sub-image1.gif", "/sub-image2.gif", "/sub-image3.png"][
-            position - 1
-          ]
-        }
+        src={"/sub-image" + ["1.png", "2.gif", "3.png"][position - 1]}
         alt={`使い方の画像${position}番`}
         width={300}
         height={300}
