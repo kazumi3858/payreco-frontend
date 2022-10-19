@@ -32,7 +32,9 @@ function AnnualIncome({ incomeList }: Props) {
           <ul>
             {incomeListByMonth.map((income, index) => (
               <li key={index} className="mb-3 text-sm">
-                <span className="mr-2 font-bold">{index + 1}月</span>
+                <span className="mr-3 inline-block w-10 text-right font-bold">
+                  {index + 1}月
+                </span>
                 <span>{income.toLocaleString()}円</span>
               </li>
             ))}
