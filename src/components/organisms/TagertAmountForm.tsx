@@ -53,7 +53,7 @@ function TargetAmountForm({ user }: Props) {
           円
         </label>
         <div className="ml-3 inline text-base">
-          <SubmitButton isUpdating={isUpdating} />
+          <SubmitButton isUpdating={isUpdating} padding="px-6" />
         </div>
       </form>
       {!user.target_amount && (

@@ -46,7 +46,7 @@ function IncomeList() {
               onChange={(e) => setIsMonthlyMode(Boolean(e.target.value))}
               isChecked={isMonthlyMode}
               shape="rounded-l-full"
-              padding="py-2 px-4"
+              padding="py-2 px-6"
             />
             <RadioButton
               value=""
@@ -54,7 +54,7 @@ function IncomeList() {
               onChange={(e) => setIsMonthlyMode(Boolean(e.target.value))}
               isChecked={!isMonthlyMode}
               shape="rounded-r-full"
-              padding="py-2 px-4"
+              padding="py-2 px-6"
             />
           </div>
         </div>

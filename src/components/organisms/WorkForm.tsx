@@ -125,7 +125,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           onChange={(e) => setIsShiftMode(Boolean(e.target.value))}
           isChecked={isShiftMode}
           shape="rounded-l-full"
-          padding="px-4 py-1"
+          padding="px-4 py-2"
         />
         <RadioButton
           value=""
@@ -133,7 +133,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           onChange={(e) => setIsShiftMode(Boolean(e.target.value))}
           isChecked={!isShiftMode}
           shape="rounded-r-full"
-          padding="px-4 py-1"
+          padding="px-4 py-2"
         />
       </div>
       <div className={isShiftMode ? "" : "hidden"}>
@@ -260,7 +260,11 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
         )}
       </div>
       <div className="mt-5 text-right">
-        <SubmitButton isUpdating={isUpdating} isDisabled={isDisabled} />
+        <SubmitButton
+          isUpdating={isUpdating}
+          isDisabled={isDisabled}
+          padding="px-10"
+        />
       </div>
     </form>
   );
