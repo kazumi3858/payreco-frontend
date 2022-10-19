@@ -17,7 +17,7 @@ function Modal({ children, isModalOpen, setIsModalOpen }: Props) {
         >
           <div className="flex h-full items-center justify-center">
             <div
-              className="rounded-lg bg-white drop-shadow-4xl"
+              className="rounded-xl border border-stone-300 bg-white drop-shadow-4xl"
               onClick={(e) => {
                 e.stopPropagation();
               }}

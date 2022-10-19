@@ -14,7 +14,7 @@ function CompapyList() {
 
   return (
     <div className="pt-5">
-      <div className="md:max-w-1xl mx-auto max-w-lg px-4 sm:px-0">
+      <div className="mx-auto max-w-lg px-4">
         <div className="mb-5 rounded-xl border border-stone-300 bg-white pb-4">
           <Heading text="勤務先一覧" />
           {!companies ? (

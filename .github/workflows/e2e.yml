@@ -35,4 +35,3 @@ jobs:
       SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
       GITHUB_HEAD_REF: ${{ github.head_ref }}
       GITHUB_REF: ${{ github.ref }}
-      TZ: 'Asia/Tokyo'

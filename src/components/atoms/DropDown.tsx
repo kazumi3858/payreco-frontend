@@ -23,7 +23,7 @@ function Dropdown({ logoutEvent, helpEvent }: Props) {
       <ul
         className={
           isMenuOpen
-            ? "absolute top-3 right-3 z-50 inline-block rounded-xl bg-white p-2 text-sm font-bold drop-shadow-3xl"
+            ? "absolute top-3 right-3 z-50 inline-block rounded-xl border border-stone-300 bg-white p-2 text-sm font-bold drop-shadow-3xl"
             : "hidden"
         }
       >

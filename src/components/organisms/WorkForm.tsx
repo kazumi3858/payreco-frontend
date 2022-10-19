@@ -125,7 +125,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           onChange={(e) => setIsShiftMode(Boolean(e.target.value))}
           isChecked={isShiftMode}
           shape="rounded-l-full"
-          padding="px-4 py-1"
+          padding="px-4 py-2"
         />
         <RadioButton
           value=""
@@ -133,7 +133,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
           onChange={(e) => setIsShiftMode(Boolean(e.target.value))}
           isChecked={!isShiftMode}
           shape="rounded-r-full"
-          padding="px-4 py-1"
+          padding="px-4 py-2"
         />
       </div>
       <div className={isShiftMode ? "" : "hidden"}>
@@ -222,7 +222,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
         <span className="mx-2">分</span>
       </div>
 
-      <div className="mb-2">
+      <div className={company.wage_amount ? "mb-3" : "mb-5"}>
         <Label width="w-20" htmlFor="pay" title="給料" />
         {company.wage_amount ? (
           <span>
@@ -231,7 +231,7 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
         ) : (
           <input
             id="pay"
-            className="mt-2 mb-3 mr-2 w-28 rounded-md bg-stone-100 px-1"
+            className="mt-2 mr-2 w-28 rounded-md bg-stone-100 px-1"
             type="number"
             placeholder="数値を入力"
             defaultValue={work?.pay_amount || ""}
@@ -260,7 +260,11 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
         )}
       </div>
       <div className="mt-5 text-right">
-        <SubmitButton isUpdating={isUpdating} isDisabled={isDisabled} />
+        <SubmitButton
+          isUpdating={isUpdating}
+          isDisabled={isDisabled}
+          padding="px-10"
+        />
       </div>
     </form>
   );
