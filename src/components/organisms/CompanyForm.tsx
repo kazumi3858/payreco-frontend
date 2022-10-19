@@ -106,11 +106,11 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
           />
         </div>
       </div>
-      <div>
+      <div className="mb-5">
         <Label width="w-14" htmlFor="name" title="名前" />
         <input
           id="name"
-          className="mb-5 w-52 rounded-md bg-stone-100 px-1"
+          className="w-52 rounded-md bg-stone-100 px-1"
           placeholder="例: 〇〇ワークス"
           defaultValue={defaultName}
           onChange={(e) => setName(e.target.value)}
@@ -120,14 +120,14 @@ function CompanyForm({ setIsFormOpen, company }: Props) {
           <p className="text-rose-600">名前は1～30文字にしてください。</p>
         )}
       </div>
-      <div className={isWageSystem ? "" : "hidden"}>
+      <div className={isWageSystem ? "mb-5" : "hidden"}>
         <Label width="w-14" htmlFor="wage" title="時給額" />
         <input
           id="wage"
           type="number"
           step="0.01"
           placeholder="数値を入力"
-          className="mb-5 w-28 rounded-md bg-stone-100 px-1"
+          className="w-28 rounded-md bg-stone-100 px-1"
           defaultValue={defaultWageAmount ? defaultWageAmount : ""}
           onChange={(e) => setWageAmount(Number(e.target.value))}
           onFocus={(e) => e.target.select()}
