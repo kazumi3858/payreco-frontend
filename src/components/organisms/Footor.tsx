@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-type Props = { loginPage: boolean };
+type Props = { isLoginPage: boolean };
 
-function Footer({ loginPage }: Props) {
+function Footer({ isLoginPage }: Props) {
   return (
     <div
       className={
         "bg-gradient-to-r from-main-gradient-l to-main-gradient-r py-4 text-center text-xs" +
-        (loginPage ? "" : " md:bg-none")
+        (isLoginPage ? "" : " md:bg-none")
       }
     >
       <div className="my-1 space-x-4">
@@ -17,7 +17,7 @@ function Footer({ loginPage }: Props) {
         <Link href="/policy">
           <a className="hover:opacity-50">プライバシーポリシー</a>
         </Link>
-        {!loginPage && (
+        {!isLoginPage && (
           <Link href="/delete-account">
             <a className="hover:opacity-50">退会方法</a>
           </Link>

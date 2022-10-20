@@ -30,7 +30,7 @@ function Main({ children }: Props) {
             <div className="z-0">{children}</div>
           </div>
           <Menu />
-          <Footer loginPage={false} />
+          <Footer isLoginPage={false} />
         </div>
       ) : (
         redirect()

@@ -120,7 +120,7 @@ function Login() {
         </div>
       </section>
       <WaveImage isUpper={false} />
-      <Footor loginPage />
+      <Footor isLoginPage />
     </>
   );
 }
