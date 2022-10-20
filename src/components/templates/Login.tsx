@@ -35,22 +35,19 @@ function Login() {
               <div className="mt-10 opacity-75">
                 <Image src="/logo.png" alt="ロゴ" width={250} height={50} />
               </div>
-              <h1 className="mt-5 mb-5 font-['游ゴシック'] text-2xl font-semibold leading-relaxed tracking-widest text-black/70 md:text-3xl md:leading-relaxed">
-                外貨もまとめて管理できる
+              <h1 className="mt-6 mb-5 font-['游ゴシック'] text-2xl font-semibold leading-relaxed tracking-widest text-black/70 md:mt-10 md:text-3xl md:leading-relaxed">
+                外貨の報酬がある人のための
                 <br />
-                シフト管理･給料計算ツール
+                かんたん給料計算ツール
               </h1>
               <div className="flex justify-center pb-5">
                 <div className="text-left text-sm tracking-widest md:text-base">
                   <ul>
                     <li className="mb-3 border-b-2 border-stone-100/50 pb-2">
-                      働いた時間を入力して簡単に給料計算
+                      外貨の報酬を日本円にして表示
                     </li>
                     <li className="mb-3 border-b-2 border-stone-100/50 pb-2">
-                      外貨の報酬は日本円に換算して表示
-                    </li>
-                    <li className="border-b-2 border-stone-100/50 pb-2">
-                      シフト管理としても使える
+                      今月いくら稼いだかをかんたんに確認できる
                     </li>
                   </ul>
                 </div>
@@ -112,7 +109,7 @@ function Login() {
       </section>
       <section>
         <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
-          3ステップで使える♪
+          3ステップで使える
         </h2>
         <div className="m-auto max-w-5xl">
           <div className="md:grid md:grid-cols-3 md:justify-between">
