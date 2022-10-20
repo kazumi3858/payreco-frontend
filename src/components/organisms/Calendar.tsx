@@ -104,7 +104,7 @@ function Calendar() {
                       isEqual(day, selectedDay),
                       !isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "bg-[#f3f7e6]",
+                        "bg-[#ebf4f5]",
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&
@@ -123,7 +123,7 @@ function Calendar() {
                         "cursor-pointer hover:bg-stone-100",
                       (isEqual(day, selectedDay) || isToday(day)) &&
                         "font-semibold",
-                      "m-1 rounded-md p-1 text-center lg:h-16"
+                      "m-1 rounded-lg p-1 text-center lg:h-16"
                     )}
                   >
                     <time dateTime={format(day, "yyyy-MM-dd")}>
