@@ -10,10 +10,10 @@ function Description({ position }: Props) {
   ][position - 1];
 
   return (
-    <div className="mt-12 md:basis-1/3">
+    <div className="p-10 text-center">
       <p className="mb-4 text-5xl font-bold text-sub-button">{position}</p>
       <Image
-        className="mx-auto rounded-full md:max-w-full"
+        className="rounded-full"
         src={"/sub-image" + ["1.png", "2.gif", "3.png"][position - 1]}
         alt={`使い方の画像${position}番`}
         width={300}

@@ -20,39 +20,34 @@ function Login() {
   return (
     <>
       <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r">
-        <div className="mx-auto mb-10 max-w-lg py-10 px-4 sm:px-7 md:max-w-7xl md:px-6 lg:pb-20">
+        <div className="mx-auto max-w-lg px-6 pt-10 sm:px-10 md:max-w-7xl">
           <div className="lg:grid lg:grid-cols-2">
-            <div className="flex items-center justify-center pt-7 drop-shadow-3xl">
-              <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r px-3 pt-3 lg:to-[#CFDEE1]">
-                <Image
-                  className="rounded-2xl"
-                  src="/main-image.png"
-                  alt="サービスのメイン画像"
-                  width={1700}
-                  height={1000}
-                />
-              </div>
+            <div className="mt-7 flex items-center justify-center drop-shadow-3xl">
+              <Image
+                className="rounded-xl"
+                src="/main-image.png"
+                alt="サービスのメイン画像"
+                width={1700}
+                height={1000}
+              />
             </div>
             <section className="my-auto mt-auto text-center">
-              <div className="mt-10">
-                <Image src="/logo.png" alt="ロゴ" width={200} height={40} />
+              <div className="mt-10 opacity-75">
+                <Image src="/logo.png" alt="ロゴ" width={250} height={50} />
               </div>
-              <h1 className="mt-5 mb-5 font-['游ゴシック'] text-2xl font-semibold leading-relaxed tracking-widest text-black/70 md:text-3xl md:leading-relaxed">
-                外貨もまとめて管理できる
+              <h1 className="mt-6 mb-5 font-['游ゴシック'] text-2xl font-semibold leading-relaxed tracking-widest text-black/70 md:mt-10 md:text-3xl md:leading-relaxed">
+                外貨の報酬がある人のための
                 <br />
-                シフト管理･給料計算ツール
+                かんたん給料計算ツール
               </h1>
               <div className="flex justify-center pb-5">
                 <div className="text-left text-sm tracking-widest md:text-base">
                   <ul>
                     <li className="mb-3 border-b-2 border-stone-100/50 pb-2">
-                      働いた時間を入力して簡単に給料計算
+                      外貨の報酬を日本円にして表示
                     </li>
                     <li className="mb-3 border-b-2 border-stone-100/50 pb-2">
-                      外貨の報酬は日本円に換算して表示
-                    </li>
-                    <li className="border-b-2 border-stone-100/50 pb-2">
-                      シフト管理としても使える
+                      今月いくら稼いだかをかんたんに確認できる
                     </li>
                   </ul>
                 </div>
@@ -60,6 +55,7 @@ function Login() {
             </section>
           </div>
         </div>
+        <WaveImage isUpper />
       </div>
       <div className="flex justify-center">
         {isLoading ? (
@@ -67,7 +63,7 @@ function Login() {
         ) : (
           <div>
             <button
-              className="mt-4 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
+              className="mt-10 mb-6 h-14 rounded-full bg-[#174378] px-10 text-base tracking-wide text-white hover:bg-[#3546b4] md:text-lg"
               onClick={googleSignIn}
             >
               Googleでログインして始める
@@ -113,15 +109,17 @@ function Login() {
       </section>
       <section>
         <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
-          使い方
+          3ステップで使える
         </h2>
-        <div className="mb-10 text-center md:mx-20 md:flex md:justify-center md:space-x-20 xl:mx-60 xl:space-x-28">
-          <Description position={1} />
-          <Description position={2} />
-          <Description position={3} />
+        <div className="m-auto max-w-5xl">
+          <div className="md:grid md:grid-cols-3 md:justify-between">
+            <Description position={1} />
+            <Description position={2} />
+            <Description position={3} />
+          </div>
         </div>
       </section>
-      <WaveImage />
+      <WaveImage isUpper={false} />
       <Footor loginPage />
     </>
   );
