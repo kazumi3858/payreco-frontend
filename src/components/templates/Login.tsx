@@ -20,18 +20,16 @@ function Login() {
   return (
     <>
       <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r">
-        <div className="mx-auto max-w-lg px-4 pt-10 sm:px-7 md:max-w-7xl md:px-6">
+        <div className="mx-auto max-w-lg px-6 pt-10 sm:px-10 md:max-w-7xl">
           <div className="lg:grid lg:grid-cols-2">
-            <div className="flex items-center justify-center pt-7 drop-shadow-3xl">
-              <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r px-3 pt-3 lg:to-[#CFDEE1]">
-                <Image
-                  className="rounded-2xl"
-                  src="/main-image.png"
-                  alt="サービスのメイン画像"
-                  width={1700}
-                  height={1000}
-                />
-              </div>
+            <div className="mt-7 flex items-center justify-center drop-shadow-3xl">
+              <Image
+                className="rounded-xl"
+                src="/main-image.png"
+                alt="サービスのメイン画像"
+                width={1700}
+                height={1000}
+              />
             </div>
             <section className="my-auto mt-auto text-center">
               <div className="mt-10 opacity-75">
