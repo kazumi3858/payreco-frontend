@@ -58,7 +58,7 @@ function Login() {
             </section>
           </div>
         </div>
-        <WaveImage top />
+        <WaveImage isUpper />
       </div>
       <div className="flex justify-center">
         {isLoading ? (
@@ -112,15 +112,17 @@ function Login() {
       </section>
       <section>
         <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
-          使い方
+          3ステップで使える♪
         </h2>
-        <div className="mb-10 text-center md:mx-20 md:flex md:justify-center md:space-x-20 xl:mx-60 xl:space-x-28">
-          <Description position={1} />
-          <Description position={2} />
-          <Description position={3} />
+        <div className="m-auto max-w-5xl">
+          <div className="md:grid md:grid-cols-3 md:justify-between">
+            <Description position={1} />
+            <Description position={2} />
+            <Description position={3} />
+          </div>
         </div>
       </section>
-      <WaveImage top={false} />
+      <WaveImage isUpper={false} />
       <Footor loginPage />
     </>
   );
