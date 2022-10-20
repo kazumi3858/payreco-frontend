@@ -20,7 +20,7 @@ function Login() {
   return (
     <>
       <div className="bg-gradient-to-r from-main-gradient-l to-main-gradient-r">
-        <div className="mx-auto mb-10 max-w-lg py-10 px-4 sm:px-7 md:max-w-7xl md:px-6 lg:pb-20">
+        <div className="mx-auto max-w-lg px-4 pt-10 sm:px-7 md:max-w-7xl md:px-6">
           <div className="lg:grid lg:grid-cols-2">
             <div className="flex items-center justify-center pt-7 drop-shadow-3xl">
               <div className="rounded-3xl bg-gradient-to-r from-main-gradient-l to-main-gradient-r px-3 pt-3 lg:to-[#CFDEE1]">
@@ -34,8 +34,8 @@ function Login() {
               </div>
             </div>
             <section className="my-auto mt-auto text-center">
-              <div className="mt-10">
-                <Image src="/logo.png" alt="ロゴ" width={200} height={40} />
+              <div className="mt-10 opacity-75">
+                <Image src="/logo.png" alt="ロゴ" width={250} height={50} />
               </div>
               <h1 className="mt-5 mb-5 font-['游ゴシック'] text-2xl font-semibold leading-relaxed tracking-widest text-black/70 md:text-3xl md:leading-relaxed">
                 外貨もまとめて管理できる
@@ -60,6 +60,7 @@ function Login() {
             </section>
           </div>
         </div>
+        <WaveImage top />
       </div>
       <div className="flex justify-center">
         {isLoading ? (
@@ -67,7 +68,7 @@ function Login() {
         ) : (
           <div>
             <button
-              className="mt-4 mb-6 h-14 rounded-full bg-[#84a4aa] px-10 text-base tracking-wide text-white hover:bg-[#6b8287] md:text-lg"
+              className="mt-10 mb-6 h-14 rounded-full bg-[#174378] px-10 text-base tracking-wide text-white hover:bg-[#3546b4] md:text-lg"
               onClick={googleSignIn}
             >
               Googleでログインして始める
@@ -121,7 +122,7 @@ function Login() {
           <Description position={3} />
         </div>
       </section>
-      <WaveImage />
+      <WaveImage top={false} />
       <Footor loginPage />
     </>
   );
