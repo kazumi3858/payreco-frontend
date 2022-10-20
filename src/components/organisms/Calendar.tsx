@@ -104,7 +104,7 @@ function Calendar() {
                       isEqual(day, selectedDay),
                       !isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "bg-[#ebf4f5]",
+                        "bg-[#eaf0f0]",
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&
@@ -113,12 +113,7 @@ function Calendar() {
                         !isToday(day) &&
                         !isSameMonth(day, firstDayCurrentMonth) &&
                         "text-gray-400",
-                      isEqual(day, selectedDay) &&
-                        isToday(day) &&
-                        "bg-main-button",
-                      isEqual(day, selectedDay) &&
-                        !isToday(day) &&
-                        "bg-main-button",
+                      isEqual(day, selectedDay) && "bg-main-button",
                       !isEqual(day, selectedDay) &&
                         "cursor-pointer hover:bg-stone-100",
                       (isEqual(day, selectedDay) || isToday(day)) &&
