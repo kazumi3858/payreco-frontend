@@ -6,12 +6,12 @@ function SiteHead() {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta
         property="description"
-        content="外貨もまとめて管理できる シフト管理・給料計算ツール"
+        content="外貨の報酬がある人のためのかんたん給料計算ツール"
       />
       <meta property="og:title" content="ペイレコ" />
       <meta
         property="og:description"
-        content="外貨もまとめて管理できる シフト管理・給料計算ツール"
+        content="外貨の報酬がある人のためのかんたん給料計算ツール"
       />
       <meta
         property="og:image"
