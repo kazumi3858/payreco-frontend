@@ -95,7 +95,7 @@ function Login() {
         </h2>
         <div className="flex justify-center py-5 px-10">
           <div className="max-w-2xl">
-            <p className="mb-5 underline decoration-main-button decoration-wavy underline-offset-8">
+            <p className="mb-5 underline decoration-main-button underline-offset-8">
               外貨の報酬がある方に向けた、働いた時間を登録するだけで
               <b>今月いくら稼いだかを日本円表示してくれるサービス</b>
               です。シフトの確認もカンタンなのでスケジュール帳としても使えます。
