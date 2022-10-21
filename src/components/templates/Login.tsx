@@ -63,7 +63,7 @@ function Login() {
         ) : (
           <div>
             <button
-              className="mt-10 mb-6 h-14 rounded-full bg-[#174378] px-10 text-base tracking-wide text-white hover:bg-[#3546b4] md:text-lg"
+              className="mt-10 mb-6 h-14 rounded-full bg-[#174378] px-10 text-base tracking-wide text-white hover:bg-[#3546B4] md:text-lg"
               onClick={googleSignIn}
             >
               Googleでログインして始める
@@ -90,12 +90,12 @@ function Login() {
         </div>
       </div>
       <section>
-        <h2 className="mt-20 mb-2 flex justify-center text-3xl font-bold md:mt-20">
+        <h2 className="mt-20 mb-2 flex justify-center font-['游ゴシック'] text-3xl font-bold md:mt-20">
           どんなサービス？
         </h2>
         <div className="flex justify-center py-5 px-10">
           <div className="max-w-2xl">
-            <p className="mb-5 underline decoration-main-button decoration-wavy underline-offset-8">
+            <p className="mb-5 underline decoration-main-button underline-offset-8">
               外貨の報酬がある方に向けた、働いた時間を登録するだけで
               <b>今月いくら稼いだかを日本円表示してくれるサービス</b>
               です。シフトの確認もカンタンなのでスケジュール帳としても使えます。
@@ -108,8 +108,8 @@ function Login() {
         </div>
       </section>
       <section>
-        <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
-          3ステップで使える
+        <h2 className="mt-10 mb-2 flex justify-center font-['游ゴシック'] text-3xl font-bold">
+          操作はこれだけ！
         </h2>
         <div className="m-auto max-w-5xl">
           <div className="md:grid md:grid-cols-3 md:justify-between">
@@ -120,7 +120,7 @@ function Login() {
         </div>
       </section>
       <WaveImage isUpper={false} />
-      <Footor loginPage />
+      <Footor isLoginPage />
     </>
   );
 }

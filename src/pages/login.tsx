@@ -24,7 +24,7 @@ export default function LoginPage() {
     <>
       <Head>
         <title>
-          ペイレコ - 外貨もまとめて管理できるシフト管理･給料計算ツール
+          ペイレコ - 外貨の報酬がある人のためのかんたん給料計算ツール
         </title>
       </Head>
       <Login />
