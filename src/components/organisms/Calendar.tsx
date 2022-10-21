@@ -104,7 +104,7 @@ function Calendar() {
                       isEqual(day, selectedDay),
                       !isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "bg-[#eaf0f0]",
+                        "bg-[#EAF0F0]",
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&

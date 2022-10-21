@@ -63,7 +63,7 @@ function Login() {
         ) : (
           <div>
             <button
-              className="mt-10 mb-6 h-14 rounded-full bg-[#174378] px-10 text-base tracking-wide text-white hover:bg-[#3546b4] md:text-lg"
+              className="mt-10 mb-6 h-14 rounded-full bg-[#174378] px-10 text-base tracking-wide text-white hover:bg-[#3546B4] md:text-lg"
               onClick={googleSignIn}
             >
               Googleでログインして始める
