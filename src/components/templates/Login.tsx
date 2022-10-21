@@ -109,7 +109,7 @@ function Login() {
       </section>
       <section>
         <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
-          3ステップで使える
+          これだけで使える
         </h2>
         <div className="m-auto max-w-5xl">
           <div className="md:grid md:grid-cols-3 md:justify-between">
