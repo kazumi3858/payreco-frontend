@@ -10,12 +10,19 @@ function Description({ position }: Props) {
   ][position - 1];
 
   return (
-    <div className="p-10 text-center">
-      <p className="mb-4 text-5xl font-bold text-sub-button">{position}</p>
+    <div className="px-20 py-4 text-center md:p-10">
+      <div className="mb-2">
+        <Image
+          src={`/step${position}.png`}
+          alt={`使い方${position}番`}
+          width={50}
+          height={50}
+        />
+      </div>
       <Image
         className="rounded-full"
         src={"/sub-image" + ["1.png", "2.gif", "3.png"][position - 1]}
-        alt={`使い方の画像${position}番`}
+        alt={`使い方の説明画像${position}番`}
         width={300}
         height={300}
       />
