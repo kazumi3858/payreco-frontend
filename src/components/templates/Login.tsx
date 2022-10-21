@@ -90,7 +90,7 @@ function Login() {
         </div>
       </div>
       <section>
-        <h2 className="mt-20 mb-2 flex justify-center text-3xl font-bold md:mt-20">
+        <h2 className="mt-20 mb-2 flex justify-center font-['游ゴシック'] text-3xl font-bold md:mt-20">
           どんなサービス？
         </h2>
         <div className="flex justify-center py-5 px-10">
@@ -108,7 +108,7 @@ function Login() {
         </div>
       </section>
       <section>
-        <h2 className="mt-10 mb-2 flex justify-center text-3xl font-bold">
+        <h2 className="mt-10 mb-2 flex justify-center font-['游ゴシック'] text-3xl font-bold">
           操作はこれだけ！
         </h2>
         <div className="m-auto max-w-5xl">
