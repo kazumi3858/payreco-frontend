@@ -8,7 +8,7 @@ import { useState } from "react";
 type Props = { user: User };
 
 function TargetAmountForm({ user }: Props) {
-  const defaultTargetAmount = user.target_amount ? user.target_amount : 0;
+  const defaultTargetAmount = user.target_amount || 0;
   const [targetAmount, setTargetAmount] = useState(defaultTargetAmount);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -31,22 +31,19 @@ function TargetAmountForm({ user }: Props) {
       return alert(alertMessage);
     }
 
-    mutation.mutate(
-      { data: { target_amount: targetAmount !== 0 ? targetAmount : null } },
-      mutationResult
-    );
+    mutation.mutate({ data: { target_amount: targetAmount } }, mutationResult);
   };
 
   return (
     <div className="pb-4">
       <form onSubmit={handleSubmit}>
         <label htmlFor="target">
-          毎月の目標金額
+          <div className="font-bold lg:inline-block">毎月の目標金額</div>
           <input
             id="target"
-            className="mx-2 w-24 rounded-md bg-stone-100 p-1"
+            className="mr-2 w-24 rounded-md bg-stone-100 p-1 lg:ml-4"
             type="number"
-            defaultValue={defaultTargetAmount}
+            defaultValue={user.target_amount || ""}
             placeholder="数値を入力"
             onChange={(e) => setTargetAmount(Number(e.target.value))}
           />
