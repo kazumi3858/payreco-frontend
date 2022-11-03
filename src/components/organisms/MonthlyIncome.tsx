@@ -22,9 +22,11 @@ function MonthlyIncome({ income }: Props) {
 
   return (
     <div className="md:rounded-xl md:border md:border-stone-300 md:bg-white md:px-6 md:pb-5">
-      <Heading text="今月の給料" />
+      <div className="hidden md:block">
+        <Heading text="今月の給料" />
+      </div>
       {data && isFinite(totalIncome) ? (
-        <div className="text-sm">
+        <div className="mt-4 text-sm">
           <ul>
             <li>
               <PayAmount text="本日まで" amount={earnedIncome} />
@@ -46,7 +48,7 @@ function MonthlyIncome({ income }: Props) {
           <TargetAmountForm user={data} />
         </div>
       ) : (
-        <div className="ml-5">
+        <div className="ml-5 mb-5">
           <LoadingIcon />
         </div>
       )}
