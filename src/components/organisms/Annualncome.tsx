@@ -25,26 +25,29 @@ function AnnualIncome({ incomeList }: Props) {
   );
 
   return (
-    <div className="md:rounded-xl md:border md:border-stone-300 md:bg-white md:px-6 md:pb-2">
-      <Heading text="年間の給料" />
+    <div className="md:rounded-xl md:border md:border-stone-300 md:bg-white md:px-6 md:pb-5">
+      <div className="hidden md:block">
+        <Heading text="年間の給料" />
+      </div>
       {incomeList && isFinite(annualTotalIncome) ? (
-        <>
+        <div className="mt-4">
           <ul>
             {incomeListByMonth.map((income, index) => (
               <li key={index} className="mb-3 text-sm">
-                <span className="mr-3 inline-block w-10 text-right font-bold">
+                <span className="mr-3 inline-block w-9 text-right font-bold">
                   {index + 1}月
                 </span>
-                <span>{income.toLocaleString()}円</span>
+                <span>{income.toLocaleString()}</span>
+                <span className="ml-1">円</span>
               </li>
             ))}
           </ul>
           <div className="text-right">
             <PayAmount text="年間合計" amount={annualTotalIncome} />
           </div>
-        </>
+        </div>
       ) : (
-        <div>
+        <div className="mb-5">
           <LoadingIcon />
         </div>
       )}
