@@ -53,14 +53,12 @@ function WorkDetails({ work, selectedDay, company }: Props) {
             rate > 0 &&
             ` (${Math.floor(work.pay_amount / rate).toLocaleString()}円)`}
         </div>
-        <div className="break-all">
-          {work.memo && (
-            <>
-              <DocumentIcon className="inline h-4 w-4 text-sub-button" />
-              <span>{` ${work.memo}`}</span>
-            </>
-          )}
-        </div>
+        {work.memo && (
+          <div className="mb-1 break-all">
+            <DocumentIcon className="inline h-4 w-4 text-sub-button" />
+            <span>{` ${work.memo}`}</span>
+          </div>
+        )}
       </div>
       <div className="flex">
         <IconButton isEditMode onClick={() => setIsFormOpen(true)} />
