@@ -55,7 +55,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
           </ul>
         )}
       </div>
-      <div className="rounded-xl border border-stone-300 bg-white px-3 pb-5 md:mb-10">
+      <div className="rounded-xl border border-stone-300 bg-white px-5 pb-5 md:mb-10">
         <Heading text={`勤務先を選んで${date}の予定を追加`} />
         {!companies ? (
           <div className="ml-5">
@@ -83,7 +83,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
               className="text-sm hover:text-stone-500"
               onClick={() => setIsCompanyFormOpen(true)}
             >
-              <PlusCircleIcon className="ml-3 mr-1 inline h-6 w-6 text-sub-button" />
+              <PlusCircleIcon className="ml-1 mr-1 inline h-6 w-6 text-sub-button" />
               勤務先を追加する
             </button>
           </div>
