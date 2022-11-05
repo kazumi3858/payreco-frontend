@@ -41,16 +41,16 @@ describe("WorkList", () => {
   it("can render work schedules in selected day", async () => {
     render(workList(works));
     expect(await screen.findAllByText("株式会社abc")).toHaveLength(3);
-    expect(screen.getByText("8:00 AM - 12:00 PM")).toBeInTheDocument();
-    expect(screen.getByText("12:00 PM - 4:00 PM")).toBeInTheDocument();
+    expect(screen.getByText("8:00 - 12:00")).toBeInTheDocument();
+    expect(screen.getByText("12:00 - 16:00")).toBeInTheDocument();
     expect(screen.queryByText("予定はありません。")).toBeNull();
   });
 
   it("can render work schedules ordered by starting time", () => {
     render(workList(works));
-    const elements = screen.getAllByText(/[AP]M - /);
-    expect(elements[0]).toHaveTextContent("8:00 AM - 12:00 PM");
-    expect(elements[1]).toHaveTextContent("12:00 PM - 4:00 PM");
+    const elements = screen.getAllByText(/ - /);
+    expect(elements[0]).toHaveTextContent("8:00 - 12:00");
+    expect(elements[1]).toHaveTextContent("12:00 - 16:00");
   });
 
   it("can render message when there is no work", () => {
