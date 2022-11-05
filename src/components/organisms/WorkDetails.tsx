@@ -33,13 +33,10 @@ function WorkDetails({ work, selectedDay, company }: Props) {
   return (
     <li className="group mb-2 flex items-center space-x-4 rounded-2xl px-4 py-2 hover:bg-stone-100">
       <div className="flex-1 text-sm">
-        <div className="break-all font-bold">{company.name}</div>
+        <div className="mb-1 break-all font-bold">{company.name}</div>
         <span className="mt-0.5">
           {work.starting_time &&
-            `${format(startingTime, "h:mm a")} - ${format(
-              endingTime,
-              "h:mm a"
-            )}`}
+            `${format(startingTime, "H:mm")} - ${format(endingTime, "H:mm")}`}
         </span>
         <span>
           {hasBreak && " (休憩 "}
@@ -47,7 +44,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
           {minuteOfBreak > 0 && `${minuteOfBreak}分`}
           {hasBreak && ")"}
         </span>
-        <div>
+        <div className="my-1">
           <ClockIcon className="inline h-4 w-4 text-sub-button" />
           {` ${work.working_hours}時間 `}
           <CurrencyYenIcon className="inline h-4 w-4 text-sub-button" />
