@@ -75,7 +75,7 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
                 />
               ))
             ) : (
-              <p className="mx-5 my-5 text-sm">
+              <p className="mx-3 my-5 text-sm">
                 最初に勤務先を登録してください。勤務先を登録をすると予定を追加できるようになります。
               </p>
             )}
