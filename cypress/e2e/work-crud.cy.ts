@@ -76,7 +76,7 @@ describe("Work CRUD function", () => {
 
   it("can reflect income list after posting", () => {
     cy.visit("/income");
-    cy.contains("7,000円");
+    cy.contains("7,000");
   });
 
   it("can update work", () => {
