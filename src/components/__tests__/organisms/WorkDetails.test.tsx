@@ -33,7 +33,7 @@ describe("WorkDetails", () => {
 
   it("can render work details properly", () => {
     render(workDetails(work));
-    expect(screen.getByText("8:00 AM - 4:00 PM")).toBeInTheDocument();
+    expect(screen.getByText("8:00 - 16:00")).toBeInTheDocument();
     expect(screen.getByText("株式会社abc")).toBeInTheDocument();
     expect(screen.getByText(/1時間/)).toBeInTheDocument();
     expect(screen.getByText(/7時間/)).toBeInTheDocument();

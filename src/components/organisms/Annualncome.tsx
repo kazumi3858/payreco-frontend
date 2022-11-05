@@ -25,7 +25,7 @@ function AnnualIncome({ incomeList }: Props) {
   );
 
   return (
-    <div className="md:rounded-xl md:border md:border-stone-300 md:bg-white md:px-6 md:pb-5">
+    <div className="md:rounded-xl md:border md:border-stone-300 md:bg-white md:px-6 md:pb-2">
       <div className="hidden md:block">
         <Heading text="年間の給料" />
       </div>

@@ -68,7 +68,7 @@ describe("Work CRUD function", () => {
     cy.get("select").first().select("1");
     cy.contains("input", "保存").click();
     cy.contains("保存").should("not.exist");
-    cy.contains("10:00 AM - 6:00 PM");
+    cy.contains("10:00 - 18:00");
     cy.contains("株式会社ジキュウ");
     cy.contains("7,000円");
     cy.contains("予定はありません。").should("have.length", 0);
@@ -76,19 +76,19 @@ describe("Work CRUD function", () => {
 
   it("can reflect income list after posting", () => {
     cy.visit("/income");
-    cy.contains("7,000円");
+    cy.contains("7,000");
   });
 
   it("can update work", () => {
     cy.visit("/");
-    cy.contains("10:00 AM - 6:00 PM");
+    cy.contains("10:00 - 18:00");
     cy.contains("7時間");
     cy.get('button[title="編集"]').click();
     cy.contains("合計勤務時間を入力").click();
     cy.get("select").eq(2).select("5");
     cy.contains("input", "保存").click();
     cy.contains("保存").should("not.exist");
-    cy.contains("10:00 AM - 6:00 PM").should("not.exist");
+    cy.contains("10:00 - 18:00").should("not.exist");
     cy.contains("5時間");
   });
 
