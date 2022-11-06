@@ -34,26 +34,28 @@ function WorkDetails({ work, selectedDay, company }: Props) {
     <li className="group mb-2 flex items-center space-x-4 rounded-2xl px-4 py-2 hover:bg-stone-100">
       <div className="flex-1 text-sm">
         <div className="mb-1 break-all font-bold">{company.name}</div>
-        <p className="mt-0.5">
-          {work.starting_time &&
-            `${format(startingTime, "H:mm")} - ${format(endingTime, "H:mm")}`}
-        </p>
-        <span>
-          {hasBreak && " (休憩 "}
-          {hourOfBreak > 0 && `${hourOfBreak}時間`}
-          {minuteOfBreak > 0 && `${minuteOfBreak}分`}
-          {hasBreak && ")"}
-        </span>
-        <div className="my-1 block lg:inline-block">
-          <ClockIcon className="inline h-4 w-4 text-sub-button" />
-          {` ${work.working_hours}時間 `}
-        </div>
-        <div className="mb-1 lg:ml-2 lg:inline-block">
-          <CurrencyYenIcon className="inline h-4 w-4 text-sub-button" />
-          {` ${work.pay_amount.toLocaleString()}${company.currency_type}`}
-          {company.currency_type !== "円" &&
-            rate > 0 &&
-            ` (${Math.floor(work.pay_amount / rate).toLocaleString()}円)`}
+        {work.starting_time && (
+          <div className="mb-1 inline-block">
+            {`${format(startingTime, "H:mm")} - ${format(endingTime, "H:mm")}`}
+          </div>
+        )}
+        {hasBreak && (
+          <div className="ml-2 mb-1 inline-block">{`(休憩 ${
+            hourOfBreak > 0 ? `${hourOfBreak}時間` : ""
+          }${minuteOfBreak > 0 ? `${minuteOfBreak}分` : ""})`}</div>
+        )}
+        <div>
+          <div className="mb-1 block lg:inline-block">
+            <ClockIcon className="inline h-4 w-4 text-sub-button" />
+            {` ${work.working_hours}時間 `}
+          </div>
+          <div className="mb-1 lg:ml-2 lg:inline-block">
+            <CurrencyYenIcon className="inline h-4 w-4 text-sub-button" />
+            {` ${work.pay_amount.toLocaleString()}${company.currency_type}`}
+            {company.currency_type !== "円" &&
+              rate > 0 &&
+              ` (${Math.floor(work.pay_amount / rate).toLocaleString()}円)`}
+          </div>
         </div>
         {work.memo && (
           <div className="mb-1 break-all">
