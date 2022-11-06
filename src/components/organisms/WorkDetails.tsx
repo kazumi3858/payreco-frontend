@@ -46,21 +46,21 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         )}
         <div>
           <div className="mb-1 block lg:inline-block">
-            <ClockIcon className="inline h-4 w-4 text-sub-button" />
-            {` ${work.working_hours}時間 `}
+            <ClockIcon className="mr-1 inline h-4 w-4 text-sub-button" />
+            {`${work.working_hours}時間 `}
           </div>
           <div className="mb-1 lg:ml-2 lg:inline-block">
-            <CurrencyYenIcon className="inline h-4 w-4 text-sub-button" />
-            {` ${work.pay_amount.toLocaleString()}${company.currency_type}`}
+            <CurrencyYenIcon className="mr-1 inline h-4 w-4 text-sub-button" />
+            {`${work.pay_amount.toLocaleString()}${company.currency_type}`}
             {company.currency_type !== "円" &&
               rate > 0 &&
-              ` (${Math.floor(work.pay_amount / rate).toLocaleString()}円)`}
+              `(${Math.floor(work.pay_amount / rate).toLocaleString()}円)`}
           </div>
         </div>
         {work.memo && (
           <div className="mb-1 break-all">
-            <DocumentIcon className="inline h-4 w-4 text-sub-button" />
-            <span>{` ${work.memo}`}</span>
+            <DocumentIcon className="mr-1 inline h-4 w-4 text-sub-button" />
+            {`${work.memo}`}
           </div>
         )}
       </div>
