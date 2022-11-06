@@ -58,7 +58,6 @@ function TargetAmountForm({ user }: Props) {
           ※目標金額を設定すると現時点での達成率が確認できるようになります。
         </p>
       )}
-
       {targetAmount !== null &&
         (targetAmount > 9999999 || targetAmount < 0) && (
           <p className="text-rose-600">{alertMessage}</p>

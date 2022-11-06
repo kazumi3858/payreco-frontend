@@ -39,20 +39,22 @@ function WorkList({ selectedDay, selectedDayWorks }: Props) {
             <LoadingIcon />
           </div>
         ) : (
-          <ul className="space-y-1 p-3 leading-7 md:text-base md:leading-8">
+          <div className="space-y-1 p-3 leading-7 md:text-base md:leading-8">
             {selectedDayWorks && selectedDayWorks.length > 0 ? (
-              selectedDayWorks.map((work) => (
-                <WorkDetails
-                  selectedDay={selectedDay}
-                  work={work}
-                  key={work.id}
-                  company={companyOfTheWork(work)}
-                />
-              ))
+              <ul>
+                {selectedDayWorks.map((work) => (
+                  <WorkDetails
+                    selectedDay={selectedDay}
+                    work={work}
+                    key={work.id}
+                    company={companyOfTheWork(work)}
+                  />
+                ))}
+              </ul>
             ) : (
               <p className="mx-3 mb-4 text-sm">予定はありません。</p>
             )}
-          </ul>
+          </div>
         )}
       </div>
       <div className="rounded-xl border border-stone-300 bg-white px-5 pb-5 md:mb-10">
