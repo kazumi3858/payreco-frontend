@@ -187,11 +187,10 @@ function WorkForm({ selectedDay, company, work, setIsFormOpen }: Props) {
         <div className="mt-4 mb-2">
           <span className="mr-2 inline-block w-20 font-bold">合計時間</span>
           <span>
-            {`${
-              isInvalidHours
-                ? Math.ceil(startAndEndTimeDifference / 60)
-                : Math.floor(startAndEndTimeDifference / 60)
-            }時間${startAndEndTimeDifference % 60}分`}
+            {isInvalidHours
+              ? Math.ceil(startAndEndTimeDifference / 60)
+              : Math.floor(startAndEndTimeDifference / 60)}
+            時間{startAndEndTimeDifference % 60}分
           </span>
           {isInvalidHours && (
             <p className="text-rose-600">合計時間が正しくありません。</p>

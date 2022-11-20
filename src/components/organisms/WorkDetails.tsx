@@ -36,25 +36,27 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         <div className="mb-1 break-all font-bold">{company.name}</div>
         {work.starting_time && (
           <div className="mb-1 inline-block">
-            {`${format(startingTime, "H:mm")} - ${format(endingTime, "H:mm")}`}
+            {format(startingTime, "H:mm")} - {format(endingTime, "H:mm")}
           </div>
         )}
         {hasBreak && (
-          <div className="ml-1 mb-1 inline-block">{`(休憩 ${
-            hourOfBreak > 0 ? `${hourOfBreak}時間` : ""
-          }${minuteOfBreak > 0 ? `${minuteOfBreak}分` : ""})`}</div>
+          <div className="ml-1 mb-1 inline-block">
+            (休憩 {hourOfBreak > 0 ? `${hourOfBreak}時間` : ""}
+            {minuteOfBreak > 0 ? `${minuteOfBreak}分` : ""})
+          </div>
         )}
         <div>
           <div className="mb-1 block lg:inline-block">
             <ClockIcon className="mr-1 inline h-4 w-4 text-sub-button" />
-            {`${work.working_hours}時間`}
+            {work.working_hours}時間
           </div>
           <div className="mb-1 lg:ml-2 lg:inline-block">
             <CurrencyYenIcon className="mr-1 inline h-4 w-4 text-sub-button" />
-            {`${work.pay_amount.toLocaleString()}${company.currency_type}`}
+            {work.pay_amount.toLocaleString()}
+            {company.currency_type}
             {company.currency_type !== "円" && rate > 0 && (
               <div className="ml-1 inline">
-                {`(${Math.floor(work.pay_amount / rate).toLocaleString()}円)`}
+                ({Math.floor(work.pay_amount / rate).toLocaleString()}円)
               </div>
             )}
           </div>
@@ -62,7 +64,7 @@ function WorkDetails({ work, selectedDay, company }: Props) {
         {work.memo && (
           <div className="mb-1 break-all">
             <DocumentIcon className="mr-1 inline h-4 w-4 text-sub-button" />
-            {`${work.memo}`}
+            {work.memo}
           </div>
         )}
       </div>

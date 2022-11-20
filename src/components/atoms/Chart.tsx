@@ -25,9 +25,9 @@ function Chart({ target, earnedIncome, expectedIncome }: Props) {
       </div>
       <p className="ml-2 mt-2 text-xs">
         <span className="text-sub-button">●</span>
-        {`本日まで: ${showRate(achievementRate)}% `}
-        <span className="text-main-gradient-l">●</span>
-        {`見込み含め: ${showRate(expectedAchievementRate)}%`}
+        本日まで: {showRate(achievementRate)}%
+        <span className="ml-2 text-main-gradient-l">●</span>
+        見込み含め: {showRate(expectedAchievementRate)}%
       </p>
     </div>
   );
