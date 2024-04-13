@@ -4,7 +4,7 @@ module.exports = {
       mode: "tags-split",
       target: "src/api/endpoints.ts",
       schemas: "src/api/model",
-      client: "react-query",
+      client: "@tanstack/react-query",
       mock: true,
       override: {
         useDates: true,
