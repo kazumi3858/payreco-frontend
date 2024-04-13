@@ -65,6 +65,7 @@ function Login() {
             <button
               className="mt-10 mb-6 h-14 rounded-full bg-[#174378] px-10 text-base tracking-wide text-white hover:bg-[#3546B4] md:text-lg"
               onClick={googleSignIn}
+              disabled
             >
               Googleでログインして始める
             </button>
@@ -87,6 +88,14 @@ function Login() {
             に同意したものとみなします。
           </p>
           <p>※無料でご利用いただけます。</p>
+        </div>
+      </div>
+      <div className="flex justify-center px-10">
+        <div className="max-w-2xl text-xs text-red-600">
+          <p className="mb-2">
+            ※ 大切なお知らせ（2024/04/13）
+          </p>
+          <p>大変申し訳ございませんが管理者の都合により本サービスの提供を終了します。これまでありがとうございましたｍ（_ _）ｍ</p>
         </div>
       </div>
       <section>
