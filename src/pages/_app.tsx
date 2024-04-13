@@ -7,7 +7,7 @@ import { useDeleteUser } from "api/default/default";
 import { auth } from "auth/firebase";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const client = new QueryClient();
+  const queryClient = new QueryClient();
   const deleteCurrentUser = useDeleteUser();
 
   // サービス終了のため、ページにアクセスがあると強制ログアウトします
@@ -17,14 +17,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <SiteHead />
-      <QueryClientProvider client={client}>
-        <div className="font-body leading-8 tracking-wide text-[#4C4D4D]">
-          <Component {...pageProps} />
-        </div>
-      </QueryClientProvider>
-    </>
+      <div className="font-body leading-8 tracking-wide text-[#4C4D4D]">
+        <Component {...pageProps} />
+      </div>
+    </QueryClientProvider>
   );
 }
 
