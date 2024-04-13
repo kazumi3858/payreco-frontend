@@ -1,6 +1,5 @@
 import Description from "components/atoms/Description";
 import Footor from "components/organisms/Footor";
-import Link from "next/link";
 import Image from "next/image";
 import WaveImage from "components/atoms/WaveImage";
 import { auth, provider } from "auth/firebase";
@@ -72,7 +71,7 @@ function Login() {
           </div>
         )}
       </div>
-      <div className="flex justify-center px-10">
+      {/* <div className="flex justify-center px-10">
         <div className="max-w-2xl text-xs">
           <p className="mb-2">
             ※上記ボタンをクリックすることで
@@ -89,13 +88,13 @@ function Login() {
           </p>
           <p>※無料でご利用いただけます。</p>
         </div>
-      </div>
+      </div> */}
       <div className="flex justify-center px-10">
         <div className="max-w-2xl text-xs text-red-600">
           <p className="mb-2">
             ※ 大切なお知らせ（2024/04/13）
           </p>
-          <p>大変申し訳ございませんが管理者の都合により本サービスの提供を終了します。これまでありがとうございましたｍ（_ _）ｍ</p>
+          <p>大変申し訳ございませんが管理者の都合により本サービスの提供を終了します😿<br/>これまでありがとうございました😺</p>
         </div>
       </div>
       <section>

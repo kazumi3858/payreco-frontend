@@ -1,7 +1,18 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect } from "react";
+import { auth } from "auth/firebase";
+import { useDeleteUser } from "api/default/default";
 
 export default function Custom404() {
+  const deleteCurrentUser = useDeleteUser();
+
+  // サービス終了のため、ページにアクセスがあると強制ログアウトします
+  useEffect(()=> {
+    deleteCurrentUser.mutate();
+    auth.signOut();
+  }, [])
+  
   return (
     <>
       <Head>

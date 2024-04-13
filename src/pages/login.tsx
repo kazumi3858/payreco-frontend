@@ -1,14 +1,19 @@
 import Login from "components/templates/Login";
-import router from "next/router";
 import Head from "next/head";
 import { auth } from "auth/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useDeleteUser } from "api/default/default";
+
 
 export default function LoginPage() {
   const [user, isLoading] = useAuthState(auth);
 
-  const redirect = () => {
-    router.push("/");
+  const deleteCurrentUser = useDeleteUser();
+
+  // サービス終了のため、強制ログアウトします
+  const logout = () => {
+    deleteCurrentUser.mutate();
+    auth.signOut();
   };
 
   if (isLoading)
@@ -19,7 +24,7 @@ export default function LoginPage() {
     );
 
   return user ? (
-    redirect()
+    logout()
   ) : (
     <>
       <Head>
