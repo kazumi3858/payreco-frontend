@@ -6,16 +6,16 @@ import { useEffect } from "react";
 import { useDeleteUser } from "api/default/default";
 import { auth } from "auth/firebase";
 
-const client = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const deleteCurrentUser = useDeleteUser();
+  const client = new QueryClient();
+  // const deleteCurrentUser = useDeleteUser();
 
   // サービス終了のため、ページにアクセスがあると強制ログアウトします
-  useEffect(()=> {
-    deleteCurrentUser.mutate();
-    auth.signOut();
-  }, [])
+  // useEffect(()=> {
+  //   deleteCurrentUser.mutate();
+  //   auth.signOut();
+  // }, [])
 
   return (
     <>
